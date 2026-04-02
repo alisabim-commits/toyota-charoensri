@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>พนักงาน — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;
+--red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;
+--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;
+--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;
+--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;
+--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px;min-height:100vh}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a1628}
+.login-box{background:var(--w);border-radius:var(--rl);padding:36px;width:340px;text-align:center}
+.login-logo{font-size:22px;font-weight:600;margin-bottom:4px}.login-logo span{color:var(--red)}
+.login-sub{font-size:12px;color:var(--mu);margin-bottom:24px}
+.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:10px 12px;border-radius:var(--r);font-size:14px;font-family:var(--font);margin-bottom:10px}
+.fi:focus{outline:none;border-color:var(--tx)}
+.login-btn{width:100%;background:var(--tx);color:#fff;border:none;padding:11px;border-radius:var(--r);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font)}
+.login-err{font-size:12px;color:var(--red);margin-top:8px}
+
+/* APP */
+.app{display:none}
+.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 20px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50}
+.logo{font-size:13px;font-weight:600;padding-right:18px;border-right:1px solid var(--br);margin-right:18px}.logo span{color:var(--red)}
+.nt{height:44px;display:flex;align-items:center;padding:0 13px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
+.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
+.hr-r{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:12px}
+.content{max-width:800px;margin:0 auto;padding:22px 20px}
+.page{display:none}.page.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
+.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
+.kv{font-size:22px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}
+.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
+.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}
+.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid}
+.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
+th.r{text-align:right}td{padding:8px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}
+.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
+.fi2{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
+.fi2:focus{outline:none;border-color:var(--tx)}
+.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
+.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
+.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
+.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}.btn-sm{padding:4px 10px;font-size:11px}
+.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
+.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
+.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}
+.bl{min-width:130px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
+.leave-bar{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--r);border:1px solid var(--br);background:var(--bg);margin-bottom:6px}
+.emp-card{background:#0a1628;border-radius:var(--rl);padding:16px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:16px}
+.emp-avatar{width:48px;height:48px;border-radius:50%;background:#c9a84c;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0}
+.div{height:1px;background:var(--br);margin:12px 0}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">TOYOTA <span>CHAROENSRI</span></div>
+    <div class="login-sub">พนักงาน Self-Service Portal</div>
+    <input class="fi" type="text" id="lg_id" placeholder="รหัสพนักงาน (เช่น 5910-0080)" onkeydown="if(event.key==='Enter')doLogin()">
+    <input class="fi" type="password" id="lg_pw" placeholder="รหัสผ่าน" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">เข้าสู่ระบบ</button>
+    <div class="login-err" id="lg_err"></div>
+    <div style="margin-top:16px;font-size:11px;color:var(--mu)">Demo: ID 5910-0080 / รหัส 1234</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+<div class="hdr">
+  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
+  <div class="nt on" onclick="gp('home',this)">🏠 หน้าหลัก</div>
+  <div class="nt" onclick="gp('leave',this)">📅 วันลา</div>
+  <div class="nt" onclick="gp('advance',this)">💵 เบิกเงิน</div>
+  <div class="nt" onclick="gp('gate',this)">🚗 Gate Pass</div>
+  <div class="nt" onclick="gp('ot',this)">⏱ OT</div>
+  <div class="nt" onclick="gp('report',this)">📝 รายงานประจำวัน</div>
+  <div class="nt" onclick="gp('payslip',this)">💰 Payslip</div>
+  <div class="hr-r">
+    <span id="emp_name_display" style="font-weight:500"></span>
+    <button onclick="doLogout()" style="border:1px solid var(--br2);background:transparent;color:var(--mu);padding:4px 10px;border-radius:var(--r);font-size:11px;cursor:pointer">ออก</button>
+  </div>
+</div>
+<div class="content">
+
+<!-- HOME -->
+<div class="page on" id="pg-home">
+<div class="emp-card">
+  <div class="emp-avatar" id="home_avatar">ส</div>
+  <div>
+    <div style="font-size:16px;font-weight:600" id="home_name">สุขธนัช วงษ์วิไล</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.6)" id="home_pos">ผู้บริหารงานบริการ (SA GS)</div>
+    <div style="font-size:12px;color:#c9a84c" id="home_dept">แผนกบริการ GS</div>
+  </div>
+  <div style="margin-left:auto;text-align:right">
+    <div style="font-size:10px;color:rgba(255,255,255,.4)">รหัสพนักงาน</div>
+    <div style="font-family:var(--mono);font-size:13px;color:#c9a84c" id="home_id">5910-0080</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px" id="home_date"></div>
+  </div>
+</div>
+
+<div class="g3" style="margin-bottom:14px">
+  <div class="kpi"><div class="kl">วันลาคงเหลือ</div><div class="kv" style="color:var(--grn)" id="home_leave">6 วัน</div></div>
+  <div class="kpi"><div class="kl">OT เดือนนี้</div><div class="kv" id="home_ot">฿877</div></div>
+  <div class="kpi"><div class="kl">เงินเดือนสุทธิ</div><div class="kv" id="home_sal">฿9,730</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">การแจ้งเตือนสำหรับคุณ</div>
+  <div id="home_notif"></div>
+</div>
+
+<div class="card">
+  <div class="ct">KPI ของฉัน — เม.ย. 69</div>
+  <div id="home_kpi"></div>
+</div>
+</div>
+
+<!-- LEAVE -->
+<div class="page" id="pg-leave">
+<div class="sec">วันลา</div>
+<div class="sec-s">ยื่นคำขอลา · ดูประวัติ · ตรวจสิทธิ์คงเหลือ</div>
+<div class="card">
+  <div class="ct">สิทธิ์วันลา</div>
+  <div id="leave_quota"></div>
+</div>
+<div class="card">
+  <div class="ct">ยื่นคำขอลา</div>
+  <div class="fg"><label class="fl">ประเภทการลา</label>
+    <select class="fs" id="lv_type" onchange="calcLeave()">
+      <option value="annual">ลาพักร้อน</option>
+      <option value="personal">ลากิจ</option>
+      <option value="sick">ลาป่วย</option>
+      <option value="maternity">ลาคลอด</option>
+      <option value="ordain">ลาบวช</option>
+    </select>
+  </div>
+  <div class="fr">
+    <div class="fg"><label class="fl">วันที่เริ่มลา</label><input class="fi2" type="date" id="lv_start" oninput="calcLeave()"></div>
+    <div class="fg"><label class="fl">วันที่สิ้นสุด</label><input class="fi2" type="date" id="lv_end" oninput="calcLeave()"></div>
+  </div>
+  <div id="lv_calc" style="margin-bottom:10px"></div>
+  <div class="fg"><label class="fl">เหตุผล</label><input class="fi2" type="text" placeholder="เหตุผล (ถ้ามี)"></div>
+  <div class="fg"><label class="fl">ผู้อนุมัติ</label>
+    <select class="fs"><option>ผู้จัดการแผนกบริการ</option><option>ผู้บริหาร</option></select>
+  </div>
+  <button class="btn btn-p btn-sm" onclick="submitLeave()">ยื่นคำขอ</button>
+</div>
+<div class="card">
+  <div class="ct">ประวัติการลา ปี 69</div>
+  <table>
+    <tr><th>ประเภท</th><th>วันที่</th><th class="r">จำนวน</th><th>สถานะ</th></tr>
+    <tr><td>ลากิจ</td><td>15 ก.พ.</td><td class="r">1 วัน</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+    <tr><td>ลาป่วย</td><td>3 มี.ค.</td><td class="r">1 วัน</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- ADVANCE -->
+<div class="page" id="pg-advance">
+<div class="sec">เบิกเงินทดรองจ่าย</div>
+<div class="sec-s">≤฿2,000 → ผจก.อนุมัติ · >฿2,000 → ผบห.อนุมัติ · ต้องเคลียร์ใน 3 วันหลังกลับ</div>
+<div class="al al-b"><span>ℹ</span><div>ต้องแนบเอกสารใบเสร็จทุกรายการ · ไม่มีใบเสร็จ ไม่ได้รับเงินคืน</div></div>
+<div class="card">
+  <div class="ct">ขอเบิกเงินทดรอง</div>
+  <div class="fg"><label class="fl">วัตถุประสงค์</label>
+    <select class="fs" id="adv_purpose" onchange="checkAdvance()">
+      <option value="">เลือก...</option>
+      <option value="travel">ค่าเดินทาง</option>
+      <option value="fuel">ค่าน้ำมัน</option>
+      <option value="hotel">ค่าที่พัก</option>
+      <option value="misc">ค่าใช้จ่ายเบ็ดเตล็ด</option>
+      <option value="tool">ซื้ออุปกรณ์/วัสดุ</option>
+    </select>
+  </div>
+  <div class="fg"><label class="fl">จำนวนเงินที่ขอ (บาท)</label><input class="fi2" type="number" id="adv_amt" placeholder="0" oninput="checkAdvance()"></div>
+  <div id="adv_check" style="margin-bottom:10px"></div>
+  <div class="fg"><label class="fl">วันที่ต้องการใช้เงิน</label><input class="fi2" type="date"></div>
+  <div class="fg"><label class="fl">รายละเอียด</label><textarea class="fi2" rows="2" placeholder="อธิบายว่าจะใช้ทำอะไร..."></textarea></div>
+  <button class="btn btn-p btn-sm" onclick="submitAdvance()">ส่งคำขอ</button>
+</div>
+<div class="card">
+  <div class="ct">เงินทดรองที่ค้างเคลียร์</div>
+  <div id="adv_pending"></div>
+</div>
+</div>
+
+<!-- GATE PASS -->
+<div class="page" id="pg-gate">
+<div class="sec">Gate Pass</div>
+<div class="sec-s">ทุกครั้งที่นำรถออก ต้องกรอกก่อน · ถ้าไม่กรอก = ถือว่านำรถออกโดยไม่รับอนุญาต</div>
+<div class="card">
+  <div class="ct">ขอ Gate Pass</div>
+  <div class="fg"><label class="fl">เลือกรถ</label>
+    <select class="fs"><option>นพ-1234 REVO Test Drive</option><option>นพ-5678 FORTUNER Test Drive</option><option>นพ-3456 รถรับส่ง</option></select>
+  </div>
+  <div class="fr">
+    <div class="fg"><label class="fl">เลขไมล์ออก</label><input class="fi2" type="number" id="gate_out" placeholder="0"></div>
+    <div class="fg"><label class="fl">วัตถุประสงค์</label>
+      <select class="fs"><option>ทดลองขับลูกค้า</option><option>รับ-ส่งอะไหล่</option><option>ราชการบริษัท</option><option>รับรถ</option></select>
+    </div>
+  </div>
+  <div class="fg"><label class="fl">ปลายทาง</label><input class="fi2" type="text" placeholder="ที่ไหน..."></div>
+  <div class="fg"><label class="fl">เวลาคาดว่ากลับ</label><input class="fi2" type="time"></div>
+  <button class="btn btn-p btn-sm" onclick="alert('Gate Pass ออกแล้ว — อย่าลืมกรอกเลขไมล์กลับ')">ออก Gate Pass</button>
+</div>
+<div class="card">
+  <div class="ct">Gate Pass ประวัติล่าสุด</div>
+  <table>
+    <tr><th>วันที่</th><th>รถ</th><th class="r">ไมล์ออก</th><th class="r">ไมล์กลับ</th><th class="r">km</th><th>สถานะ</th></tr>
+    <tr><td>1 เม.ย.</td><td>นพ-1234</td><td class="r">87,240</td><td class="r">88,575</td><td class="r">1,335</td><td><span class="bd bd-g">ปิดแล้ว</span></td></tr>
+    <tr><td>28 มี.ค.</td><td>นพ-5678</td><td class="r">44,890</td><td class="r">45,120</td><td class="r">230</td><td><span class="bd bd-g">ปิดแล้ว</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- OT -->
+<div class="page" id="pg-ot">
+<div class="sec">ขอ OT</div>
+<div class="sec-s">OT ถูกยกเลิกแล้ว ยกเว้น รปภ. · project พิเศษ ต้องขอผบห.ก่อน</div>
+<div class="al al-r"><span>🔴</span><div>นโยบาย: OT ถูกยกเลิกทั้งหมด ยกเว้น รปภ. (เพราะคนขาด) — ถ้าต้องการ OT ต้องได้รับอนุมัติ ผบห. ก่อนทำงานล่วงเวลา</div></div>
+<div class="card">
+  <div class="ct">OT ของฉัน มี.ค. 69</div>
+  <table>
+    <tr><th>วันที่</th><th class="r">ชั่วโมง</th><th class="r">ค่า OT</th><th>สาเหตุ</th><th>สถานะ</th></tr>
+    <tr><td>26 ก.พ.</td><td class="r">1</td><td class="r">฿73.13</td><td style="font-size:11px">รปภ.กะเช้าหยุด</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+    <tr><td>4 มี.ค.</td><td class="r">2</td><td class="r">฿146.26</td><td style="font-size:11px">รปภ.กลางวันหยุด</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+    <tr><td>5 มี.ค.</td><td class="r">1</td><td class="r">฿73.13</td><td style="font-size:11px">รปภ.กะเช้าหยุด</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+    <tr style="background:var(--bg)"><td colspan="2"><strong>รวม</strong></td><td class="r"><strong>฿877.56</strong></td><td colspan="2"></td></tr>
+  </table>
+</div>
+<div class="card">
+  <div class="ct">ขอ OT (Project พิเศษ)</div>
+  <div class="al al-a"><span>!</span><div>OT project พิเศษ ต้องได้รับอนุมัติก่อนเท่านั้น กรอกล่วงหน้า ไม่รับย้อนหลัง</div></div>
+  <div class="fg"><label class="fl">วันที่จะ OT</label><input class="fi2" type="date"></div>
+  <div class="fr">
+    <div class="fg"><label class="fl">เวลาเริ่ม</label><input class="fi2" type="time"></div>
+    <div class="fg"><label class="fl">เวลาสิ้นสุด</label><input class="fi2" type="time"></div>
+  </div>
+  <div class="fg"><label class="fl">เหตุผลที่จำเป็น</label><textarea class="fi2" rows="2" placeholder="อธิบายว่าทำไมต้อง OT..."></textarea></div>
+  <button class="btn btn-p btn-sm" onclick="alert('ส่งขออนุมัติ OT ผบห. แล้ว — รอการอนุมัติก่อนทำงานล่วงเวลา')">ส่งขออนุมัติ ผบห.</button>
+</div>
+</div>
+
+<!-- DAILY REPORT -->
+<div class="page" id="pg-report">
+<div class="sec">รายงานประจำวัน</div>
+<div class="sec-s">กรอกตอน 17:00 ทุกวัน · ผจก.เห็นทันที · ไม่กรอก = ขาดรายงาน</div>
+<div class="card">
+  <div class="ct">รายงานวันนี้ — <span id="rpt_date"></span></div>
+  <div id="rpt_form"></div>
+</div>
+<div class="card">
+  <div class="ct">อัพโหลดรายงาน/เอกสาร</div>
+  <div style="border:2px dashed var(--br2);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer" onclick="document.getElementById('rpt_file').click()">
+    <div style="font-size:22px;margin-bottom:6px">📎</div>
+    <div style="font-size:12px;font-weight:500">แนบเอกสาร / รูปภาพ</div>
+    <div style="font-size:11px;color:var(--mu);margin-top:3px">ใบเสร็จ, รายงาน, Gate Pass ภาพถ่าย</div>
+    <input type="file" id="rpt_file" style="display:none" multiple onchange="alert('อัพโหลด '+this.files.length+' ไฟล์แล้ว')">
+  </div>
+</div>
+<div class="card">
+  <div class="ct">รายงานล่าสุด</div>
+  <table>
+    <tr><th>วันที่</th><th>รายงาน</th><th>สถานะ</th></tr>
+    <tr><td>1 เม.ย.</td><td style="font-size:11px">CPU 17 · Tire 0 · Battery 0 · PBC ฿31,200</td><td><span class="bd bd-g">ส่งแล้ว</span></td></tr>
+    <tr><td>31 มี.ค.</td><td style="font-size:11px">CPU 24 · Tire 0 · Battery 2 · PBC ฿48,500</td><td><span class="bd bd-g">ส่งแล้ว</span></td></tr>
+    <tr><td>30 มี.ค.</td><td style="font-size:11px">ลาป่วย</td><td><span class="bd bd-hi">ลา</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- PAYSLIP -->
+<div class="page" id="pg-payslip">
+<div class="sec">Payslip</div>
+<div class="sec-s">สลิปเงินเดือนรายเดือน · ข้อมูลส่วนตัว</div>
+<div class="card">
+  <div class="ct">เงินเดือน มี.ค. 69</div>
+  <div id="payslip_content"></div>
+</div>
+</div>
+
+</div><!-- content -->
+</div><!-- app -->
+
+<script>
+const USERS={
+  '5910-0080':{pw:'1234',name:'โชคทวี ไชยสงคราม',pos:'เจ้าหน้าที่รักษาความปลอดภัย',dept:'ฝ่ายทรัพยากรบุคคล',sal:9730,leave:6,ot:877.56,type:'guard',kpi:null},
+  '6805-0606':{pw:'1234',name:'ชูศักดิ์ พิเศษฤทธิ์',pos:'เจ้าหน้าที่รักษาความปลอดภัย',dept:'ฝ่ายทรัพยากรบุคคล',sal:9730,leave:6,ot:198,type:'guard',kpi:null},
+  'SA001':{pw:'1234',name:'สุขธนัช วงษ์วิไล',pos:'ผู้บริหารงานบริการ (SA GS)',dept:'แผนกบริการ GS',sal:18500,leave:8,ot:0,type:'sa',kpi:{cpu:'33%',tire:'0 เส้น',battery:'0 ชิ้น',pbc:'฿52K',qr:'4.7★'}},
+  'SALES001':{pw:'1234',name:'ภูริเนตร อภัยโส',pos:'ที่ปรึกษาการขาย',dept:'แผนกขาย',sal:12000,leave:6,ot:0,type:'sales',kpi:{cars:'0 คัน',finance:'0%',insurance:'0%',acc:'฿0'}},
+};
+let currentUser=null;
+
+function doLogin(){
+  const id=document.getElementById('lg_id').value.trim();
+  const pw=document.getElementById('lg_pw').value;
+  const u=USERS[id];
+  if(!u||u.pw!==pw){document.getElementById('lg_err').textContent='รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง';return;}
+  currentUser={...u,id};
+  document.getElementById('login-wrap').style.display='none';
+  document.getElementById('app').style.display='block';
+  initApp();
+}
+function doLogout(){document.getElementById('login-wrap').style.display='flex';document.getElementById('app').style.display='none';document.getElementById('lg_id').value='';document.getElementById('lg_pw').value='';document.getElementById('lg_err').textContent='';}
+
+function initApp(){
+  const u=currentUser;
+  document.getElementById('emp_name_display').textContent=u.name;
+  document.getElementById('home_avatar').textContent=u.name[0];
+  document.getElementById('home_name').textContent=u.name;
+  document.getElementById('home_pos').textContent=u.pos;
+  document.getElementById('home_dept').textContent=u.dept;
+  document.getElementById('home_id').textContent=u.id;
+  document.getElementById('home_date').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('home_leave').textContent=u.leave+' วัน';
+  document.getElementById('home_ot').textContent='฿'+u.ot.toLocaleString('th-TH');
+  document.getElementById('home_sal').textContent='฿'+u.sal.toLocaleString('th-TH');
+  document.getElementById('rpt_date').textContent=new Date().toLocaleDateString('th-TH');
+
+  // Notifications
+  const notifs=[];
+  if(u.type==='guard')notifs.push({c:'al-g',t:'✅ OT มี.ค. ฿'+u.ot+' — อนุมัติแล้ว ลงเงินเดือนวันที่ 3 เม.ย.'});
+  notifs.push({c:'al-b',t:'ℹ Payroll เม.ย. 69 — วันที่ 3 เม.ย.'});
+  if(u.type==='sa')notifs.push({c:'al-r',t:'⚠ Tire MTD = 0 เส้น เป้า 40 — ต้องเสนอลูกค้าทุกคัน!'});
+  document.getElementById('home_notif').innerHTML=notifs.map(n=>`<div class="al ${n.c}"><span></span><div>${n.t}</div></div>`).join('');
+
+  // KPI
+  if(u.kpi){
+    const kpiEl=document.getElementById('home_kpi');
+    if(u.type==='sa'){
+      kpiEl.innerHTML=`
+        <div class="brow"><span class="bl">CPU วันนี้</span><div class="pw"><div class="pf" style="width:55%;background:var(--amb)"></div></div><span class="bv">${u.kpi.cpu}</span></div>
+        <div class="brow"><span class="bl">Tire MTD</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">${u.kpi.tire}</span></div>
+        <div class="brow"><span class="bl">Battery MTD</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">${u.kpi.battery}</span></div>
+        <div class="brow"><span class="bl">PBC MTD</span><div class="pw"><div class="pf" style="width:1.6%;background:var(--amb)"></div></div><span class="bv">${u.kpi.pbc}</span></div>
+        <div class="brow"><span class="bl">QR Rating</span><div class="pw"><div class="pf" style="width:94%;background:var(--grn)"></div></div><span class="bv" style="color:var(--grn)">${u.kpi.qr}</span></div>`;
+    } else if(u.type==='sales'){
+      kpiEl.innerHTML=`
+        <div class="brow"><span class="bl">ยอดขาย MTD</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">${u.kpi.cars}</span></div>
+        <div class="brow"><span class="bl">Finance rate</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">${u.kpi.finance}</span></div>
+        <div class="brow"><span class="bl">Insurance rate</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">${u.kpi.insurance}</span></div>`;
+    }
+  } else {document.getElementById('home_kpi').innerHTML=`<div style="font-size:12px;color:var(--mu);padding:10px 0">ไม่มี KPI ส่วนตัว</div>`;}
+
+  // Leave quota
+  const lqEl=document.getElementById('leave_quota');
+  if(lqEl){
+    const yr={annual:u.leave,personal:3,sick:30};
+    const used={annual:2,personal:1,sick:1};
+    lqEl.innerHTML=Object.entries({annual:'พักร้อน',personal:'กิจ',sick:'ป่วย'}).map(([k,n])=>`
+      <div class="leave-bar">
+        <span style="min-width:80px;font-size:12px">${n}</span>
+        <div class="pw"><div class="pf" style="width:${Math.round(used[k]/yr[k]*100)}%;background:var(--grn)"></div></div>
+        <span style="font-size:11px;font-family:var(--mono);min-width:90px;text-align:right">${yr[k]-used[k]}/${yr[k]} วัน</span>
+      </div>`).join('');
+  }
+
+  // Advance pending
+  const apEl=document.getElementById('adv_pending');
+  if(apEl)apEl.innerHTML=`<div style="font-size:12px;color:var(--mu);text-align:center;padding:12px">ไม่มีเงินทดรองค้างเคลียร์ ✓</div>`;
+
+  // Daily report form
+  const rptEl=document.getElementById('rpt_form');
+  if(rptEl){
+    if(u.type==='sa'){
+      rptEl.innerHTML=`
+        <div class="fr"><div class="fg"><label class="fl">CPU วันนี้</label><input class="fi2" type="number" placeholder="0"></div><div class="fg"><label class="fl">Tire (เส้น)</label><input class="fi2" type="number" placeholder="0"></div></div>
+        <div class="fr"><div class="fg"><label class="fl">Battery (ชิ้น)</label><input class="fi2" type="number" placeholder="0"></div><div class="fg"><label class="fl">PBC Revenue (บาท)</label><input class="fi2" type="number" placeholder="0"></div></div>
+        <div class="fg"><label class="fl">ลูกค้าสนใจซื้อรถใหม่</label><input class="fi2" type="text" placeholder="ทะเบียน / ชื่อ..."></div>
+        <div class="fg"><label class="fl">หมายเหตุ</label><textarea class="fi2" rows="2" placeholder="..."></textarea></div>
+        <button class="btn btn-p btn-sm" onclick="alert('ส่งรายงานแล้ว — ผจก.บริการเห็นทันที')">ส่งรายงาน 17:00</button>`;
+    } else if(u.type==='guard'){
+      rptEl.innerHTML=`
+        <div class="fg"><label class="fl">กะที่ทำงาน</label><select class="fs"><option>กะเช้า 06:00-18:00</option><option>กะดึก 18:00-06:00</option></select></div>
+        <div class="fg"><label class="fl">เหตุการณ์ผิดปกติ</label><textarea class="fi2" rows="3" placeholder="ไม่มี / อธิบาย..."></textarea></div>
+        <button class="btn btn-p btn-sm" onclick="alert('ส่งรายงานแล้ว')">ส่งรายงาน</button>`;
+    } else {
+      rptEl.innerHTML=`
+        <div class="fg"><label class="fl">สรุปงานวันนี้</label><textarea class="fi2" rows="3" placeholder="สรุปสิ่งที่ทำวันนี้..."></textarea></div>
+        <div class="fg"><label class="fl">ปัญหา / ต้องการความช่วยเหลือ</label><textarea class="fi2" rows="2" placeholder="..."></textarea></div>
+        <button class="btn btn-p btn-sm" onclick="alert('ส่งรายงานแล้ว')">ส่งรายงาน</button>`;
+    }
+  }
+
+  // Payslip
+  const psEl=document.getElementById('payslip_content');
+  if(psEl){
+    const gross=u.sal+Math.round(u.sal*0.05)+u.ot;
+    const sso=Math.round(u.sal*0.05);
+    const gys=u.id==='5910-0080'?195:0;
+    const net=gross-sso-gys;
+    psEl.innerHTML=`
+      <div style="font-size:12px">
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">เงินเดือน</span><span style="font-family:var(--mono)">฿${u.sal.toLocaleString()}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">ค่า OT มี.ค.</span><span style="font-family:var(--mono);color:var(--grn)">+฿${u.ot.toLocaleString()}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">หัก SSO (5%)</span><span style="font-family:var(--mono);color:var(--red)">-฿${sso.toLocaleString()}</span></div>
+        ${gys>0?`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">หัก กยศ.</span><span style="font-family:var(--mono);color:var(--red)">-฿${gys}</span></div>`:''}
+        <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:16px;font-weight:600;border-top:1px solid var(--br);margin-top:4px"><span>รับสุทธิ</span><span style="font-family:var(--mono);color:var(--grn)">฿${net.toLocaleString()}</span></div>
+      </div>`;
+  }
+}
+
+function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
+
+function calcLeave(){
+  const s=new Date(document.getElementById('lv_start').value);
+  const e=new Date(document.getElementById('lv_end').value);
+  const el=document.getElementById('lv_calc');
+  if(isNaN(s)||isNaN(e)){el.innerHTML='';return;}
+  const days=Math.round((e-s)/86400000)+1;
+  if(days<=0){el.innerHTML='<div class="al al-r"><span>⚠</span><div>วันสิ้นสุดต้องหลังวันเริ่มต้น</div></div>';return;}
+  const quota=currentUser?.leave||6;
+  el.innerHTML=`<div class="al ${days>quota?'al-r':'al-g'}"><span>${days>quota?'⚠':'✓'}</span><div>ลา ${days} วัน ${days>quota?'เกินสิทธิ์ที่เหลือ ('+quota+' วัน)':'สิทธิ์คงเหลือ '+(quota-days)+' วัน'}</div></div>`;
+}
+function submitLeave(){
+  const s=document.getElementById('lv_start').value;
+  const e=document.getElementById('lv_end').value;
+  if(!s||!e){alert('กรุณาเลือกวันที่ก่อน');return;}
+  alert('ส่งคำขอลาแล้ว — รอผจก.อนุมัติ');
+}
+function checkAdvance(){
+  const amt=parseInt(document.getElementById('adv_amt').value)||0;
+  const el=document.getElementById('adv_check');
+  if(!amt){el.innerHTML='';return;}
+  el.innerHTML=amt>2000?`<div class="al al-a"><span>!</span><div>฿${amt.toLocaleString()} > ฿2,000 → ต้อง <strong>ผู้บริหาร</strong> อนุมัติ</div></div>`:`<div class="al al-b"><span>ℹ</span><div>฿${amt.toLocaleString()} ≤ ฿2,000 → ผู้จัดการอนุมัติได้</div></div>`;
+}
+function submitAdvance(){
+  const amt=document.getElementById('adv_amt').value;
+  const purpose=document.getElementById('adv_purpose').value;
+  if(!amt||!purpose){alert('กรุณากรอกข้อมูลให้ครบ');return;}
+  alert('ส่งคำขอเบิกเงินแล้ว — รอการอนุมัติ');
+}
+</script>
+</body>
+</html>

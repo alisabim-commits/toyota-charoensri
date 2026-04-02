@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ผู้จัดการบริการ — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--pur:#4c1d95;--pbg:#f5f3ff;--pbr:#c4b5fd;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
+.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 24px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50}
+.logo{font-size:13px;font-weight:600;padding-right:20px;border-right:1px solid var(--br);margin-right:20px}.logo span{color:var(--red)}
+.nt{height:44px;display:flex;align-items:center;padding:0 13px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
+.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
+.hr-r{margin-left:auto;font-size:11px;color:var(--mu)}
+.content{max-width:1100px;margin:0 auto;padding:22px 20px}
+.page{display:none}.page.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
+.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
+.kpi.r{border-color:var(--rbr);background:var(--rbg)}.kpi.g{border-color:var(--gbr);background:var(--gbg)}
+.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
+.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
+.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}.bd-p{background:var(--pbg);color:var(--pur)}
+.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid}
+.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
+th.r{text-align:right}td{padding:8px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
+.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
+.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
+.fi:focus{outline:none;border-color:var(--tx)}
+.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
+.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}.btn-sm{padding:4px 10px;font-size:11px}
+.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
+.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
+.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}.bl{min-width:170px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
+.brief-block{background:#0a1628;border-radius:var(--rl);padding:16px;color:rgba(255,255,255,.9);margin-bottom:12px}
+.bb-title{font-size:11px;color:#c9a84c;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.bb-item{display:flex;gap:8px;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,.1);font-size:12px}
+.bb-item:last-child{border-bottom:none}.bb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
+  <div class="nt on" onclick="gp('brief',this)">☀️ Briefing</div>
+  <div class="nt" onclick="gp('dash',this)">📊 Dashboard</div>
+  <div class="nt" onclick="gp('intake',this)">🚗 รับรถวันนี้</div>
+  <div class="nt" onclick="gp('tire',this)">🔵 Tire & Battery</div>
+  <div class="nt" onclick="gp('qr',this)">⭐ QR Rating</div>
+  <div class="nt" onclick="gp('report',this)">📁 รายงาน</div>
+  <div class="hr-r" id="dt"></div>
+</div>
+<div class="content">
+
+<!-- BRIEFING -->
+<div class="page on" id="pg-brief">
+<div class="sec">Morning Briefing — บริการ</div>
+<div class="sec-s">ทุกวัน 8:00 น. · ผจก.บริการนำ · SA ทุกคนต้องรับรู้ก่อนเริ่มงาน</div>
+<div class="g2">
+  <div>
+    <div class="brief-block">
+      <div class="bb-title">🎯 Focus วันนี้</div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div><strong>Tire & Battery = 0 เส้น/ชิ้น MTD!</strong> ทุกรถ Out-of-Warranty ต้องเสนอทันที ไม่มีข้อยกเว้น</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>รถวันนี้ 17 คัน · 5 คันเป็น EM+ = โอกาส Upsell สูงสุด</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>CPU เป้า 31 คัน/วัน ทำได้ 17 — ต้องนัดเพิ่ม</div></div>
+    </div>
+    <div class="brief-block">
+      <div class="bb-title">📊 Q1/69 จริง — จาก TOPSERV</div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>ม.ค. CPU 604 · PBC ฿2.53ล. · Battery 24 ชิ้น (ดีสุด)</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--abr)"></div><div>ก.พ. CPU 551 · PBC ฿2.20ล. (ต่ำสุด Q1) ต้องกลับขึ้น</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>มี.ค. CPU 599 · PBC ฿2.57ล. (ฟื้นตัว)</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>Tire เฉลี่ย 4 เส้น/เดือน ห่างเป้า 40 มากที่สุด</div></div>
+    </div>
+    <div class="brief-block">
+      <div class="bb-title">🌙 Evening Briefing — 17:00</div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>รายงาน: CPU จริง · Tire · Battery · PBC · รถค้างคืน</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>ลูกค้าบริการที่สนใจรถใหม่ — ส่งให้ Sales ทันที</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>QR Rating วันนี้ดาวเฉลี่ย + complaint ถ้ามี</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="brief-block">
+      <div class="bb-title">🔵 Script เสนอ Tire/Battery</div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 1</strong> ตรวจ Tire ทุกคัน ถ่ายรูปสภาพยางพร้อม</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 2</strong> แสดงรูปลูกค้า: "ยางใกล้ถึงเวลาเปลี่ยนแล้วครับ ทำวันนี้สะดวกไหม?"</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 3</strong> เสนอราคา + แพ็กเกจ Tire+Wheel Alignment</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>Battery: ใช้ Tester วัดและแสดงผลให้ลูกค้าเห็น — ลูกค้าตัดสินใจเองง่ายขึ้น</div></div>
+    </div>
+    <div class="brief-block">
+      <div class="bb-title">🔄 ส่งลูกค้าบริการ → ขาย</div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>รถอายุ >5 ปี หรือวิ่ง >100K km = แจ้ง Sales</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>ลูกค้าถาม trade-in = ประสาน Sales ทันที</div></div>
+      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>SA ที่ส่งลูกค้าซื้อรถได้รับค่าแนะนำ ฿5,000</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="pg-dash">
+<div class="sec">Dashboard บริการ</div>
+<div class="sec-s">KPI รายวัน · อัพเดทจาก SA ทุก 17:00</div>
+<div class="al al-r"><span>⚠</span><div>Tire MTD = 0 เส้น · Battery MTD = 0 ชิ้น · 2 วันแรกเดือน เม.ย. ห่างเป้ามาก</div></div>
+<div class="g5" style="margin-bottom:14px">
+  <div class="kpi r"><div class="kl">Tire MTD</div><div class="kv" style="color:var(--red)">0 เส้น</div><div class="ks" style="color:var(--red)">เป้า 40</div></div>
+  <div class="kpi r"><div class="kl">Battery MTD</div><div class="kv" style="color:var(--red)">0 ชิ้น</div><div class="ks" style="color:var(--red)">เป้า 43</div></div>
+  <div class="kpi"><div class="kl">CPU MTD</div><div class="kv">33</div><div class="ks" style="color:var(--mu)">เป้า 720/เดือน</div></div>
+  <div class="kpi"><div class="kl">PBC MTD</div><div class="kv">฿52K</div><div class="ks" style="color:var(--mu)">เป้า ฿3.30ล.</div></div>
+  <div class="kpi g"><div class="kl">Appt. Rate</div><div class="kv" style="color:var(--grn)">100%</div><div class="ks" style="color:var(--grn)">12/12 ✓</div></div>
+</div>
+<div class="g2">
+  <div class="card">
+    <div class="ct">KPI vs เป้า</div>
+    <div class="brow"><span class="bl">CPU (720/เดือน)</span><div class="pw"><div class="pf" style="width:4.6%;background:var(--amb)"></div></div><span class="bv" style="color:var(--amb)">33</span></div>
+    <div class="brow"><span class="bl">PBC Revenue (฿3.30ล.)</span><div class="pw"><div class="pf" style="width:1.6%;background:var(--amb)"></div></div><span class="bv" style="color:var(--amb)">฿52K</span></div>
+    <div class="brow"><span class="bl">Tire (40 เส้น)</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">0</span></div>
+    <div class="brow"><span class="bl">Battery (43 ชิ้น)</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">0</span></div>
+  </div>
+  <div class="card">
+    <div class="ct">Q1/69 จาก TOPSERV จริง</div>
+    <table>
+      <tr><th>เดือน</th><th class="r">CPU</th><th class="r">PBC</th><th class="r">Battery</th><th class="r">Tire</th></tr>
+      <tr><td>ม.ค. 69</td><td class="r">604</td><td class="r">฿2.53ล.</td><td class="r" style="color:var(--grn)">24 ✓</td><td class="r" style="color:var(--red)">-</td></tr>
+      <tr><td>ก.พ. 69</td><td class="r" style="color:var(--red)">551</td><td class="r" style="color:var(--red)">฿2.20ล.</td><td class="r">18</td><td class="r" style="color:var(--red)">-</td></tr>
+      <tr><td>มี.ค. 69</td><td class="r">599</td><td class="r">฿2.57ล.</td><td class="r" style="color:var(--grn)">24 ✓</td><td class="r" style="color:var(--red)">4</td></tr>
+      <tr style="background:var(--bg)"><td>เป้าเดือน เม.ย.</td><td class="r" style="color:var(--grn)">720</td><td class="r" style="color:var(--grn)">฿3.30ล.</td><td class="r" style="color:var(--grn)">43</td><td class="r" style="color:var(--grn)">40</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- INTAKE -->
+<div class="page" id="pg-intake">
+<div class="sec">รับรถวันนี้</div>
+<div class="sec-s">รายการนัดหมายวันนี้ · EM+ = เสนอ Tire/Battery ทุกคัน</div>
+<div class="al al-g"><span>✓</span><div>5 คัน EM+ วันนี้ = โอกาส Tire/Battery สูงสุด · SA ต้องตรวจทุกคันและแสดงผลลูกค้า</div></div>
+<div class="card">
+  <table>
+    <tr><th>เวลา</th><th>ทะเบียน</th><th>รุ่น / ไมล์</th><th>ประเภท</th><th>Tire</th><th>Battery</th><th>SA</th><th>สถานะ</th></tr>
+    <tr><td>08:30</td><td class="bd bd-hi" style="font-family:var(--mono)">นพ-1234</td><td><div style="font-size:11px">REVO D-CAB<br><span style="color:var(--mu)">85,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-a">ตรวจแล้ว</span></td><td><span class="bd bd-a">เสนอแล้ว</span></td><td>สุขธนัช</td><td><span class="bd bd-b">ดำเนินการ</span></td></tr>
+    <tr><td>09:00</td><td class="bd bd-hi" style="font-family:var(--mono)">ขก-5678</td><td><div style="font-size:11px">COMMUTER<br><span style="color:var(--mu)">45,000 km</span></div></td><td><span class="bd bd-g">GS</span></td><td><span class="bd bd-r">ยังไม่ตรวจ</span></td><td><span class="bd bd-r">ยังไม่ตรวจ</span></td><td>นิราวรรณ</td><td><span class="bd bd-a">รอ SA</span></td></tr>
+    <tr><td>09:30</td><td class="bd bd-hi" style="font-family:var(--mono)">สน-9012</td><td><div style="font-size:11px">FORTUNER 4×4<br><span style="color:var(--mu)">120,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-g">เปลี่ยน 2 เส้น ✓</span></td><td><span class="bd bd-g">เปลี่ยน ✓</span></td><td>สุขธนัช</td><td><span class="bd bd-g">เสร็จ</span></td></tr>
+    <tr><td>10:00</td><td class="bd bd-hi" style="font-family:var(--mono)">นม-3456</td><td><div style="font-size:11px">ATIV<br><span style="color:var(--mu)">30,000 km</span></div></td><td><span class="bd bd-b">EM</span></td><td><span class="bd bd-hi">ไม่เสนอ (ใหม่)</span></td><td><span class="bd bd-hi">ไม่เสนอ (ใหม่)</span></td><td>อริศรา</td><td><span class="bd bd-b">ดำเนินการ</span></td></tr>
+    <tr><td>10:30</td><td class="bd bd-hi" style="font-family:var(--mono)">นพ-7890</td><td><div style="font-size:11px">Yaris Cross<br><span style="color:var(--mu)">65,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-a">รอ</span></td><td><span class="bd bd-a">รอ</span></td><td>นิราวรรณ</td><td><span class="bd bd-a">รอ</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- TIRE BATTERY -->
+<div class="page" id="pg-tire">
+<div class="sec">Tire & Battery</div>
+<div class="sec-s">KPI ที่ห่างเป้ามากที่สุด · ทำได้ +฿2.5ล./ปี โดยไม่ลงทุนเพิ่มเลย</div>
+<div class="al al-r"><span>🔴</span><div>Tire เฉลี่ยเดิม 4 เส้น/เดือน เป้า 40 เส้น · ห่าง 10 เท่า · SA รู้อยู่แต่ไม่เสนอ = ปัญหาพฤติกรรม</div></div>
+<div class="g2">
+  <div class="card">
+    <div class="ct">บันทึก Tire & Battery วันนี้</div>
+    <div class="fr">
+      <div class="fg"><label class="fl">ทะเบียนรถ</label><input class="fi" type="text" id="tb_car" placeholder="นพ-XXXX"></div>
+      <div class="fg"><label class="fl">SA</label><select style="width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)"><option>สุขธนัช</option><option>นิราวรรณ</option><option>อริศรา</option></select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Tire เปลี่ยน (เส้น)</label><input class="fi" type="number" id="tb_tire" placeholder="0" min="0"></div>
+      <div class="fg"><label class="fl">Battery เปลี่ยน (ชิ้น)</label><input class="fi" type="number" id="tb_bat" placeholder="0" min="0"></div>
+      <div class="fg"><label class="fl">PBC วันนี้ (บาท)</label><input class="fi" type="number" id="tb_pbc" placeholder="0"></div>
+    </div>
+    <button class="btn btn-p btn-sm" onclick="alert('บันทึกยอดบริการแล้ว — ผบห.เห็นทันที')">บันทึกและส่งผบห.</button>
+  </div>
+  <div class="card">
+    <div class="ct">เปรียบเทียบ — Tire Q1/69</div>
+    <div class="brow"><span class="bl">ม.ค. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">~4 เส้น</span></div>
+    <div class="brow"><span class="bl">ก.พ. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">~4 เส้น</span></div>
+    <div class="brow"><span class="bl">มี.ค. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">4 เส้น</span></div>
+    <div class="brow"><span class="bl">เป้า เม.ย.</span><div class="pw"><div class="pf" style="width:100%;background:var(--grn)"></div></div><span class="bv" style="color:var(--grn)">40 เส้น</span></div>
+    <div class="al al-a" style="margin-top:8px"><span>!</span><div>Tire เส้นละ margin ~฿750 · 40 เส้น = ฿30,000/เดือน = ฿360K/ปี เพิ่มจากการเสนอเท่านั้น</div></div>
+  </div>
+</div>
+</div>
+
+<!-- QR RATING -->
+<div class="page" id="pg-qr">
+<div class="sec">QR Rating ลูกค้า</div>
+<div class="sec-s">วางที่แคชเชียร์ · QR เปลี่ยนรายวัน · ผล → หัก/บวก incentive SA อัตโนมัติ</div>
+<div class="g2">
+  <div class="card">
+    <div class="ct">ผล Rating MTD — เม.ย.</div>
+    <table>
+      <tr><th>SA</th><th class="r">ตอบ</th><th class="r">คะแนน</th><th class="r">Complaint</th><th>หัก incentive</th></tr>
+      <tr><td>สุขธนัช</td><td class="r">22</td><td class="r" style="color:var(--grn)">4.7 ★</td><td class="r">1</td><td><span class="bd bd-a">-0.05%</span></td></tr>
+      <tr><td>นิราวรรณ</td><td class="r">19</td><td class="r" style="color:var(--grn)">4.5 ★</td><td class="r">0</td><td><span class="bd bd-g">+0.05% bonus</span></td></tr>
+      <tr><td>อริศรา</td><td class="r">18</td><td class="r" style="color:var(--amb)">4.1 ★</td><td class="r">3</td><td><span class="bd bd-r">-0.10%</span></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="ct">Complaint ที่พบบ่อย</div>
+    <table>
+      <tr><th>หัวข้อ</th><th class="r">ครั้ง</th><th>แนวทางแก้</th></tr>
+      <tr><td>รอนานเกิน</td><td class="r">5</td><td style="font-size:11px">เพิ่ม QS bay / จัด slot ดีขึ้น</td></tr>
+      <tr><td>ไม่แนะนำ Tire/Battery</td><td class="r">4</td><td style="font-size:11px">ตรงกับ Tire MTD=0 SA ต้องฝึก</td></tr>
+      <tr><td>ราคาไม่ตรง</td><td class="r">2</td><td style="font-size:11px">SA ยืนยันราคาก่อนทุกครั้ง</td></tr>
+    </table>
+    <div class="al al-a" style="margin-top:8px"><span>!</span><div>Complaint "ไม่แนะนำ Tire" ตรงกับ KPI Tire ต่ำ — เป็นปัญหาเดียวกัน ต้องฝึก SA ด่วน</div></div>
+  </div>
+</div>
+</div>
+
+<!-- REPORT -->
+<div class="page" id="pg-report">
+<div class="sec">กรอกรายงานประจำวัน</div>
+<div class="sec-s">17:00 ทุกวัน · กรอกครบ ผบห.เห็นทันที</div>
+<div class="card">
+  <div class="ct">รายงาน 5 ตัวเลข — <span id="rp_date"></span></div>
+  <div class="g2">
+    <div>
+      <div class="fg"><label class="fl">CPU จริงวันนี้</label><input class="fi" type="number" id="rp_cpu" placeholder="0"></div>
+      <div class="fg"><label class="fl">Tire เปลี่ยนวันนี้ (เส้น)</label><input class="fi" type="number" id="rp_tire" placeholder="0"></div>
+      <div class="fg"><label class="fl">Battery เปลี่ยนวันนี้ (ชิ้น)</label><input class="fi" type="number" id="rp_bat" placeholder="0"></div>
+    </div>
+    <div>
+      <div class="fg"><label class="fl">PBC Revenue วันนี้ (บาท)</label><input class="fi" type="number" id="rp_pbc" placeholder="0"></div>
+      <div class="fg"><label class="fl">รถค้างคืน (คัน)</label><input class="fi" type="number" id="rp_wip" placeholder="0"></div>
+      <div class="fg"><label class="fl">ลูกค้าที่สนใจซื้อรถใหม่</label><input class="fi" type="text" placeholder="ชื่อ/ทะเบียน..."></div>
+    </div>
+  </div>
+  <div class="fg"><label class="fl">หมายเหตุ/เหตุการณ์พิเศษ</label><textarea class="fi" rows="2" placeholder="..."></textarea></div>
+  <button class="btn btn-p" onclick="alert('ส่งรายงานให้ผบห.แล้ว — อัพเดท Dashboard ทันที')">ส่งรายงาน 17:00</button>
+</div>
+<div class="card">
+  <div class="ct">อัพโหลด TOPSERV</div>
+  <div style="border:2px dashed var(--br2);border-radius:var(--r);padding:24px;text-align:center;cursor:pointer" onclick="document.getElementById('ts_file').click()">
+    <div style="font-size:24px;margin-bottom:8px">📁</div>
+    <div style="font-size:13px;font-weight:500">คลิกเพื่ออัพโหลดไฟล์ TOPSERV</div>
+    <div style="font-size:11px;color:var(--mu);margin-top:4px">ทุกวันที่ 5 ของเดือน · ระบบดึง CPU/PBC อัตโนมัติ</div>
+    <input type="file" id="ts_file" style="display:none" accept=".xls,.xlsx,.csv" onchange="alert('อัพโหลด TOPSERV แล้ว — ระบบกำลัง process...')">
+  </div>
+</div>
+</div>
+
+</div>
+<script>
+document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+document.getElementById('rp_date').textContent=new Date().toLocaleDateString('th-TH');
+function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
+</script>
+</body>
+</html>

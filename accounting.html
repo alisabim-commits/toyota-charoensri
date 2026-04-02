@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>บัญชี/การเงิน — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
+.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 24px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50}
+.logo{font-size:13px;font-weight:600;padding-right:20px;border-right:1px solid var(--br);margin-right:20px}.logo span{color:var(--red)}
+.nt{height:44px;display:flex;align-items:center;padding:0 13px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
+.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
+.hr-r{margin-left:auto;font-size:11px;color:var(--mu)}
+.content{max-width:1000px;margin:0 auto;padding:22px 20px}
+.page{display:none}.page.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
+.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
+.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}
+.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
+.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}
+.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid;line-height:1.6}
+.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
+th.r{text-align:right}td{padding:8px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
+.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
+.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
+.fi:focus{outline:none;border-color:var(--tx)}.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
+.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
+.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
+.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}.btn-sm{padding:4px 10px;font-size:11px}.btn-gr{background:var(--gbg);color:var(--grn);border-color:var(--gbr)}
+.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
+.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
+.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}.bl{min-width:160px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
+.div{height:1px;background:var(--br);margin:12px 0}
+.fuel-log{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);margin-bottom:5px;font-size:12px;border:1px solid}
+.fl-ok{background:var(--gbg);border-color:var(--gbr)}.fl-warn{background:var(--abg);border-color:var(--abr)}.fl-bad{background:var(--rbg);border-color:var(--rbr)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
+  <div class="nt on" onclick="gp('flash',this)">⌨️ Flash P&L</div>
+  <div class="nt" onclick="gp('cash',this)">🏦 Cash Deposit</div>
+  <div class="nt" onclick="gp('fuel',this)">⛽ น้ำมันหลอด</div>
+  <div class="nt" onclick="gp('asset',this)">🏷️ ขายของเก่า</div>
+  <div class="nt" onclick="gp('budget',this)">📊 Budget</div>
+  <div class="nt" onclick="gp('deduct',this)">✂️ หักเงินเดือน ม.76</div>
+  <div class="hr-r" id="dt"></div>
+</div>
+<div class="content">
+
+<!-- FLASH P&L -->
+<div class="page on" id="pg-flash">
+<div class="sec">Flash P&L — คีย์รายวัน</div>
+<div class="sec-s">กรอก 3 ตัวเลข ~5 นาที · ก่อน 17:30 · ผบห.เห็นทันที ไม่ต้องรอ TFIS วันที่ 20</div>
+<div class="al al-b"><span>ℹ</span><div>TFIS ก.พ.69 จริง: Net Loss -฿1,575,279/เดือน · P28 ฿508K · ดอกเบี้ย TLT ฿540K · OD ฿81.3ล.</div></div>
+<div class="g2">
+  <div>
+    <div class="card">
+      <div class="ct">รายรับวันนี้ (ดึงจาก SB)</div>
+      <div class="g2" style="margin-bottom:0">
+        <div class="kpi"><div class="kl">PBC Revenue</div><div class="kv">฿31,200</div></div>
+        <div class="kpi"><div class="kl">รายรับขายรถ</div><div class="kv">฿784,000</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">คีย์เพิ่ม 3 ตัวเลข</div>
+      <div class="fg"><label class="fl">ส่วนลด P28 วันนี้ (บาท)</label><input class="fi" type="number" id="p28" value="20000" placeholder="0" oninput="calcF()"></div>
+      <div class="fg"><label class="fl">ค่าใช้จ่าย OPEX วันนี้ (บาท)</label><input class="fi" type="number" id="opex" value="48200" placeholder="0" oninput="calcF()"></div>
+      <div class="fg"><label class="fl">OD ธนาคาร สิ้นวัน (บาท)</label><input class="fi" type="number" id="od" value="81300000" placeholder="0" oninput="calcF()"></div>
+      <div class="fg"><label class="fl">F&I Commission วันนี้</label><input class="fi" type="number" id="fi" value="10000" placeholder="0" oninput="calcF()"></div>
+      <button class="btn btn-p" onclick="calcF();alert('บันทึก Flash P&L แล้ว — ผบห.เห็นทันที')">บันทึกและส่งผบห.</button>
+    </div>
+  </div>
+  <div id="flash_res" style="padding:16px;background:var(--w);border:1px solid var(--br);border-radius:var(--rl)">
+    <div style="font-size:12px;color:var(--mu);text-align:center;padding:20px">กรอกข้อมูลเพื่อคำนวณ</div>
+  </div>
+</div>
+<div class="card">
+  <div class="ct">Flash P&L ย้อนหลัง — Q1/69</div>
+  <table>
+    <tr><th>วันที่</th><th class="r">P28</th><th class="r">OPEX</th><th class="r">OD</th><th class="r">Flash Net</th><th>vs TFIS</th></tr>
+    <tr><td>ก.พ. 69 (TFIS จริง)</td><td class="r">฿508K</td><td class="r">฿2.28ล.</td><td class="r">฿81.3ล.</td><td class="r"><span class="bd bd-r">-฿1,575,279</span></td><td><span class="bd bd-g">ยืนยันแล้ว</span></td></tr>
+    <tr><td>ม.ค. 69 (ประมาณ)</td><td class="r">~฿500K</td><td class="r">~฿2.2ล.</td><td class="r">~฿80ล.</td><td class="r"><span class="bd bd-r">~-฿1.2ล.</span></td><td><span class="bd bd-a">รอ TFIS</span></td></tr>
+    <tr><td>1 เม.ย. 69 (วันนี้)</td><td class="r" id="td_p28">-</td><td class="r" id="td_opex">-</td><td class="r" id="td_od">-</td><td class="r" id="td_net">-</td><td><span class="bd bd-b">Flash</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- CASH -->
+<div class="page" id="pg-cash">
+<div class="sec">Cash Deposit</div>
+<div class="sec-s">ฝากภายใน 2 วัน · วันที่ 2 แจ้ง ผจก.+บัญชี · วันที่ 3 ขึ้นแดง ผบห.</div>
+<div class="al al-r"><span>🔴</span><div>29 มี.ค. ยังไม่ฝาก ฿55,000 เกิน 2 วันแล้ว — ต้องดำเนินการวันนี้</div></div>
+<div class="card">
+  <div class="ct">บันทึก Cash Deposit วันนี้</div>
+  <div class="fr">
+    <div class="fg"><label class="fl">วันที่รับเงิน</label><input class="fi" type="date" id="cd_date"></div>
+    <div class="fg"><label class="fl">ยอดเงินสดที่นับ (บาท)</label><input class="fi" type="number" id="cd_cash" placeholder="0" oninput="chkCash()"></div>
+    <div class="fg"><label class="fl">ยอดตาม SB (บาท)</label><input class="fi" type="number" id="cd_sb" placeholder="0" oninput="chkCash()"></div>
+  </div>
+  <div id="cd_res" style="margin-bottom:10px"></div>
+  <div class="fg"><label class="fl">เลข Pay-in slip</label><input class="fi" type="text" placeholder="PAY-XXXXX"></div>
+  <div class="fg"><label class="fl">ชื่อธนาคาร/บัญชี</label><select class="fs"><option>BAY C/A 275-0-00795-8</option><option>BAY C/A 275-0-00768-2</option><option>SCB S/A 407-431972-8</option></select></div>
+  <button class="btn btn-p btn-sm" onclick="alert('บันทึก Cash Deposit แล้ว')">บันทึก</button>
+</div>
+<div class="card">
+  <div class="ct">Status Cash Deposit 7 วันล่าสุด</div>
+  <table>
+    <tr><th>วันที่</th><th class="r">ยอดรับ</th><th class="r">ยอดฝาก</th><th>ฝากวันที่</th><th>สถานะ</th></tr>
+    <tr style="background:var(--rbg)"><td style="color:var(--red);font-weight:500">29 มี.ค.</td><td class="r">฿55,000</td><td class="r" style="color:var(--red)">ยังไม่ฝาก</td><td style="color:var(--red)">เกิน 2 วัน!</td><td><span class="bd bd-r">วิกฤต</span></td></tr>
+    <tr style="background:var(--abg)"><td>30 มี.ค.</td><td class="r">฿31,800</td><td class="r" style="color:var(--amb)">ยังไม่ฝาก</td><td>รอวันที่ 1</td><td><span class="bd bd-a">รอ</span></td></tr>
+    <tr style="background:var(--gbg)"><td>31 มี.ค.</td><td class="r">฿48,250</td><td class="r" style="color:var(--grn)">฿48,250</td><td>31 มี.ค.</td><td><span class="bd bd-g">ตรง ✓</span></td></tr>
+    <tr><td>28 มี.ค.</td><td class="r">฿42,000</td><td class="r">฿41,500</td><td>29 มี.ค.</td><td><span class="bd bd-a">ต่าง ฿500</span></td></tr>
+    <tr style="background:var(--gbg)"><td>27 มี.ค.</td><td class="r">฿38,900</td><td class="r" style="color:var(--grn)">฿38,900</td><td>28 มี.ค.</td><td><span class="bd bd-g">ตรง ✓</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- FUEL -->
+<div class="page" id="pg-fuel">
+<div class="sec">บันทึกน้ำมันหลอด</div>
+<div class="sec-s">บันทึกทุกครั้งที่เติม · ระบบคำนวณ km/L · ต่ำกว่า 8 แจ้งทันที · สิ้นเดือน reconcile · ผิดปกติ → หักเงิน ม.76</div>
+<div class="al al-a"><span>!</span><div>เดือนนี้น้ำมันหาย 44 ลิตร = ฿1,848 · ถ้าไม่พบสาเหตุ → ออกใบหักเงินผู้ดูแลถัง ตามขั้นตอน ม.76</div></div>
+<div class="g2">
+  <div class="card">
+    <div class="ct">บันทึกการเติมน้ำมัน</div>
+    <div class="fg"><label class="fl">เลือกรถ</label>
+      <select class="fs" id="f_car" onchange="loadCar()">
+        <option value="">-- เลือกทะเบียน --</option>
+        <option value="87240">นพ-1234 REVO Test Drive (ไมล์ล่าสุด: 87,240)</option>
+        <option value="45120">นพ-5678 FORTUNER Test Drive (ไมล์ล่าสุด: 45,120)</option>
+        <option value="210450">นพ-3456 รถรับส่งพนักงาน (ไมล์ล่าสุด: 210,450)</option>
+        <option value="156300">นพ-7890 รถรับส่งอะไหล่ (ไมล์ล่าสุด: 156,300)</option>
+      </select>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">เลขไมล์ตอนเติม</label><input class="fi" type="number" id="f_mile" placeholder="0" oninput="calcKML()"></div>
+      <div class="fg"><label class="fl">ลิตรที่เติม</label><input class="fi" type="number" id="f_liter" placeholder="0" step="0.5" oninput="calcKML()"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">ผู้เติม</label><input class="fi" type="text" id="f_person" placeholder="ชื่อพนักงาน..."></div>
+      <div class="fg"><label class="fl">วัตถุประสงค์</label><select class="fs"><option>ทดลองขับลูกค้า</option><option>รับ-ส่งอะไหล่</option><option>รถรับส่งพนักงาน</option><option>ราชการบริษัท</option></select></div>
+    </div>
+    <div id="kml_res" style="margin-bottom:10px"></div>
+    <button class="btn btn-p btn-sm" onclick="alert('บันทึกการเติมน้ำมันแล้ว')">บันทึก</button>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ct">Reconcile เดือนนี้</div>
+      <div class="brow"><span class="bl">น้ำมันซื้อเข้า</span><div class="pw"><div class="pf" style="width:100%;background:var(--blu)"></div></div><span class="bv">842 L</span></div>
+      <div class="brow"><span class="bl">บันทึกใช้จริง</span><div class="pw"><div class="pf" style="width:94.8%;background:var(--grn)"></div></div><span class="bv" style="color:var(--grn)">798 L</span></div>
+      <div class="brow"><span class="bl">ไม่มี record</span><div class="pw"><div class="pf" style="width:5.2%;background:var(--amb)"></div></div><span class="bv" style="color:var(--amb)">44 L</span></div>
+      <div class="al al-a" style="margin-top:8px"><span>!</span><div>44 L = ฿1,848 · ถ้าเกินทุกเดือน = ฿22K/ปี · ต้องสอบสวนก่อนหักเงิน ม.76</div></div>
+    </div>
+    <div class="card">
+      <div class="ct">Log การเติมน้ำมัน</div>
+      <div class="fuel-log fl-ok"><div style="flex:1"><strong>นพ-1234 REVO</strong> — ทดลองขับ</div><div style="font-family:var(--mono);font-size:11px">38.5L · 87,240→88,575</div><span class="bd bd-g">8.7 km/L ✓</span></div>
+      <div class="fuel-log fl-warn"><div style="flex:1"><strong>นพ-5678 FORTUNER</strong></div><div style="font-family:var(--mono);font-size:11px">42.0L · 45,120→45,890</div><span class="bd bd-a">6.9 km/L ⚠</span></div>
+      <div class="fuel-log fl-ok"><div style="flex:1"><strong>นพ-3456 รับส่ง</strong></div><div style="font-family:var(--mono);font-size:11px">55.0L · 210,450→211,045</div><span class="bd bd-g">10.8 km/L ✓</span></div>
+      <div class="fuel-log fl-bad"><div style="flex:1;color:var(--red)"><strong>ไม่ระบุรถ</strong></div><div style="font-family:var(--mono);font-size:11px;color:var(--red)">25.0L · ไม่มีข้อมูลไมล์</div><span class="bd bd-r">ไม่มีข้อมูล ❌</span></div>
+      <div class="al al-r" style="margin-top:8px"><span>⚠</span><div>FORTUNER km/L = 6.9 ต่ำผิดปกติ — แจ้งผจก.บริการตรวจ</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ASSET -->
+<div class="page" id="pg-asset">
+<div class="sec">ขายของเก่า</div>
+<div class="sec-s">ทุกรายการต้องผ่านผบห.อนุมัติก่อน · เงินเข้าบัญชีบริษัทเท่านั้น ห้ามรับเงินสด · P-Code REV-ASSET</div>
+<div class="g2">
+  <div class="card">
+    <div class="ct">บันทึกรายการขาย</div>
+    <div class="fg"><label class="fl">ประเภท</label><select class="fs"><option>รถยนต์ใช้แล้ว/Demo</option><option>อุปกรณ์/เครื่องมือ</option><option>อะไหล่เก่า/เหล็กเก่า</option><option>เฟอร์นิเจอร์/สำนักงาน</option><option>อุปกรณ์ IT</option></select></div>
+    <div class="fg"><label class="fl">ชื่อรายการ</label><input class="fi" type="text" id="a_name" placeholder="เช่น REVO Demo ปี 65 นพ-XXXX"></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">ราคาซื้อตอนแรก</label><input class="fi" type="number" id="a_cost" placeholder="0" oninput="calcBook()"></div>
+      <div class="fg"><label class="fl">อายุการใช้งาน</label><select class="fs" id="a_age" onchange="calcBook()"><option value="1">1 ปี</option><option value="2">2 ปี</option><option value="3" selected>3 ปี</option><option value="4">4 ปี</option><option value="5">5 ปี</option><option value="10">10+ ปี</option></select></div>
+    </div>
+    <div id="book_res" style="margin-bottom:8px"></div>
+    <div class="fg"><label class="fl">ราคาขาย (บาท)</label><input class="fi" type="number" id="a_price" placeholder="0" oninput="calcBook()"></div>
+    <div class="fg"><label class="fl">ผู้ซื้อ</label><input class="fi" type="text" placeholder="ชื่อผู้ซื้อ..."></div>
+    <div class="fg"><label class="fl">วิธีรับเงิน</label><select class="fs"><option value="">เลือก...</option><option>โอนเข้าบัญชีบริษัท</option><option>เช็ค</option></select></div>
+    <button class="btn btn-p btn-sm" onclick="alert('ส่งขออนุมัติ ผบห. แล้ว')">ส่งขออนุมัติ ผบห.</button>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ct">ราคาอ้างอิงมาตรฐาน</div>
+      <table>
+        <tr><th>ประเภท</th><th>ราคาอ้างอิง</th></tr>
+        <tr><td>REVO (3-5 ปี)</td><td>฿350K-550K</td></tr>
+        <tr><td>FORTUNER (3-5 ปี)</td><td>฿700K-1M</td></tr>
+        <tr><td>รถ Demo (1-2 ปี)</td><td>ราคาใหม่ × 80%</td></tr>
+        <tr><td>อุปกรณ์ช่าง</td><td>ราคาใหม่ × 15-30%</td></tr>
+        <tr><td>เศษเหล็ก</td><td>฿3-8/kg</td></tr>
+        <tr><td>PC/Laptop 3+ ปี</td><td>฿500-3,000/เครื่อง</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="ct">ประวัติขายของเก่า ปี 69</div>
+      <table>
+        <tr><th>รายการ</th><th class="r">ราคาขาย</th><th class="r">กำไร/ขาดทุน</th><th>สถานะ</th></tr>
+        <tr><td>REVO D-CAB Demo</td><td class="r">฿350,000</td><td class="r" style="color:var(--grn)">+฿70,000</td><td><span class="bd bd-g">รับแล้ว</span></td></tr>
+        <tr><td>ลิฟต์ยกรถเก่า</td><td class="r">฿12,000</td><td class="r" style="color:var(--red)">-฿6,000</td><td><span class="bd bd-g">รับแล้ว</span></td></tr>
+        <tr><td>PC x3</td><td class="r">฿3,200</td><td class="r" style="color:var(--red)">-฿5,800</td><td><span class="bd bd-g">รับแล้ว</span></td></tr>
+        <tr><td>เศษเหล็ก/อะไหล่</td><td class="r">฿3,200</td><td class="r" style="color:var(--grn)">+฿3,200</td><td><span class="bd bd-a">รอตรวจ</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BUDGET -->
+<div class="page" id="pg-budget">
+<div class="sec">Budget รายหมวด</div>
+<div class="sec-s">ตั้งจาก TFIS ก.พ.69 จริง × 88% · P-Code ครบทุกหมวด · ผบห.เห็น real-time</div>
+<div class="g4" style="margin-bottom:14px">
+  <div class="kpi"><div class="kl">Budget รวม/เดือน</div><div class="kv">฿6.37ล.</div></div>
+  <div class="kpi"><div class="kl">ใช้ไป MTD (2 วัน)</div><div class="kv" style="color:var(--grn)">฿184K</div></div>
+  <div class="kpi" style="border-color:var(--rbr);background:var(--rbg)"><div class="kl">Over budget (เม.ย.)</div><div class="kv" style="color:var(--red)">0 หมวด</div></div>
+  <div class="kpi"><div class="kl">ดอกเบี้ย TLT+OD</div><div class="kv" style="color:var(--red)">฿762K</div></div>
+</div>
+<div class="card">
+  <div class="ct">Budget รายหมวด — TFIS ก.พ. vs เป้าใหม่</div>
+  <table>
+    <tr><th>หมวด</th><th>P-Code</th><th class="r">จริง ก.พ.</th><th class="r">Budget ใหม่</th><th class="r">ใช้ไป MTD</th><th>สถานะ</th></tr>
+    <tr><td>เงินเดือน+สวัสดิการ</td><td style="font-family:var(--mono);font-size:11px">P50/P19</td><td class="r">฿4,800K</td><td class="r">฿4,220K</td><td class="r" style="color:var(--grn)">฿280K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>ดอกเบี้ย OD</td><td style="font-family:var(--mono);font-size:11px">P84</td><td class="r">฿430K</td><td class="r">฿380K</td><td class="r" style="color:var(--grn)">฿14K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>ดอกเบี้ย TLT</td><td style="font-family:var(--mono);font-size:11px">P83</td><td class="r">฿540K</td><td class="r">฿540K</td><td class="r" style="color:var(--grn)">฿36K</td><td><span class="bd bd-b">Fixed</span></td></tr>
+    <tr><td>ค่าสาธารณูปโภค</td><td style="font-family:var(--mono);font-size:11px">P60/61</td><td class="r">฿280K</td><td class="r">฿250K</td><td class="r" style="color:var(--grn)">฿17K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>P45 ของแถม/ส่งเสริม</td><td style="font-family:var(--mono);font-size:11px">P45</td><td class="r">฿709K</td><td class="r">฿409K</td><td class="r" style="color:var(--grn)">฿32K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>P28 ส่วนลดจ่าย</td><td style="font-family:var(--mono);font-size:11px">P28</td><td class="r">฿508K</td><td class="r">฿308K</td><td class="r" style="color:var(--grn)">฿20K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>ค่าน้ำมันรถ</td><td style="font-family:var(--mono);font-size:11px">P64</td><td class="r">฿83K</td><td class="r">฿63K</td><td class="r" style="color:var(--grn)">฿5K</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>ค่าซ่อมบำรุง</td><td style="font-family:var(--mono);font-size:11px">P66</td><td class="r">฿152K</td><td class="r">฿120K</td><td class="r" style="color:var(--grn)">฿0</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+    <tr><td>ที่ปรึกษาบริหาร</td><td style="font-family:var(--mono);font-size:11px">P69/P50</td><td class="r">฿213K</td><td class="r">฿50K</td><td class="r" style="color:var(--grn)">฿0</td><td><span class="bd bd-a">ตรวจสอบ</span></td></tr>
+  </table>
+</div>
+</div>
+
+<!-- DEDUCT ม.76 -->
+<div class="page" id="pg-deduct">
+<div class="sec">หักเงินเดือน — ม.76</div>
+<div class="sec-s">ขั้นตอน: แจ้งเป็นลายลักษณ์อักษร → ให้ชี้แจง 7 วัน → พนักงานเซ็นยินยอม → หักได้ไม่เกิน 10% ต่อครั้ง</div>
+<div class="al al-b"><span>ℹ</span><div>ห้ามหักเงินโดยไม่มีใบยินยอมจากพนักงาน แม้พนักงานยอมรับผิดด้วยวาจา — ผิดกฎหมายแรงงาน</div></div>
+<div class="g2">
+  <div>
+    <div class="card">
+      <div class="ct">สร้างใบแจ้งหักเงิน</div>
+      <div class="fg"><label class="fl">พนักงานที่รับผิดชอบ</label>
+        <select class="fs" id="ded_emp">
+          <option value="">-- เลือกพนักงาน --</option>
+          <option value="โชคทวี ไชยสงคราม|9730">โชคทวี ไชยสงคราม (รปภ.) เงินเดือน ฿9,730</option>
+          <option value="ชูศักดิ์ พิเศษฤทธิ์|9730">ชูศักดิ์ พิเศษฤทธิ์ (รปภ.) เงินเดือน ฿9,730</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">เหตุผล</label><select class="fs" id="ded_reason"><option>น้ำมันหายไม่มีบันทึก</option><option>ทรัพย์สินสูญหาย</option><option>ความเสียหายจากความประมาท</option></select></div>
+      <div class="fg"><label class="fl">จำนวนเงินที่เสียหาย (บาท)</label><input class="fi" type="number" id="ded_amt" placeholder="0" oninput="calcDed()"></div>
+      <div id="ded_res" style="margin-bottom:10px"></div>
+      <div class="fg"><label class="fl">รายละเอียด</label><textarea class="fi" rows="3" placeholder="อธิบายเหตุการณ์..."></textarea></div>
+      <button class="btn btn-p btn-sm" onclick="genLetter()">สร้างใบแจ้งและส่งให้พนักงาน</button>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ct">ขั้นตอน ม.76 — ต้องทำครบ</div>
+      <div style="font-size:12px;line-height:2">
+        <div style="padding:8px;background:var(--bbg);border-radius:var(--r);border:1px solid var(--bbr);margin-bottom:6px"><strong>ขั้นที่ 1</strong> แจ้งพนักงานเป็นลายลักษณ์อักษรว่าเกิดอะไรขึ้น จำนวนเงินเท่าไหร่</div>
+        <div style="padding:8px;background:var(--abg);border-radius:var(--r);border:1px solid var(--abr);margin-bottom:6px"><strong>ขั้นที่ 2</strong> ให้พนักงานชี้แจงภายใน 7 วัน (อาจมีเหตุผลที่ยอมรับได้)</div>
+        <div style="padding:8px;background:var(--abg);border-radius:var(--r);border:1px solid var(--abr);margin-bottom:6px"><strong>ขั้นที่ 3</strong> ถ้าชี้แจงไม่ได้ → พนักงานเซ็นใบยินยอมหักเงินเดือน</div>
+        <div style="padding:8px;background:var(--rbg);border-radius:var(--r);border:1px solid var(--rbr)"><strong>ขั้นที่ 4</strong> หักได้ไม่เกิน 10% ของค่าจ้างต่อครั้ง · ถ้าเกินต้องแบ่งหักหลายงวด</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">รายการรอดำเนินการ</div>
+      <div style="padding:10px;background:var(--abg);border-radius:var(--r);border:1px solid var(--abr);font-size:12px">
+        <div style="font-weight:500;color:var(--amb)">น้ำมันหาย 44 ลิตร = ฿1,848</div>
+        <div style="color:var(--mu);margin-top:4px">ผู้ดูแลถัง: ต้องระบุก่อนออกใบแจ้ง · รอสอบสวน 7 วัน</div>
+        <button class="btn btn-sm btn-g" style="margin-top:8px" onclick="alert('ออกใบแจ้งสอบสวนแล้ว — รอการชี้แจงภายใน 7 วัน')">ออกใบแจ้งสอบสวน</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<script>
+document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
+function calcF(){
+  const p28=parseInt(document.getElementById('p28').value)||0;
+  const opex=parseInt(document.getElementById('opex').value)||0;
+  const od=parseInt(document.getElementById('od').value)||0;
+  const fi=parseInt(document.getElementById('fi').value)||0;
+  const pbc=31200,car=784000,cost_car=705000;
+  const gross=pbc+car+fi-cost_car-(pbc*0.245);
+  const od_i=Math.round(od*0.065/365);
+  const net=Math.round(gross-p28-opex-od_i);
+  const col=net>0?'var(--grn)':net>-50000?'var(--amb)':'var(--red)';
+  document.getElementById('flash_res').innerHTML=`<div style="padding:14px">
+    <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin-bottom:10px">Flash P&L วันนี้</div>
+    <div style="font-size:12px">
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">Gross Profit est.</span><span style="font-family:var(--mono);color:var(--grn)">+฿${Math.round(gross).toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">P28 + OPEX</span><span style="font-family:var(--mono);color:var(--red)">-฿${(p28+opex).toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">ดอกเบี้ย OD (est.)</span><span style="font-family:var(--mono);color:var(--red)">-฿${od_i.toLocaleString()}</span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600;padding-top:10px;margin-top:6px;border-top:1px solid var(--br)"><span>กำไร/ขาดทุนวันนี้</span><span style="font-family:var(--mono);color:${col}">${net>=0?'+':''}฿${net.toLocaleString()}</span></div>
+  </div>`;
+  document.getElementById('td_p28').textContent='฿'+p28.toLocaleString();
+  document.getElementById('td_opex').textContent='฿'+opex.toLocaleString();
+  document.getElementById('td_od').textContent='฿'+(od/1e6).toFixed(1)+'ล.';
+  document.getElementById('td_net').innerHTML=`<span class="bd ${net>=0?'bd-g':'bd-r'}">${net>=0?'+':''}฿${net.toLocaleString()}</span>`;
+}
+calcF();
+function chkCash(){
+  const c=parseInt(document.getElementById('cd_cash').value)||0;
+  const s=parseInt(document.getElementById('cd_sb').value)||0;
+  const d=c-s;
+  const el=document.getElementById('cd_res');
+  if(!c&&!s){el.innerHTML='';return;}
+  const ok=Math.abs(d)<=100;
+  el.innerHTML=`<div class="al ${ok?'al-g':'al-a'}"><span>${ok?'✓':'⚠'}</span><div>ยอดนับ ฿${c.toLocaleString()} vs SB ฿${s.toLocaleString()} = ${d>=0?'+':''}฿${d.toLocaleString()}${!ok?' — ตรวจสอบก่อนฝาก!':' — ตรงดี'}</div></div>`;
+}
+function loadCar(){const v=document.getElementById('f_car').value;document.getElementById('f_mile').value='';document.getElementById('f_liter').value='';document.getElementById('kml_res').innerHTML='';}
+function calcKML(){
+  const lastMile=parseInt(document.getElementById('f_car').value)||0;
+  const now=parseInt(document.getElementById('f_mile').value)||0;
+  const liter=parseFloat(document.getElementById('f_liter').value)||0;
+  const el=document.getElementById('kml_res');
+  if(!now||!liter||!lastMile){el.innerHTML='';return;}
+  const km=now-lastMile;
+  if(km<=0){el.innerHTML='<div class="al al-r"><span>⚠</span><div>เลขไมล์ต้องมากกว่าครั้งก่อน</div></div>';return;}
+  const kml=km/liter;
+  const ok=kml>=8;
+  el.innerHTML=`<div class="al ${ok?'al-g':'al-a'}"><span>${ok?'✓':'!'}</span><div>วิ่ง ${km.toLocaleString()} km · ใช้ ${liter} L → <strong>${kml.toFixed(1)} km/L</strong>${!ok?' — ต่ำกว่า 8 แจ้งผจก.ตรวจสอบ!':' — ปกติ'}</div></div>`;
+}
+function calcBook(){
+  const cost=parseInt(document.getElementById('a_cost').value)||0;
+  const age=parseInt(document.getElementById('a_age').value)||0;
+  const price=parseInt(document.getElementById('a_price').value)||0;
+  const el=document.getElementById('book_res');
+  if(!cost){el.innerHTML='';return;}
+  const dep=Math.min(cost,cost*0.2*age);
+  const book=Math.max(0,cost-dep);
+  const gain=price-book;
+  el.innerHTML=`<div style="background:var(--bg);border-radius:var(--r);padding:10px;font-size:12px;border:1px solid var(--br)">
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--mu)">มูลค่าตามบัญชี</span><span style="font-family:var(--mono)">฿${book.toLocaleString()}</span></div>
+    ${price?`<div style="display:flex;justify-content:space-between;font-weight:600;margin-top:4px"><span>กำไร/ขาดทุน</span><span style="font-family:var(--mono);color:${gain>=0?'var(--grn)':'var(--red)'}">${gain>=0?'+':''}฿${gain.toLocaleString()}</span></div>`:''}
+  </div>`;
+}
+function calcDed(){
+  const amt=parseInt(document.getElementById('ded_amt').value)||0;
+  const emp=document.getElementById('ded_emp').value;
+  const el=document.getElementById('ded_res');
+  if(!amt||!emp){el.innerHTML='';return;}
+  const sal=parseInt(emp.split('|')[1])||10000;
+  const max10=Math.round(sal*0.1);
+  const months=Math.ceil(amt/max10);
+  el.innerHTML=`<div class="al al-b"><span>ℹ</span><div>หักได้สูงสุด ฿${max10.toLocaleString()}/เดือน (10% ของ ฿${sal.toLocaleString()}) · ต้องหัก ${months} งวด</div></div>`;
+}
+function genLetter(){const emp=document.getElementById('ded_emp').value;if(!emp){alert('เลือกพนักงานก่อน');return;}alert('สร้างใบแจ้งหักเงิน (ม.76) แล้ว\nส่งให้พนักงานรับรู้\nรอการชี้แจงภายใน 7 วัน');}
+</script>
+</body>
+</html>

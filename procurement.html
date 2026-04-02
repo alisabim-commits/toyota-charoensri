@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>จัดซื้อ — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f7f5;--white:#fff;--border:#e8e6e1;--border2:#d0cdc8;
+  --tx:#1a1a18;--mu:#6b6b68;
+  --red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;
+  --amber:#92600a;--abg:#fffbeb;--abr:#fcd34d;
+  --green:#166534;--gbg:#f0fdf4;--gbr:#86efac;
+  --blue:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;
+  --font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --r:8px;--rl:12px;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px;min-height:100vh}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:56px;gap:0;position:sticky;top:0;z-index:50}
+.logo{font-size:13px;font-weight:600;padding-right:24px;border-right:1px solid var(--border);margin-right:24px}
+.logo span{color:var(--red)}
+.nav-tabs{display:flex;gap:0;height:100%;align-items:flex-end}
+.nt{height:44px;display:flex;align-items:center;padding:0 15px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
+.nt:hover{color:var(--tx)}
+.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
+.hr{margin-left:auto;display:flex;align-items:center;gap:10px}
+.hbtn{background:var(--tx);color:white;border:none;padding:7px 16px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font)}
+.content{max-width:1100px;margin:0 auto;padding:24px 20px}
+.page{display:none}.page.on{display:block}
+.sec-title{font-size:20px;font-weight:600;margin-bottom:3px}
+.sec-sub{font-size:12px;color:var(--mu);margin-bottom:20px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;margin-bottom:14px}
+.ct{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{background:var(--bg);border-radius:var(--r);padding:14px;text-align:center;border:1px solid var(--border)}
+.kv{font-size:22px;font-weight:600;font-family:var(--mono)}
+.kl{font-size:10px;color:var(--mu);margin-top:4px}
+.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
+.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amber)}.bd-g{background:var(--gbg);color:var(--green)}.bd-b{background:var(--bbg);color:var(--blue)}.bd-hi{background:#f1f0eb;color:var(--mu)}
+.alert{border-radius:var(--r);padding:10px 14px;font-size:12px;display:flex;gap:8px;margin-bottom:10px;border:1px solid}
+.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}
+.al-a{background:var(--abg);border-color:var(--abr);color:var(--amber)}
+.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--green)}
+.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 12px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--border);font-size:11px;background:var(--bg)}
+th.r{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+td.r{text-align:right;font-family:var(--mono)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafaf8}
+.fg{margin-bottom:12px}
+.fl{font-size:11px;color:var(--mu);margin-bottom:4px;display:block;font-weight:500}
+.fi{width:100%;background:var(--white);border:1px solid var(--border2);color:var(--tx);padding:8px 11px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
+.fi:focus{outline:none;border-color:var(--tx)}
+.fs{width:100%;background:var(--white);border:1px solid var(--border2);color:var(--tx);padding:8px 11px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
+.fr{display:flex;gap:10px;margin-bottom:12px;align-items:flex-end}
+.fr .fg{flex:1;margin-bottom:0}
+.btn{padding:8px 18px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
+.btn-p{background:var(--tx);color:white;border-color:var(--tx)}
+.btn-g{background:transparent;color:var(--tx);border-color:var(--border2)}
+.btn-g:hover{border-color:var(--tx)}
+.btn-sm{padding:5px 11px;font-size:11px}
+.btn-gr{background:var(--gbg);color:var(--green);border-color:var(--gbr)}
+.si{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--white);margin-bottom:6px;cursor:pointer}
+.si:hover{border-color:var(--border2)}
+.si.sel{border-color:var(--tx);background:var(--bg)}
+.si-ck{width:18px;height:18px;border:1.5px solid var(--border2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;visibility:hidden}
+.si.sel .si-ck{background:var(--tx);border-color:var(--tx);color:white;visibility:visible}
+.si-nm{flex:1;font-size:13px;font-weight:500}
+.si-ct{font-size:10px;color:var(--mu)}
+.si-pr{font-family:var(--mono);font-size:12px;font-weight:500;min-width:90px;text-align:right}
+.si-qty{display:flex;align-items:center;gap:5px}
+.qb{width:26px;height:26px;border:1px solid var(--border2);border-radius:6px;background:var(--white);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.qb:hover{border-color:var(--tx)}
+.qi{width:40px;text-align:center;border:1px solid var(--border2);border-radius:6px;padding:3px;font-size:12px;font-family:var(--mono)}
+.vm{border-radius:var(--r);padding:8px 12px;font-size:12px;display:flex;align-items:center;gap:8px;margin-top:6px;border:1px solid}
+.vm-g{background:var(--gbg);color:var(--green);border-color:var(--gbr)}
+.vm-a{background:var(--abg);color:var(--amber);border-color:var(--abr)}
+.vm-r{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
+.pw{background:var(--border);border-radius:3px;height:6px;overflow:hidden;flex:1}
+.pf{height:100%;border-radius:3px}
+.pi{display:flex;align-items:center;gap:12px;padding:10px;border-radius:var(--r);background:#fefce8;border:1px solid #fde047;margin-bottom:6px}
+.pi-i{flex:1;font-size:12px}
+.pi-t{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#fde047;color:#92600a;display:inline-block;margin-bottom:3px}
+.div{height:1px;background:var(--border);margin:12px 0}
+.po-c{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:14px;margin-bottom:8px;display:flex;gap:12px}
+.po-bar{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
+  <div class="nav-tabs">
+    <div class="nt on" onclick="gp('dash',this)">Dashboard</div>
+    <div class="nt" onclick="gp('order',this)">สั่งซื้อ</div>
+    <div class="nt" onclick="gp('po',this)">PO</div>
+    <div class="nt" onclick="gp('vendor',this)">Vendor</div>
+    <div class="nt" onclick="gp('stock',this)">Stock</div>
+    <div class="nt" onclick="gp('recv',this)">รับของ</div>
+  </div>
+  <div class="hr">
+    <span style="font-size:11px;color:var(--mu)" id="dt"></span>
+    <button class="hbtn" onclick="gp('order',document.querySelectorAll('.nt')[1])">+ สั่งซื้อใหม่</button>
+  </div>
+</div>
+<div class="content">
+
+<div class="page on" id="pg-dash">
+  <div class="sec-title">Dashboard จัดซื้อ</div>
+  <div class="sec-sub">ภาพรวมการสั่งซื้อและ Stock — อัพเดทวันนี้</div>
+  <div class="alert al-r"><span>⚠</span><div><strong>3 รายการ</strong> Stock ต่ำกว่าขั้นต่ำ · PO-2569-015 รอ ผบห. อนุมัติ</div></div>
+  <div class="g4" style="margin-bottom:16px">
+    <div class="kpi"><div class="kv" style="color:var(--red)">3</div><div class="kl">Stock ต่ำกว่า Min</div></div>
+    <div class="kpi"><div class="kv" style="color:var(--amber)">4</div><div class="kl">PO รอดำเนินการ</div></div>
+    <div class="kpi"><div class="kv" style="color:var(--green)">฿184,500</div><div class="kl">ค่าใช้จ่ายเดือนนี้</div></div>
+    <div class="kpi"><div class="kv">6</div><div class="kl">รอรับของ</div></div>
+  </div>
+  <div class="g2">
+    <div>
+      <div class="card">
+        <div class="ct">Stock ต่ำกว่าขั้นต่ำ</div>
+        <table>
+          <tr><th>รายการ</th><th class="r">คงเหลือ</th><th class="r">Min</th><th>สถานะ</th><th></th></tr>
+          <tr><td><div style="font-weight:500">Filter น้ำมัน Genuine</div></td><td class="r" style="color:var(--red)">12</td><td class="r" style="color:var(--mu)">30</td><td><span class="bd bd-r">ต่ำมาก</span></td><td><button class="btn btn-g btn-sm" onclick="gp('order',document.querySelectorAll('.nt')[1])">สั่ง</button></td></tr>
+          <tr><td><div style="font-weight:500">น้ำยา ATF</div></td><td class="r" style="color:var(--red)">8 L</td><td class="r" style="color:var(--mu)">20 L</td><td><span class="bd bd-r">ต่ำมาก</span></td><td><button class="btn btn-g btn-sm">สั่ง</button></td></tr>
+          <tr><td><div style="font-weight:500">Wiper Blade 18"</div></td><td class="r" style="color:var(--amber)">5</td><td class="r" style="color:var(--mu)">15</td><td><span class="bd bd-a">ใกล้หมด</span></td><td><button class="btn btn-g btn-sm">สั่ง</button></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="ct">ของค้างนาน → ดันเข้า Package ขายรถ</div>
+        <div class="pi"><div style="font-size:18px">📦</div><div class="pi-i"><div class="pi-t">ค้าง 90 วัน</div><div style="font-weight:500">กันรอยขอบประตู 41 ชิ้น</div><div style="color:var(--mu)">ต้นทุน ฿350 → ลูกค้าเห็น ฿1,500 (Gold Pack)</div></div><button class="btn btn-g btn-sm">ดัน</button></div>
+        <div class="pi"><div style="font-size:18px">🧹</div><div class="pi-i"><div class="pi-t">ค้าง 60 วัน</div><div style="font-weight:500">พรมยาง Genuine 23 ชุด</div><div style="color:var(--mu)">ต้นทุน ฿800 → ลูกค้าเห็น ฿3,500</div></div><button class="btn btn-g btn-sm">ดัน</button></div>
+        <div class="pi"><div style="font-size:18px">🛡️</div><div class="pi-i"><div class="pi-t">ค้าง 45 วัน</div><div style="font-weight:500">น้ำยาขจัดเขม่า 89 ชิ้น</div><div style="color:var(--mu)">ต้นทุน ฿200 → ลูกค้าเห็น ฿900</div></div><button class="btn btn-g btn-sm">ดัน</button></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ct">PO ล่าสุด</div>
+        <div class="po-c"><div class="po-bar" style="background:#fcd34d"></div><div style="flex:1"><div style="font-size:10px;color:var(--mu);font-family:var(--mono)">PO-2569-015</div><div style="font-weight:600;font-size:13px">Filter บัตรอากาศ ×200</div><div style="font-size:11px;color:var(--mu)">อะไหล่ NP (ใหม่)</div></div><div><div style="font-family:var(--mono);font-weight:600">฿28,400</div><span class="bd bd-a">รอผบห.</span></div></div>
+        <div class="po-c"><div class="po-bar" style="background:#86efac"></div><div style="flex:1"><div style="font-size:10px;color:var(--mu);font-family:var(--mono)">PO-2569-014</div><div style="font-weight:600;font-size:13px">น้ำมัน 5W-30 ×100L</div><div style="font-size:11px;color:var(--mu)">โตโยต้า TPS</div></div><div><div style="font-family:var(--mono);font-weight:600">฿42,000</div><span class="bd bd-g">อนุมัติ</span></div></div>
+        <div class="po-c"><div class="po-bar" style="background:var(--border)"></div><div style="flex:1"><div style="font-size:10px;color:var(--mu);font-family:var(--mono)">PO-2569-013</div><div style="font-weight:600;font-size:13px">Brake Pad ×20 ชุด</div><div style="font-size:11px;color:var(--mu)">โตโยต้า TPS</div></div><div><div style="font-family:var(--mono);font-weight:600">฿18,900</div><span class="bd bd-hi">รับแล้ว</span></div></div>
+      </div>
+      <div class="card">
+        <div class="ct">Budget จัดซื้อเดือนนี้</div>
+        <div id="budget-bars"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="pg-order">
+  <div class="sec-title">สั่งซื้อใหม่</div>
+  <div class="sec-sub">ติ๊กรายการที่เคยซื้อ หรือเพิ่มรายการใหม่ · ระบบคำนวณผู้อนุมัติอัตโนมัติ</div>
+  <div class="g2" style="align-items:start">
+    <div>
+      <div class="card">
+        <div class="ct">รายการที่เคยซื้อ
+          <input type="text" placeholder="🔍 ค้นหา..." style="border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-size:12px;font-family:var(--font)" oninput="filterSI(this.value)">
+        </div>
+        <div id="si-list"></div>
+        <div class="div"></div>
+        <button class="btn btn-g" style="width:100%" onclick="document.getElementById('nif').style.display=document.getElementById('nif').style.display==='none'?'block':'none'">+ เพิ่มรายการใหม่</button>
+        <div id="nif" style="display:none;margin-top:10px;padding:12px;background:var(--bg);border-radius:var(--r);border:1px solid var(--border)">
+          <div class="fr">
+            <div class="fg"><label class="fl">ชื่อรายการ</label><input class="fi" type="text" id="nn" placeholder="ชื่อสินค้า..."></div>
+            <div class="fg" style="max-width:90px"><label class="fl">หน่วย</label><input class="fi" type="text" id="nu" placeholder="ชิ้น"></div>
+            <div class="fg" style="max-width:100px"><label class="fl">ราคา</label><input class="fi" type="number" id="np" placeholder="0"></div>
+          </div>
+          <button class="btn btn-p btn-sm" onclick="addSI()">เพิ่ม</button>
+        </div>
+      </div>
+    </div>
+    <div style="position:sticky;top:66px">
+      <div class="card">
+        <div class="ct">รายการที่เลือก</div>
+        <div id="sel-sum" style="min-height:50px;font-size:12px;color:var(--mu);text-align:center;padding:16px 0">ยังไม่ได้เลือก</div>
+        <div class="div"></div>
+        <div style="display:flex;justify-content:space-between;font-weight:600;font-size:13px"><span>รวม</span><span id="tot" style="font-family:var(--mono)">฿0</span></div>
+      </div>
+      <div class="card">
+        <div class="ct">ผู้ขาย & อนุมัติ</div>
+        <div class="fg"><label class="fl">ชื่อผู้ขาย</label><input class="fi" type="text" id="vi" placeholder="พิมพ์ชื่อผู้ขาย..." oninput="chkV(this.value)"><div id="vr"></div></div>
+        <div class="fg"><label class="fl">วันที่ต้องการ</label><input class="fi" type="date"></div>
+        <div class="fg"><label class="fl">หมายเหตุ</label><input class="fi" type="text" placeholder="..."></div>
+        <div id="alv" style="margin-bottom:10px"></div>
+        <button class="btn btn-p" style="width:100%" onclick="subPO()">สร้าง PO และส่งขออนุมัติ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="pg-po">
+  <div class="sec-title">ใบสั่งซื้อ PO</div>
+  <div class="sec-sub">≤฿2,000 → ผจก. · >฿2,000 → ผบห. · Vendor ใหม่ → ผบห.เสมอ</div>
+  <div class="alert al-a"><span>!</span><div>PO-2569-015 รอ ผบห. อนุมัติ — Vendor ใหม่ "อะไหล่ NP"</div></div>
+  <div class="card">
+    <div class="ct">PO ทั้งหมดเดือน เม.ย. 69</div>
+    <table>
+      <tr><th>PO No.</th><th>รายการ</th><th>Vendor</th><th class="r">มูลค่า</th><th>อนุมัติโดย</th><th>สถานะ</th><th></th></tr>
+      <tr><td style="font-family:var(--mono);font-weight:500">PO-2569-015</td><td>Filter บัตรอากาศ ×200</td><td>อะไหล่ NP (ใหม่)</td><td class="r">฿28,400</td><td><span class="bd bd-hi">ผบห.</span></td><td><span class="bd bd-a">รอ</span></td><td><button class="btn btn-g btn-sm">ดู</button></td></tr>
+      <tr><td style="font-family:var(--mono);font-weight:500">PO-2569-014</td><td>น้ำมัน 5W-30 ×100L</td><td>โตโยต้า TPS</td><td class="r">฿42,000</td><td><span class="bd bd-hi">ผบห.</span></td><td><span class="bd bd-g">อนุมัติ</span></td><td><button class="btn btn-g btn-sm">ดู</button></td></tr>
+      <tr><td style="font-family:var(--mono);font-weight:500">PO-2569-013</td><td>Brake Pad ×20 ชุด</td><td>โตโยต้า TPS</td><td class="r">฿18,900</td><td><span class="bd bd-hi">ผจก.</span></td><td><span class="bd bd-hi">รับแล้ว</span></td><td></td></tr>
+      <tr><td style="font-family:var(--mono);font-weight:500">PO-2569-012</td><td>น้ำยาขจัดเขม่า ×60</td><td>NP เคมีภัณฑ์</td><td class="r">฿12,600</td><td><span class="bd bd-hi">ผจก.</span></td><td><span class="bd bd-hi">รับแล้ว</span></td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="page" id="pg-vendor">
+  <div class="sec-title">Vendor ผู้ขาย</div>
+  <div class="sec-sub">Name Verification: ≥95% เขียว · 65-95% เหลือง · &lt;65% แดง → ผบห.อนุมัติ</div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">ตรวจสอบชื่อ</div>
+      <div class="fg"><label class="fl">พิมพ์ชื่อผู้ขาย</label><input class="fi" type="text" placeholder="ชื่อผู้ขาย..." oninput="chkVP(this.value)"></div>
+      <div id="vpr"></div>
+    </div>
+    <div class="card">
+      <div class="ct">Vendor ในระบบ</div>
+      <table>
+        <tr><th>ชื่อ</th><th>ประเภท</th><th class="r">YTD</th><th>สถานะ</th></tr>
+        <tr><td style="font-weight:500">โตโยต้า TPS</td><td style="font-size:11px;color:var(--mu)">อะไหล่ Genuine</td><td class="r">฿284,000</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+        <tr><td style="font-weight:500">NP เคมีภัณฑ์</td><td style="font-size:11px;color:var(--mu)">น้ำยา/เคมี</td><td class="r">฿67,200</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+        <tr><td style="font-weight:500">อะไหล่รวมไทย</td><td style="font-size:11px;color:var(--mu)">อะไหล่ทั่วไป</td><td class="r">฿38,400</td><td><span class="bd bd-g">อนุมัติ</span></td></tr>
+        <tr><td style="font-weight:500">อะไหล่ NP</td><td style="font-size:11px;color:var(--mu)">อะไหล่ทั่วไป</td><td class="r">฿28,400</td><td><span class="bd bd-a">ใหม่</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="pg-stock">
+  <div class="sec-title">Stock อะไหล่</div>
+  <div class="sec-sub">Cycle count รายสัปดาห์ · ค้างเกิน 30 วัน → แนะนำ push Package ขายรถ</div>
+  <div class="g4" style="margin-bottom:14px">
+    <div class="kpi"><div class="kv" style="color:var(--red)">3</div><div class="kl">ต่ำกว่า Min</div></div>
+    <div class="kpi"><div class="kv" style="color:var(--green)">42</div><div class="kl">ปกติ</div></div>
+    <div class="kpi"><div class="kv">45</div><div class="kl">รายการทั้งหมด</div></div>
+    <div class="kpi"><div class="kv">฿1.24ล.</div><div class="kl">มูลค่า Stock</div></div>
+  </div>
+  <div class="card">
+    <div class="ct">รายการ Stock</div>
+    <table>
+      <tr><th>รายการ</th><th>หมวด</th><th class="r">คงเหลือ</th><th class="r">Min</th><th class="r">Max</th><th class="r">มูลค่า</th><th>ค้างนาน</th><th>สถานะ</th></tr>
+      <tr><td style="font-weight:500">Filter น้ำมัน Genuine</td><td><span class="bd bd-hi">อะไหล่</span></td><td class="r" style="color:var(--red)">12</td><td class="r" style="color:var(--mu)">30</td><td class="r" style="color:var(--mu)">60</td><td class="r">฿3,360</td><td>-</td><td><span class="bd bd-r">ต่ำกว่า Min</span></td></tr>
+      <tr><td style="font-weight:500">น้ำมัน 5W-30</td><td><span class="bd bd-hi">น้ำมัน</span></td><td class="r">85</td><td class="r" style="color:var(--mu)">50</td><td class="r" style="color:var(--mu)">150</td><td class="r">฿8,075</td><td>-</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+      <tr><td style="font-weight:500">Brake Pad Front</td><td><span class="bd bd-hi">อะไหล่</span></td><td class="r">22</td><td class="r" style="color:var(--mu)">15</td><td class="r" style="color:var(--mu)">40</td><td class="r">฿20,790</td><td>-</td><td><span class="bd bd-g">ปกติ</span></td></tr>
+      <tr><td style="font-weight:500">น้ำยาขจัดเขม่า</td><td><span class="bd bd-hi">Accessory</span></td><td class="r">89</td><td class="r" style="color:var(--mu)">30</td><td class="r" style="color:var(--mu)">60</td><td class="r">฿10,680</td><td><span class="bd bd-a">45 วัน</span></td><td><span class="bd bd-g">ปกติ</span></td></tr>
+      <tr><td style="font-weight:500">พรมยาง Genuine</td><td><span class="bd bd-hi">Accessory</span></td><td class="r">23</td><td class="r" style="color:var(--mu)">10</td><td class="r" style="color:var(--mu)">30</td><td class="r">฿18,400</td><td><span class="bd bd-a">60 วัน</span></td><td><span class="bd bd-g">ปกติ</span></td></tr>
+      <tr><td style="font-weight:500">กันรอยขอบประตู</td><td><span class="bd bd-hi">Accessory</span></td><td class="r">41</td><td class="r" style="color:var(--mu)">10</td><td class="r" style="color:var(--mu)">30</td><td class="r">฿14,350</td><td><span class="bd bd-r">90 วัน</span></td><td><span class="bd bd-g">ปกติ</span></td></tr>
+      <tr><td style="font-weight:500">น้ำยา ATF</td><td><span class="bd bd-hi">น้ำยา</span></td><td class="r" style="color:var(--red)">8</td><td class="r" style="color:var(--mu)">20</td><td class="r" style="color:var(--mu)">40</td><td class="r">฿2,400</td><td>-</td><td><span class="bd bd-r">ต่ำกว่า Min</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="page" id="pg-recv">
+  <div class="sec-title">รับของ</div>
+  <div class="sec-sub">ยืนยันรับของ match กับ PO → Stock อัพเดทอัตโนมัติ</div>
+  <div class="card">
+    <div class="ct">รอรับของ</div>
+    <div style="border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div><div style="font-family:var(--mono);font-size:11px;color:var(--mu)">PO-2569-014</div><div style="font-weight:600;font-size:14px">น้ำมัน 5W-30 × 100L</div><div style="font-size:11px;color:var(--mu)">โตโยต้า TPS · ETA: 3 เม.ย.</div></div>
+        <div style="font-family:var(--mono);font-weight:600;font-size:15px">฿42,000</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-gr btn-sm" onclick="alert('บันทึกรับของแล้ว — Stock อัพเดทอัตโนมัติ')">✓ รับครบ</button>
+        <button class="btn btn-g btn-sm">รับบางส่วน</button>
+        <button class="btn btn-g btn-sm">มีปัญหา</button>
+      </div>
+    </div>
+    <div style="text-align:center;padding:20px;color:var(--mu);font-size:12px">รายการอื่น อยู่ระหว่างจัดส่ง</div>
+  </div>
+</div>
+
+</div>
+<script>
+document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+
+// Budget bars
+const budgets=[{n:'อะไหล่ Genuine',u:85000,t:100000},{n:'น้ำมัน/น้ำยา',u:42000,t:60000},{n:'วัสดุสำนักงาน',u:18500,t:25000},{n:'เคมีภัณฑ์',u:12000,t:20000},{n:'อุปกรณ์ช่าง',u:27000,t:15000}];
+document.getElementById('budget-bars').innerHTML=budgets.map(b=>{
+  const p=Math.round(b.u/b.t*100),over=b.u>b.t;
+  const c=over?'var(--red)':p>80?'#f59e0b':'var(--green)';
+  return `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>${b.n}</span><span style="font-family:var(--mono);font-size:11px;color:${c}">฿${b.u.toLocaleString()}/฿${b.t.toLocaleString()}</span></div><div class="pw"><div class="pf" style="width:${Math.min(p,100)}%;background:${c}"></div></div></div>`;
+}).join('')+'<div style="font-size:11px;color:var(--red)">⚠ อุปกรณ์ช่าง เกิน budget ฿12,000</div>';
+
+// Items data
+const ITEMS=[
+  {id:'a1',name:'Filter น้ำมัน Toyota Genuine',cat:'อะไหล่',price:280,stock:12,min:30,unit:'ชิ้น',qty:10},
+  {id:'a2',name:'Filter บัตรอากาศ Genuine',cat:'อะไหล่',price:142,stock:8,min:20,unit:'ชิ้น',qty:20},
+  {id:'a3',name:'Brake Pad Front Toyota',cat:'อะไหล่',price:945,stock:22,min:15,unit:'ชุด',qty:5},
+  {id:'a4',name:'Wiper Blade 18"',cat:'อะไหล่',price:250,stock:5,min:15,unit:'อัน',qty:20},
+  {id:'a5',name:'Spark Plug Iridium',cat:'อะไหล่',price:300,stock:18,min:10,unit:'ชิ้น',qty:10},
+  {id:'b1',name:'น้ำมันเครื่อง 5W-30',cat:'น้ำมัน',price:95,stock:85,min:50,unit:'ลิตร',qty:50},
+  {id:'b2',name:'น้ำยา ATF Automatic',cat:'น้ำยา',price:300,stock:8,min:20,unit:'ลิตร',qty:20},
+  {id:'b3',name:'น้ำยาหม้อน้ำ Toyota Red',cat:'น้ำยา',price:120,stock:32,min:20,unit:'ลิตร',qty:20},
+  {id:'c1',name:'น้ำยาขจัดเขม่า',cat:'Accessory',price:120,stock:89,min:30,unit:'ชิ้น',qty:30},
+  {id:'c2',name:'พรมยาง Genuine Set',cat:'Accessory',price:800,stock:23,min:10,unit:'ชุด',qty:10},
+  {id:'c3',name:'กันรอยขอบประตู',cat:'Accessory',price:350,stock:41,min:10,unit:'ชุด',qty:20},
+  {id:'c4',name:'Air Care Spray',cat:'Accessory',price:120,stock:67,min:20,unit:'กระป๋อง',qty:30},
+  {id:'d1',name:'กระดาษ A4 (รีม)',cat:'สำนักงาน',price:110,stock:15,min:10,unit:'รีม',qty:10},
+  {id:'d2',name:'หมึกปริ้นเตอร์ HP',cat:'สำนักงาน',price:890,stock:3,min:5,unit:'กล่อง',qty:3},
+  {id:'e1',name:'เคมีภัณฑ์ล้างรถ',cat:'เคมีภัณฑ์',price:180,stock:12,min:10,unit:'ลิตร',qty:20},
+  {id:'e2',name:'น้ำยาขัดเงา CarPro',cat:'เคมีภัณฑ์',price:450,stock:8,min:5,unit:'ขวด',qty:10},
+];
+const cats=[...new Set(ITEMS.map(i=>i.cat))];
+const sel={};
+
+function renderItems(filter=''){
+  const el=document.getElementById('si-list');
+  el.innerHTML=cats.map(cat=>{
+    const its=ITEMS.filter(i=>i.cat===cat&&(!filter||i.name.toLowerCase().includes(filter.toLowerCase())));
+    if(!its.length)return'';
+    return`<div style="font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;padding:8px 0 4px">${cat}</div>`+
+    its.map(item=>`<div class="si${sel[item.id]?' sel':''}" id="si-${item.id}" onclick="togSI('${item.id}')">
+      <div class="si-ck" id="ck-${item.id}">✓</div>
+      <div style="flex:1">
+        <div class="si-nm">${item.name}</div>
+        <div class="si-ct">Stock: <span style="color:${item.stock<item.min?'var(--red)':'var(--mu)'}">${item.stock} ${item.unit}</span> (Min: ${item.min})</div>
+      </div>
+      <div class="si-pr">฿${item.price.toLocaleString()}/${item.unit}${item.stock<item.min?'<div style="font-size:10px;color:var(--red)">ต่ำกว่า min!</div>':''}</div>
+      <div class="si-qty" onclick="event.stopPropagation()">
+        <button class="qb" onclick="chgQ('${item.id}',-1)">−</button>
+        <input class="qi" id="q-${item.id}" value="${item.qty}" type="number" min="1" oninput="if(sel['${item.id}'])updSum()">
+        <button class="qb" onclick="chgQ('${item.id}',1)">+</button>
+      </div>
+    </div>`).join('');
+  }).join('');
+}
+renderItems();
+
+function togSI(id){
+  const item=ITEMS.find(i=>i.id===id);
+  if(sel[id]){delete sel[id];}else{sel[id]=item.price;}
+  document.getElementById('si-'+id)?.classList.toggle('sel');
+  const ck=document.getElementById('ck-'+id);
+  if(ck)ck.style.visibility=sel[id]?'visible':'hidden';
+  updSum();
+}
+function chgQ(id,d){
+  const inp=document.getElementById('q-'+id);
+  inp.value=Math.max(1,parseInt(inp.value)+d);
+  if(sel[id])updSum();
+}
+function updSum(){
+  const keys=Object.keys(sel);
+  const el=document.getElementById('sel-sum');
+  const te=document.getElementById('tot');
+  const al=document.getElementById('alv');
+  if(!keys.length){el.innerHTML='<div style="color:var(--mu);font-size:12px;text-align:center;padding:16px 0">ยังไม่ได้เลือก</div>';te.textContent='฿0';al.innerHTML='';return;}
+  let total=0;
+  el.innerHTML=keys.map(k=>{
+    const qty=parseInt(document.getElementById('q-'+k)?.value)||1;
+    const item=ITEMS.find(i=>i.id===k);
+    const sub=(item?.price||0)*qty;
+    total+=sub;
+    return`<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:0.5px solid var(--border)"><span>${item?.name||k} ×${qty}</span><span style="font-family:var(--mono)">฿${sub.toLocaleString()}</span></div>`;
+  }).join('');
+  te.textContent='฿'+total.toLocaleString();
+  al.innerHTML=total>2000?`<div class="alert al-a" style="margin:0"><span>!</span><div>฿${total.toLocaleString()} → <strong>ผู้บริหาร</strong> อนุมัติ</div></div>`:`<div class="alert al-b" style="margin:0"><span>ℹ</span><div>฿${total.toLocaleString()} → ผู้จัดการอนุมัติได้</div></div>`;
+}
+function filterSI(q){renderItems(q);}
+
+// Vendor
+const VS=['โตโยต้า TPS','NP เคมีภัณฑ์','อะไหล่รวมไทย','อะไหล่ NP','ช.ชัยยนต์อะไหล่'];
+function simV(a,b){if(a===b)return 1;if(!a||!b)return 0;let m=0;for(let i=0;i<Math.min(a.length,b.length);i++)if(a[i]===b[i])m++;return m/Math.max(a.length,b.length);}
+function chkV(v){
+  const el=document.getElementById('vr');
+  if(v.length<2){el.innerHTML='';return;}
+  const best=VS.map(vn=>({name:vn,score:simV(v,vn)})).sort((a,b)=>b.score-a.score)[0];
+  const p=Math.round(best.score*100);
+  const c=p>=95?'vm-g':p>=65?'vm-a':'vm-r';
+  const lb=p>=95?`✓ อยู่ในระบบ: "${best.name}"`:p>=65?`⚠ ใกล้เคียง "${best.name}" — ตรวจสอบ`:`✗ Vendor ใหม่ → ผบห.อนุมัติ`;
+  el.innerHTML=`<div class="vm ${c}"><span>${lb}</span><span style="font-family:var(--mono);margin-left:auto">${p}%</span></div>`;
+}
+function chkVP(v){
+  const el=document.getElementById('vpr');
+  if(v.length<2){el.innerHTML='';return;}
+  chkV(v);
+  el.innerHTML=document.getElementById('vr').innerHTML;
+}
+function addSI(){
+  const n=document.getElementById('nn').value,u=document.getElementById('nu').value,p=document.getElementById('np').value;
+  if(!n||!p){alert('กรุณากรอกชื่อและราคา');return;}
+  alert(`เพิ่ม "${n}" ฿${p}/${u||'ชิ้น'} แล้ว — จะแสดงในรายการครั้งหน้า`);
+  document.getElementById('nif').style.display='none';
+}
+function subPO(){
+  const v=document.getElementById('vi').value;
+  if(!v){alert('กรุณาระบุผู้ขาย');return;}
+  if(!Object.keys(sel).length){alert('กรุณาเลือกรายการ');return;}
+  alert('สร้าง PO และส่งขออนุมัติแล้ว\nระบบแจ้ง LINE ผู้อนุมัติทันที');
+}
+function gp(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  if(el)el.classList.add('on');
+}
+</script>
+</body>
+</html>
