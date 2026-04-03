@@ -7,7 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800&display=swap');
 :root {
-  --bg:#0a0d14;--bg2:#111520;--bg3:#161c2e;--bg4:#1e2640;
+  --bg:#f4f6fb;--bg2:#ffffff;--bg3:#f0f3fa;--bg4:#e8edf8;
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.04);
   --text:#e8edf8;--text2:#8896b3;--text3:#4a5880;
   --red:#ff3355;--rd:rgba(255,51,85,.12);--rdg:rgba(255,51,85,.06);
@@ -27,7 +27,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* TOPBAR */
 .topbar{background:rgba(10,13,20,.95);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
 .brand{display:flex;align-items:center;gap:12px;}
-.brand-logo{width:36px;height:36px;background:var(--toy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Kanit',sans-serif;font-weight:800;font-size:14px;color:#fff;}
+.brand-logo{width:36px;height:36px;background:var(--toy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Kanit',sans-serif;font-weight:800;font-size:14px;color:#18233d;}
 .brand-name{font-family:'Kanit',sans-serif;font-weight:700;font-size:16px;letter-spacing:.5px;}
 .brand-sub{font-size:10px;color:var(--text3);margin-top:1px;}
 .topbar-right{display:flex;align-items:center;gap:12px;}
@@ -41,7 +41,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .tabs{display:flex;gap:2px;padding:12px 24px 0;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;}
 .tab{padding:10px 18px;font-size:12px;font-weight:700;color:var(--text3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;letter-spacing:.3px;transition:all .2s;}
 .tab:hover{color:var(--text2);}
-.tab.on{color:#fff;border-bottom-color:var(--toy);}
+.tab.on{color:#18233d;border-bottom-color:var(--toy);}
 
 .main{padding:20px 24px;max-width:1600px;margin:0 auto;position:relative;z-index:1;}
 
@@ -112,9 +112,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .status-pill.ok{background:var(--gd);color:var(--grn);border:1px solid rgba(16,217,138,.2);}
 
 /* MARGIN CALCULATOR */
-.margin-calc{background:linear-gradient(135deg,#0d1117,#161c2e);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:20px;}
-.calc-title{font-family:'Kanit',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:16px;}
-.model-select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:#fff;font-family:'Sarabun',sans-serif;font-size:13px;width:100%;margin-bottom:14px;outline:none;}
+.margin-calc{background:var(--bg3);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:20px;}
+.calc-title{font-family:'Kanit',sans-serif;font-size:15px;font-weight:700;color:#18233d;margin-bottom:16px;}
+.model-select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:#18233d;font-family:'Sarabun',sans-serif;font-size:13px;width:100%;margin-bottom:14px;outline:none;}
 .model-select option{background:var(--bg3);}
 .margin-display{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
 .margin-box{background:var(--bg3);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border);}
@@ -156,7 +156,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
 .modal-title{font-family:'Kanit',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;}
 .modal-sub{font-size:12px;color:var(--text2);margin-bottom:20px;}
 .f-label{display:block;font-size:10px;color:var(--text3);font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
-.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:13px;font-family:'Sarabun',sans-serif;color:#fff;outline:none;transition:border .2s;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:13px;font-family:'Sarabun',sans-serif;color:#18233d;outline:none;transition:border .2s;}
 .f-input:focus{border-color:var(--blu);}
 .f-group{margin-bottom:12px;}
 .btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;}
@@ -200,6 +200,11 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
 .alarm-btn:hover{background:rgba(255,51,85,.2);}
 
 @media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21,.g31{grid-template-columns:1fr;}.margin-display{grid-template-columns:1fr 1fr;}}
+
+.step-circle{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+.cancel-step{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);font-size:12px;}
+.cancel-step:last-child{border-bottom:none;}
+
 </style>
 </head>
 <body>
@@ -228,6 +233,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
   <button class="tab" onclick="sw(this,'t-cashflow')">💸 Cash Flow Forecast</button>
   <button class="tab" onclick="sw(this,'t-sales')">🏆 Sales Overview</button>
   <button class="tab" onclick="sw(this,'t-pl')">📊 Flash P&L</button>
+  <button class="tab" onclick="sw(this,'t-refund')">💸 อนุมัติคืนเงิน <span style="background:var(--rd);color:var(--red);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:3px;" id="exec-refund-badge">1</span></button>
 </div>
 
 <div class="main">
@@ -419,7 +425,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
 
       <div class="discount-slider">
         <div class="slider-label">
-          <span>ส่วนลดที่จะให้: <strong id="disc-label" style="color:#fff;">฿0</strong></span>
+          <span>ส่วนลดที่จะให้: <strong id="disc-label" style="color:#18233d;">฿0</strong></span>
           <span id="disc-pct" style="color:var(--text3);">0% ของ room</span>
         </div>
         <input type="range" id="discSlider" min="0" max="100" value="0" oninput="calcImpact(this.value)">
@@ -472,7 +478,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
   <div class="p45-panel" style="margin-bottom:16px;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;">
       <div>
-        <div style="font-family:'Kanit',sans-serif;font-size:18px;font-weight:800;color:#fff;">🔒 P45 ของแถม — อนุมัติโดยผบห.เท่านั้น</div>
+        <div style="font-family:'Kanit',sans-serif;font-size:18px;font-weight:800;color:#18233d;">🔒 P45 ของแถม — อนุมัติโดยผบห.เท่านั้น</div>
         <div style="font-size:12px;color:var(--text3);margin-top:4px;">SA และ ผจก.ขาย/บริการ ไม่มีอำนาจ · ทุกรายการต้องผ่านคุณก่อน</div>
       </div>
       <div style="text-align:right;">
@@ -736,6 +742,84 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;b
   </div>
 </div><!-- /pl -->
 
+
+<!-- ===== อนุมัติคืนเงิน (ผบห.) ===== -->
+<div id="t-refund" style="display:none;">
+
+  <div class="signal r" style="margin-bottom:14px;">
+    <span>🚨</span>
+    <div><div class="st">รอ ผบห. อนุมัติคืนเงิน — 1 รายการ</div>
+    <div class="sd">ผจก.ขายอนุมัติแล้ว รอขั้นตอนสุดท้ายก่อนส่งบัญชีโอน</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">⏳ รอ ผบห. อนุมัติ</div><span class="badge r">1 รายการ</span></div>
+
+      <div style="padding:16px;">
+        <!-- Case 1: Finance รีเจค -->
+        <div style="background:var(--bg3);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:14px;font-weight:800;">วิภาวดี รักดี</div>
+              <div style="font-size:11px;" class="m">TCS-2026-04-0022 · Fortuner Legender · เซล์: ภุมรี</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:800;" class="r">฿50,000</div>
+              <span class="badge r">💳 Finance รีเจค → คืนเต็ม</span>
+            </div>
+          </div>
+
+          <!-- Flow -->
+          <div style="background:#fff;border-radius:8px;padding:10px;margin-bottom:10px;border:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;color:var(--text2);margin-bottom:6px;">FLOW</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;flex-wrap:wrap;">
+              <span style="background:var(--gd);color:var(--grn);padding:3px 8px;border-radius:6px;font-weight:700;">✅ เซล์แจ้ง</span>
+              <span style="color:var(--text3);">→</span>
+              <span style="background:var(--gd);color:var(--grn);padding:3px 8px;border-radius:6px;font-weight:700;">✅ ผจก.ขาย</span>
+              <span style="color:var(--text3);">→</span>
+              <span style="background:var(--yd);color:var(--yel);padding:3px 8px;border-radius:6px;font-weight:700;">⏳ ผบห.</span>
+              <span style="color:var(--text3);">→</span>
+              <span style="background:var(--bg3);color:var(--text3);padding:3px 8px;border-radius:6px;">บัญชีโอน</span>
+            </div>
+          </div>
+
+          <div style="font-size:11px;line-height:1.7;margin-bottom:10px;">
+            <b>สาเหตุ:</b> Finance รีเจค NCB ติดแบล็คลิสต์ ลองหาไฟแนนซ์ 3 แห่งแล้วไม่ผ่าน<br>
+            <b>ผจก.ขายเห็นด้วย:</b> ยืนยันว่า Finance รีเจคจริง ควรคืนเต็ม<br>
+            <b>บัญชีคืน:</b> กรุงไทย 123-4-56789-0 · นาง วิภาวดี รักดี
+          </div>
+
+          <div style="display:flex;gap:8px;">
+            <button onclick="execApproveRefund(this)" class="btn btn-green" style="font-size:12px;padding:8px 18px;">✅ อนุมัติ → ส่งบัญชีโอนคืน</button>
+            <button onclick="openModal('modal-exec-reject')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌ ไม่อนุมัติ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ประวัติ -->
+    <div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="ch"><div class="ct">📊 สรุปยกเลิก เดือนนี้</div></div>
+        <table class="tbl">
+          <thead><tr><th>ประเภท</th><th>จำนวน</th><th>ยอดคืน</th><th>ยอดริบ</th></tr></thead>
+          <tbody>
+            <tr><td>💳 Finance รีเจค</td><td class="n">2 ราย</td><td class="n r">฿70,000</td><td class="n">—</td></tr>
+            <tr><td>🚗 รถช้า</td><td class="n">1 ราย</td><td class="n r">฿30,000</td><td class="n">—</td></tr>
+            <tr><td>🔄 ลูกค้าเปลี่ยนใจ</td><td class="n">4 ราย</td><td class="n">—</td><td class="n g">฿40,000</td></tr>
+            <tr style="background:var(--bg3)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">7 ราย</td><td class="n r" style="font-weight:700;">฿100,000</td><td class="n g" style="font-weight:700;">฿40,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">✅ อนุมัติแล้ว — รอบัญชีโอน</div><span class="badge y">0 รายการ</span></div>
+        <div style="padding:12px 14px;font-size:12px;" class="m">ไม่มีรายการรอโอน</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /refund -->
+
 </div><!-- /main -->
 
 <!-- MODAL: รถสไลด์ -->
@@ -777,7 +861,7 @@ setInterval(updateClock,1000); updateClock();
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['t-warroom','t-margin','t-p45','t-cashflow','t-sales','t-pl'].forEach(t=>{
+  ['t-warroom','t-margin','t-p45','t-cashflow','t-sales','t-pl','t-refund'].forEach(t=>{
     document.getElementById(t).style.display=t===id?'':'none';
   });
   if(id==='t-sales') renderLeaderboard();
@@ -918,6 +1002,14 @@ function calcSlide(){
 }
 
 // MODAL
+
+function execApproveRefund(btn){
+  btn.closest('[style*="border-radius:12px"]').style.background='var(--gd)';
+  btn.parentElement.innerHTML='<div style="color:var(--grn);font-size:13px;font-weight:700;padding:4px 0;">✅ ผบห. อนุมัติแล้ว — ส่งบัญชีโอนคืน ฿50,000 LINE แล้ว<br><span style="font-size:11px;color:var(--text2);">บัญชีจะโอนภายใน 1-3 วันทำการ</span></div>';
+  document.getElementById('exec-refund-badge').textContent='0';
+  document.getElementById('exec-refund-badge').style.display='none';
+}
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>{
@@ -927,5 +1019,28 @@ document.querySelectorAll('.modal-overlay').forEach(el=>{
 // INIT
 updateMargin(); calcSlide();
 </script>
+
+<div class="modal-overlay" id="modal-exec-reject">
+  <div class="modal">
+    <div class="modal-title">❌ ผบห. ไม่อนุมัติคืนเงิน</div>
+    <div class="modal-sub">กรุณาระบุเหตุผล</div>
+    <div class="f-group"><label class="f-label">เหตุผล</label>
+      <select class="f-select">
+        <option>ลูกค้าไม่ได้พิสูจน์ว่า Finance รีเจคจริง</option>
+        <option>รถมาแล้ว ลูกค้าไม่รับ</option>
+        <option>อยู่ระหว่างการตรวจสอบ</option>
+        <option>อื่นๆ</option>
+      </select>
+    </div>
+    <div class="f-group"><label class="f-label">รายละเอียด</label>
+      <textarea class="f-input" rows="3" style="resize:vertical;"></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-exec-reject')">ยกเลิก</button>
+      <button class="btn btn-red" onclick="closeModal('modal-exec-reject');alert('❌ ไม่อนุมัติ\n📱 แจ้ง ผจก.ขาย + เซล์ LINE แล้ว')">❌ ยืนยัน</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

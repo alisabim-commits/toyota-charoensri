@@ -124,6 +124,11 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
 .sd{font-size:11px;color:var(--text2);margin-top:2px;}
 
 @media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}.appr-grid{grid-template-columns:1fr 1fr;}}
+
+.step-circle{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+.cancel-step{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);font-size:12px;}
+.cancel-step:last-child{border-bottom:none;}
+
 </style>
 </head>
 <body>
@@ -619,6 +624,83 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   </div>
 </div><!-- /daily -->
 
+
+<!-- ===== ยกเลิก/คืนเงิน ===== -->
+<div id="t-cancel" style="display:none;">
+
+  <div class="g4">
+    <div class="kpi r"><div class="kl">🔴 รออนุมัติ</div><div class="kv r">2 รายการ</div><div class="ks">รอผจก.ขายอนุมัติ</div></div>
+    <div class="kpi y"><div class="kl">🟡 รอ ผบห.</div><div class="kv y">1 รายการ</div><div class="ks">ส่ง ผบห. แล้ว</div></div>
+    <div class="kpi b"><div class="kl">🔵 รอบัญชีโอน</div><div class="kv b">0 รายการ</div><div class="ks">—</div></div>
+    <div class="kpi g"><div class="kl">✅ เสร็จสิ้น</div><div class="kv g">5 รายการ</div><div class="ks">เดือนนี้</div></div>
+  </div>
+
+  <!-- รอผจก.ขายอนุมัติ -->
+  <div class="card">
+    <div class="ch"><div class="ct">⏳ รอผจก.ขายอนุมัติ</div><span class="badge r">2 รายการ</span></div>
+
+    <!-- รายการ 1: Finance รีเจค → คืนเงิน -->
+    <div style="padding:14px;border-bottom:1px solid var(--border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <div style="font-size:13px;font-weight:800;">วิภาวดี รักดี <span class="badge r">💳 Finance รีเจค</span></div>
+          <div style="font-size:11px;" class="m">ใบจอง TCS-2026-04-0022 · Fortuner Legender · เซล์: ภุมรี</div>
+          <div style="font-size:11px;" class="m">ส่งมาเมื่อ: 3/4/69 14:23 น.</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" class="r">฿50,000</div>
+          <div style="font-size:10px;" class="m">ขอคืนเงินดาวน์</div>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-bottom:10px;font-size:11px;line-height:1.6;">
+        <b>เหตุผล:</b> Finance รีเจค NCB ติดแบล็คลิสต์ ลองขอ 3 ไฟแนนซ์แล้ว ไม่ผ่านทุกที่ ลูกค้าขอยกเลิกและรับเงินคืน<br>
+        <b>บัญชีคืน:</b> กรุงไทย 123-4-56789-0 · นาง วิภาวดี รักดี
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="approveCancelMgr(this,'finance')" class="btn btn-green" style="font-size:12px;padding:7px 16px;">✅ อนุมัติ → ส่ง ผบห.</button>
+        <button onclick="rejectCancelMgr(this)" class="btn btn-yel" style="font-size:12px;padding:7px 16px;">🔄 ส่งกลับ ให้เซล์ชี้แจง</button>
+        <button onclick="openModal('modal-mgr-reject-reason')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:8px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌ ไม่อนุมัติ</button>
+      </div>
+    </div>
+
+    <!-- รายการ 2: รถช้า → คืนเงิน -->
+    <div style="padding:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <div style="font-size:13px;font-weight:800;">สมศรี มีดี <span class="badge r">🚗 รถช้า</span></div>
+          <div style="font-size:11px;" class="m">ใบจอง TCS-2026-03-0087 · Hilux D-CAB 2.8 Overland · เซล์: ภัทราภรณ์</div>
+          <div style="font-size:11px;" class="m">ส่งมาเมื่อ: 3/4/69 10:15 น.</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" class="r">฿30,000</div>
+          <div style="font-size:10px;" class="m">ขอคืนเงินมัดจำ</div>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-bottom:10px;font-size:11px;line-height:1.6;">
+        <b>เหตุผล:</b> จองมาแล้ว 45 วัน กำหนดส่งเดิมวันที่ 20 มี.ค. 69 รถยังไม่มา ลูกค้าแจ้งขอยกเลิก บริษัทต้องคืนเงินเต็ม<br>
+        <b>บัญชีคืน:</b> BBL 987-6-54321-0 · นาง สมศรี มีดี
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="approveCancelMgr(this,'delay')" class="btn btn-green" style="font-size:12px;padding:7px 16px;">✅ อนุมัติ → ส่ง ผบห.</button>
+        <button onclick="rejectCancelMgr(this)" class="btn btn-yel" style="font-size:12px;padding:7px 16px;">🔄 ส่งกลับ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ประวัติ -->
+  <div class="card">
+    <div class="ch"><div class="ct">📋 ประวัติยกเลิก เดือนนี้</div><span class="badge b">7 รายการ</span></div>
+    <table class="tbl">
+      <thead><tr><th>ลูกค้า</th><th>รุ่น</th><th>สาเหตุ</th><th>ยอด</th><th>ประเภท</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr><td><b>ธนา ก.</b></td><td class="m">Yaris Cross</td><td class="m">Finance รีเจค</td><td class="n r">฿20,000</td><td><span class="badge r">คืนเงิน</span></td><td><span class="badge g">✅ โอนคืนแล้ว</span></td></tr>
+        <tr><td><b>นงนุช ส.</b></td><td class="m">Ativ</td><td class="m">เปลี่ยนใจ</td><td class="n y">฿5,000</td><td><span class="badge y">ริบมัดจำ</span></td><td><span class="badge g">✅ บันทึกรายรับ</span></td></tr>
+        <tr><td><b>ชัย พ.</b></td><td class="m">Fortuner</td><td class="m">เปลี่ยนใจ</td><td class="n y">฿10,000</td><td><span class="badge y">ริบมัดจำ</span></td><td><span class="badge g">✅ บันทึกรายรับ</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div><!-- /cancel -->
+
 </div><!-- /main -->
 
 <script>
@@ -627,7 +709,7 @@ setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocal
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['t-approve','t-team','t-deals','t-campaign','t-daily'].forEach(t=>{
+  ['t-approve','t-team','t-deals','t-campaign','t-daily','t-cancel'].forEach(t=>{
     document.getElementById(t).style.display=t===id?'':'none';
   });
 }
@@ -660,11 +742,45 @@ function filterDeals(type){
   });
 }
 
+
+function approveCancelMgr(btn, type){
+  const card = btn.closest('[style*="padding:14px"]');
+  btn.parentElement.innerHTML = '<div style="color:var(--grn);font-size:12px;font-weight:700;padding:4px 0;">✅ อนุมัติแล้ว — ส่ง ผบห. LINE แล้ว ⏳ รอ ผบห. อนุมัติ</div>';
+  document.getElementById('cancel-badge').textContent = '1';
+  alert('✅ อนุมัติแล้ว\n📱 แจ้ง ผบห. LINE ขออนุมัติต่อ\n⏳ รอ ผบห. กด');
+}
+function rejectCancelMgr(btn){
+  btn.parentElement.innerHTML = '<div style="color:var(--yel);font-size:12px;font-weight:700;padding:4px 0;">🔄 ส่งกลับ — แจ้งเซล์ให้ชี้แจงเพิ่มเติม LINE แล้ว</div>';
+}
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>{
   el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
 });
 </script>
+
+<div class="modal-overlay" id="modal-mgr-reject-reason">
+  <div class="modal">
+    <div class="modal-title">❌ ไม่อนุมัติคืนเงิน</div>
+    <div class="modal-sub">กรุณาระบุเหตุผลเพื่อแจ้งเซล์และลูกค้า</div>
+    <div class="f-group"><label class="f-label">เหตุผลที่ไม่อนุมัติ</label>
+      <select class="f-select" id="reject-reason">
+        <option>ลูกค้ายกเลิกเองโดยไม่มีเหตุผลอันควร</option>
+        <option>อยู่ในช่วง cooling period ยังไม่ครบกำหนด</option>
+        <option>รถมาแล้ว ลูกค้าไม่รับมอบ</option>
+        <option>อื่นๆ</option>
+      </select>
+    </div>
+    <div class="f-group"><label class="f-label">รายละเอียดเพิ่มเติม</label>
+      <textarea class="f-input" rows="3" placeholder="อธิบายเพิ่มเติม..." style="resize:vertical;"></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-mgr-reject-reason')">ยกเลิก</button>
+      <button class="btn btn-red" onclick="closeModal('modal-mgr-reject-reason');alert('❌ ส่งผลการปฏิเสธให้เซล์ + ลูกค้า LINE แล้ว')">❌ ยืนยันไม่อนุมัติ</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

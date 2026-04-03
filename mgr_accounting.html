@@ -76,6 +76,9 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
 .modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
 .btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
 @media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}.f-row,.f-row3{grid-template-columns:1fr;}}
+
+.step-circle{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+
 </style>
 </head>
 <body>
@@ -98,6 +101,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   <button class="tab" onclick="sw(this,'t-cashier')">🧾 แคชเชียร์</button>
   <button class="tab" onclick="sw(this,'t-purchase')">🛒 จัดซื้อ</button>
   <button class="tab" onclick="sw(this,'t-payroll')">💰 เงินเดือน</button>
+  <button class="tab" onclick="sw(this,'t-refund')">💸 คืนเงิน/ริบมัดจำ <span style="background:var(--rd);color:var(--red);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:3px;">1</span></button>
 </div>
 
 <div class="main">
@@ -380,6 +384,130 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   </div>
 </div>
 
+
+<!-- ===== คืนเงิน/ริบมัดจำ (บัญชี) ===== -->
+<div id="t-refund" style="display:none;">
+
+  <div class="signal b" style="margin-bottom:14px;"><span>📌</span>
+    <div><div class="st">บัญชีรับเรื่องสุดท้าย — ตรวจสอบแล้วโอนคืน หรือบันทึกรายรับ</div>
+    <div class="sd">ผบห. อนุมัติแล้ว → บัญชีโอนคืนลูกค้า | ลูกค้าผิดนัด → บันทึก Other Income</div></div>
+  </div>
+
+  <div class="g2">
+    <!-- คืนเงิน -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💸 รอโอนคืนลูกค้า</div><span class="badge r">1 รายการ</span></div>
+      <div style="padding:14px;">
+        <div style="background:var(--bg3);border-radius:10px;padding:14px;border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <div>
+              <div style="font-size:13px;font-weight:800;">วิภาวดี รักดี</div>
+              <div style="font-size:11px;" class="m">TCS-2026-04-0022 · Finance รีเจค</div>
+              <div style="font-size:11px;" class="m">✅ ผบห. อนุมัติ 3/4/69</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:800;" class="r">฿50,000</div>
+              <div style="font-size:10px;" class="m">เงินดาวน์</div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:8px;padding:10px;font-size:11px;margin-bottom:10px;border:1px solid var(--border);">
+            <div style="font-weight:700;margin-bottom:4px;">บัญชีโอนคืน:</div>
+            <div>กรุงไทย 123-4-56789-0</div>
+            <div style="font-weight:700;">นาง วิภาวดี รักดี</div>
+          </div>
+          <div class="f-group">
+            <label class="f-label">โอนจากบัญชี</label>
+            <select class="f-select">
+              <option>BAY 275-0-00795-8</option>
+              <option>BBL 496-7-05557-7</option>
+              <option>SCB 407-4-31972-8</option>
+            </select>
+          </div>
+          <button onclick="confirmRefundTransfer(this)" class="btn btn-green" style="width:100%;">💸 ยืนยันโอนคืน ฿50,000</button>
+        </div>
+      </div>
+
+      <!-- บันทึกบัญชี -->
+      <div style="padding:0 14px 14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px;">บันทึกบัญชี</div>
+        <table style="width:100%;font-size:11px;border-collapse:collapse;">
+          <tr style="background:var(--bg3);">
+            <td style="padding:6px 10px;font-weight:700;">Dr. เงินมัดจำรับล่วงหน้า</td>
+            <td style="padding:6px 10px;text-align:right;font-family:'IBM Plex Mono',monospace;">฿50,000</td>
+            <td style="padding:6px 10px;"></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;padding-left:20px;" class="m">Cr. เงินฝากธนาคาร BAY</td>
+            <td style="padding:6px 10px;"></td>
+            <td style="padding:6px 10px;text-align:right;font-family:'IBM Plex Mono',monospace;">฿50,000</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ริบมัดจำ (ลูกค้าผิดนัด) -->
+    <div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="ch"><div class="ct">📋 บันทึกรายรับ (ริบมัดจำ)</div><span class="badge y">2 รายการ</span></div>
+        <div style="padding:14px;">
+
+          <div style="background:var(--bg3);border-radius:10px;padding:12px;border:1px solid var(--border);margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <div>
+                <div style="font-size:12px;font-weight:800;">นงนุช สุขใจ</div>
+                <div style="font-size:10px;" class="m">TCS-2026-04-0018 · Ativ · เปลี่ยนใจ</div>
+              </div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:800;" class="y">฿5,000</div>
+            </div>
+            <button onclick="confirmForfeit(this,'นงนุช','5000')" class="btn btn-primary" style="width:100%;font-size:11px;padding:6px;">📊 บันทึก Other Income ฿5,000</button>
+          </div>
+
+          <div style="background:var(--bg3);border-radius:10px;padding:12px;border:1px solid var(--border);">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <div>
+                <div style="font-size:12px;font-weight:800;">ชัย พิชัย</div>
+                <div style="font-size:10px;" class="m">TCS-2026-03-0095 · Fortuner · เปลี่ยนใจ</div>
+              </div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:800;" class="y">฿10,000</div>
+            </div>
+            <button onclick="confirmForfeit(this,'ชัย','10000')" class="btn btn-primary" style="width:100%;font-size:11px;padding:6px;">📊 บันทึก Other Income ฿10,000</button>
+          </div>
+        </div>
+
+        <!-- บันทึกบัญชี ริบมัดจำ -->
+        <div style="padding:0 14px 14px;">
+          <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">บันทึกบัญชี (ริบมัดจำ)</div>
+          <table style="width:100%;font-size:11px;border-collapse:collapse;">
+            <tr style="background:var(--bg3);">
+              <td style="padding:6px 10px;font-weight:700;">Dr. เงินมัดจำรับล่วงหน้า</td>
+              <td style="padding:6px 10px;text-align:right;font-family:'IBM Plex Mono',monospace;">฿X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;padding-left:20px;" class="m">Cr. รายได้อื่น (Other Income)</td>
+              <td></td>
+              <td style="padding:6px 10px;text-align:right;font-family:'IBM Plex Mono',monospace;">฿X</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- สรุปเดือนนี้ -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📊 สรุปยกเลิก เดือนนี้</div></div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>จำนวน</th><th>ยอด</th></tr></thead>
+          <tbody>
+            <tr><td>💸 โอนคืนลูกค้า</td><td class="n">3 ราย</td><td class="n r">฿100,000</td></tr>
+            <tr><td>📋 ริบมัดจำ (Other Income)</td><td class="n">4 ราย</td><td class="n g">฿40,000</td></tr>
+            <tr style="background:var(--bg3)"><td style="font-weight:700;">รวมทั้งหมด</td><td class="n" style="font-weight:700;">7 ราย</td><td class="n" style="font-weight:700;">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- /refund -->
+
 </div><!-- /main -->
 
 <!-- MODALs -->
@@ -467,7 +595,7 @@ setInterval(()=>{
 },1000);
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
-  ['t-upload','t-cashflow','t-commission','t-cashier','t-purchase','t-payroll'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+  ['t-upload','t-cashflow','t-commission','t-cashier','t-purchase','t-payroll','t-refund'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
   if(id==='t-cashier') renderDenoms();
 }
 function handleUpload(zoneId,statusId,input){
@@ -503,6 +631,20 @@ function approvePO(btn,action){
   parent.innerHTML=action==='ok'?'<div style="color:var(--grn);font-size:12px;font-weight:700;">✅ อนุมัติแล้ว</div>':'<div style="color:var(--red);font-size:12px;font-weight:700;">❌ ปฏิเสธแล้ว</div>';
 }
 function printSlip(name){alert('🖨️ ออกสลิป: '+name+'\n📱 ส่ง LINE แล้ว');}
+
+function confirmRefundTransfer(btn){
+  btn.closest('[style*="border-radius:10px"]').style.background='var(--gd)';
+  btn.style.background='#ccc';
+  btn.disabled=true;
+  btn.textContent='✅ บันทึกโอนคืนแล้ว — กระแสเงินสดอัพเดต';
+  alert('✅ โอนคืน ฿50,000 บันทึกแล้ว\n\nDr. เงินมัดจำฯ 50,000\nCr. เงินฝาก BAY 50,000\n\n📱 แจ้ง ผจก.ขาย + เซล์ LINE แล้ว\n📊 กระแสเงินสดอัพเดตอัตโนมัติ');
+}
+function confirmForfeit(btn,name,amount){
+  btn.style.background='var(--grn)';
+  btn.textContent='✅ บันทึกแล้ว — Other Income +฿'+parseInt(amount).toLocaleString('th-TH');
+  alert('✅ บันทึก Other Income แล้ว\n\nลูกค้า: '+name+'\nยอด: ฿'+parseInt(amount).toLocaleString('th-TH')+'\n\nDr. เงินมัดจำฯ '+parseInt(amount).toLocaleString('th-TH')+'\nCr. รายได้อื่น '+parseInt(amount).toLocaleString('th-TH')+'\n\n📊 Flash P&L อัพเดต');
+}
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>{el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});});
