@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg3:#f0f3fa;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1200px;margin:0 auto;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);}
+.kpi.r{border-top-color:var(--red);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--red);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.pt{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:7px;}
+.pf{height:100%;border-radius:3px;}
+.pf.r{background:var(--red);}.pf.g{background:var(--grn);}.pf.b{background:var(--blu);}.pf.y{background:var(--yel);}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;background:var(--bg3);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;}
+.btn-primary{background:var(--blu);color:#fff;}
+.btn-green{background:var(--grn);color:#fff;}
+.btn-red{background:var(--toy);color:#fff;}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:500px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:var(--bg3);}
+.upload-zone:hover{border-color:var(--blu);background:var(--bd);}
+.upload-zone.done{border-color:var(--grn);background:var(--gd);border-style:solid;}
+.cpu-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:5px;}
+.cpu-fill{height:100%;border-radius:4px;transition:width .6s;}
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2{grid-template-columns:1fr;}.f-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname" id="sa-name">SA — บริการ</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:11px;color:var(--text2);" id="date-now"></span>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-today')">📋 งานวันนี้</button>
+  <button class="tab" onclick="sw(this,'t-commission')">💳 Commission</button>
+  <button class="tab" onclick="sw(this,'t-cpu')">🔧 CPU Target</button>
+  <button class="tab" onclick="sw(this,'t-spare')">📸 เบิกอะไหล่</button>
+  <button class="tab" onclick="sw(this,'t-csi')">⭐ CSI Script</button>
+</div>
+
+<div class="main">
+
+<!-- ===== งานวันนี้ ===== -->
+<div id="t-today">
+  <div class="g4">
+    <div class="kpi b"><div class="kl">🚗 งานวันนี้</div><div class="kv b">6 ใบงาน</div><div class="ks">รับมอบแล้ว 4 คัน</div></div>
+    <div class="kpi g"><div class="kl">💰 ยอดขายวันนี้</div><div class="kv g">฿87,540</div><div class="ks">เป้าเดือน ฿150K | 58%</div><div class="pt"><div class="pf g" style="width:58%"></div></div></div>
+    <div class="kpi y"><div class="kl">⭐ CSI วันนี้</div><div class="kv y">3/6 ราย</div><div class="ks">ขอคะแนนแล้ว 3 คัน</div></div>
+    <div class="kpi r"><div class="kl">⚠️ ค้างส่งมอบ</div><div class="kv r">2 คัน</div><div class="ks">เกิน TAT แล้ว</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">🚗 รายการงานซ่อมวันนี้</div>
+      <button onclick="openModal('modal-new-job')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">+ รับรถใหม่</button>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>ใบงาน</th><th>ลูกค้า/รถ</th><th>ประเภท</th><th>ยอด</th><th>CPU</th><th>CSI</th><th>สถานะ</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="m">WO-0041</td>
+          <td><div style="font-weight:700;">นาย ก. วาวี</div><div style="font-size:10px;" class="m">Hilux D-CAB 2.8 | กท-5678</div></td>
+          <td class="m">เช็คระยะ 40K</td>
+          <td class="n g">฿4,850</td>
+          <td>
+            <span class="badge g">🔋 แบต</span>
+            <span class="badge y">🛞 ยาง x2</span>
+          </td>
+          <td><span class="badge g">✅ ขอแล้ว</span></td>
+          <td><span class="badge g">✅ ส่งมอบแล้ว</span></td>
+          <td><button onclick="openModal('modal-csi-script')" style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">Script</button></td>
+        </tr>
+        <tr>
+          <td class="m">WO-0042</td>
+          <td><div style="font-weight:700;">นาง ข. ดี</div><div style="font-size:10px;" class="m">Fortuner 2.4 | นพ-1234</div></td>
+          <td class="m">ซ่อมทั่วไป</td>
+          <td class="n g">฿12,300</td>
+          <td><span class="badge y">🛞 ยาง x4</span></td>
+          <td><span class="badge y">⏳ รอส่ง</span></td>
+          <td><span class="badge b">🔧 กำลังซ่อม</span></td>
+          <td><button onclick="alert('📞 แจ้งลูกค้าเมื่อรถเสร็จแล้ว')" style="background:var(--bd);color:var(--blu);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">แจ้ง</button></td>
+        </tr>
+        <tr style="background:var(--rd)">
+          <td class="m">WO-0039</td>
+          <td><div style="font-weight:700;">นาย ค. รัก <span class="badge r">เกิน TAT!</span></div><div style="font-size:10px;" class="m">Yaris Cross | นพ-5555</div></td>
+          <td class="m">ซ่อมตัวถัง</td>
+          <td class="n y">฿45,000</td>
+          <td><span class="badge r">ยังไม่ได้ offer</span></td>
+          <td><span class="badge r">⚠️ รีบขอ!</span></td>
+          <td><span class="badge r">⚠️ รอเกิน 3 วัน</span></td>
+          <td><button onclick="alert('🚨 รีบแจ้งลูกค้า! WO-0039')" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">ด่วน!</button></td>
+        </tr>
+        <tr>
+          <td class="m">WO-0043</td>
+          <td><div style="font-weight:700;">นาง ง. สุข</div><div style="font-size:10px;" class="m">Camry HEV | นพ-9999</div></td>
+          <td class="m">เช็คระยะ 10K</td>
+          <td class="n g">฿2,800</td>
+          <td><span class="badge g">✅ Offer แล้ว</span></td>
+          <td><span class="badge y">⏳ รอ SMS</span></td>
+          <td><span class="badge g">✅ ส่งมอบแล้ว</span></td>
+          <td><button onclick="openModal('modal-csi-script')" style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">Script</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== Commission ===== -->
+<div id="t-commission" style="display:none;">
+  <div class="g4">
+    <div class="kpi b"><div class="kl">ยอดขายเดือนนี้</div><div class="kv b">฿105,817</div><div class="ks">เป้า ฿150,000</div><div class="pt"><div class="pf b" style="width:71%"></div></div></div>
+    <div class="kpi g"><div class="kl">Base Commission</div><div class="kv g">฿3,522</div><div class="ks">≥฿100K → 0.75%</div></div>
+    <div class="kpi y"><div class="kl">CPU Bonus</div><div class="kv y">฿1,200</div><div class="ks">ยาง 4 เส้น + แบต 2 ลูก</div></div>
+    <div class="kpi g"><div class="kl">หลังหัก 15%</div><div class="kv g">฿2,994</div><div class="ks">ได้รับจริง เดือนนี้</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💳 สรุป Commission ฉัน — เดือนนี้</div></div>
+      <table class="tbl">
+        <thead><tr><th>รายการ</th><th>ยอด</th></tr></thead>
+        <tbody>
+          <tr><td>ยอดขายรวม</td><td class="n b" style="font-weight:700;">฿105,817</td></tr>
+          <tr style="background:var(--bg3)"><td class="m" style="padding-left:20px;">Tier ≥฿100K → 0.75%</td><td class="n m">฿793.6</td></tr>
+          <tr><td>CPU Bonus — ยาง</td><td class="n g">+฿600 (4 เส้น × ฿150)</td></tr>
+          <tr><td>CPU Bonus — แบต</td><td class="n g">+฿200 (2 ลูก × ฿100)</td></tr>
+          <tr><td>CPU Bonus — Air Care</td><td class="n g">+฿200 (4 × ฿50)</td></tr>
+          <tr><td style="color:var(--grn);font-weight:700;">Gross Commission</td><td class="n g" style="font-weight:800;">฿3,522</td></tr>
+          <tr><td class="m">หัก กองกลาง 10%</td><td class="n r">-฿352</td></tr>
+          <tr><td class="m">หัก ภาษี 5%</td><td class="n r">-฿176</td></tr>
+          <tr style="background:var(--gd)"><td style="font-weight:800;">รับจริง</td><td class="n g" style="font-weight:800;font-size:16px;">฿2,994</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📊 Tier Commission SA</div></div>
+      <table class="tbl">
+        <thead><tr><th>ยอดขาย/เดือน</th><th>อัตรา</th><th>ตัวอย่าง</th></tr></thead>
+        <tbody>
+          <tr><td>≥ ฿350,000</td><td class="n g">1.50%</td><td class="n m">฿5,250</td></tr>
+          <tr><td>≥ ฿250,000</td><td class="n g">1.20%</td><td class="n m">฿3,600</td></tr>
+          <tr><td>≥ ฿150,000</td><td class="n b">0.90%</td><td class="n m">฿1,800</td></tr>
+          <tr><td>≥ ฿100,000</td><td class="n b">0.75%</td><td class="n m">฿825</td></tr>
+          <tr style="background:var(--bd)"><td><b>ของฉัน ฿105K</b></td><td class="n b"><b>0.75%</b></td><td class="n b"><b>฿793</b></td></tr>
+          <tr><td>≥ ฿50,000</td><td class="n y">0.50%</td><td class="n m">฿300</td></tr>
+          <tr><td>< ฿50,000</td><td class="n m">0.25%</td><td class="n m">—</td></tr>
+        </tbody>
+      </table>
+      <div style="padding:8px 14px;background:var(--yd);font-size:10px;" class="y">
+        ⚠️ Penalty: ยาง &lt;10 เส้น = -0.1% | แบต &lt;10 ลูก = -0.1% | Complaint หัก 5%/ราย
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CPU Target ===== -->
+<div id="t-cpu" style="display:none;">
+  <div class="g4">
+    <div class="kpi r"><div class="kl">🛞 ยาง</div><div class="kv r">4 เส้น</div><div class="ks">เป้า 10 | เหลือ 6 เส้น<br><span style="color:var(--red);font-size:9px;">⚠️ ต่ำกว่าเป้า -0.1%</span></div><div class="pt"><div class="pf r" style="width:40%"></div></div></div>
+    <div class="kpi y"><div class="kl">🔋 แบตเตอรี่</div><div class="kv y">2 ลูก</div><div class="ks">เป้า 10 | เหลือ 8 ลูก<br><span style="color:var(--yel);font-size:9px;">⚠️ ต้องเร่ง!</span></div><div class="pt"><div class="pf y" style="width:20%"></div></div></div>
+    <div class="kpi g"><div class="kl">❄️ Air Care</div><div class="kv g">4 รายการ</div><div class="ks">เป้า 5 | เหลือ 1</div><div class="pt"><div class="pf g" style="width:80%"></div></div></div>
+    <div class="kpi b"><div class="kl">🫧 เขม่า+กระจก</div><div class="kv b">8 รายการ</div><div class="ks">เป้า 10 | ใกล้ถึง</div><div class="pt"><div class="pf b" style="width:80%"></div></div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🎯 CPU Script — พูดกับลูกค้า</div><span class="badge g">ใช้ได้เลย</span></div>
+      <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--gd);border-radius:8px;padding:11px 13px;border:1px solid rgba(10,124,82,.2);">
+          <div style="font-size:10px;font-weight:700;color:var(--grn);margin-bottom:5px;">🛞 ยาง (Bonus ฿150/เส้น)</div>
+          <div style="font-size:11px;line-height:1.8;">"ตรวจสอบยางให้ลูกค้าแล้วครับ/ค่ะ ดอกยางเหลือ <strong>[X]mm</strong> มาตรฐาน 2mm<br>แนะนำเปลี่ยนได้แล้วนะครับ/ค่ะ ราคา ฿[X] ต่อเส้น มีแบรนด์ [Y] ครับ/ค่ะ"</div>
+        </div>
+        <div style="background:var(--bd);border-radius:8px;padding:11px 13px;border:1px solid rgba(29,82,204,.18);">
+          <div style="font-size:10px;font-weight:700;color:var(--blu);margin-bottom:5px;">🔋 แบตเตอรี่ (Bonus ฿100/ลูก)</div>
+          <div style="font-size:11px;line-height:1.8;">"วัดค่าแบตให้แล้วครับ/ค่ะ ค่าที่ได้ <strong>[X]V</strong> ปกติ 12.4V+<br>แบตอ่อนแล้วครับ/ค่ะ แนะนำเปลี่ยนก่อนหมดอายุ ราคา ฿[X] ครับ/ค่ะ"</div>
+        </div>
+        <div style="background:var(--yd);border-radius:8px;padding:11px 13px;border:1px solid rgba(194,106,0,.2);">
+          <div style="font-size:10px;font-weight:700;color:var(--yel);margin-bottom:5px;">❄️ Air Care (Bonus ฿50)</div>
+          <div style="font-size:11px;line-height:1.8;">"ล้างแอร์ให้อากาศเย็นขึ้นและประหยัดไฟครับ/ค่ะ ราคา ฿799 ใช้เวลา 30 นาทีเอง ทำเลยไหมครับ/ค่ะ?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📈 CPU Bonus รายการ</div></div>
+      <table class="tbl">
+        <thead><tr><th>รายการ</th><th>Bonus</th><th>ทำแล้ว</th><th>คาดรับ</th></tr></thead>
+        <tbody>
+          <tr><td>🛞 ยาง</td><td class="n g">฿150/เส้น</td><td class="n r">4 เส้น</td><td class="n y">฿600</td></tr>
+          <tr><td>🔋 แบต</td><td class="n g">฿100/ลูก</td><td class="n r">2 ลูก</td><td class="n y">฿200</td></tr>
+          <tr><td>❄️ Air Care</td><td class="n g">฿50/ครั้ง</td><td class="n b">4 ครั้ง</td><td class="n g">฿200</td></tr>
+          <tr><td>🫧 เขม่า</td><td class="n g">฿15/ครั้ง</td><td class="n b">5 ครั้ง</td><td class="n g">฿75</td></tr>
+          <tr><td>🪟 เคลือบกระจก</td><td class="n g">฿10/ครั้ง</td><td class="n b">3 ครั้ง</td><td class="n g">฿30</td></tr>
+          <tr style="background:var(--gd)"><td style="font-weight:700;">รวม CPU Bonus</td><td></td><td></td><td class="n g" style="font-weight:800;">฿1,105</td></tr>
+        </tbody>
+      </table>
+      <div style="padding:8px 14px;background:var(--rd);font-size:10px;" class="r">
+        🚨 ยาง &lt;10 เส้น → Penalty -0.1% = -฿106 | แบต &lt;10 ลูก → -฿106 เพิ่ม! เร่งทำให้ครบก่อนสิ้นเดือน
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== เบิกอะไหล่ ===== -->
+<div id="t-spare" style="display:none;">
+
+  <div style="background:var(--bd);border:1px solid rgba(29,82,204,.2);border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:12px;" class="b">
+    📸 ถ่ายรูปใบงานส่งขอเบิก — ผจก.GS ตรวจสอบอัตโนมัติ ไม่ต้องกดขออนุมัติทุกรายการ
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch">
+        <div class="ct">📸 ขอเบิกอะไหล่ใหม่</div>
+        <span class="badge b">ถ่ายรูปใบงาน</span>
+      </div>
+      <div style="padding:16px;">
+        <div class="f-group">
+          <label class="f-label">ใบงานเลขที่</label>
+          <input class="f-input" placeholder="เช่น WO-0042" id="wo-number">
+        </div>
+        <div class="f-group">
+          <label class="f-label">รายการอะไหล่ที่ขอเบิก</label>
+          <input class="f-input" placeholder="เช่น ผ้าเบรก + น้ำมันเครื่อง 5L" id="spare-items">
+        </div>
+
+        <!-- ถ่ายรูปใบงาน -->
+        <div class="f-group">
+          <label class="f-label">📸 ถ่ายรูปใบงาน / ใบสั่งซื้อ</label>
+          <div class="upload-zone" id="photo-zone" onclick="document.getElementById('spare-photo').click()">
+            <input type="file" id="spare-photo" accept="image/*" capture="environment" style="display:none" onchange="photoUploaded(this)">
+            <div style="font-size:30px;margin-bottom:6px;">📷</div>
+            <div style="font-size:13px;font-weight:700;">แตะเพื่อถ่ายรูป</div>
+            <div style="font-size:10px;color:var(--text2);margin-top:3px;">ถ่ายใบงาน หรือเลือกจากรูปภาพ</div>
+            <div id="photo-name" style="font-size:11px;color:var(--grn);margin-top:4px;font-weight:700;display:none;"></div>
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label class="f-label">หมายเหตุ (ถ้ามี)</label>
+          <input class="f-input" placeholder="เช่น ลูกค้ายินดีให้เปลี่ยน">
+        </div>
+        <button onclick="submitSpare()" class="btn btn-green" style="width:100%;">📤 ส่งขอเบิก</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📋 รายการเบิกของฉัน</div><span class="badge b">วันนี้</span></div>
+      <table class="tbl">
+        <thead><tr><th>ใบงาน</th><th>รายการ</th><th>สถานะ</th><th>เวลา</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="m">WO-0041</td>
+            <td><div style="font-weight:700;">น้ำมันเครื่อง 5W-30 5L</div><div style="font-size:10px;" class="m">+ กรองน้ำมัน</div></td>
+            <td><span class="badge g">✅ จ่ายแล้ว</span></td>
+            <td class="m">08:30</td>
+          </tr>
+          <tr>
+            <td class="m">WO-0041</td>
+            <td><div style="font-weight:700;">ยาง Bridgestone 195/65R15</div><div style="font-size:10px;" class="m">2 เส้น</div></td>
+            <td><span class="badge g">✅ จ่ายแล้ว</span></td>
+            <td class="m">09:15</td>
+          </tr>
+          <tr>
+            <td class="m">WO-0042</td>
+            <td><div style="font-weight:700;">ผ้าเบรกหน้า Fortuner</div><div style="font-size:10px;" class="m">1 ชุด</div></td>
+            <td><span class="badge y">⏳ รอจ่าย</span></td>
+            <td class="m">10:45</td>
+          </tr>
+          <tr>
+            <td class="m">WO-0043</td>
+            <td><div style="font-weight:700;">น้ำมันเกียร์อัตโนมัติ</div><div style="font-size:10px;" class="m">2L</div></td>
+            <td><span class="badge b">🔍 ตรวจสอบ</span></td>
+            <td class="m">11:20</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CSI Script ===== -->
+<div id="t-csi" style="display:none;">
+  <div class="g4">
+    <div class="kpi r"><div class="kl">NPS T.Charoensri</div><div class="kv r">87%</div><div class="ks">ภาค NE3: 93% | ต่ำกว่า!</div></div>
+    <div class="kpi r"><div class="kl">BiWeek 2</div><div class="kv r">949</div><div class="ks">ลงจาก BW1 (986) ต้องปรับ!</div></div>
+    <div class="kpi y"><div class="kl">อันดับภูมิภาค</div><div class="kv y">อันดับ 212</div><div class="ks">ต้องเร่งขึ้น!</div></div>
+    <div class="kpi b"><div class="kl">ขอคะแนนวันนี้</div><div class="kv b">3/6 ราย</div><div class="ks">ต้องขออีก 3 ราย</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💬 Script ขอคะแนน CSI</div><span class="badge g">พูดทุกครั้ง</span></div>
+      <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+
+        <div style="background:var(--gd);border-radius:10px;padding:14px;border:1px solid rgba(10,124,82,.2);">
+          <div style="font-size:11px;font-weight:800;color:var(--grn);margin-bottom:8px;">📞 ก่อนส่งมอบรถ — พูดทุกครั้ง:</div>
+          <div style="font-size:13px;line-height:2;background:#fff;border-radius:8px;padding:12px;border:1px solid rgba(10,124,82,.15);">
+            "ลูกค้าจะได้รับ SMS จาก Toyota เพื่อสำรวจความพึงพอใจนะครับ/ค่ะ<br>
+            ถ้าบริการวันนี้ทำได้ดี <strong>ขอคะแนน 10 ทุกข้อ</strong> เลยนะครับ/ค่ะ<br>
+            ถ้ามีอะไรไม่พอใจบอกผม/หนูได้เลยครับ/ค่ะ จะแก้ไขให้ทันที"
+          </div>
+        </div>
+
+        <div style="background:var(--bd);border-radius:10px;padding:14px;border:1px solid rgba(29,82,204,.18);">
+          <div style="font-size:11px;font-weight:800;color:var(--blu);margin-bottom:8px;">📞 กรณีลูกค้าไม่พอใจ — พูดก่อนส่งรถ:</div>
+          <div style="font-size:13px;line-height:2;background:#fff;border-radius:8px;padding:12px;border:1px solid rgba(29,82,204,.15);">
+            "ขอโทษที่ทำให้ไม่พอใจนะครับ/ค่ะ<br>
+            ขอโอกาสแก้ไขก่อนนะครับ/ค่ะ <strong>[แก้ไขให้เสร็จ]</strong><br>
+            ถ้าพอใจแล้ว ขอ <strong>10 คะแนน</strong> ใน SMS ด้วยนะครับ/ค่ะ"
+          </div>
+        </div>
+
+        <div style="background:var(--yd);border-radius:10px;padding:14px;border:1px solid rgba(194,106,0,.2);">
+          <div style="font-size:11px;font-weight:800;color:var(--yel);margin-bottom:6px;">⚠️ ห้ามทำเด็ดขาด:</div>
+          <div style="font-size:12px;line-height:1.8;color:var(--text);">
+            ❌ บอกให้ลูกค้า "ไม่ต้องตอบ SMS"<br>
+            ❌ บอกว่า "ถ้าไม่พอใจอย่าตอบ"<br>
+            ❌ กรอก SMS แทนลูกค้า<br>
+            <span style="color:var(--red);font-weight:700;">→ TMT ตรวจพบ = โดนตัดคะแนนทันที + กระทบ Commission ทั้งทีม</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📋 Checklist CSI วันนี้</div></div>
+      <div style="padding:14px;display:flex;flex-direction:column;gap:8px;font-size:12px;">
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;">
+          <div style="font-weight:700;margin-bottom:8px;">✅ ต้องทำทุกใบงาน:</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="display:flex;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);"><span>อธิบายงานที่ทำให้ลูกค้าชัดเจน</span></label>
+            <label style="display:flex;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);"><span>ใบเสร็จครบ ราคาถูกต้อง</span></label>
+            <label style="display:flex;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);"><span>ตรวจรถก่อนส่ง ทำความสะอาด</span></label>
+            <label style="display:flex;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);"><span>พูด Script ขอคะแนน CSI</span></label>
+            <label style="display:flex;gap:8px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);"><span>ให้เบอร์ตัวเองลูกค้า ถ้ามีปัญหาโทรได้</span></label>
+          </div>
+        </div>
+        <div style="background:var(--rd);border-radius:8px;padding:10px 12px;">
+          <div style="font-weight:700;color:var(--red);margin-bottom:4px;">🚨 Complaint วันนี้:</div>
+          <div style="font-size:11px;" class="m">ไม่มี Complaint — รักษาไว้!<br>มี Complaint = หัก Commission 5%/ราย</div>
+        </div>
+        <button onclick="openModal('modal-followup')" class="btn btn-primary" style="width:100%;">📞 บันทึก Follow-up ลูกค้า</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- MODALs -->
+<div class="modal-overlay" id="modal-new-job">
+  <div class="modal">
+    <div class="modal-title">🚗 รับรถใหม่</div>
+    <div class="modal-sub">บันทึกใบงานรับซ่อม</div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">ทะเบียนรถ</label><input class="f-input" placeholder="กข-1234 นพ"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">รุ่นรถ</label><input class="f-input" placeholder="Hilux D-CAB 2.8"></div>
+    </div>
+    <div class="f-group"><label class="f-label">ชื่อลูกค้า / เบอร์</label><input class="f-input" placeholder="ชื่อ-นามสกุล · 08X-XXX-XXXX"></div>
+    <div class="f-group"><label class="f-label">อาการ / งานที่ต้องทำ</label><input class="f-input" placeholder="เช็คระยะ 30,000 กม. / เปลี่ยนยาง..."></div>
+    <div class="f-group"><label class="f-label">กำหนดส่ง</label><input class="f-input" type="datetime-local"></div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-new-job')">ยกเลิก</button>
+      <button class="btn btn-green" onclick="closeModal('modal-new-job');alert('✅ บันทึกใบงานแล้ว\n📊 แจ้งผจก.GS อัตโนมัติ')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-csi-script">
+  <div class="modal">
+    <div class="modal-title">⭐ Script ขอคะแนน CSI</div>
+    <div class="modal-sub">พูดกับลูกค้าก่อนส่งรถ</div>
+    <div style="background:var(--gd);border-radius:10px;padding:14px;font-size:14px;line-height:2.2;border:1px solid rgba(10,124,82,.2);">
+      "ลูกค้าจะได้รับ <strong>SMS จาก Toyota</strong> เพื่อสำรวจความพึงพอใจนะครับ/ค่ะ<br>
+      ถ้าบริการวันนี้ทำได้ดี <strong style="color:var(--toy);">ขอคะแนน 10 ทุกข้อ</strong> เลยนะครับ/ค่ะ<br>
+      มีปัญหาอะไรโทรหาผม/หนูได้เลยครับ/ค่ะ"
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="closeModal('modal-csi-script');alert('✅ บันทึกว่าพูด Script แล้ว')">✅ พูดแล้ว บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-followup">
+  <div class="modal">
+    <div class="modal-title">📞 บันทึก Follow-up</div>
+    <div class="f-group"><label class="f-label">ใบงาน</label><input class="f-input" placeholder="WO-0041"></div>
+    <div class="f-group"><label class="f-label">ผลการ Follow-up</label>
+      <select class="f-select">
+        <option>ลูกค้าพอใจ — คะแนน 10</option>
+        <option>ลูกค้าพอใจ — คะแนนปกติ</option>
+        <option>ลูกค้ามีข้อเสนอแนะ</option>
+        <option>ไม่รับสาย</option>
+      </select>
+    </div>
+    <div class="f-group"><label class="f-label">หมายเหตุ</label><input class="f-input" placeholder="รายละเอียด"></div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-followup')">ยกเลิก</button>
+      <button class="btn btn-green" onclick="closeModal('modal-followup');alert('✅ บันทึก Follow-up แล้ว')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<script>
+setInterval(()=>{
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('th-TH');
+  document.getElementById('date-now').textContent=n.toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'});
+},1000);
+
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-today','t-commission','t-cpu','t-spare','t-csi'].forEach(t=>{
+    document.getElementById(t).style.display=t===id?'':'none';
+  });
+}
+
+function photoUploaded(input){
+  if(!input.files.length) return;
+  const zone=document.getElementById('photo-zone');
+  zone.classList.add('done');
+  zone.querySelector('div').textContent='✅';
+  document.getElementById('photo-name').style.display='block';
+  document.getElementById('photo-name').textContent='📎 '+input.files[0].name;
+}
+
+function submitSpare(){
+  const wo=document.getElementById('wo-number').value;
+  const items=document.getElementById('spare-items').value;
+  if(!wo||!items){alert('กรุณากรอกเลขใบงานและรายการอะไหล่');return;}
+  alert('📤 ส่งขอเบิกแล้ว!\n\nใบงาน: '+wo+'\nรายการ: '+items+'\n\n📊 ผจก.GS จะตรวจสอบให้\n✅ แจ้งผลกลับทาง LINE');
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

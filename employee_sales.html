@@ -178,6 +178,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   <button class="tab" onclick="sw(this,'t-mydeals')">📋 ดีลของฉัน</button>
   <button class="tab" onclick="sw(this,'t-leaderboard')">🏆 Leaderboard</button>
   <button class="tab" onclick="sw(this,'t-kpi')">📊 KPI ของฉัน</button>
+  <button class="tab" onclick="sw(this,'t-salekit')">🛠️ Sale Kit</button>
 </div>
 
 <div class="main">
@@ -351,9 +352,39 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
 
         <!-- COMMISSION PREVIEW -->
         <div style="background:var(--gd);border:1px solid rgba(10,124,82,.2);border-radius:10px;padding:12px 14px;margin-top:8px;">
-          <div style="font-size:10px;color:var(--grn);font-weight:700;margin-bottom:4px;">💰 Commission ที่คุณจะได้รับ (ประมาณ)</div>
-          <div style="font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);" id="comm-preview">฿3,700</div>
-          <div style="font-size:10px;color:var(--text2);margin-top:2px;">จ่ายสิ้นเดือน หลังส่งมอบรถแล้ว</div>
+          <div style="font-size:10px;color:var(--grn);font-weight:700;margin-bottom:6px;">💰 Commission คันนี้ (Step-up ตามยอดสะสม)</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px;">
+            <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:9px;color:var(--text2);">1-3 คัน</div>
+              <div style="font-size:12px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);">฿2,000</div>
+            </div>
+            <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:9px;color:var(--text2);">4-6 คัน</div>
+              <div style="font-size:12px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);">฿2,500</div>
+            </div>
+            <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:9px;color:var(--text2);">7-10 คัน</div>
+              <div style="font-size:12px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);">฿3,000</div>
+            </div>
+            <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:9px;color:var(--text2);">11+ คัน</div>
+              <div style="font-size:12px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);">฿3,500</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:10px;color:var(--grn);">คันนี้ (คันที่ 6 เดือนนี้)</div>
+              <div style="font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);" id="comm-preview">฿2,500</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:10px;color:var(--grn);">Bonus เดือนนี้</div>
+              <div style="font-size:13px;font-weight:700;color:var(--grn);">+฿4,000</div>
+              <div style="font-size:9px;color:var(--text2);">Finance ✅ + Insurance ✅</div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text2);margin-top:6px;border-top:1px solid rgba(10,124,82,.2);padding-top:6px;">
+            💰 รวมสิ้นเดือน (ถ้าขาย 6 คัน): ฿2,000×3 + ฿2,500×3 + Bonus = <strong style="color:var(--grn);">฿17,500</strong>
+          </div>
         </div>
 
         <div style="display:flex;justify-content:space-between;margin-top:14px;">
@@ -523,8 +554,8 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
 <!-- ===== KPI ===== -->
 <div id="t-kpi" style="display:none;">
   <div class="kpi-strip" style="margin-bottom:14px;">
-    <div class="kpi r"><div class="kl">🏆 ยอดขาย เม.ย.</div><div class="kv r">5 คัน</div><div class="ks">เป้า 14 คัน | เหลือ 9 คัน</div><div class="pt"><div class="pf r" style="width:36%"></div></div></div>
-    <div class="kpi g"><div class="kl">💰 Commission สะสม</div><div class="kv g">฿18,500</div><div class="ks">เป้า ฿51,800 | ถึงได้ 36%</div><div class="pt"><div class="pf g" style="width:36%"></div></div></div>
+    <div class="kpi r"><div class="kl">🏆 ยอดขาย เม.ย.</div><div class="kv r">5 คัน</div><div class="ks">Tier ปัจจุบัน: ฿2,500/คัน (4-6 คัน)</div><div class="pt"><div class="pf r" style="width:50%"></div></div></div>
+    <div class="kpi g"><div class="kl">💰 Commission สะสม</div><div class="kv g">฿12,000</div><div class="ks">คัน 1-3: ฿6K | คัน 4-5: ฿5K | Bonus: ฿1K</div><div class="pt"><div class="pf g" style="width:60%"></div></div></div>
     <div class="kpi b"><div class="kl">💳 Finance Attach</div><div class="kv b">4/5</div><div class="ks">80% | เป้า 75% ✅</div><div class="pt"><div class="pf b" style="width:80%"></div></div></div>
     <div class="kpi y"><div class="kl">🛡️ Insurance Attach</div><div class="kv y">3/5</div><div class="ks">60% | เป้า 85% ⚠️</div><div class="pt"><div class="pf y" style="width:60%"></div></div></div>
   </div>
@@ -546,9 +577,19 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
             <span style="font-size:12px;">Insurance 85%+</span>
             <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--blu);">+฿2,000 bonus</span>
           </div>
-          <div style="background:var(--gd);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;border:1px solid rgba(10,124,82,.2);">
-            <span style="font-size:12px;font-weight:700;color:var(--grn);">รวมถ้าทำได้ครบ</span>
-            <span style="font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:16px;color:var(--grn);">฿55,800</span>
+          <div style="background:var(--gd);border-radius:8px;padding:10px 12px;border:1px solid rgba(10,124,82,.2);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:12px;font-weight:700;color:var(--grn);">ขาย 4 คัน (ทำได้แน่ๆ)</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-weight:800;color:var(--grn);">฿8,500</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:12px;font-weight:700;color:var(--grn);">ขาย 7 คัน (ดีมาก)</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-weight:800;color:var(--grn);">฿17,500</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--grn);">ขาย 10 คัน + Bonus ครบ</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:16px;color:var(--grn);">฿26,500</span>
+            </div>
           </div>
         </div>
       </div>
@@ -576,6 +617,162 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
     </div>
   </div>
 </div><!-- /kpi -->
+
+
+<!-- ===== SALE KIT ===== -->
+<div id="t-salekit" style="display:none;">
+
+  <!-- คำนวณค่างวด -->
+  <div class="card">
+    <div class="ch"><div class="ct">🧮 คำนวณค่างวด — ใช้คุยกับลูกค้าได้เลย</div></div>
+    <div style="padding:16px;">
+      <div class="f-row" style="margin-bottom:10px;">
+        <div class="f-group" style="margin:0;">
+          <label class="f-label">รุ่นรถ</label>
+          <select class="f-select" id="kit-model" onchange="calcInstallment()">
+            <option value="737000">Hilux Revo D-CAB 2.4 Entry — ฿737,000</option>
+            <option value="815000">Hilux Revo D-CAB 2.8 Premium — ฿815,000</option>
+            <option value="924000">Hilux Revo D-CAB 2.8 Overland — ฿924,000</option>
+            <option value="849000">Yaris Cross HEV Premium — ฿849,000</option>
+            <option value="899000">Yaris Cross HEV Prem. Luxury — ฿899,000</option>
+            <option value="549000">Ativ 1.2 Smart — ฿549,000</option>
+            <option value="671000">Ativ 1.2 Premium Luxury — ฿671,000</option>
+            <option value="1239000">Fortuner 2.4 Leader S — ฿1,239,000</option>
+            <option value="1643000">Fortuner 2.4 Legender — ฿1,643,000</option>
+            <option value="1969000">Fortuner 2.8 Legender 4WD — ฿1,969,000</option>
+            <option value="1094000">Corolla Cross HEV Premium — ฿1,094,000</option>
+            <option value="1134000">Corolla Cross HEV Prem. Luxury — ฿1,134,000</option>
+            <option value="1819000">Camry HEV Premium Luxury — ฿1,819,000</option>
+            <option value="1375000">Commuter 2.8 A/T — ฿1,375,000</option>
+            <option value="929000">Hiace 2.8 — ฿929,000</option>
+          </select>
+        </div>
+        <div class="f-group" style="margin:0;">
+          <label class="f-label">เงินดาวน์ (%)</label>
+          <select class="f-select" id="kit-down" onchange="calcInstallment()">
+            <option value="10">10%</option><option value="15">15%</option>
+            <option value="20" selected>20%</option><option value="25">25%</option>
+            <option value="30">30%</option><option value="35">35%</option>
+            <option value="40">40%</option>
+          </select>
+        </div>
+      </div>
+      <div class="f-row" style="margin-bottom:12px;">
+        <div class="f-group" style="margin:0;">
+          <label class="f-label">ระยะผ่อน</label>
+          <select class="f-select" id="kit-months" onchange="calcInstallment()">
+            <option value="48">48 เดือน (4 ปี)</option>
+            <option value="60" selected>60 เดือน (5 ปี)</option>
+            <option value="72">72 เดือน (6 ปี)</option>
+            <option value="84">84 เดือน (7 ปี)</option>
+          </select>
+        </div>
+        <div class="f-group" style="margin:0;">
+          <label class="f-label">ดอกเบี้ย (% flat/ปี)</label>
+          <select class="f-select" id="kit-rate" onchange="calcInstallment()">
+            <option value="1.99">1.99% (TLT พิเศษ)</option>
+            <option value="2.49" selected>2.49% (TLT ปกติ)</option>
+            <option value="2.99">2.99%</option>
+            <option value="3.49">3.49%</option>
+            <option value="3.99">3.99%</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ผลการคำนวณ -->
+      <div style="background:linear-gradient(135deg,#dbeafe,#eff6ff);border:1px solid rgba(29,82,204,.2);border-radius:12px;padding:16px;">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px;">ราคารถ</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" class="b" id="k-price">฿737,000</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px;">เงินดาวน์ 20%</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" class="y" id="k-down">฿147,400</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px;">ยอดจัด</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" id="k-financed">฿589,600</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:14px;text-align:center;border:2px solid var(--blu);">
+          <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">ค่างวดต่อเดือน</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:32px;font-weight:800;color:var(--toy);" id="k-monthly">฿12,098</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px;" id="k-total-int">ดอกเบี้ยรวม ฿29,280 | ยอดชำระทั้งหมด ฿618,880</div>
+        </div>
+        <div style="margin-top:10px;padding:8px 12px;background:rgba(29,82,204,.08);border-radius:8px;font-size:11px;color:var(--text2);">
+          💡 <strong>คำพูดให้ลูกค้า:</strong> "ผ่อนแค่วันละ <span id="k-daily">฿403</span> ก็ได้รถกลับบ้านแล้วครับ/ค่ะ"
+        </div>
+      </div>
+
+      <!-- ⚠️ Commuter/Hiace alert -->
+      <div id="commuter-alert" style="display:none;margin-top:10px;background:var(--rd);border:1px solid rgba(220,34,68,.3);border-radius:10px;padding:12px;font-size:11px;color:var(--red);">
+        🚨 <strong>Commuter / Hiace — Margin = ฿0</strong><br>
+        ห้ามลดราคาเด็ดขาด! ต้องทำ <strong>Finance + Insurance</strong> ทุกคันถึงจะมีกำไร<br>
+        ถ้าลูกค้าต่อราคา → เสนอของแถมแทน หรือขอผจก.ช่วย
+      </div>
+    </div>
+  </div>
+
+  <!-- เปรียบเทียบรุ่น -->
+  <div class="card">
+    <div class="ch"><div class="ct">⚖️ เปรียบเทียบรุ่น — ช่วยลูกค้าตัดสินใจ</div></div>
+    <div style="overflow-x:auto;padding:0;">
+      <table class="tbl">
+        <thead><tr><th>รุ่น</th><th>ราคา</th><th>ดาวน์ 20%</th><th>ค่างวด 60 เดือน 2.49%</th><th>จุดเด่น</th></tr></thead>
+        <tbody>
+          <tr><td><b>Hilux D-CAB 2.4 Entry</b></td><td class="n">฿737,000</td><td class="n y">฿147,400</td><td class="n g" style="font-weight:700;">฿12,098/เดือน</td><td class="m">ประหยัด เหมาะงานหนัก</td></tr>
+          <tr><td><b>Hilux D-CAB 2.8 Premium</b></td><td class="n">฿815,000</td><td class="n y">฿163,000</td><td class="n g" style="font-weight:700;">฿13,380/เดือน</td><td class="m">เครื่องแรง ฟีเจอร์ครบ</td></tr>
+          <tr><td><b>Hilux D-CAB 2.8 Overland</b></td><td class="n">฿924,000</td><td class="n y">฿184,800</td><td class="n g" style="font-weight:700;">฿15,170/เดือน</td><td class="m">ออฟโรดสุดๆ ดูดี</td></tr>
+          <tr><td><b>Yaris Cross HEV Premium</b></td><td class="n">฿849,000</td><td class="n y">฿169,800</td><td class="n g" style="font-weight:700;">฿13,936/เดือน</td><td class="m">ประหยัดน้ำมัน HEV</td></tr>
+          <tr><td><b>Fortuner 2.4 Leader S</b></td><td class="n">฿1,239,000</td><td class="n y">฿247,800</td><td class="n b" style="font-weight:700;">฿20,342/เดือน</td><td class="m">PPV ดูสง่า</td></tr>
+          <tr style="background:var(--rd)"><td><b>Commuter 2.8 A/T 🚨</b></td><td class="n">฿1,375,000</td><td class="n y">฿275,000</td><td class="n" style="font-weight:700;">฿22,575/เดือน</td><td style="color:var(--red);">⚠️ margin=0 ต้องทำ F&I</td></tr>
+          <tr style="background:var(--rd)"><td><b>Hiace 2.8 🚨</b></td><td class="n">฿929,000</td><td class="n y">฿185,800</td><td class="n" style="font-weight:700;">฿15,253/เดือน</td><td style="color:var(--red);">⚠️ margin=0 ต้องทำ F&I</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Script ปิดดีล -->
+  <div class="card">
+    <div class="ch"><div class="ct">💬 Script ปิดดีล — ตามสถานการณ์</div><span class="badge g">แทนครูฝึก</span></div>
+    <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:var(--gd);border-radius:8px;padding:12px;border:1px solid rgba(10,124,82,.2);">
+        <div style="font-size:11px;font-weight:700;color:var(--grn);margin-bottom:6px;">💚 ลูกค้าลังเลเรื่องราคา</div>
+        <div style="font-size:11px;line-height:1.8;">
+          "ผ่อนแค่ ฿X/เดือน ครับ/ค่ะ เทียบกับค่าน้ำมัน HEV ที่ประหยัดได้<br>
+          Package นี้รวมฟิล์ม+พรม มูลค่า ฿15,000 ให้ฟรีครับ/ค่ะ<br>
+          ถ้าตัดสินใจวันนี้ยังมีรถสีที่ต้องการครับ/ค่ะ"
+        </div>
+      </div>
+      <div style="background:var(--bd);border-radius:8px;padding:12px;border:1px solid rgba(29,82,204,.18);">
+        <div style="font-size:11px;font-weight:700;color:var(--blu);margin-bottom:6px;">🔵 ลูกค้าขอคิดก่อน</div>
+        <div style="font-size:11px;line-height:1.8;">
+          "ไม่เป็นไรครับ/ค่ะ ขอ LINE ไว้ส่งรายละเอียดให้นะครับ/ค่ะ<br>
+          รุ่นนี้ stock เหลือไม่มาก ถ้าตัดสินใจแล้วโทรได้เลยนะครับ/ค่ะ<br>
+          [ส่งสรุปค่างวด+Package ทาง LINE]"
+        </div>
+      </div>
+      <div style="background:var(--yd);border-radius:8px;padding:12px;border:1px solid rgba(194,106,0,.2);">
+        <div style="font-size:11px;font-weight:700;color:var(--yel);margin-bottom:6px;">🟡 ลูกค้าขอลดราคาเพิ่ม</div>
+        <div style="font-size:11px;line-height:1.8;">
+          "ราคานี้ดีที่สุดที่ทำได้แล้วครับ/ค่ะ<br>
+          แต่ผมขอเพิ่ม Package B แทนได้ครับ/ค่ะ มูลค่า ฿15,000<br>
+          [ถ้าเกิน floor บอกลูกค้ารอก่อน แล้วไปขอผจก.]"
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:12px;border:1px solid var(--border);">
+        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">⚫ ลูกค้าเปรียบราคาร้านอื่น</div>
+        <div style="font-size:11px;line-height:1.8;">
+          "ขอบคุณที่แจ้งนะครับ/ค่ะ ราคาเราใกล้เคียงกันแน่นอนครับ/ค่ะ<br>
+          แต่บริการหลังการขายของเราดีกว่า + มีศูนย์ซ่อมในนครพนม<br>
+          ประกันภัย IOI + ALIVE-X สะสมแต้มได้ด้วยครับ/ค่ะ"
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /salekit -->
 
 </div><!-- /main -->
 
@@ -632,7 +829,7 @@ setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocal
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['t-booking','t-mydeals','t-leaderboard','t-kpi'].forEach(t=>{
+  ['t-booking','t-mydeals','t-leaderboard','t-kpi','t-salekit'].forEach(t=>{
     document.getElementById(t).style.display=t===id?'':'none';
   });
 }
@@ -749,6 +946,33 @@ function toggleDeliveryAddr(){
 }
 
 // MODAL
+
+function calcInstallment(){
+  const price = parseFloat(document.getElementById('kit-model').value);
+  const downPct = parseFloat(document.getElementById('kit-down').value)/100;
+  const months = parseInt(document.getElementById('kit-months').value);
+  const rate = parseFloat(document.getElementById('kit-rate').value)/100;
+  const down = Math.round(price * downPct);
+  const financed = price - down;
+  const totalInterest = Math.round(financed * rate * (months/12));
+  const totalPayment = financed + totalInterest;
+  const monthly = Math.round(totalPayment / months);
+  const daily = Math.round(monthly / 30);
+  
+  document.getElementById('k-price').textContent = '฿'+price.toLocaleString('th-TH');
+  document.getElementById('k-down').textContent = '฿'+down.toLocaleString('th-TH');
+  document.getElementById('k-financed').textContent = '฿'+financed.toLocaleString('th-TH');
+  document.getElementById('k-monthly').textContent = '฿'+monthly.toLocaleString('th-TH');
+  document.getElementById('k-total-int').textContent = 'ดอกเบี้ยรวม ฿'+totalInterest.toLocaleString('th-TH')+' | ยอดชำระทั้งหมด ฿'+totalPayment.toLocaleString('th-TH');
+  document.getElementById('k-daily').textContent = '฿'+daily.toLocaleString('th-TH');
+  
+  // เตือน Commuter/Hiace
+  const isZeroMargin = [1375000, 929000].includes(price);
+  document.getElementById('commuter-alert').style.display = isZeroMargin ? 'block' : 'none';
+}
+// init
+document.addEventListener('DOMContentLoaded', calcInstallment);
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>{

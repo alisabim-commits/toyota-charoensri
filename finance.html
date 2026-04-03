@@ -129,6 +129,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   <button class="tab" onclick="sw(this,'t-commission')">💳 รับ Commission</button>
   <button class="tab" onclick="sw(this,'t-petty')">🧾 เงินสดย่อย</button>
   <button class="tab" onclick="sw(this,'t-cash')">💵 เงินสด + ปิดยอด</button>
+  <button class="tab" onclick="sw(this,'t-receive-files')">📥 รับรายรับจากแผนก</button>
 </div>
 
 <div class="main">
@@ -686,6 +687,104 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   </div>
 </div><!-- /cash -->
 
+
+<!-- ===== รับรายรับจากแผนก ===== -->
+<div id="t-receive-files" style="display:none;">
+
+  <div style="background:var(--bd);border:1px solid rgba(29,82,204,.2);border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:12px;" class="b">
+    📌 การเงินรับไฟล์รายรับจาก <strong>บริการ GS</strong> และ <strong>ขาย/ทะเบียน</strong> → รวมกันที่นี่ → นับเงินสดจริง → ปิดยอดส่งบัญชี
+  </div>
+
+  <div class="g3">
+    <!-- รับจาก GS -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🔧 รายรับงานซ่อม GS</div><span class="badge g">จากผจก.GS</span></div>
+      <div style="padding:14px;">
+        <div class="upload-zone" id="uz-gs" onclick="document.getElementById('f-gs').click()">
+          <input type="file" id="f-gs" style="display:none" accept=".xlsx,.xls,.pdf" onchange="receiveFile('uz-gs','gs')">
+          <div style="font-size:26px;margin-bottom:4px;">🔧</div>
+          <div style="font-size:13px;font-weight:700;">รายรับงานซ่อม GS</div>
+          <div style="font-size:10px;color:var(--text2);">รายงานรายรับบริการ_GS_Mar.xls</div>
+          <div id="gs-status" style="display:none;" class="badge g" style="margin-top:4px;">✅ รับแล้ว</div>
+        </div>
+        <div id="gs-preview" style="display:none;margin-top:10px;background:var(--gd);border-radius:8px;padding:10px;font-size:11px;" class="g">
+          <div style="font-weight:700;margin-bottom:4px;">📊 ยอดรายรับ GS ที่อัพโหลด</div>
+          <div style="display:flex;justify-content:space-between;"><span>รายรับงานซ่อมรวม</span><span class="n" style="font-family:'IBM Plex Mono',monospace;font-weight:700;">฿1,817,694</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>มัดจำอะไหล่</span><span class="n" style="font-family:'IBM Plex Mono',monospace;">฿145,922</span></div>
+          <div style="display:flex;justify-content:space-between;font-weight:700;border-top:1px solid rgba(10,124,82,.2);margin-top:4px;padding-top:4px;"><span>รวม GS</span><span class="n" style="font-family:'IBM Plex Mono',monospace;">฿1,963,616</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- รับจากขาย/ทะเบียน -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🚗 รายรับเงินดาวน์+ขาย</div><span class="badge b">จากทะเบียน</span></div>
+      <div style="padding:14px;">
+        <div class="upload-zone" id="uz-sales" onclick="document.getElementById('f-sales').click()">
+          <input type="file" id="f-sales" style="display:none" accept=".xlsx,.xls,.pdf" onchange="receiveFile('uz-sales','sales')">
+          <div style="font-size:26px;margin-bottom:4px;">🚗</div>
+          <div style="font-size:13px;font-weight:700;">รายรับเงินดาวน์+ขาย</div>
+          <div style="font-size:10px;color:var(--text2);">รายรับเงินดาวน์_เมษ_69.xlsx</div>
+          <div id="sales-status" style="display:none;" class="badge b" style="margin-top:4px;">✅ รับแล้ว</div>
+        </div>
+        <div id="sales-preview" style="display:none;margin-top:10px;background:var(--bd);border-radius:8px;padding:10px;font-size:11px;" class="b">
+          <div style="font-weight:700;margin-bottom:4px;">📊 ยอดรายรับขาย</div>
+          <div style="display:flex;justify-content:space-between;"><span>เงินดาวน์รถ</span><span class="n" style="font-family:'IBM Plex Mono',monospace;font-weight:700;">฿250,000</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>ค่าไฟแนนซ์ TLT</span><span class="n" style="font-family:'IBM Plex Mono',monospace;">฿1,201,537</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>ค่าจดทะเบียน</span><span class="n" style="font-family:'IBM Plex Mono',monospace;">฿13,450</span></div>
+          <div style="display:flex;justify-content:space-between;font-weight:700;border-top:1px solid rgba(29,82,204,.2);margin-top:4px;padding-top:4px;"><span>รวมขาย/ทะเบียน</span><span class="n" style="font-family:'IBM Plex Mono',monospace;">฿1,464,987</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ยอดรวม + ปิดยอด -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">✅ ยอดรวมวันนี้</div><span class="badge y" id="files-received-badge">รอรับไฟล์ 2 แผนก</span></div>
+      <div style="padding:14px;">
+        <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+            <span class="m">รายรับ GS</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" id="total-gs" class="g">— รอรับไฟล์</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+            <span class="m">รายรับขาย/ทะเบียน</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" id="total-sales" class="b">— รอรับไฟล์</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+            <span class="m">เงินสดนับจริง (คีย์)</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="b">฿241,200</span>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:8px;margin-top:4px;display:flex;justify-content:space-between;font-size:14px;font-weight:700;">
+            <span>รวมทั้งหมด</span>
+            <span style="font-family:'IBM Plex Mono',monospace;" id="grand-total" class="g">฿241,200</span>
+          </div>
+        </div>
+        <div style="margin-bottom:8px;font-size:11px;color:var(--text2);">เมื่อครบทุกแผนก:</div>
+        <button onclick="closeAndSend()" class="btn btn-red" style="width:100%;" id="close-btn" disabled>
+          🔒 ปิดยอด + ส่งบัญชีอัตโนมัติ
+        </button>
+        <div style="font-size:10px;color:var(--text3);margin-top:6px;text-align:center;">
+          รอรับไฟล์จาก GS และ ขาย/ทะเบียน ก่อนปิดยอด
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- สรุปรายรับ-จ่ายรวม -->
+  <div class="card">
+    <div class="ch"><div class="ct">📊 สรุปรายรับ-จ่ายทั้งวัน — รวมทุกแผนก</div></div>
+    <table class="tbl">
+      <thead><tr><th>แผนก</th><th>รายรับ</th><th>รายจ่าย</th><th>สุทธิ</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr><td><b>🔧 บริการ GS</b></td><td class="n g" id="row-gs">฿0</td><td class="n r">-฿0</td><td class="n g" id="net-gs">฿0</td><td id="stat-gs"><span class="badge y">รอรับไฟล์</span></td></tr>
+        <tr><td><b>🚗 ขาย/ทะเบียน</b></td><td class="n g" id="row-sales">฿0</td><td class="n r">-฿13,450</td><td class="n b" id="net-sales">-฿13,450</td><td id="stat-sales"><span class="badge y">รอรับไฟล์</span></td></tr>
+        <tr><td><b>💵 เงินสดนับจริง</b></td><td class="n g">฿241,200</td><td class="n r">฿0</td><td class="n g">฿241,200</td><td><span class="badge g">✅ นับแล้ว</span></td></tr>
+        <tr style="background:var(--gd)"><td style="font-weight:700;">รวมทั้งหมด</td><td class="n g" style="font-weight:800;" id="sum-in">฿241,200</td><td class="n r" style="font-weight:800;">-฿13,450</td><td class="n g" style="font-weight:800;" id="sum-net">฿227,750</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div><!-- /receive-files -->
+
 </div><!-- /main -->
 
 <!-- MODAL: ลงรายรับ -->
@@ -911,6 +1010,54 @@ function calcCash(){/* placeholder */}
 
 // render denoms when cash tab opens
 const origSw = sw;
+
+
+// ===== รับไฟล์จากแผนก =====
+let gsReceived = false, salesReceived = false;
+function receiveFile(zoneId, type){
+  const zone = document.getElementById(zoneId);
+  zone.classList.add('done');
+  
+  if(type === 'gs'){
+    gsReceived = true;
+    document.getElementById('gs-status').style.display='inline-flex';
+    document.getElementById('gs-preview').style.display='block';
+    document.getElementById('total-gs').textContent = '฿1,963,616';
+    document.getElementById('total-gs').className = 'g';
+    document.getElementById('row-gs').textContent = '฿1,963,616';
+    document.getElementById('net-gs').textContent = '฿1,963,616';
+    document.getElementById('stat-gs').innerHTML = '<span class="badge g">✅ รับแล้ว</span>';
+    document.getElementById('sum-in').textContent = '฿3,427,003';
+    document.getElementById('sum-net').textContent = '฿3,413,553';
+  } else {
+    salesReceived = true;
+    document.getElementById('sales-status').style.display='inline-flex';
+    document.getElementById('sales-preview').style.display='block';
+    document.getElementById('total-sales').textContent = '฿1,464,987';
+    document.getElementById('total-sales').className = 'b';
+    document.getElementById('row-sales').textContent = '฿1,464,987';
+    document.getElementById('net-sales').textContent = '฿1,451,537';
+    document.getElementById('stat-sales').innerHTML = '<span class="badge g">✅ รับแล้ว</span>';
+  }
+  
+  // อัพเดต grand total
+  let gt = 241200;
+  if(gsReceived) gt += 1963616;
+  if(salesReceived) gt += 1464987;
+  document.getElementById('grand-total').textContent = '฿'+gt.toLocaleString('th-TH');
+  
+  // เช็คว่าครบทั้งสองแผนกหรือยัง
+  if(gsReceived && salesReceived){
+    document.getElementById('files-received-badge').textContent = '✅ ครบทุกแผนก';
+    document.getElementById('files-received-badge').className = 'badge g';
+    document.getElementById('close-btn').disabled = false;
+    document.getElementById('close-btn').style.opacity = '1';
+  }
+}
+
+function closeAndSend(){
+  alert('🔒 ปิดยอดสิ้นวัน 3 เม.ย. 69 แล้ว\n\n📊 ยอดรวม:\n  GS: ฿1,963,616\n  ขาย/ทะเบียน: ฿1,464,987\n  เงินสดนับจริง: ฿241,200\n  รวม: ฿3,669,803\n\n📱 ส่งรายงานไป ผจก.บัญชี + ผบห. อัตโนมัติ\n🔒 ล็อครายการแล้ว');
+}
 
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}

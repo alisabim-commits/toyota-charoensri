@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>จัดซื้อ — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg3:#f0f3fa;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1000px;margin:0 auto;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;background:var(--bg3);}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;}
+.btn-primary{background:var(--blu);color:#fff;}
+.btn-green{background:var(--grn);color:#fff;}
+@media(max-width:768px){.g2{grid-template-columns:1fr;}.f-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">จัดซื้อ</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-new')">📝 ขอจัดซื้อใหม่</button>
+  <button class="tab" onclick="sw(this,'t-my')">📋 รายการของฉัน</button>
+  <button class="tab" onclick="sw(this,'t-history')">📊 ประวัติ</button>
+</div>
+<div class="main">
+
+<!-- ขอจัดซื้อใหม่ -->
+<div id="t-new">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🏢 ขอจัดซื้อบริษัท</div><span class="badge b">ทั่วไป</span></div>
+      <div style="padding:16px;">
+        <div class="f-group"><label class="f-label">รายการที่ขอ</label><input class="f-input" placeholder="เช่น กระดาษ A4 / เครื่องเขียน"></div>
+        <div class="f-row">
+          <div class="f-group" style="margin:0;"><label class="f-label">จำนวน</label><input class="f-input" type="number" placeholder="1"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">หน่วย</label><input class="f-input" placeholder="ชุด / กล่อง / ชิ้น"></div>
+        </div>
+        <div class="f-group"><label class="f-label">ผู้ขาย (Dropdown)</label>
+          <select class="f-select">
+            <option>Office Mate (เครื่องเขียน)</option>
+            <option>Thai Watsadu (อุปกรณ์)</option>
+            <option>ร้านปิ่นโต (อาหาร/เครื่องดื่ม)</option>
+            <option>อื่นๆ — ระบุในหมายเหตุ</option>
+          </select>
+        </div>
+        <div class="f-row">
+          <div class="f-group" style="margin:0;"><label class="f-label">ราคาประมาณ (฿)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">ต้องการภายใน</label><input class="f-input" type="date"></div>
+        </div>
+        <div class="f-group"><label class="f-label">หมายเหตุ / เหตุผล</label><input class="f-input" placeholder="เพราะ..."></div>
+        <button onclick="submitPO('บริษัท')" class="btn btn-primary" style="width:100%;">📤 ส่งขออนุมัติ → ผจก.บัญชี</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🔧 ขอจัดซื้ออะไหล่</div><span class="badge g">ผ่านบริการ</span></div>
+      <div style="padding:16px;">
+        <div class="f-group"><label class="f-label">รหัสอะไหล่</label><input class="f-input" placeholder="เช่น 04465-31080"></div>
+        <div class="f-group"><label class="f-label">ชื่ออะไหล่</label><input class="f-input" placeholder="เช่น ผ้าเบรกหน้า Fortuner"></div>
+        <div class="f-row">
+          <div class="f-group" style="margin:0;"><label class="f-label">จำนวน</label><input class="f-input" type="number" placeholder="1"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">ใบงาน (ถ้ามี)</label><input class="f-input" placeholder="WO-0042"></div>
+        </div>
+        <div class="f-group"><label class="f-label">ผู้ขาย</label>
+          <select class="f-select">
+            <option>Toyota Parts Center (อะไหล่แท้)</option>
+            <option>Denso Thailand (อะไหล่ OEM)</option>
+            <option>อื่นๆ — ระบุในหมายเหตุ</option>
+          </select>
+        </div>
+        <div class="f-group"><label class="f-label">ราคาประมาณ (฿)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+        <div class="f-group"><label class="f-label">หมายเหตุ</label><input class="f-input" placeholder="เช่น ลูกค้ารออยู่ ด่วน!"></div>
+        <button onclick="submitPO('อะไหล่')" class="btn btn-green" style="width:100%;">📤 ส่งขออนุมัติ → ผจก.บัญชี</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- รายการของฉัน -->
+<div id="t-my" style="display:none;">
+  <div class="card">
+    <div class="ch"><div class="ct">📋 รายการที่ฉันขอ</div></div>
+    <table class="tbl">
+      <thead><tr><th>วันที่</th><th>ประเภท</th><th>รายการ</th><th>ผู้ขาย</th><th>ยอด</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr><td class="m">3/4/69</td><td><span class="badge b">บริษัท</span></td><td><b>กระดาษ A4 × 5 รีม</b></td><td class="m">Office Mate</td><td class="n y">฿625</td><td><span class="badge y">⏳ รออนุมัติ</span></td></tr>
+        <tr><td class="m">2/4/69</td><td><span class="badge g">อะไหล่</span></td><td><b>ผ้าเบรกหน้า Fortuner</b><br><span style="font-size:10px;" class="m">WO-0042</span></td><td class="m">Toyota Parts</td><td class="n y">฿2,100</td><td><span class="badge g">✅ อนุมัติ</span></td></tr>
+        <tr><td class="m">1/4/69</td><td><span class="badge b">บริษัท</span></td><td><b>ปากกา × 12 ด้าม</b></td><td class="m">Office Mate</td><td class="n g">฿180</td><td><span class="badge g">✅ รับแล้ว</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ประวัติ -->
+<div id="t-history" style="display:none;">
+  <div class="card">
+    <div class="ch"><div class="ct">📊 ประวัติจัดซื้อ — เดือนนี้</div></div>
+    <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
+      <div style="background:var(--bd);border-radius:8px;padding:10px;"><div style="font-size:9px;" class="b">รายการทั้งหมด</div><div style="font-size:20px;font-weight:800;" class="b">15</div></div>
+      <div style="background:var(--gd);border-radius:8px;padding:10px;"><div style="font-size:9px;" class="g">อนุมัติแล้ว</div><div style="font-size:20px;font-weight:800;" class="g">12</div></div>
+      <div style="background:var(--rd);border-radius:8px;padding:10px;"><div style="font-size:9px;" class="r">ยอดรวม</div><div style="font-size:20px;font-weight:800;" class="r">฿24,850</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-new','t-my','t-history'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+}
+function submitPO(type){alert('📤 ส่งขอจัดซื้อ'+type+' แล้ว!\n\n📱 แจ้ง ผจก.บัญชี LINE อัตโนมัติ\n✅ รอผลการอนุมัติ (ปกติ 1 วันทำการ)\n📋 ดูสถานะได้ที่แท็บ "รายการของฉัน"');}
+</script>
+</body>
+</html>

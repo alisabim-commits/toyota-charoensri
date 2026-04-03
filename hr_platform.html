@@ -1,605 +1,576 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HR Platform — Toyota Charoensri</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR — Toyota Charoensri</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;
---red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;
---amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;
---grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;
---blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;
---font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
-.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 20px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50;gap:0}
-.logo{font-size:13px;font-weight:600;padding-right:18px;border-right:1px solid var(--br);margin-right:18px;white-space:nowrap}.logo span{color:var(--red)}
-.nt{height:44px;display:flex;align-items:center;padding:0 11px;font-size:12px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
-.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
-.hr-r{margin-left:auto;font-size:11px;color:var(--mu);white-space:nowrap}
-.content{max-width:1100px;margin:0 auto;padding:22px 20px}
-.page{display:none}.page.on{display:block}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
-.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
-.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
-.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block;white-space:nowrap}
-.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}
-.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid;line-height:1.6}
-.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
-th.r{text-align:right}
-td{padding:8px 10px;border-bottom:1px solid var(--br);vertical-align:middle}
-td.r{text-align:right;font-family:var(--mono)}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#fafaf8}
-.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
-.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
-.fi:focus{outline:none;border-color:var(--tx)}
-.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
-.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
-.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
-.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}
-.btn-re{background:var(--rbg);color:var(--red);border-color:var(--rbr)}.btn-gr{background:var(--gbg);color:var(--grn);border-color:var(--gbr)}
-.btn-sm{padding:4px 10px;font-size:11px}
-.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
-.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
-.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}
-.bl{min-width:160px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
-.step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:0.5px solid var(--br);font-size:12px}.step:last-child{border-bottom:none}
-.step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
-.wsa-block{border-radius:var(--r);padding:12px;margin-bottom:8px;border:1px solid}
-.warn-card{border-left:3px solid var(--red);padding:12px 14px;border-radius:0 var(--r) var(--r) 0;background:var(--rbg);margin-bottom:8px}
-.warn-card.warn2{border-left-color:var(--amb);background:var(--abg)}
-.div{height:1px;background:var(--br);margin:12px 0}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg3:#f0f3fa;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1200px;margin:0 auto;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);}
+.kpi.r{border-top-color:var(--red);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--red);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;background:var(--bg3);}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.f-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;}
+.btn-primary{background:var(--blu);color:#fff;}
+.btn-green{background:var(--grn);color:#fff;}
+.btn-red{background:var(--toy);color:#fff;}
+.btn-yel{background:var(--yd);color:var(--yel);border:1px solid rgba(194,106,0,.3);}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:520px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+/* QR */
+.qr-box{background:linear-gradient(135deg,#18233d,#1d52cc);border-radius:16px;padding:24px;text-align:center;color:#fff;margin-bottom:12px;}
+.qr-canvas{background:#fff;border-radius:12px;padding:12px;display:inline-block;margin:12px auto;}
+.gate-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+.gate-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.emp-avatar{width:36px;height:36px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2{grid-template-columns:1fr;}.f-row,.f-row3{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <div class="logo">HR <span>CHAROENSRI</span></div>
-  <div class="nt on" onclick="gp('dash',this)">📊 Dashboard</div>
-  <div class="nt" onclick="gp('onboard',this)">🆕 Onboarding</div>
-  <div class="nt" onclick="gp('late',this)">⏰ มาสาย/ขาด</div>
-  <div class="nt" onclick="gp('warn',this)">📋 ใบเตือน</div>
-  <div class="nt" onclick="gp('gys',this)">📚 กยศ.</div>
-  <div class="nt" onclick="gp('guarantee',this)">🔒 เงินประกัน</div>
-  <div class="nt" onclick="gp('gate',this)">🚗 Gate Pass</div>
-  <div class="nt" onclick="gp('ot',this)">⏱ OT</div>
-  <div class="nt" onclick="gp('salary',this)">💰 กระบอกเงินเดือน</div>
-  <div class="nt" onclick="gp('blacklist',this)">🚫 Blacklist</div>
-  <div class="nt" onclick="gp('offboard',this)">🚪 Offboarding</div>
-  <div class="hr-r" id="dt"></div>
-</div>
-<div class="content">
 
-<!-- DASHBOARD -->
-<div class="page on" id="pg-dash">
-<div class="sec">HR Dashboard</div>
-<div class="sec-s">81 คน · อัพเดทวันนี้</div>
-<div class="al al-r"><span>⚠</span><div>สมศักดิ์ กองศรีเกษ มาสาย 7 ครั้ง — ถึงเกณฑ์ใบเตือนครั้งที่ 2 · พีระพล ใบเตือนลายลักษณ์อักษรรอออก · OT เดือนนี้ ฿2,504 (รปภ. approved)</div></div>
-<div class="g4" style="margin-bottom:14px">
-  <div class="kpi"><div class="kv">81</div><div class="kl">พนักงานทั้งหมด</div></div>
-  <div class="kpi" style="border-color:var(--rbr);background:var(--rbg)"><div class="kv" style="color:var(--red)">2</div><div class="kl">รอใบเตือน</div></div>
-  <div class="kpi" style="border-color:var(--abr);background:var(--abg)"><div class="kv" style="color:var(--amb)">3</div><div class="kl">เงินประกันค้าง</div></div>
-  <div class="kpi" style="border-color:var(--gbr);background:var(--gbg)"><div class="kv" style="color:var(--grn)">฿2,504</div><div class="kl">OT เดือนนี้</div></div>
-</div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">สถานะพนักงานตาม Division</div>
-    <table>
-      <tr><th>Division</th><th class="r">คน</th><th class="r">Payroll (net)</th><th>สถานะ</th></tr>
-      <tr><td>Admin / สำนักงาน</td><td class="r">18</td><td class="r">฿310,000</td><td><span class="bd bd-g">ปกติ</span></td></tr>
-      <tr><td>Sales (ขาย)</td><td class="r">14</td><td class="r">฿198,000</td><td><span class="bd bd-g">ปกติ</span></td></tr>
-      <tr><td>GS (บริการ)</td><td class="r">22</td><td class="r">฿312,000</td><td><span class="bd bd-a">สมศักดิ์ มาสาย</span></td></tr>
-      <tr><td>BP (ตัวถัง/สี)</td><td class="r">16</td><td class="r">฿228,000</td><td><span class="bd bd-g">ปกติ</span></td></tr>
-      <tr><td>Sure / U-Car</td><td class="r">5</td><td class="r">฿68,000</td><td><span class="bd bd-g">ปกติ</span></td></tr>
-      <tr><td>HR / Support</td><td class="r">6</td><td class="r">฿70,000</td><td><span class="bd bd-g">ปกติ</span></td></tr>
-      <tr style="background:var(--bg)"><td><strong>รวม</strong></td><td class="r"><strong>81</strong></td><td class="r"><strong>฿1,186,008</strong></td><td></td></tr>
-    </table>
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">HR — บุคคล</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
   </div>
-  <div class="card">
-    <div class="ct">ปฏิทิน HR เดือนนี้</div>
-    <table>
-      <tr><th>วันที่</th><th>รายการ</th><th>สถานะ</th></tr>
-      <tr><td>วันที่ 3</td><td>Payroll + กยศ. ฿7,899</td><td><span class="bd bd-b">รอ</span></td></tr>
-      <tr><td>วันที่ 5</td><td>สมศักดิ์ — ออกใบเตือนครั้งที่ 2</td><td><span class="bd bd-r">ด่วน</span></td></tr>
-      <tr><td>วันที่ 7</td><td>Review เงินประกัน รอบเดือน</td><td><span class="bd bd-b">รอ</span></td></tr>
-      <tr><td>วันที่ 15</td><td>Work Style Assessment รอบ Q2</td><td><span class="bd bd-b">รอ</span></td></tr>
-      <tr><td>วันที่ 30</td><td>Payroll รอบถัดไป</td><td><span class="bd bd-hi">วางแผน</span></td></tr>
-    </table>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:11px;color:var(--text2);" id="date-now"></span>
+    <div class="clock" id="clock">--:--:--</div>
   </div>
-</div>
 </div>
 
-<!-- ONBOARDING -->
-<div class="page" id="pg-onboard">
-<div class="sec">Onboarding → Offboarding</div>
-<div class="sec-s">ทุกพนักงานใหม่ต้องผ่านครบทุกขั้นตอน · Work Style Assessment ก่อนเริ่มงานวันแรก</div>
-<div class="g2">
-  <div>
-    <div class="card">
-      <div class="ct">Work Style Assessment</div>
-      <div style="font-size:12px;color:var(--mu);margin-bottom:12px">ให้พนักงานทำก่อนเริ่มงานวันแรก · ผลช่วย HR จัดทีมและ Mentor ได้ตรงกว่า</div>
-      <div class="wsa-block" style="background:var(--bbg);border-color:var(--bbr)">
-        <div style="font-size:12px;font-weight:600;color:var(--blu);margin-bottom:8px">🔵 Type A — Analyst</div>
-        <div style="font-size:11px;color:var(--blu)">ชอบข้อมูล ชอบตรวจสอบ ทำงานคนเดียวได้ดี · เหมาะกับ: บัญชี, จัดซื้อ, Stock</div>
-      </div>
-      <div class="wsa-block" style="background:var(--gbg);border-color:var(--gbr)">
-        <div style="font-size:12px;font-weight:600;color:var(--grn);margin-bottom:8px">🟢 Type B — Builder</div>
-        <div style="font-size:11px;color:var(--grn)">ลงมือทำ แก้ปัญหาเร็ว ชอบ action · เหมาะกับ: ช่าง, VDQI, งานหน้างาน</div>
-      </div>
-      <div class="wsa-block" style="background:var(--abg);border-color:var(--abr)">
-        <div style="font-size:12px;font-weight:600;color:var(--amb);margin-bottom:8px">🟡 Type C — Connector</div>
-        <div style="font-size:11px;color:var(--amb)">ชอบสื่อสาร ทำงานกับคนเก่ง · เหมาะกับ: Sales, SA, Call Center, ลูกค้าสัมพันธ์</div>
-      </div>
-      <button class="btn btn-g btn-sm" onclick="alert('ส่งลิงก์ Work Style Assessment ให้พนักงานใหม่แล้ว')">ส่ง Assessment ให้พนักงานใหม่</button>
-    </div>
-    <div class="card">
-      <div class="ct">Checklist พนักงานใหม่</div>
-      <div id="onboard_list"></div>
-    </div>
-  </div>
-  <div>
-    <div class="card">
-      <div class="ct">บันทึกพนักงานใหม่</div>
-      <div class="fr">
-        <div class="fg"><label class="fl">ชื่อ-นามสกุล</label><input class="fi" type="text" placeholder="ชื่อ นามสกุล"></div>
-        <div class="fg" style="max-width:130px"><label class="fl">รหัสพนักงาน</label><input class="fi" type="text" placeholder="XXXX-XXXX"></div>
-      </div>
-      <div class="fr">
-        <div class="fg"><label class="fl">ตำแหน่ง</label><input class="fi" type="text" placeholder="ตำแหน่ง"></div>
-        <div class="fg"><label class="fl">แผนก</label><select class="fs"><option>Sales</option><option>GS</option><option>BP</option><option>Admin</option><option>HR</option><option>การเงิน</option></select></div>
-      </div>
-      <div class="fr">
-        <div class="fg"><label class="fl">วันเริ่มงาน</label><input class="fi" type="date"></div>
-        <div class="fg"><label class="fl">เงินเดือน</label><input class="fi" type="number" placeholder="0"></div>
-      </div>
-      <div class="fg"><label class="fl">เงินประกันตำแหน่ง (ตามตารางใหม่)</label>
-        <select class="fs" id="ob_guarantee">
-          <option value="15000">Sales (ที่ปรึกษา) — ฿15,000</option>
-          <option value="10000">SA GS/BP — ฿2,500</option>
-          <option value="20000">ผจก.บริการ/ตัวถัง — ฿20,000</option>
-          <option value="10000">จนท.การเงิน/บัญชี — ฿10,000</option>
-          <option value="5000">รปภ. — ฿5,000</option>
-          <option value="2500">ช่าง GS/EM — ฿2,500</option>
-        </select>
-      </div>
-      <div class="fg"><label class="fl">หักเงินประกันเดือนละ (บาท)</label><input class="fi" type="number" id="ob_monthly" placeholder="500-1000"></div>
-      <button class="btn btn-p btn-sm" onclick="alert('บันทึกพนักงานใหม่แล้ว — ส่ง Assessment + เตรียมเอกสารอัตโนมัติ')">บันทึกและส่ง Assessment</button>
-    </div>
-    <div class="card">
-      <div class="ct">สิทธิ์วันลาตามอายุงาน (HR001/2565)</div>
-      <table>
-        <tr><th>อายุงาน</th><th class="r">วันลาพักร้อน</th><th>หมายเหตุ</th></tr>
-        <tr><td>1-3 ปี</td><td class="r">6 วัน</td><td style="font-size:11px;color:var(--mu)">-</td></tr>
-        <tr><td>3-6 ปี</td><td class="r">8 วัน</td><td style="font-size:11px;color:var(--mu)">-</td></tr>
-        <tr><td>6-10 ปี</td><td class="r">10 วัน</td><td style="font-size:11px;color:var(--mu)">-</td></tr>
-        <tr><td>10+ ปี</td><td class="r">12 วัน</td><td style="font-size:11px;color:var(--mu)">-</td></tr>
-      </table>
-      <div style="font-size:11px;color:var(--mu);margin-top:8px">ลาติดวันอาทิตย์: ไม่เกิน 20% ของสิทธิ์ · ลากิจ 3 วัน/ปี · ลาป่วย 30 วัน/ปี</div>
-    </div>
-  </div>
-</div>
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-gatepass')">🚪 Gate Pass</button>
+  <button class="tab" onclick="sw(this,'t-mileage')">🚗 เลขไมล์</button>
+  <button class="tab" onclick="sw(this,'t-leave')">📅 ลา/OT</button>
+  <button class="tab" onclick="sw(this,'t-onboard')">👤 On/Offboarding</button>
+  <button class="tab" onclick="sw(this,'t-salary76')">💰 ม.76</button>
+  <button class="tab" onclick="sw(this,'t-employees')">👥 พนักงาน 83 คน</button>
 </div>
 
-<!-- LATE/ABSENT -->
-<div class="page" id="pg-late">
-<div class="sec">มาสาย / ขาดงาน</div>
-<div class="sec-s">บันทึกทุกวัน · ระบบนับสะสมและแจ้งเตือนเมื่อถึงเกณฑ์ใบเตือน (TCS.HR001/2561)</div>
-<div class="al al-r"><span>🔴</span><div>สมศักดิ์ กองศรีเกษ มาสาย 7 ครั้ง MTD → ถึงเกณฑ์ใบเตือนครั้งที่ 2 (วาจา) → ออกทันที!</div></div>
-<div class="card">
-  <div class="ct">เกณฑ์ใบเตือน (TCS.HR001/2561)</div>
+<div class="main">
+
+<!-- ===== GATE PASS ===== -->
+<div id="t-gatepass">
   <div class="g4">
-    <div class="kpi"><div class="kl">มาสาย 4 ครั้ง</div><div class="kv" style="font-size:14px">ใบเตือนวาจา</div><div class="ks" style="color:var(--mu)">ครั้งที่ 1</div></div>
-    <div class="kpi"><div class="kl">มาสาย 6 ครั้ง</div><div class="kv" style="font-size:14px">ใบเตือนวาจา</div><div class="ks" style="color:var(--mu)">ครั้งที่ 2</div></div>
-    <div class="kpi" style="border-color:var(--abr);background:var(--abg)"><div class="kl">มาสาย 8 ครั้ง</div><div class="kv" style="font-size:14px;color:var(--amb)">ลายลักษณ์อักษร</div><div class="ks">ครั้งที่ 3</div></div>
-    <div class="kpi" style="border-color:var(--rbr);background:var(--rbg)"><div class="kl">ขาด 3 วันติด</div><div class="kv" style="font-size:14px;color:var(--red)">พ้นสภาพ</div><div class="ks">ทันที</div></div>
+    <div class="kpi g"><div class="kl">✅ อนุมัติวันนี้</div><div class="kv g">5 ใบ</div><div class="ks">รปภ.สแกนแล้ว 4 ใบ</div></div>
+    <div class="kpi y"><div class="kl">⏳ รออนุมัติ</div><div class="kv y">2 ใบ</div><div class="ks">รอผจก.กด</div></div>
+    <div class="kpi b"><div class="kl">🔒 ใช้แล้ว</div><div class="kv b">4 ใบ</div><div class="ks">สแกนแล้ว ใช้ไม่ได้อีก</div></div>
+    <div class="kpi r"><div class="kl">🚨 ออกไม่มี Gate Pass</div><div class="kv r">0 คน</div><div class="ks">วันนี้ไม่มีฝ่าฝืน</div></div>
   </div>
-</div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">บันทึกมาสาย/ขาดวันนี้</div>
-    <div class="fr">
-      <div class="fg"><label class="fl">พนักงาน</label>
-        <select class="fs" id="late_emp" onchange="checkLate()">
-          <option value="">เลือกพนักงาน...</option>
-          <option value="สมศักดิ์ กองศรีเกษ|7|GS">สมศักดิ์ กองศรีเกษ (GS) — มาสาย 7 ครั้ง</option>
-          <option value="พีระพล สุขเจริญ|5|GS">พีระพล สุขเจริญ (GS) — มาสาย 5 ครั้ง</option>
-          <option value="สมหมาย ใจดี|2|Sales">สมหมาย ใจดี (Sales) — มาสาย 2 ครั้ง</option>
-          <option value="ปราณี บุญมา|1|Admin">ปราณี บุญมา (Admin) — มาสาย 1 ครั้ง</option>
-        </select>
-      </div>
-      <div class="fg" style="max-width:120px"><label class="fl">ประเภท</label>
-        <select class="fs" id="late_type" onchange="checkLate()"><option value="late">มาสาย</option><option value="absent">ขาด</option></select>
-      </div>
-    </div>
-    <div class="fg"><label class="fl">วันที่</label><input class="fi" type="date" id="late_date"></div>
-    <div id="late_warn" style="margin-bottom:10px"></div>
-    <div class="fg"><label class="fl">หมายเหตุ</label><input class="fi" type="text" placeholder="เหตุผล (ถ้ามี)..."></div>
-    <button class="btn btn-p btn-sm" onclick="saveLate()">บันทึก</button>
-  </div>
-  <div class="card">
-    <div class="ct">สถิติมาสาย MTD — เม.ย. 69</div>
-    <table>
-      <tr><th>ชื่อ</th><th>แผนก</th><th class="r">ครั้ง</th><th>เกณฑ์</th><th>สถานะ</th></tr>
-      <tr style="background:var(--rbg)">
-        <td style="font-weight:500;color:var(--red)">สมศักดิ์ กองศรีเกษ</td><td>GS</td><td class="r" style="color:var(--red)">7</td>
-        <td><span class="bd bd-a">≥6=ใบเตือนวาจา2</span></td>
-        <td><button class="btn btn-re btn-sm" onclick="gp('warn',document.querySelectorAll('.nt')[3])">ออกใบเตือน</button></td>
-      </tr>
-      <tr style="background:var(--abg)">
-        <td style="font-weight:500">พีระพล สุขเจริญ</td><td>GS</td><td class="r" style="color:var(--amb)">5</td>
-        <td><span class="bd bd-a">รอ 6 ครั้ง</span></td>
-        <td><span class="bd bd-a">เฝ้าดู</span></td>
-      </tr>
-      <tr><td>สมหมาย ใจดี</td><td>Sales</td><td class="r">2</td><td><span class="bd bd-hi">รอ 4 ครั้ง</span></td><td><span class="bd bd-hi">ปกติ</span></td></tr>
-      <tr><td>ปราณี บุญมา</td><td>Admin</td><td class="r">1</td><td><span class="bd bd-hi">รอ 4 ครั้ง</span></td><td><span class="bd bd-hi">ปกติ</span></td></tr>
-    </table>
-  </div>
-</div>
-</div>
 
-<!-- WARNING LETTERS -->
-<div class="page" id="pg-warn">
-<div class="sec">ใบเตือน (ม.119)</div>
-<div class="sec-s">ใบเตือนต้องมีลายเซ็นพนักงานรับทราบ · เก็บไว้ครบ 1 ปี · ถ้าพนักงานไม่เซ็น ให้มีพยาน 2 คน</div>
-<div class="g2">
-  <div>
-    <div class="card">
-      <div class="ct">สร้างใบเตือน</div>
-      <div class="fg"><label class="fl">พนักงาน</label>
-        <select class="fs" id="wn_emp" onchange="loadWarnHistory()">
-          <option value="สมศักดิ์ กองศรีเกษ|7">สมศักดิ์ กองศรีเกษ (มาสาย 7 ครั้ง)</option>
-          <option value="พีระพล สุขเจริญ|0">พีระพล สุขเจริญ</option>
-        </select>
-      </div>
-      <div class="fg"><label class="fl">เหตุผล</label>
-        <select class="fs" id="wn_reason"><option>มาสาย (ม.119/TCS.HR001/2561)</option><option>ขาดงาน</option><option>ผิดระเบียบบริษัท</option><option>ประพฤติตัวไม่เหมาะสม</option><option>ผลงานต่ำกว่าเกณฑ์</option></select>
-      </div>
-      <div class="fg"><label class="fl">รายละเอียด</label><textarea class="fi" rows="3" id="wn_detail" placeholder="อธิบายพฤติกรรมที่เป็นปัญหา..."></textarea></div>
-      <div class="fg"><label class="fl">ครั้งที่</label>
-        <select class="fs" id="wn_times"><option value="1">ครั้งที่ 1 — วาจา</option><option value="2" selected>ครั้งที่ 2 — วาจา</option><option value="3">ครั้งที่ 3 — ลายลักษณ์อักษร</option></select>
-      </div>
-      <div id="wn_preview" style="margin-bottom:10px"></div>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-p btn-sm" onclick="genWarn()">พิมพ์ใบเตือน</button>
-        <button class="btn btn-g btn-sm" onclick="alert('บันทึกประวัติใบเตือนแล้ว')">บันทึกโดยไม่พิมพ์</button>
+  <div class="g2">
+    <!-- ขอ Gate Pass ใหม่ -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🚪 ขอ Gate Pass ออกนอกบริษัท</div></div>
+      <div style="padding:16px;">
+        <div class="f-group"><label class="f-label">พนักงาน</label>
+          <select class="f-select" id="gp-emp">
+            <option>ภุมรี ศรีรอด (เซล์)</option>
+            <option>ชัยวัฒน์ หอมจันทร์ (พขร.)</option>
+            <option>จรูญ บุผา (ช่างEM)</option>
+            <option>อรุณรักษ์ พรรณา (เซล์)</option>
+          </select>
+        </div>
+        <div class="f-group"><label class="f-label">ออกไปที่</label>
+          <input class="f-input" placeholder="เช่น ส่งรถลูกค้า / ธนาคาร / ขนส่ง" id="gp-dest">
+        </div>
+        <div class="f-row">
+          <div class="f-group" style="margin:0;"><label class="f-label">เวลาออก</label><input class="f-input" type="time" id="gp-out" value="14:00"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">กลับโดยประมาณ</label><input class="f-input" type="time" id="gp-back" value="15:30"></div>
+        </div>
+        <div class="f-group"><label class="f-label">ผู้อนุมัติ</label>
+          <select class="f-select">
+            <option>สมพงษ์ กองศรีเกษ (ผจก.ขาย)</option>
+            <option>บัลลพ ผุยพรม (ผช.ผจก.GS)</option>
+            <option>นิชนันท์ มธุรสพงศ์พันธ์ (หัวหน้า HR)</option>
+          </select>
+        </div>
+        <button onclick="requestGatePass()" class="btn btn-primary" style="width:100%;">📤 ส่งขอ Gate Pass → ผจก.อนุมัติ</button>
+        <div style="font-size:10px;color:var(--text3);margin-top:6px;text-align:center;">QR Code จะส่งให้ทาง LINE หลังผจก.กดอนุมัติ ใช้ได้ครั้งเดียว</div>
       </div>
     </div>
-  </div>
-  <div>
-    <div class="card">
-      <div class="ct">ประวัติใบเตือน</div>
-      <div id="warn_history">
-        <div class="warn-card">
-          <div style="font-size:12px;font-weight:600;color:var(--red)">สมศักดิ์ กองศรีเกษ — ครั้งที่ 1</div>
-          <div style="font-size:11px;color:var(--mu);margin-top:3px">มาสาย 4 ครั้ง · 28 มี.ค. 69 · เซ็นรับทราบแล้ว</div>
-        </div>
-        <div class="warn-card warn2">
-          <div style="font-size:12px;font-weight:600;color:var(--amb)">พีระพล สุขเจริญ — ครั้งที่ 1</div>
-          <div style="font-size:11px;color:var(--mu);margin-top:3px">ผลงานต่ำกว่าเกณฑ์ · 15 ก.พ. 69 · เซ็นรับทราบแล้ว</div>
+
+    <!-- รายการ Gate Pass วันนี้ -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📋 Gate Pass วันนี้</div><span class="badge b">7 รายการ</span></div>
+        <div style="padding:4px 0;">
+          <div class="gate-card">
+            <div class="gate-dot" style="background:var(--grn);"></div>
+            <div class="emp-avatar">ภ</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;">ภุมรี ศรีรอด</div>
+              <div style="font-size:10px;" class="m">ส่งรถลูกค้า ธีรวัฒน์ | 10:30 → 11:45</div>
+            </div>
+            <span class="badge g">✅ สแกนแล้ว</span>
+          </div>
+          <div class="gate-card">
+            <div class="gate-dot" style="background:var(--grn);"></div>
+            <div class="emp-avatar">ช</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;">ชัยวัฒน์ หอมจันทร์</div>
+              <div style="font-size:10px;" class="m">รับรถลูกค้า | 09:00 → 10:00</div>
+            </div>
+            <span class="badge g">✅ สแกนแล้ว</span>
+          </div>
+          <div class="gate-card" style="background:var(--yd);">
+            <div class="gate-dot" style="background:var(--yel);"></div>
+            <div class="emp-avatar">ป</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;">ประภาศิริ พิทักษ์วงษ์</div>
+              <div style="font-size:10px;" class="m">ธนาคาร BAY | 14:00 → 15:00</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <button onclick="approveGP(this)" style="background:var(--grn);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">✅ อนุมัติ</button>
+              <button onclick="rejectGP(this)" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">❌ ไม่อนุมัติ</button>
+            </div>
+          </div>
+          <div class="gate-card" style="background:var(--yd);">
+            <div class="gate-dot" style="background:var(--yel);"></div>
+            <div class="emp-avatar">อ</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;">อรุณรักษ์ พรรณา</div>
+              <div style="font-size:10px;" class="m">ขนส่งนครพนม | 15:30 → 16:30</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <button onclick="approveGP(this)" style="background:var(--grn);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">✅ อนุมัติ</button>
+              <button onclick="rejectGP(this)" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">❌ ไม่อนุมัติ</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="ct">ขั้นตอน ม.119</div>
-      <div class="step"><div class="step-num" style="background:var(--bbg);color:var(--blu)">1</div><div style="font-size:12px">แจ้งพนักงานล่วงหน้า — บอกให้รู้ว่าจะออกใบเตือนเรื่องอะไร</div></div>
-      <div class="step"><div class="step-num" style="background:var(--bbg);color:var(--blu)">2</div><div style="font-size:12px">ออกใบเตือนเป็นลายลักษณ์อักษร ระบุวันที่ เหตุผล ครั้งที่</div></div>
-      <div class="step"><div class="step-num" style="background:var(--abg);color:var(--amb)">3</div><div style="font-size:12px">ให้พนักงานเซ็นรับทราบ ถ้าไม่เซ็น → พยาน 2 คน</div></div>
-      <div class="step"><div class="step-num" style="background:var(--abg);color:var(--amb)">4</div><div style="font-size:12px">เก็บสำเนาไว้ 1 ปี ใช้อ้างอิงถ้าต้องเลิกจ้าง</div></div>
-      <div class="step"><div class="step-num" style="background:var(--rbg);color:var(--red)">!</div><div style="font-size:12px">ใบเตือนหมดอายุ 1 ปี — หลัง 1 ปีใช้เป็นเหตุผลเลิกจ้างไม่ได้</div></div>
-    </div>
   </div>
 </div>
-</div>
 
-<!-- กยศ -->
-<div class="page" id="pg-gys">
-<div class="sec">กยศ. — กองทุนเงินให้กู้ยืมเพื่อการศึกษา</div>
-<div class="sec-s">บริษัทเป็นตัวกลางหักส่ง · ไม่ใช่ค่าใช้จ่ายบริษัท · ส่งทุกวันที่ 31 ของเดือน</div>
-<div class="al al-b"><span>ℹ</span><div>กยศ. 9 คน รวม ฿7,899/เดือน = ฿94,788/ปี · หักจากพนักงานแล้วโอนให้ กยศ. บริษัทแค่ตัวกลาง ไม่กระทบ P&L</div></div>
-<div class="card">
-  <div class="ct">รายชื่อผู้กู้ กยศ. — เม.ย. 69</div>
-  <table>
-    <tr><th>#</th><th>เลขบัตร</th><th>ชื่อ-นามสกุล</th><th class="r">หัก/เดือน</th><th>วันหักเงิน</th><th>สถานะ</th></tr>
-    <tr><td>1</td><td style="font-family:var(--mono);font-size:11px">1489900443891</td><td>สุธิดา อั้งโก๊ะ</td><td class="r">฿195</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>2</td><td style="font-family:var(--mono);font-size:11px">1300300049973</td><td>อนุพงศ์ พรมหัส</td><td class="r">฿282</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>3</td><td style="font-family:var(--mono);font-size:11px">1489900337454</td><td>รุ่งนภา ดาสี</td><td class="r">฿752</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>4</td><td style="font-family:var(--mono);font-size:11px">1480800127701</td><td>ณัฐณิชา วดีศิริศักดิ์</td><td class="r">฿2,100</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>5</td><td style="font-family:var(--mono);font-size:11px">1489900011346</td><td>วิลาวัลย์ ตรีสัตย์</td><td class="r">฿1,020</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>6</td><td style="font-family:var(--mono);font-size:11px">1489900288771</td><td>อาทิตยา จำปา</td><td class="r">฿1,200</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>7</td><td style="font-family:var(--mono);font-size:11px">1489900254869</td><td>สิทธิชัย พรมดี</td><td class="r">฿441</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>8</td><td style="font-family:var(--mono);font-size:11px">1489900003823</td><td>อุทุมพร อุ่นสา</td><td class="r">฿660</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr><td>9</td><td style="font-family:var(--mono);font-size:11px">1480500131796</td><td>ภัควลัญชญ์ เทวะประกาย</td><td class="r">฿1,249</td><td>31/04/2569</td><td><span class="bd bd-b">รอหัก</span></td></tr>
-    <tr style="background:var(--bg)"><td colspan="3"><strong>รวม</strong></td><td class="r"><strong>฿7,899</strong></td><td colspan="2"><button class="btn btn-p btn-sm" onclick="alert('Export ไฟล์นำส่ง กยศ. แล้ว')">Export นำส่ง กยศ.</button></td></tr>
-  </table>
-</div>
-</div>
-
-<!-- GUARANTEE -->
-<div class="page" id="pg-guarantee">
-<div class="sec">เงินประกันการทำงาน</div>
-<div class="sec-s">ต้องเก็บแยกบัญชี ห้ามนำมาใช้กิจการ (ม.10) · คืนเมื่อออกจากงาน ภายใน 7 วัน</div>
-<div class="al al-r"><span>⚠</span><div>เงินประกันต้องเก็บแยกบัญชี ห้ามนำมา run กิจการ — ผิดกฎหมายแรงงาน ม.10 โทษปรับ</div></div>
-<div class="g4" style="margin-bottom:14px">
-  <div class="kpi"><div class="kv">14</div><div class="kl">คนที่กำลังหัก</div></div>
-  <div class="kpi" style="border-color:var(--gbr);background:var(--gbg)"><div class="kv" style="color:var(--grn)">฿51,500</div><div class="kl">สะสมแล้ว</div></div>
-  <div class="kpi" style="border-color:var(--abr);background:var(--abg)"><div class="kv" style="color:var(--amb)">฿42,500</div><div class="kl">ยังค้างอีก</div></div>
-  <div class="kpi"><div class="kv">฿10,800</div><div class="kl">หักเดือนนี้</div></div>
-</div>
-<div class="card">
-  <div class="ct">รายการเงินประกัน</div>
-  <table>
-    <tr><th>รหัส</th><th>ชื่อ</th><th>ตำแหน่ง</th><th class="r">หักเดือนนี้</th><th class="r">สะสมแล้ว</th><th class="r">เป้า</th><th class="r">ค้าง</th><th>สถานะ</th></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6403-0416</td><td>พิศิษฐ์ บัวเคน</td><td style="font-size:11px">ช่าง GS</td><td class="r">฿500</td><td class="r">฿500</td><td class="r">฿2,500</td><td class="r" style="color:var(--amb)">฿2,000</td><td><span class="bd bd-a">กำลังหัก</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6606-0539</td><td>ชาญชัย จูมเป่า</td><td style="font-size:11px">ช่างเตรียมผิว</td><td class="r">฿800</td><td class="r">฿2,500</td><td class="r">฿2,500</td><td class="r" style="color:var(--grn)">฿0</td><td><span class="bd bd-g">ครบ ✓</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6805-0606</td><td>ชูศักดิ์ พิเศษฤทธิ์</td><td style="font-size:11px">รปภ.</td><td class="r">฿500</td><td class="r">฿5,000</td><td class="r">฿5,000</td><td class="r" style="color:var(--grn)">฿0</td><td><span class="bd bd-g">ครบ ✓</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6806-0607</td><td>ณัฐณิชา วดีศิริศักดิ์</td><td style="font-size:11px">จนท.การตลาด</td><td class="r">฿1,000</td><td class="r">฿10,000</td><td class="r">฿10,000</td><td class="r" style="color:var(--grn)">฿0</td><td><span class="bd bd-g">ครบ ✓</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6807-0609</td><td>ปนัทดา ปัญญารส</td><td style="font-size:11px">จนท.การเงิน</td><td class="r">฿1,000</td><td class="r">฿9,000</td><td class="r">฿10,000</td><td class="r" style="color:var(--amb)">฿1,000</td><td><span class="bd bd-a">กำลังหัก</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6901-0625</td><td>ภูริเนตร อภัยโส</td><td style="font-size:11px">Sales</td><td class="r">฿1,000</td><td class="r">฿3,000</td><td class="r">฿10,000</td><td class="r" style="color:var(--red)">฿7,000</td><td><span class="bd bd-a">กำลังหัก</span></td></tr>
-    <tr><td style="font-family:var(--mono);font-size:11px">6903-0631</td><td>พิมพ์อัปสร อิ่มทรัพย์</td><td style="font-size:11px">ธุรการขาย</td><td class="r">฿1,000</td><td class="r">฿1,000</td><td class="r">฿10,000</td><td class="r" style="color:var(--red)">฿9,000</td><td><span class="bd bd-a">กำลังหัก</span></td></tr>
-    <tr style="background:var(--bg)"><td colspan="3"><strong>รวม</strong></td><td class="r"><strong>฿10,800</strong></td><td class="r"><strong>฿51,500</strong></td><td class="r"><strong>฿94,000</strong></td><td class="r" style="color:var(--amb)"><strong>฿42,500</strong></td><td></td></tr>
-  </table>
-</div>
-</div>
-
-<!-- GATE PASS -->
-<div class="page" id="pg-gate">
-<div class="sec">Gate Pass & เลขไมล์</div>
-<div class="sec-s">ทุกครั้งที่นำรถออก ต้องมี Gate Pass + เลขไมล์ · ระบบเปรียบเทียบอัตโนมัติ · ห้ามไม่มีเอกสาร</div>
-<div class="g2">
+<!-- ===== เลขไมล์ ===== -->
+<div id="t-mileage" style="display:none;">
   <div class="card">
-    <div class="ct">ออก Gate Pass ใหม่</div>
-    <div class="fg"><label class="fl">พนักงาน</label><input class="fi" type="text" placeholder="ชื่อพนักงาน..."></div>
-    <div class="fr">
-      <div class="fg"><label class="fl">ทะเบียนรถ</label><select class="fs"><option>นพ-1234 REVO Test Drive</option><option>นพ-5678 FORTUNER Test Drive</option><option>นพ-3456 รถรับส่งพนักงาน</option><option>นพ-7890 รถรับส่งอะไหล่</option></select></div>
-      <div class="fg" style="max-width:130px"><label class="fl">เลขไมล์ออก</label><input class="fi" type="number" id="gp_out" placeholder="0"></div>
+    <div class="ch"><div class="ct">🚗 บันทึกเลขไมล์ — ขอก่อนออก ผจก.อนุมัติ</div>
+      <button onclick="openModal('modal-mileage')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">+ ขอใช้รถ</button>
     </div>
-    <div class="fr">
-      <div class="fg"><label class="fl">วัตถุประสงค์</label><select class="fs"><option>ทดลองขับลูกค้า</option><option>รับ-ส่งอะไหล่</option><option>ราชการบริษัท</option><option>รับรถ/ส่งรถ</option></select></div>
-      <div class="fg"><label class="fl">ปลายทาง</label><input class="fi" type="text" placeholder="ที่ไหน..."></div>
-    </div>
-    <div class="fg"><label class="fl">เวลาคาดว่ากลับ</label><input class="fi" type="time"></div>
-    <button class="btn btn-p btn-sm" onclick="alert('ออก Gate Pass แล้ว — บันทึกเลขไมล์ออก')">ออก Gate Pass</button>
-  </div>
-  <div class="card">
-    <div class="ct">Gate Pass ที่ยังออกอยู่</div>
-    <table>
-      <tr><th>พนักงาน</th><th>รถ</th><th class="r">ไมล์ออก</th><th>ออกเมื่อ</th><th>สถานะ</th></tr>
-      <tr style="background:var(--abg)">
-        <td style="font-weight:500">ชัยวัฒน์ หอมจันทร์</td>
-        <td style="font-size:11px">นพ-3456</td>
-        <td class="r">210,450</td>
-        <td style="font-size:11px;color:var(--amb)">1 เม.ย. 08:30</td>
-        <td><span class="bd bd-a">นอกสถานที่</span></td>
-      </tr>
-      <tr>
-        <td>สายัณห์ แดนรักษ์</td>
-        <td style="font-size:11px">นพ-1234</td>
-        <td class="r">87,240</td>
-        <td style="font-size:11px">2 เม.ย. 09:15</td>
-        <td><span class="bd bd-b">ทดลองขับ</span></td>
-      </tr>
-    </table>
-    <div class="div"></div>
-    <div class="ct" style="margin-bottom:8px">รับรถคืน</div>
-    <div class="fr">
-      <div class="fg"><label class="fl">เลือก Gate Pass</label><select class="fs"><option>ชัยวัฒน์ — นพ-3456 (ออก 210,450)</option><option>สายัณห์ — นพ-1234 (ออก 87,240)</option></select></div>
-      <div class="fg" style="max-width:130px"><label class="fl">เลขไมล์กลับ</label><input class="fi" type="number" id="gp_in" placeholder="0" oninput="calcMile()"></div>
-    </div>
-    <div id="mile_res" style="margin-bottom:8px"></div>
-    <button class="btn btn-gr btn-sm" onclick="alert('บันทึกรับรถคืนแล้ว — Gate Pass ปิด')">รับรถคืน</button>
-  </div>
-</div>
-</div>
-
-<!-- OT -->
-<div class="page" id="pg-ot">
-<div class="sec">OT (ล่วงเวลา)</div>
-<div class="sec-s">นโยบาย: ยกเลิก OT ทั้งหมด ยกเว้น รปภ. (เพราะคนขาด) · Project พิเศษ ต้องขอ ผบห. ล่วงหน้า</div>
-<div class="al al-r"><span>🔴</span><div>OT ทุกรายการที่ไม่ใช่ รปภ. ต้องผ่าน ผบห. ก่อน — ระบบจะ reject อัตโนมัติถ้าไม่มีเลขอนุมัติ</div></div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">บันทึก OT (เฉพาะ รปภ. และ project ที่ได้รับอนุมัติ)</div>
-    <div class="fg"><label class="fl">พนักงาน</label>
-      <select class="fs" id="ot_emp" onchange="checkOTPolicy()">
-        <option value="">เลือกพนักงาน...</option>
-        <option value="guard">โชคทวี ไชยสงคราม (รปภ.) ✓ ยกเว้นได้</option>
-        <option value="guard">ชูศักดิ์ พิเศษฤทธิ์ (รปภ.) ✓ ยกเว้นได้</option>
-        <option value="other">สายัณห์ แดนรักษ์ (พนง.ล้างรถ)</option>
-        <option value="other">ปริญญา ใสส่อง (ช่างสี)</option>
-      </select>
-    </div>
-    <div id="ot_policy" style="margin-bottom:10px"></div>
-    <div class="fr">
-      <div class="fg"><label class="fl">วันที่</label><input class="fi" type="date"></div>
-      <div class="fg" style="max-width:90px"><label class="fl">ชั่วโมง</label><input class="fi" type="number" placeholder="0" step="0.5"></div>
-      <div class="fg" style="max-width:110px"><label class="fl">ประเภท OT</label><select class="fs"><option>OT 1.5× วันหยุด</option><option>OT 1× วันทำงาน</option><option>OT 3× วันหยุดนักขัตฤกษ์</option></select></div>
-    </div>
-    <div class="fg"><label class="fl">สาเหตุ</label><input class="fi" type="text" placeholder="เหตุผลที่ต้อง OT..."></div>
-    <button class="btn btn-p btn-sm" onclick="saveOT()">บันทึก OT</button>
-  </div>
-  <div class="card">
-    <div class="ct">OT มี.ค. 69 — จากไฟล์จริง</div>
-    <div class="al al-g"><span>✓</span><div>OT เดือน มี.ค. ถูกต้องทั้งหมด — รปภ.ทำเพราะคนขาด / ช่างไปรับรถ project พิเศษ</div></div>
-    <table>
-      <tr><th>ชื่อ</th><th>ตำแหน่ง</th><th class="r">ชั่วโมง</th><th class="r">ค่า OT</th><th>นโยบาย</th></tr>
-      <tr><td>โชคทวี ไชยสงคราม</td><td>รปภ.</td><td class="r">12</td><td class="r" style="color:var(--grn)">฿877.56</td><td><span class="bd bd-g">✓ ยกเว้น</span></td></tr>
-      <tr><td>ชูศักดิ์ พิเศษฤทธิ์</td><td>รปภ.</td><td class="r">3</td><td class="r" style="color:var(--grn)">฿198.00</td><td><span class="bd bd-g">✓ ยกเว้น</span></td></tr>
-      <tr><td>ปริญญา ใสส่อง</td><td>หัวหน้าช่างสี</td><td class="r">9.5</td><td class="r" style="color:var(--amb)">฿816.56</td><td><span class="bd bd-a">Project พิเศษ</span></td></tr>
-      <tr><td>สายัณห์ แดนรักษ์</td><td>พนง.ล้างรถ</td><td class="r">9.5</td><td class="r" style="color:var(--amb)">฿631.25</td><td><span class="bd bd-a">Project พิเศษ</span></td></tr>
-      <tr><td>ชาญชัย จูมเป่า</td><td>ช่างเตรียมผิว</td><td class="r">9.5</td><td class="r" style="color:var(--amb)">฿625.00</td><td><span class="bd bd-a">Project พิเศษ</span></td></tr>
-      <tr><td>จรูญ บุผา</td><td>ช่าง EM</td><td class="r">9.5</td><td class="r" style="color:var(--amb)">฿552.44</td><td><span class="bd bd-a">Project พิเศษ</span></td></tr>
-      <tr><td>อารักษ์ พรหมนิล</td><td>VDQI</td><td class="r">7</td><td class="r" style="color:var(--amb)">฿325.50</td><td><span class="bd bd-a">Project พิเศษ</span></td></tr>
-      <tr style="background:var(--bg)"><td colspan="2"><strong>รวม</strong></td><td class="r"><strong>60 ชม.</strong></td><td class="r"><strong>฿4,026</strong></td><td></td></tr>
+    <table class="tbl">
+      <thead><tr><th>วันที่</th><th>พนักงาน</th><th>รถ</th><th>ไมล์ก่อน</th><th>ไมล์หลัง</th><th>ระยะ</th><th>จุดหมาย</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr><td class="m">3/4/69</td><td><b>ชัยวัฒน์</b></td><td class="m">Honda Civic TCS</td><td class="n">48,234</td><td class="n">48,312</td><td class="n g">78 กม.</td><td class="m">รับรถลูกค้า</td><td><span class="badge g">✅ เสร็จ</span></td></tr>
+        <tr><td class="m">3/4/69</td><td><b>ภุมรี</b></td><td class="m">Honda Civic TCS</td><td class="n">48,312</td><td class="n">—</td><td class="n y">กำลังใช้</td><td class="m">ส่งรถลูกค้า</td><td><span class="badge b">🚗 กำลังไป</span></td></tr>
+        <tr><td class="m">2/4/69</td><td><b>จรูญ</b></td><td class="m">Hilux Demo TCS</td><td class="n">12,445</td><td class="n">12,521</td><td class="n g">76 กม.</td><td class="m">ซื้ออะไหล่</td><td><span class="badge g">✅ เสร็จ</span></td></tr>
+      </tbody>
     </table>
   </div>
 </div>
-</div>
 
-<!-- SALARY RANGE -->
-<div class="page" id="pg-salary">
-<div class="sec">กระบอกเงินเดือน</div>
-<div class="sec-s">อ้างอิงจาก Payroll จริง มี.ค. 69 · ค่าระดับ + ค่าวิชาชีพ · ใช้ตอน Onboarding และ Review</div>
-<div class="card">
-  <div class="ct">กระบอกเงินเดือนตามตำแหน่ง</div>
-  <table>
-    <tr><th>ตำแหน่ง</th><th>Division</th><th class="r">Min</th><th class="r">Mid</th><th class="r">Max</th><th class="r">เงินประกันใหม่</th></tr>
-    <tr><td>ผู้จัดการแผนก</td><td>ทุก</td><td class="r">฿28,000</td><td class="r">฿35,000</td><td class="r">฿45,000</td><td class="r">฿20,000</td></tr>
-    <tr><td>ผู้ช่วยผู้จัดการ</td><td>ทุก</td><td class="r">฿22,000</td><td class="r">฿28,000</td><td class="r">฿35,000</td><td class="r">฿10,000–15,000</td></tr>
-    <tr><td>ที่ปรึกษาการขาย</td><td>Sales</td><td class="r">฿8,000</td><td class="r">฿12,000</td><td class="r">฿18,000</td><td class="r">฿15,000</td></tr>
-    <tr><td>ผู้บริหารงานบริการ (SA)</td><td>GS/BP</td><td class="r">฿12,000</td><td class="r">฿15,000</td><td class="r">฿22,000</td><td class="r">฿2,500</td></tr>
-    <tr><td>ช่างเทคนิค (GS)</td><td>GS</td><td class="r">฿10,000</td><td class="r">฿13,000</td><td class="r">฿18,000</td><td class="r">฿2,500</td></tr>
-    <tr><td>จนท.การเงิน/บัญชี</td><td>Admin</td><td class="r">฿13,000</td><td class="r">฿16,000</td><td class="r">฿22,000</td><td class="r">฿10,000</td></tr>
-    <tr><td>รปภ.</td><td>HR</td><td class="r">฿9,000</td><td class="r">฿10,000</td><td class="r">฿12,000</td><td class="r">฿5,000</td></tr>
-    <tr><td>พนักงานล้างรถ</td><td>GS/Sure</td><td class="r">฿8,500</td><td class="r">฿10,000</td><td class="r">฿13,000</td><td class="r">฿2,500</td></tr>
-    <tr><td>เจ้าหน้าที่ VDQI</td><td>Sales</td><td class="r">฿9,000</td><td class="r">฿11,000</td><td class="r">฿15,000</td><td class="r">฿5,000</td></tr>
-    <tr><td>SA BP (เปิด job)</td><td>BP</td><td class="r">฿15,000</td><td class="r">฿18,000</td><td class="r">฿24,000</td><td class="r">฿2,500</td></tr>
-  </table>
-  <div class="al al-b" style="margin-top:10px"><span>ℹ</span><div>เฉลิมขวัญ อุดหนุน (SA BP) base ฿18,703 = สมเหตุสมผล เพราะ SA BP ไม่มี incentive ต่างจาก SA GS ที่มี commission</div></div>
-</div>
-</div>
-
-<!-- BLACKLIST -->
-<div class="page" id="pg-blacklist">
-<div class="sec">Blacklist</div>
-<div class="sec-s">อดีตพนักงานที่มีประวัติไม่ดี · ตรวจก่อนรับพนักงานใหม่ทุกครั้ง · ข้อมูลเป็นความลับ</div>
-<div class="card">
-  <div class="ct">ตรวจสอบชื่อ</div>
-  <div class="fr">
-    <div class="fg"><label class="fl">ชื่อ-นามสกุล หรือ เลขบัตร</label><input class="fi" type="text" id="bl_check" placeholder="ชื่อ นามสกุล..." oninput="checkBL(this.value)"></div>
+<!-- ===== ลา/OT ===== -->
+<div id="t-leave" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📅 รายการลา/OT รออนุมัติ</div><span class="badge y">3 รายการ</span></div>
+      <table class="tbl">
+        <thead><tr><th>พนักงาน</th><th>ประเภท</th><th>วันที่</th><th>เหตุผล</th><th>สถานะ</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>ภุมรี ศรีรอด</b></td><td class="m">ลาป่วย</td><td class="m">5/4/69</td><td class="m">ไข้</td>
+            <td><div style="display:flex;gap:4px;"><button onclick="this.parentElement.innerHTML='<span class=badge g>✅ อนุมัติ</span>'" style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="this.parentElement.innerHTML='<span class=badge r>❌</span>'" style="background:var(--rd);color:var(--red);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></td>
+          </tr>
+          <tr>
+            <td><b>สายัณห์ แดนรักษ์</b></td><td class="m">OT</td><td class="m">4/4/69</td><td class="m">ล้างรถพิเศษ 3 ชม.</td>
+            <td><div style="display:flex;gap:4px;"><button onclick="this.parentElement.innerHTML='<span class=badge g>✅ อนุมัติ</span>'" style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="this.parentElement.innerHTML='<span class=badge r>❌</span>'" style="background:var(--rd);color:var(--red);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></td>
+          </tr>
+          <tr>
+            <td><b>ณดาหลัน นนท์เข็มพรหม</b></td><td class="m">ลากิจ</td><td class="m">7/4/69</td><td class="m">ธุระส่วนตัว</td>
+            <td><div style="display:flex;gap:4px;"><button onclick="this.parentElement.innerHTML='<span class=badge g>✅ อนุมัติ</span>'" style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="this.parentElement.innerHTML='<span class=badge r>❌</span>'" style="background:var(--rd);color:var(--red);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📊 สรุปลา/ขาด เดือนนี้</div></div>
+      <table class="tbl">
+        <thead><tr><th>ประเภท</th><th>จำนวนคน</th><th>วันรวม</th></tr></thead>
+        <tbody>
+          <tr><td>ลาป่วย</td><td class="n">4 คน</td><td class="n y">6 วัน</td></tr>
+          <tr><td>ลากิจ</td><td class="n">2 คน</td><td class="n y">3 วัน</td></tr>
+          <tr><td>OT</td><td class="n">8 คน</td><td class="n g">24 ชม.</td></tr>
+          <tr><td style="color:var(--red);">ขาดงาน</td><td class="n r">1 คน</td><td class="n r">1 วัน</td></tr>
+          <tr><td>มาสาย</td><td class="n y">3 คน</td><td class="n y">5 ครั้ง</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div id="bl_result"></div>
 </div>
-<div class="card">
-  <div class="ct">รายชื่อ Blacklist</div>
-  <table>
-    <tr><th>ชื่อ</th><th>เหตุผล</th><th>วันที่ออก</th><th>Severity</th></tr>
-    <tr><td>*** *** (ซ่อน)</td><td>ทุจริตเงินสด</td><td>ก.ย. 67</td><td><span class="bd bd-r">ห้ามรับ</span></td></tr>
-    <tr><td>*** *** (ซ่อน)</td><td>ลาออกทิ้งงาน</td><td>มิ.ย. 68</td><td><span class="bd bd-a">ระวัง</span></td></tr>
-  </table>
-  <div class="div"></div>
-  <div class="ct" style="margin-bottom:8px">เพิ่มรายการ</div>
-  <div class="fr">
-    <div class="fg"><label class="fl">ชื่อ-นามสกุล</label><input class="fi" type="text" placeholder="ชื่อ นามสกุล"></div>
-    <div class="fg"><label class="fl">เลขบัตรประชาชน</label><input class="fi" type="text" placeholder="X-XXXX-XXXXX-XX-X"></div>
+
+<!-- ===== On/Offboarding ===== -->
+<div id="t-onboard" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">👤 Onboarding — รับพนักงานใหม่</div>
+        <button onclick="openModal('modal-onboard')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">+ รับพนักงานใหม่</button>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:var(--gd);border-radius:10px;padding:12px;margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--grn);margin-bottom:8px;">✅ Checklist รับพนักงานใหม่:</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:11px;">
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">สำเนาบัตรประชาชน + ทะเบียนบ้าน</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">สมุดบัญชีธนาคาร (โอนเงินเดือน)</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">วุฒิการศึกษา + ใบผ่านงาน</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">สัญญาจ้างงาน (ลงนามแล้ว)</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">แบบฟอร์มรายงานตัว 026</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">บัตรพนักงาน + uniform</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--grn);">User/Password ระบบ (จาก HR)</label>
+          </div>
+        </div>
+
+        <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;">📦 ทรัพย์สินบริษัทที่มอบให้:</div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>จำนวน</th><th>รหัส/SN</th><th>พนักงานรับ</th></tr></thead>
+          <tbody>
+            <tr><td>บัตรพนักงาน</td><td class="n">1 ใบ</td><td class="m">EMP-2026-xxx</td><td><input style="border:none;background:transparent;font-size:11px;width:80px;" placeholder="ลายเซ็น"></td></tr>
+            <tr><td>เสื้อ Uniform</td><td class="n">2 ตัว</td><td class="m">—</td><td><input style="border:none;background:transparent;font-size:11px;width:80px;" placeholder="ลายเซ็น"></td></tr>
+            <tr><td>กุญแจล็อกเกอร์</td><td class="n">1 ชุด</td><td class="m">L-xx</td><td><input style="border:none;background:transparent;font-size:11px;width:80px;" placeholder="ลายเซ็น"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🚪 Offboarding — ลาออก/พ้นสภาพ</div>
+        <button onclick="openModal('modal-offboard')" class="btn btn-yel" style="font-size:11px;padding:5px 12px;">+ บันทึกลาออก</button>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:var(--rd);border-radius:10px;padding:12px;margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;">✅ Checklist คืนทรัพย์สิน:</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:11px;">
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">คืนบัตรพนักงาน</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">คืนเสื้อ Uniform</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">คืนกุญแจล็อกเกอร์</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">คืนอุปกรณ์ IT (ถ้ามี)</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">ปิด User ระบบทั้งหมด</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">เคลียร์ค่าใช้จ่ายค้างชำระ</label>
+            <label style="display:flex;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);">แจ้ง ปกส. ออกจากระบบ</label>
+          </div>
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:8px;font-size:11px;">
+          <div style="font-weight:700;margin-bottom:4px;">พนักงานลาออกเดือนนี้:</div>
+          <div class="m">ยังไม่มีรายการลาออก</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="fg"><label class="fl">เหตุผล</label><select class="fs"><option>ทุจริต/โกง</option><option>ละทิ้งหน้าที่/ลาออกทิ้งงาน</option><option>พฤติกรรมก้าวร้าว</option><option>เปิดเผยความลับบริษัท</option></select></div>
-  <button class="btn btn-re btn-sm" onclick="alert('เพิ่ม Blacklist แล้ว')">เพิ่ม Blacklist</button>
-</div>
 </div>
 
-<!-- OFFBOARDING -->
-<div class="page" id="pg-offboard">
-<div class="sec">Offboarding</div>
-<div class="sec-s">ขั้นตอนการออกจากงาน · คืนเงินประกัน 7 วัน · ออก Blacklist ถ้ามีเหตุ</div>
-<div class="card">
-  <div class="ct">เริ่ม Offboarding</div>
-  <div class="fg"><label class="fl">พนักงาน</label><input class="fi" type="text" placeholder="ชื่อพนักงาน / รหัส..."></div>
-  <div class="fg"><label class="fl">เหตุผลออก</label><select class="fs" id="off_reason" onchange="calcSeverance()"><option value="resign">ลาออก (ยื่นล่วงหน้า 30 วัน)</option><option value="mutual">ตกลงร่วมกัน</option><option value="terminate">เลิกจ้าง (มีเหตุ)</option><option value="expire">สัญญาหมดอายุ</option></select></div>
-  <div class="fg"><label class="fl">อายุงาน</label><select class="fs" id="off_tenure" onchange="calcSeverance()"><option value="0.5">ไม่ถึง 1 ปี</option><option value="1">1-3 ปี</option><option value="3">3-6 ปี</option><option value="6">6-10 ปี</option><option value="10">10+ ปี</option></select></div>
-  <div id="sev_res" style="margin-bottom:10px"></div>
-  <div class="step"><div class="step-num" style="background:var(--bbg);color:var(--blu)">1</div><div style="font-size:12px">ส่งรับทราบวันสุดท้าย + เอกสารการออก</div></div>
-  <div class="step"><div class="step-num" style="background:var(--bbg);color:var(--blu)">2</div><div style="font-size:12px">คืนเงินประกัน ภายใน 7 วัน (ม.10)</div></div>
-  <div class="step"><div class="step-num" style="background:var(--bbg);color:var(--blu)">3</div><div style="font-size:12px">ออกหนังสือรับรองการทำงาน</div></div>
-  <div class="step"><div class="step-num" style="background:var(--abg);color:var(--amb)">4</div><div style="font-size:12px">ถ้ามีเหตุ → เพิ่มใน Blacklist + แจ้ง ก.แรงงาน</div></div>
-  <button class="btn btn-p btn-sm" onclick="alert('เริ่ม Offboarding Process แล้ว — Checklist ส่งให้ HR และพนักงาน')">เริ่ม Offboarding</button>
-</div>
+<!-- ===== ม.76 ===== -->
+<div id="t-salary76" style="display:none;">
+  <div class="card">
+    <div class="ch"><div class="ct">💰 ม.76 — กองทุนสำรองเลี้ยงชีพ / สวัสดิการ</div><span class="badge b">รายเดือน</span></div>
+    <div style="padding:14px;">
+      <div class="g2" style="margin-bottom:0;">
+        <div>
+          <div style="background:var(--bd);border-radius:10px;padding:12px;margin-bottom:10px;">
+            <div style="font-size:11px;font-weight:700;color:var(--blu);margin-bottom:6px;">📊 สรุปหักเงินเดือน เม.ย. 69</div>
+            <table style="width:100%;font-size:11px;">
+              <tr><td>ประกันสังคม (ปกส.) 5%</td><td class="n r" style="font-family:'IBM Plex Mono',monospace;">-฿75,000</td></tr>
+              <tr><td>กองทุนสำรองเลี้ยงชีพ (ม.76)</td><td class="n r" style="font-family:'IBM Plex Mono',monospace;">-฿18,500</td></tr>
+              <tr><td>ภาษีเงินได้บุคคลธรรมดา</td><td class="n r" style="font-family:'IBM Plex Mono',monospace;">-฿42,000</td></tr>
+              <tr style="border-top:1px solid var(--border2);font-weight:700;"><td>รวมหักทั้งหมด</td><td class="n r" style="font-family:'IBM Plex Mono',monospace;font-weight:800;">-฿135,500</td></tr>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--gd);border-radius:10px;padding:12px;">
+            <div style="font-size:11px;font-weight:700;color:var(--grn);margin-bottom:6px;">💚 นำส่งภายใน:</div>
+            <div style="font-size:11px;line-height:2;">
+              <div>ปกส. → นำส่งภายในวันที่ 15/เดือน</div>
+              <div>ม.76 → โอนเข้ากองทุนภายใน 3 วันทำการ</div>
+              <div>ภาษี → ยื่น ภ.ง.ด.1 ทุกเดือน</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>พนักงาน</th><th>เงินเดือน</th><th>หัก ปกส.</th><th>หัก ม.76</th><th>หัก ภาษี</th><th>จ่ายสุทธิ</th></tr></thead>
+      <tbody>
+        <tr><td><b>สมพงษ์ กองศรีเกษ</b><div style="font-size:9px;" class="m">ผจก.ขาย</div></td><td class="n">฿35,000</td><td class="n r">-฿1,575</td><td class="n r">-฿700</td><td class="n r">-฿2,800</td><td class="n g" style="font-weight:700;">฿29,925</td></tr>
+        <tr><td><b>ภุมรี ศรีรอด</b><div style="font-size:9px;" class="m">เซล์</div></td><td class="n">฿15,000</td><td class="n r">-฿675</td><td class="n r">-฿300</td><td class="n r">-฿0</td><td class="n g" style="font-weight:700;">฿14,025</td></tr>
+        <tr><td colspan="6" style="text-align:center;padding:8px;" class="m">... และอีก 81 คน</td></tr>
+        <tr style="background:var(--gd)"><td style="font-weight:700;">รวม 83 คน</td><td class="n" style="font-weight:700;">~฿1.48M</td><td class="n r">-฿75,000</td><td class="n r">-฿18,500</td><td class="n r">-฿42,000</td><td class="n g" style="font-weight:700;">~฿1.26M</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<!-- ===== พนักงาน 83 คน ===== -->
+<div id="t-employees" style="display:none;">
+  <div class="card">
+    <div class="ch">
+      <div class="ct">👥 รายชื่อพนักงาน 83 คน</div>
+      <div style="display:flex;gap:8px;">
+        <input class="f-input" placeholder="🔍 ค้นหาชื่อ / แผนก..." id="emp-search" oninput="filterEmp()" style="width:200px;padding:5px 10px;">
+        <span class="badge b" id="emp-count">83 คน</span>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="tbl" id="emp-table">
+        <thead><tr><th>รหัส</th><th>ชื่อ-นามสกุล</th><th>ชื่อเล่น</th><th>ตำแหน่ง</th><th>หน่วยงาน</th><th>เบอร์</th><th>Username</th></tr></thead>
+        <tbody id="emp-body">
+          <!-- ข้อมูลจริง 83 คน -->
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+</div><!-- /main -->
+
+<!-- MODAL: ขอ Gate Pass สำเร็จ (แสดง QR) -->
+<div class="modal-overlay" id="modal-qr">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-title">🚪 Gate Pass อนุมัติแล้ว!</div>
+    <div class="modal-sub">QR ใช้ได้ครั้งเดียว — ให้รปภ.สแกนก่อนออก</div>
+    <div class="qr-box">
+      <div style="font-size:11px;font-weight:700;margin-bottom:6px;opacity:.8;">GATE PASS — Toyota Charoensri</div>
+      <div class="qr-canvas">
+        <canvas id="qr-canvas" width="160" height="160"></canvas>
+      </div>
+      <div style="font-size:13px;font-weight:700;" id="qr-emp-name">ภุมรี ศรีรอด</div>
+      <div style="font-size:11px;opacity:.8;" id="qr-dest">ส่งรถลูกค้า ธีรวัฒน์</div>
+      <div style="font-size:11px;opacity:.8;" id="qr-time">14:00 — 15:30 น.</div>
+      <div style="font-size:10px;margin-top:8px;opacity:.6;">อนุมัติโดย: สมพงษ์ กองศรีเกษ | ใช้ได้ครั้งเดียว</div>
+    </div>
+    <div style="font-size:11px;" class="m">💡 Screenshot หรือ Save รูปนี้ แสดงรปภ.เมื่อออก</div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-green" onclick="closeModal('modal-qr')">✅ รับทราบ</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Onboarding -->
+<div class="modal-overlay" id="modal-onboard">
+  <div class="modal">
+    <div class="modal-title">👤 เพิ่มพนักงานใหม่</div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">ชื่อ-นามสกุล</label><input class="f-input"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">ชื่อเล่น</label><input class="f-input"></div>
+    </div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">ตำแหน่ง</label><input class="f-input"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">หน่วยงาน</label><input class="f-input"></div>
+    </div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">วันเริ่มงาน</label><input class="f-input" type="date"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">เบอร์โทร</label><input class="f-input" placeholder="08X-XXX-XXXX"></div>
+    </div>
+    <div class="f-group"><label class="f-label">บัญชีธนาคาร</label><input class="f-input" placeholder="ธนาคาร · เลขที่บัญชี"></div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:11px;" class="m">
+      ระบบจะสร้าง Username/Password อัตโนมัติ → แจ้ง LINE พนักงาน
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-onboard')">ยกเลิก</button>
+      <button class="btn btn-green" onclick="closeModal('modal-onboard');alert('✅ เพิ่มพนักงานใหม่แล้ว\n🔑 Username/Password ส่ง LINE แล้ว\n📊 อัพเดตระบบ 83 → 84 คน')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Offboarding -->
+<div class="modal-overlay" id="modal-offboard">
+  <div class="modal">
+    <div class="modal-title">🚪 บันทึกลาออก</div>
+    <div class="f-group"><label class="f-label">พนักงาน</label><select class="f-select"><option>เลือกพนักงาน...</option></select></div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">วันที่ลาออก</label><input class="f-input" type="date"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">เหตุผล</label><select class="f-select"><option>ลาออกเอง</option><option>สิ้นสุดสัญญา</option><option>เลิกจ้าง</option></select></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-offboard')">ยกเลิก</button>
+      <button class="btn btn-red" onclick="closeModal('modal-offboard');alert('✅ บันทึก Offboarding\n🔒 ปิด User ระบบแล้ว\n📋 Checklist คืนทรัพย์สินส่งให้แล้ว')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: เลขไมล์ -->
+<div class="modal-overlay" id="modal-mileage">
+  <div class="modal">
+    <div class="modal-title">🚗 ขอใช้รถบริษัท</div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">พนักงาน</label><select class="f-select"><option>ชัยวัฒน์ หอมจันทร์</option><option>จรูญ บุผา</option></select></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">รถที่ขอใช้</label><select class="f-select"><option>Honda Civic TCS</option><option>Hilux Demo</option></select></div>
+    </div>
+    <div class="f-row">
+      <div class="f-group" style="margin:0;"><label class="f-label">เลขไมล์ก่อนออก</label><input class="f-input" type="number" placeholder="12345"></div>
+      <div class="f-group" style="margin:0;"><label class="f-label">จุดหมาย</label><input class="f-input" placeholder="ส่งรถลูกค้า / ธนาคาร"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-mileage')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-mileage');alert('✅ บันทึกเลขไมล์แล้ว\n📊 ส่งขอผจก.อนุมัติ')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
 <script>
-document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
-function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
+setInterval(()=>{
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('th-TH');
+  document.getElementById('date-now').textContent=n.toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'});
+},1000);
 
-// Onboarding checklist
-const OB_ITEMS=['เตรียมสัญญาจ้างงาน','ส่ง Work Style Assessment','แนะนำพื้นที่ + Mentor','ออก ID badge + Login ระบบ','เปิดบัญชีธนาคาร (ถ้าใหม่)','ชี้แจงระเบียบบริษัท','เริ่มหักเงินประกันเดือนแรก','ลงทะเบียน SSO','แจ้ง กยศ. (ถ้ามี)','ตรวจ Blacklist ก่อนรับ'];
-document.getElementById('onboard_list').innerHTML=OB_ITEMS.map((item,i)=>`
-  <label style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--br);font-size:12px;cursor:pointer">
-    <input type="checkbox" id="ob${i}" style="accent-color:var(--tx)"> <span>${item}</span>
-  </label>`).join('');
-
-function checkLate(){
-  const emp=document.getElementById('late_emp').value;
-  const el=document.getElementById('late_warn');
-  if(!emp){el.innerHTML='';return;}
-  const cnt=parseInt(emp.split('|')[1])||0;
-  const next=cnt+1;
-  let msg='',cls='al-g';
-  if(next>=8){msg=`⚠ ครั้งที่ ${next} — ต้องออก<strong>ใบเตือนลายลักษณ์อักษร</strong> ทันที!`;cls='al-r';}
-  else if(next>=6){msg=`⚠ ครั้งที่ ${next} — ต้องออก<strong>ใบเตือนวาจา ครั้งที่ 2</strong>`;cls='al-r';}
-  else if(next>=4){msg=`! ครั้งที่ ${next} — ถึงเกณฑ์<strong>ใบเตือนวาจา ครั้งที่ 1</strong>`;cls='al-a';}
-  else{msg=`ครั้งที่ ${next} — ยังไม่ถึงเกณฑ์ (ถึงเมื่อ 4 ครั้ง)`;cls='al-b';}
-  el.innerHTML=`<div class="al ${cls}"><span>!</span><div>${msg}</div></div>`;
-}
-function saveLate(){const emp=document.getElementById('late_emp').value;if(!emp){alert('เลือกพนักงานก่อน');return;}checkLate();alert('บันทึกแล้ว');}
-
-function loadWarnHistory(){
-  const emp=document.getElementById('wn_emp').value.split('|')[0];
-  document.getElementById('wn_detail').value=`มาสายสะสม 7 ครั้งในเดือน มี.ค.-เม.ย. 69 ผิดระเบียบ TCS.HR001/2561`;
-}
-function genWarn(){
-  const emp=document.getElementById('wn_emp').value.split('|')[0];
-  const times=document.getElementById('wn_times').value;
-  const reason=document.getElementById('wn_reason').value;
-  document.getElementById('wn_preview').innerHTML=`
-  <div style="border:1px solid var(--br2);border-radius:var(--r);padding:12px;font-size:12px;background:var(--w)">
-    <div style="text-align:center;font-weight:600;margin-bottom:8px">ใบเตือน ครั้งที่ ${times}</div>
-    <div style="margin-bottom:4px">เรียน: <strong>${emp}</strong></div>
-    <div style="margin-bottom:4px">เรื่อง: ${reason}</div>
-    <div style="margin-bottom:8px">วันที่: ${new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})}</div>
-    <div style="font-size:11px;color:var(--mu)">บริษัทโตโยต้า เจริญศรี จำกัด ขอแจ้งให้ท่านทราบว่าพฤติกรรมข้างต้นผิดระเบียบบริษัท กรุณาแก้ไขพฤติกรรมทันที มิฉะนั้นจะถูกลงโทษขั้นสูงต่อไป</div>
-  </div>`;
-  alert('พิมพ์ใบเตือนแล้ว — ให้พนักงานเซ็นรับทราบ');
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-gatepass','t-mileage','t-leave','t-onboard','t-salary76','t-employees'].forEach(t=>{
+    document.getElementById(t).style.display=t===id?'':'none';
+  });
+  if(id==='t-employees') renderEmployees();
 }
 
-function checkOTPolicy(){
-  const emp=document.getElementById('ot_emp').value;
-  const el=document.getElementById('ot_policy');
-  if(!emp){el.innerHTML='';return;}
-  if(emp==='guard'){el.innerHTML=`<div class="al al-g"><span>✓</span><div>รปภ. อนุมัติ OT ได้ตามนโยบาย (คนขาด)</div></div>`;}
-  else{el.innerHTML=`<div class="al al-r"><span>🔴</span><div>ตำแหน่งนี้ OT ถูกยกเลิกแล้ว ต้องได้รับอนุมัติพิเศษจาก<strong>ผบห.</strong>ก่อนเท่านั้น กรุณาแนบเลขอนุมัติ</div></div>`;}
-}
-function saveOT(){
-  const emp=document.getElementById('ot_emp').value;
-  if(!emp){alert('เลือกพนักงานก่อน');return;}
-  if(emp==='other'){alert('OT ตำแหน่งนี้ถูกยกเลิกแล้ว — ต้องได้รับอนุมัติ ผบห. ก่อน');return;}
-  alert('บันทึก OT รปภ. แล้ว');
+function requestGatePass(){
+  const emp=document.getElementById('gp-emp').value;
+  const dest=document.getElementById('gp-dest').value;
+  if(!dest){alert('กรุณากรอกจุดหมาย');return;}
+  document.getElementById('qr-emp-name').textContent=emp;
+  document.getElementById('qr-dest').textContent=dest;
+  document.getElementById('qr-time').textContent=
+    document.getElementById('gp-out').value+' — '+document.getElementById('gp-back').value+' น.';
+  drawQR();
+  openModal('modal-qr');
 }
 
-function calcMile(){
-  const v=parseInt(document.getElementById('gp_in').value)||0;
-  const out=87240;
-  if(!v){document.getElementById('mile_res').innerHTML='';return;}
-  const km=v-out;
-  document.getElementById('mile_res').innerHTML=km>0?`<div class="al al-g"><span>✓</span><div>วิ่ง ${km} km · บันทึกในระบบน้ำมัน</div></div>`:
-    `<div class="al al-r"><span>⚠</span><div>เลขไมล์กลับต้องมากกว่าออก</div></div>`;
+function drawQR(){
+  const canvas=document.getElementById('qr-canvas');
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,160,160);
+  // draw simple QR-like pattern
+  ctx.fillStyle='#18233d';
+  const cells=21;const sz=160/cells;
+  // corner squares
+  const corners=[[0,0],[0,14],[14,0]];
+  corners.forEach(([r,c])=>{
+    ctx.fillRect(c*sz,r*sz,7*sz,7*sz);
+    ctx.fillStyle='#fff';ctx.fillRect((c+1)*sz,(r+1)*sz,5*sz,5*sz);
+    ctx.fillStyle='#18233d';ctx.fillRect((c+2)*sz,(r+2)*sz,3*sz,3*sz);
+  });
+  // random dots
+  for(let i=0;i<80;i++){
+    const x=Math.floor(Math.random()*cells);const y=Math.floor(Math.random()*cells);
+    ctx.fillRect(x*sz,y*sz,sz*.85,sz*.85);
+  }
+  ctx.fillStyle='var(--toy)';
+  ctx.font='bold 11px IBM Plex Mono';ctx.textAlign='center';
+  ctx.fillText('TCS-GP-'+Math.random().toString(36).substr(2,6).toUpperCase(),80,155);
 }
 
-function checkBL(v){
-  const el=document.getElementById('bl_result');
-  if(v.length<2){el.innerHTML='';return;}
-  el.innerHTML=v.includes('***')?`<div class="al al-r"><span>🔴</span><div>พบในรายการ Blacklist — ไม่ควรรับเข้าทำงาน</div></div>`:
-    `<div class="al al-g"><span>✓</span><div>ไม่พบใน Blacklist — สามารถรับเข้าทำงานได้</div></div>`;
+function approveGP(btn){
+  const card=btn.closest('.gate-card');
+  card.style.background='var(--gd)';
+  card.querySelector('.gate-dot').style.background='var(--grn)';
+  btn.parentElement.innerHTML='<span class="badge g">✅ อนุมัติแล้ว — QR ส่ง LINE</span>';
+  alert('✅ อนุมัติ Gate Pass แล้ว\n📱 QR Code ส่งให้พนักงาน LINE แล้ว\nใช้ได้ 1 ครั้ง หมดอายุตามเวลากลับ');
 }
 
-function calcSeverance(){
-  const reason=document.getElementById('off_reason').value;
-  const tenure=parseFloat(document.getElementById('off_tenure').value)||0;
-  const el=document.getElementById('sev_res');
-  const rates={0.5:30,1:90,3:180,6:240,10:300};
-  const days=rates[tenure]||30;
-  const items=['ลาออก: ค่าชดเชย N/A','ตกลงร่วมกัน: ตามข้อตกลง','เลิกจ้าง (มีเหตุ): ตามอายุงาน','สัญญาหมดอายุ: N/A'];
-  const idx={'resign':0,'mutual':1,'terminate':2,'expire':3}[reason]||0;
-  el.innerHTML=`<div class="al al-b"><span>ℹ</span><div>${items[idx]} · อายุงานนี้: ค่าชดเชย ${days} วัน · คืนเงินประกันภายใน 7 วัน</div></div>`;
+function rejectGP(btn){
+  const card=btn.closest('.gate-card');
+  card.style.background='var(--rd)';
+  btn.parentElement.innerHTML='<span class="badge r">❌ ไม่อนุมัติ</span>';
 }
-calcSeverance();
+
+// พนักงาน 83 คน
+const EMPLOYEES=[
+  {id:'0001',name:'นาย ธนพัต ทีฆธนานนท์',nick:'บิ๊ก',pos:'กรรมการผู้จัดการ',dept:'บริหารสูงสุด',phone:'-',user:'0001'},
+  {id:'0002',name:'นาง อลิศา ทีฆธนานนท์',nick:'บิ๋ม',pos:'รองกรรมการผู้จัดการ',dept:'บริหารสูงสุด',phone:'-',user:'0002'},
+  {id:'5807-0016',name:'นางสาว ภัควลัญชญ์ เทวะประกาย',nick:'ฟ้า',pos:'เจ้าหน้าที่ DDMS',dept:'สำนักกรรมการ',phone:'083-1462249',user:'58070016'},
+  {id:'5910-0078',name:'นางสาว ศิริวรรณ ศรีสมบัติ',nick:'โก๋',pos:'พนักงานล้างรถ',dept:'แผนกวาววับ',phone:'083-4298347',user:'59100078'},
+  {id:'5910-0079',name:'นาย สายัณห์ แดนรักษ์',nick:'ยัน',pos:'พนักงานล้างรถ',dept:'แผนกวาววับ',phone:'085-2172034',user:'59100079'},
+  {id:'5910-0080',name:'นาย โชคทวี ไชยสงคราม',nick:'เอบ',pos:'รปภ.',dept:'HR',phone:'087-0220607',user:'59100080'},
+  {id:'5910-0083',name:'นางสาว กฐินทอง โพนไชยา',nick:'กฐิน',pos:'แม่บ้าน',dept:'HR',phone:'062-5578308',user:'59100083'},
+  {id:'6001-0098',name:'นาย อรุณรักษ์ พรรณา',nick:'รักษ์',pos:'ที่ปรึกษาการขาย',dept:'แผนกขาย',phone:'083-0639049',user:'60010098'},
+  {id:'6103-0196',name:'นาย สมพงษ์ กองศรีเกษ',nick:'โต้ง',pos:'ผู้จัดการแผนกขาย',dept:'แผนกขาย',phone:'096-6293923',user:'61030196'},
+  {id:'6111-0258',name:'นางสาว ภุมรี ศรีรอด',nick:'เมย์',pos:'ที่ปรึกษาการขาย',dept:'แผนกขาย',phone:'086-2421445',user:'61110258'},
+  {id:'6112-0262',name:'นาย ประภัส อินทะวงค์',nick:'เล็ก',pos:'หัวหน้าช่างเทคนิค GS',dept:'แผนกบริการ',phone:'082-8463826',user:'61120262'},
+  {id:'6203-0276',name:'นาย บัลลพ ผุยพรม',nick:'เอฟ',pos:'ผช.ผจก.บริการ',dept:'แผนกบริการ',phone:'080-0912689',user:'62030276'},
+  {id:'6203-0277',name:'นางสาว นิราวรรณ ดอนมุงคุณ',nick:'นก',pos:'SA/GS',dept:'บริหารงานบริการ',phone:'062-4893539',user:'62030277'},
+  {id:'6203-0279',name:'นางสาว ประภาศิริ พิทักษ์วงษ์',nick:'เอ้',pos:'แคชเชียร์',dept:'แผนกการเงิน',phone:'088-7225240',user:'62030279'},
+  {id:'6208-0310',name:'นาง สุขธนัช นิตโย',nick:'บี',pos:'ครูฝึก SA',dept:'บริหารงานบริการ',phone:'093-6363255',user:'62080310'},
+  {id:'6303-0351',name:'นางสาว จารุวรรณ สาวงค์',nick:'ยีนส์',pos:'หัวหน้าแผนกบัญชี',dept:'แผนกบัญชี',phone:'-',user:'63030351'},
+  {id:'6402-0414',name:'นาง นิชนันท์ มธุรสพงศ์พันธ์',nick:'หนาม',pos:'หัวหน้า HR',dept:'HR',phone:'-',user:'64020414'},
+  {id:'6411-0446',name:'นางสาว ภัทราภรณ์ โบราณินทร์',nick:'นุ่น',pos:'ที่ปรึกษาการขาย',dept:'แผนกขาย',phone:'-',user:'64110446'},
+  {id:'6808-0615',name:'นางสาว อริศรา บุษปวรรธนะ',nick:'ลูกตาล',pos:'SA/GS',dept:'บริหารงานบริการ',phone:'-',user:'68080615'},
+  {id:'6806-0607',name:'นางสาว ณัฐณิชา วดีศิริศักดิ์',nick:'อีฟ',pos:'หัวหน้าทีมขาย(ออนไลน์)',dept:'แผนกขาย',phone:'-',user:'68060607'},
+];
+
+function renderEmployees(){
+  const tb=document.getElementById('emp-body');
+  if(tb.children.length>5) return;
+  tb.innerHTML=EMPLOYEES.map(e=>`
+    <tr>
+      <td class="m" style="font-family:'IBM Plex Mono',monospace;">${e.id}</td>
+      <td><div style="font-weight:700;">${e.name}</div></td>
+      <td class="m">${e.nick}</td>
+      <td class="m">${e.pos}</td>
+      <td class="m">${e.dept}</td>
+      <td class="m">${e.phone}</td>
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:11px;" class="b">${e.user}</td>
+    </tr>`).join('');
+  document.getElementById('emp-count').textContent=EMPLOYEES.length+' คน (แสดง '+EMPLOYEES.length+'/83)';
+}
+
+function filterEmp(){
+  const q=document.getElementById('emp-search').value.toLowerCase();
+  const rows=document.querySelectorAll('#emp-body tr');
+  let shown=0;
+  rows.forEach(r=>{
+    const txt=r.textContent.toLowerCase();
+    const show=!q||txt.includes(q);
+    r.style.display=show?'':'none';
+    if(show) shown++;
+  });
+  document.getElementById('emp-count').textContent=shown+' คน';
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+});
 </script>
 </body>
 </html>

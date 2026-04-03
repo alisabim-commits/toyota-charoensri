@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TLT Dashboard v4 — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:#f4f6f9;--white:#fff;--border:#e2e6ea;--border2:#ced4da;
+  --text:#1a2035;--muted:#6b7280;--muted2:#adb5bd;
+  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fecaca;
+  --yellow:#d97706;--yellow-bg:#fffbeb;--yellow-border:#fde68a;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --teal:#0891b2;--teal-bg:#ecfeff;--teal-border:#a5f3fc;
+  --purple:#7c3aed;--purple-bg:#f5f3ff;--purple-border:#ddd6fe;
+  --orange:#ea580c;--orange-bg:#fff7ed;--orange-border:#fed7aa;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+.nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;display:flex;position:sticky;top:0;z-index:200;box-shadow:var(--shadow);align-items:stretch}
+.nav-brand{padding:10px 16px 10px 0;border-right:1px solid var(--border);margin-right:8px;display:flex;align-items:center}
+.nav-brand h1{font-size:15px;font-weight:800}
+.nav-brand .sub{font-size:10px;color:var(--muted)}
+.nav-tabs{display:flex;flex:1;align-items:stretch}
+.nav-tab{padding:0 16px;display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;border:none;background:none;font-family:'Sarabun',sans-serif;height:100%}
+.nav-tab:hover{color:var(--text);background:#f8f9fa}
+.nav-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:8px;margin-left:auto;padding-left:12px}
+.date-chip{background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--blue);font-family:'IBM Plex Mono',monospace;font-weight:500;white-space:nowrap}
+
+.page{padding:20px 24px;max-width:1440px;margin:0 auto;display:none}
+.page.active{display:block}
+
+.alert{border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;font-size:13px}
+.alert.red{background:var(--red-bg);border:1px solid var(--red-border)}
+.alert.yellow{background:var(--yellow-bg);border:1px solid var(--yellow-border)}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.alert-title{font-weight:700;color:var(--red);margin-bottom:2px}
+.alert.yellow .alert-title{color:var(--yellow)}
+.alert-desc{color:var(--muted);font-size:12px}
+
+.upload-section{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.upload-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.upload-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.upload-box{border:2px dashed var(--border2);border-radius:8px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;background:#f8fafc;position:relative}
+.upload-box:hover{border-color:var(--blue);background:var(--blue-bg)}
+.upload-box.loaded{border-color:var(--green);border-style:solid;background:var(--green-bg)}
+.upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.up-icon{font-size:20px;margin-bottom:4px}
+.up-label{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+.up-desc{font-size:10px;color:var(--muted)}
+.up-status{font-size:10px;font-weight:600;margin-top:4px;color:var(--green)}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
+.kpi-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.k-label{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.k-value{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;line-height:1;margin-bottom:3px}
+.k-sub{font-size:11px;color:var(--muted)}
+.k-red{border-top:3px solid var(--red)}.k-red .k-value{color:var(--red)}
+.k-yellow{border-top:3px solid var(--yellow)}.k-yellow .k-value{color:var(--yellow)}
+.k-green{border-top:3px solid var(--green)}.k-green .k-value{color:var(--green)}
+.k-blue{border-top:3px solid var(--blue)}.k-blue .k-value{color:var(--blue)}
+.k-teal{border-top:3px solid var(--teal)}.k-teal .k-value{color:var(--teal)}
+.k-purple{border-top:3px solid var(--purple)}.k-purple .k-value{color:var(--purple)}
+
+.progress-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-title{font-size:13px;font-weight:700}
+.prog-pct{font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--yellow)}
+.prog-track{height:8px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:6px}
+.prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green) 0%,#eab308 65%,var(--red) 92%);transition:width .6s ease}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+.card-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#fafbfc}
+.card-title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
+.card-badge{font-size:11px;background:var(--border);color:var(--muted);padding:2px 8px;border-radius:99px;font-family:'IBM Plex Mono',monospace;font-weight:600}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:8px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--border);background:#fafbfc;white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#fafbfc}
+.scrollable{max-height:360px;overflow-y:auto}
+.scrollable::-webkit-scrollbar{width:4px}
+.scrollable::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:99px;font-size:10px;font-weight:700;white-space:nowrap}
+.b-tcs{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.b-tsnu{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.b-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.b-warn{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border)}
+.b-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+
+.tab-bar{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--border);background:#fafbfc;flex-wrap:wrap}
+.tab-btn{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent;background:transparent;color:var(--muted);transition:all .15s;font-family:'Sarabun',sans-serif}
+.tab-btn.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.tmr-card{background:linear-gradient(135deg,var(--blue-bg),var(--green-bg));border:2px solid var(--blue-border);border-radius:12px;padding:16px 20px;margin-bottom:16px}
+.tmr-title{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tmr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tmr-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+
+.holiday-card{background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.holi-title{font-size:13px;font-weight:800;color:var(--yellow);margin-bottom:12px}
+.holi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.h-item{background:var(--white);border:1px solid var(--yellow-border);border-radius:8px;padding:10px 12px}
+.h-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600}
+.h-value{font-size:16px;font-weight:800;font-family:'IBM Plex Mono',monospace}
+.h-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+
+/* ===== V4 NEW ===== */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.chart-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.chart-box-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chart-wrap{position:relative;height:240px}
+.notify-row{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-bottom:1px solid #f0f2f5;font-size:12px}
+.notify-row:last-child{border-bottom:none}
+.notify-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.storage-chip{display:inline-flex;align-items:center;gap:4px;background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700}
+.margin-ok{color:var(--green)}.margin-loss{color:var(--red)}.margin-zero{color:var(--yellow)}
+.tag-tlt{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700}
+.tag-tsnu{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700}
+.tag-warn{background:#fffbeb;color:#d97706;border:1px solid #fde68a;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700}
+.tag-red{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700}
+
+/* FLOW */
+.flow-section{padding:20px}
+.flow-row{display:flex;align-items:stretch;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.flow-box{flex:1;min-width:160px;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:14px 16px}
+.flow-box.hl-blue{border-color:var(--blue);background:var(--blue-bg)}
+.flow-box.hl-green{border-color:var(--green);background:var(--green-bg)}
+.flow-box.hl-yellow{border-color:var(--yellow);background:var(--yellow-bg)}
+.flow-box.hl-red{border-color:var(--red);background:var(--red-bg)}
+.flow-arrow{display:flex;align-items:center;font-size:22px;color:var(--muted);padding:0 4px;flex-shrink:0}
+.fl-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;color:var(--muted)}
+.fl-val{font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-bottom:4px}
+.fl-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.flow-condition{background:var(--white);border:2px solid var(--purple);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.fc-title{font-size:12px;font-weight:800;color:var(--purple);margin-bottom:10px}
+.fc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fc-item{border-radius:8px;padding:12px}
+.fc-item.good{background:var(--green-bg);border:1px solid var(--green-border)}
+.fc-item.bad{background:var(--red-bg);border:1px solid var(--red-border)}
+.fc-head{font-size:13px;font-weight:800;margin-bottom:8px}
+.fc-desc{font-size:11px;color:var(--muted);line-height:1.8}
+
+/* CASHFLOW */
+.cf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px;border-bottom:1px solid var(--border)}
+.cf-card{border-radius:10px;padding:14px;text-align:center}
+.cf-card.in{background:var(--green-bg);border:1px solid var(--green-border)}
+.cf-card.out{background:var(--red-bg);border:1px solid var(--red-border)}
+.cf-card.net{background:var(--blue-bg);border:2px solid var(--blue-border)}
+.cf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:6px}
+.cf-value{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-bottom:4px}
+.cf-card.in .cf-value{color:var(--green)}
+.cf-card.out .cf-value{color:var(--red)}
+.cf-card.net .cf-value{color:var(--blue)}
+.cf-sub{font-size:11px;color:var(--muted)}
+
+/* SALES */
+.sa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;border-bottom:1px solid var(--border)}
+.sa-result{padding:16px;display:none}
+.sa-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.sa-card{border-radius:8px;padding:12px 14px}
+.sa-card.good{background:var(--green-bg);border:1px solid var(--green-border)}
+.sa-card.warn{background:var(--yellow-bg);border:1px solid var(--yellow-border)}
+.sa-card.bad{background:var(--red-bg);border:1px solid var(--red-border)}
+.sa-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
+.sa-val{font-size:18px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-bottom:3px}
+.sa-desc{font-size:11px;color:var(--muted)}
+.bar-mini{height:4px;background:var(--border);border-radius:99px;margin-top:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;transition:width .6s}
+
+/* INPUT */
+.input-group label{font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.input-group input{width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);background:var(--white);transition:border-color .15s}
+.input-group input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-bg)}
+
+/* ACTION */
+.action-list{padding:12px 16px}
+.action-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f2f5}
+.action-item:last-child{border-bottom:none}
+.action-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px}
+.num-red{background:var(--red);color:white}
+.num-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.num-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.action-text{font-size:12px;line-height:1.6}
+.action-text strong{color:var(--text);font-weight:700}
+.action-text .note{color:var(--muted);font-size:11px;display:block;margin-top:1px}
+
+/* WF */
+.wf-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border)}
+.wf-step{padding:16px}
+.wf-step:not(:last-child){border-right:1px solid var(--border)}
+.wf-num{width:24px;height:24px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-bottom:8px}
+.wf-title{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--blue)}
+.wf-list{font-size:11px;color:var(--muted);line-height:1.9}
+.wf-list span{color:var(--text);font-weight:600}
+
+.sumbar{padding:10px 16px;border-top:1px solid var(--border);background:#fafbfc;display:flex;gap:16px;flex-wrap:wrap;font-size:12px;align-items:center}
+.si{display:flex;align-items:center;gap:5px}
+.sdot{width:8px;height:8px;border-radius:50%}
+.no-data{padding:28px;text-align:center;color:var(--muted);font-size:13px}
+.no-icon{font-size:28px;margin-bottom:6px}
+
+.mono{font-family:'IBM Plex Mono',monospace}
+.fw7{font-weight:700}
+.red{color:var(--red)}.green{color:var(--green)}.blue{color:var(--blue)}.yellow{color:var(--yellow)}.muted{color:var(--muted)}
+
+@media(max-width:1100px){
+  .kpi-grid{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:1fr}
+  .holi-grid{grid-template-columns:1fr 1fr}
+  .upload-grid{grid-template-columns:1fr 1fr}
+  .wf-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-brand">
+    <div>
+      <h1>🚗 TLT Dashboard</h1>
+      <div class="sub">ผู้บริหาร · Toyota Credit</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="gotoPage('p-overview',this)">📊 ภาพรวม</button>
+    <button class="nav-tab" onclick="gotoPage('p-assign',this)">📋 Assignment</button>
+    <button class="nav-tab" onclick="gotoPage('p-cashflow',this)">💸 กระแสเงินสด</button>
+    <button class="nav-tab" onclick="gotoPage('p-flow',this)">🔄 Flow บริหารวงเงิน</button>
+    <button class="nav-tab" onclick="gotoPage('p-sales',this)">💰 ยอดขาย/จอง</button>
+    <button class="nav-tab" onclick="gotoPage('p-workflow',this)">📖 ขั้นตอนงาน</button>
+      <button class="nav-tab" onclick="gotoPage('p-chart',this)">📈 กราฟ</button>
+      <button class="nav-tab" onclick="gotoPage('p-alert',this)">🔔 แจ้งเตือน</button>
+  </div>
+  <div class="nav-right">
+    <div class="date-chip" id="todayDate"></div>
+  </div>
+</div>
+
+<!-- PAGE: OVERVIEW -->
+<div class="page active" id="p-overview">
+  <div class="alert red">
+    <div class="alert-icon">🔴</div>
+    <div>
+      <div class="alert-title">⚠️ วงเงินคงเหลือวิกฤต — เร่งโยก TSNU ออกก่อนสงกรานต์!</div>
+      <div class="alert-desc">คงเหลือ ~฿8.4M จาก 60M (86.0%) · รถเข้าก่อน 7 เม.ย. = 35 คัน · TMT หยุด 7–20 เม.ย. (13 วัน)</div>
+    </div>
+  </div>
+
+  <div class="upload-section">
+    <div class="upload-title">📁 อัปโหลดไฟล์ (ผบห. อัปเดตได้เองทุกเช้า)</div>
+    <div class="upload-grid">
+      <div class="upload-box" id="box-assign">
+        <input type="file" accept=".xlsx,.xls" onchange="loadAssignment(this)">
+        <div class="up-icon">📋</div><div class="up-label">Assignment</div>
+        <div class="up-desc">รายการรถที่จะเข้า</div>
+        <div class="up-status" id="st-assign" style="display:none">✓ โหลดแล้ว</div>
+      </div>
+      <div class="upload-box" id="box-sales">
+        <input type="file" accept=".xlsx,.xls" onchange="loadSales(this)">
+        <div class="up-icon">💰</div><div class="up-label">ยอดขาย (VSS)</div>
+        <div class="up-desc">ดึงยอดขาย+จองอัตโนมัติ</div>
+        <div class="up-status" id="st-sales" style="display:none">✓ โหลดแล้ว</div>
+      </div>
+      <div class="upload-box" id="box-tlt">
+        <input type="file" accept=".xlsx,.xls" onchange="loadTLT(this)">
+        <div class="up-icon">🏦</div><div class="up-label">รายงาน TLT</div>
+        <div class="up-desc">อัปเดตวงเงินอัตโนมัติ</div>
+        <div class="up-status" id="st-tlt" style="display:none">✓ โหลดแล้ว</div>
+      </div>
+      <div class="upload-box" id="box-ay">
+        <input type="file" accept=".xlsx,.xls" onchange="loadAY(this)">
+        <div class="up-icon">💳</div><div class="up-label">AY จ่ายค่ารถ</div>
+        <div class="up-desc">Historical Report E-Pay</div>
+        <div class="up-status" id="st-ay" style="display:none">✓ โหลดแล้ว</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card k-red"><div class="k-label">วงเงินคงเหลือ</div><div class="k-value" id="kpi-remaining">4.97M</div><div class="k-sub">จาก 60 ล้านบาท</div></div>
+    <div class="kpi-card k-yellow"><div class="k-label">% ใช้วงเงิน</div><div class="k-value" id="kpi-pct">86.0%</div><div class="k-sub">ใช้ไป 51.6M</div></div>
+    <div class="kpi-card k-blue"><div class="k-label">รถออกพรุ่งนี้</div><div class="k-value" id="kpi-tmr">—</div><div class="k-sub" id="kpi-tmr-sub">รออัปโหลด Assignment</div></div>
+    <div class="kpi-card k-green"><div class="k-label">ยอดขาย TCS</div><div class="k-value" id="kpi-sold">—</div><div class="k-sub" id="kpi-sold-sub">รออัปโหลด VSS</div></div>
+    <div class="kpi-card k-teal"><div class="k-label">ยอดจองรอส่งมอบ</div><div class="k-value" id="kpi-booking">—</div><div class="k-sub">คัน</div></div>
+    <div class="kpi-card k-purple"><div class="k-label">Net Cash Flow</div><div class="k-value" id="kpi-netcash">—</div><div class="k-sub">เงินหมุนสุทธิ</div></div>
+  </div>
+
+  <div class="progress-card">
+    <div class="prog-header"><div class="prog-title">📊 สถานะวงเงิน TLT (เป้า 60M)</div><div class="prog-pct" id="prog-pct-lbl">86.0%</div></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:86.0%"></div></div>
+    <div class="prog-labels"><span>0</span><span>15M</span><span>30M</span><span>45M</span><span class="red fw7" id="prog-used-lbl">51.6M ◄ ตอนนี้</span><span>60M</span></div>
+  </div>
+
+  <div class="tmr-card">
+    <div class="tmr-title">🚚 รถที่จะออก <span id="tmr-date-lbl">พรุ่งนี้</span> — <span id="tmr-count" class="mono">อัปโหลด Assignment</span></div>
+    <div class="tmr-grid" id="tmr-grid"><div class="no-data"><div class="no-icon">📋</div><div>อัปโหลด Assignment เพื่อดูรถออกพรุ่งนี้</div></div></div>
+  </div>
+
+  <div class="holiday-card">
+    <div class="holi-title">🎊 แผนรับมือสงกรานต์ 2569</div>
+    <div class="holi-grid">
+      <div class="h-item"><div class="h-label">TMT หยุดวันสุดท้าย</div><div class="h-value red">7 เม.ย.</div><div class="h-sub">Yaris 1.2 = คันสุดท้าย</div></div>
+      <div class="h-item"><div class="h-label">TMT เริ่มผลิตใหม่</div><div class="h-value green">20 เม.ย.</div><div class="h-sub">ช่องว่าง 13 วัน</div></div>
+      <div class="h-item"><div class="h-label">รถต้องรับก่อนหยุด</div><div class="h-value yellow">35 คัน</div><div class="h-sub">1–7 เม.ย.</div></div>
+      <div class="h-item"><div class="h-label">TSNU ต้องโยกออก</div><div class="h-value blue">27 คัน</div><div class="h-sub">เพื่อเปิดวงเงิน</div></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">✅ สิ่งที่ ผบห. ต้องตัดสินใจวันนี้</div></div>
+      <div class="action-list">
+        <div class="action-item"><div class="action-num num-red">1</div><div class="action-text"><strong>🔴 เร่งโยก TSNU 27 คัน ออก</strong><span class="note">ดึงเงินกลับเปิดวงเงิน ก่อนรถ TCS เข้า 2–7 เม.ย.</span></div></div>
+        <div class="action-item"><div class="action-num num-red">2</div><div class="action-text"><strong>🔴 กด E-Pay ชำระครบกำหนด 3–4 เม.ย.</strong><span class="note">รถซื้อ 4–5 มี.ค. ครบ 30 วันแล้ว</span></div></div>
+        <div class="action-item"><div class="action-num num-red">3</div><div class="action-text"><strong>🔴 หาลูกค้า TCS ที่ว่าง 7 คัน</strong><span class="note">Ativ, Yaris Cross, D-CAB, Fortuner</span></div></div>
+        <div class="action-item"><div class="action-num num-blue">4</div><div class="action-text"><strong>🔵 ตรวจ Flow B&gt;A / B&lt;A</strong><span class="note">ดูหน้า "Flow บริหารวงเงิน"</span></div></div>
+        <div class="action-item"><div class="action-num num-blue">5</div><div class="action-text"><strong>🔵 วางแผน Cash Flow สงกรานต์</strong><span class="note">ดูหน้า "กระแสเงินสด"</span></div></div>
+        <div class="action-item"><div class="action-num num-green">6</div><div class="action-text"><strong>🟢 อัปเดต VSS + E-Pay ทุกเช้า</strong><span class="note">TBR → TLT → AY → Refresh</span></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">💳 ตารางครบกำหนดชำระ</div></div>
+      <table class="tbl">
+        <thead><tr><th>ครบกำหนด</th><th>รถที่ซื้อช่วง</th><th>สถานะ</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="mono red fw7">3 เม.ย.</td><td>5 คัน | 4 มี.ค.</td><td><span class="badge b-danger">⚠️ ครบแล้ว!</span></td><td class="red fw7">฿3,748,638 — กด E-Pay ด่วน</td></tr>
+          <tr><td class="mono red fw7">4 เม.ย.</td><td>2 คัน | 5 มี.ค.</td><td><span class="badge b-danger">⚠️ พรุ่งนี้!</span></td><td class="red fw7">฿1,952,322 — เตรียมกด E-Pay</td></tr>
+          <tr><td class="mono yellow fw7">5 เม.ย.</td><td>7 คัน | 6 มี.ค.</td><td><span class="badge b-warn">อีก 2 วัน</span></td><td class="yellow">฿5,155,795 — เตรียมพร้อม</td></tr>
+          <tr><td class="mono yellow fw7">8 เม.ย.</td><td>6 คัน | 9 มี.ค.</td><td><span class="badge b-warn">อีก 5 วัน</span></td><td class="yellow">฿5,665,115 — วางแผน</td></tr>
+          <tr><td class="mono green">หลัง 20 เม.ย.</td><td>W.2 | 5 คัน</td><td><span class="badge b-ok">✓ ยังมีเวลา</span></td><td class="green">ปกติ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: ASSIGNMENT -->
+<div class="page" id="p-assign">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📋 Assignment เมษายน 2569</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span class="badge b-tcs">🏪 TCS</span>
+        <span class="badge b-tsnu">🤝 TSNU</span>
+        <span class="card-badge" id="assign-cnt">40 คัน</span>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab(event,'tab-all')">ทั้งหมด (<span id="c-all">40</span>)</button>
+      <button class="tab-btn" onclick="showTab(event,'tab-tcs')">🏪 TCS (<span id="c-tcs">13</span>)</button>
+      <button class="tab-btn" onclick="showTab(event,'tab-tsnu')">🤝 TSNU (<span id="c-tsnu">27</span>)</button>
+      <button class="tab-btn" onclick="showTab(event,'tab-nocust')">⚠️ ไม่มีลูกค้า (<span id="c-nc">14</span>)</button>
+    </div>
+    <div class="tab-content active scrollable" id="tab-all"><table class="tbl"><thead><tr><th>No.</th><th>รุ่นรถ</th><th>สี</th><th>Assign</th><th>โชว์รูม</th><th>ลูกค้า</th><th>Sales / ชื่อ</th><th>หมายเหตุ</th></tr></thead><tbody id="tb-all"></tbody></table></div>
+    <div class="tab-content scrollable" id="tab-tcs"><table class="tbl"><thead><tr><th>No.</th><th>รุ่นรถ</th><th>สี</th><th>Assign</th><th>ลูกค้า</th><th>Sales</th><th>ชื่อลูกค้า</th><th>หมายเหตุ</th></tr></thead><tbody id="tb-tcs"></tbody></table></div>
+    <div class="tab-content scrollable" id="tab-tsnu"><table class="tbl"><thead><tr><th>No.</th><th>รุ่นรถ</th><th>สี</th><th>Assign</th><th>ลูกค้า</th><th>หมายเหตุ</th></tr></thead><tbody id="tb-tsnu"></tbody></table></div>
+    <div class="tab-content scrollable" id="tab-nocust"><table class="tbl"><thead><tr><th>No.</th><th>รุ่นรถ</th><th>สี</th><th>Assign</th><th>โชว์รูม</th><th>⚡ Action</th></tr></thead><tbody id="tb-nc"></tbody></table></div>
+    <div class="sumbar">
+      <div class="si"><div class="sdot" style="background:var(--blue)"></div><span class="blue fw7">TCS: <span id="s-tcs">13</span></span></div>
+      <div class="si"><div class="sdot" style="background:var(--green)"></div><span class="green fw7">TSNU: <span id="s-tsnu">27</span></span></div>
+      <div class="si"><div class="sdot" style="background:#22c55e"></div><span>มีลูกค้า: <span id="s-cust">26</span></span></div>
+      <div class="si"><div class="sdot" style="background:var(--red)"></div><span class="red">ไม่มีลูกค้า: <span id="s-nc">14</span></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: CASHFLOW -->
+<div class="page" id="p-cashflow">
+  <div class="alert yellow">
+    <div class="alert-icon">⚠️</div>
+    <div><div class="alert-title">กระแสเงินสดช่วงสงกรานต์เสี่ยงสูง</div><div class="alert-desc">13 วัน (7–20 เม.ย.) ไม่มีรถเข้า = ไม่มีเงินใหม่หมุนเวียน</div></div>
+  </div>
+
+  <!-- SOURCE SELECTOR -->
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow)">
+    <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📡 เลือกวิธีดึงข้อมูล</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div id="src-file-btn" onclick="selectCFSource('file')" style="border:2px solid var(--blue);background:var(--blue-bg);border-radius:8px;padding:12px 14px;cursor:pointer">
+        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:3px">📁 อัปโหลดไฟล์ Excel</div>
+        <div style="font-size:11px;color:var(--muted)">ใช้ได้ทุกที่ ไม่ต้องมี Extension</div>
+      </div>
+      <div id="src-chrome-btn" onclick="selectCFSource('chrome')" style="border:2px solid var(--border);background:#fafbfc;border-radius:8px;padding:12px 14px;cursor:pointer">
+        <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:3px">🌐 ดึงจาก E-Pay / VSS (Chrome)</div>
+        <div style="font-size:11px;color:var(--muted)">ต้องมี Claude in Chrome Extension</div>
+      </div>
+    </div>
+    <div id="cf-mode-file">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">อัปโหลดไฟล์ที่นี่ — ระบบดึงตัวเลขให้อัตโนมัติ:</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div class="upload-box" style="padding:10px" id="cf-box-ay"><input type="file" accept=".xlsx,.xls" onchange="loadAYcf(this)"><div style="font-size:18px;margin-bottom:3px">💳</div><div style="font-size:11px;font-weight:700">AY จ่ายค่ารถ</div><div style="font-size:10px;color:var(--muted)">Historical Report</div><div class="up-status" id="cf-st-ay" style="display:none">✓</div></div>
+        <div class="upload-box" style="padding:10px" id="cf-box-tlt2"><input type="file" accept=".xlsx,.xls" onchange="loadTLTcf(this)"><div style="font-size:18px;margin-bottom:3px">🏦</div><div style="font-size:11px;font-weight:700">รายงาน TLT</div><div style="font-size:10px;color:var(--muted)">วงเงินและ Invoice</div><div class="up-status" id="cf-st-tlt2" style="display:none">✓</div></div>
+        <div class="upload-box" style="padding:10px" id="cf-box-tsnu"><input type="file" accept=".xlsx,.xls" onchange="loadTSNUcf(this)"><div style="font-size:18px;margin-bottom:3px">🤝</div><div style="font-size:11px;font-weight:700">รายการโอน TSNU</div><div style="font-size:10px;color:var(--muted)">ยอดโอนกลับมา</div><div class="up-status" id="cf-st-tsnu" style="display:none">✓</div></div>
+      </div>
+    </div>
+    <div id="cf-mode-chrome" style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
+        <button onclick="fetchEpay()" style="background:var(--blue-bg);border:1.5px solid var(--blue-border);color:var(--blue);border-radius:8px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;line-height:1.6">🌐 ดึงจาก E-Pay<br><span style="font-size:10px;font-weight:400;color:var(--muted)">Invoice + Outstanding</span></button>
+        <button onclick="fetchVSS()" style="background:var(--green-bg);border:1.5px solid var(--green-border);color:var(--green);border-radius:8px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;line-height:1.6">📊 ดึงจาก VSS<br><span style="font-size:10px;font-weight:400;color:var(--muted)">ยอดขาย + ยอดจอง</span></button>
+        <button onclick="fetchAllSources()" style="background:var(--purple-bg);border:1.5px solid var(--purple-border);color:var(--purple);border-radius:8px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;line-height:1.6">⚡ ดึงทั้งหมด<br><span style="font-size:10px;font-weight:400;color:var(--muted)">E-Pay + VSS พร้อมกัน</span></button>
+      </div>
+      <div id="chrome-log" style="display:none;border-radius:8px;padding:10px 12px;font-size:12px;font-weight:600;margin-bottom:8px"></div>
+      <div style="background:#f8f9fa;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--muted)">⚠️ ต้องใช้คอมที่ติดตั้ง <strong>Claude in Chrome Extension</strong> เท่านั้น · ถ้าไม่มีให้ใช้แบบ "อัปโหลดไฟล์"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">💸 กระแสเงินสด TLT System</div><div id="cf-source-badge" class="card-badge">📁 จากไฟล์</div></div>
+    <div class="cf-cards">
+      <div class="cf-card in"><div class="cf-label">เงินเข้า (Cash In)</div><div class="cf-value" id="cf-in">—</div><div class="cf-sub">โอนจาก TSNU + AY</div></div>
+      <div class="cf-card out"><div class="cf-label">เงินออก (Cash Out)</div><div class="cf-value" id="cf-out">—</div><div class="cf-sub">ชำระ Invoice TLT</div></div>
+      <div class="cf-card net"><div class="cf-label">Net Cash Flow</div><div class="cf-value" id="cf-net">—</div><div class="cf-sub" id="cf-net-sub">เงินหมุนสุทธิ</div></div>
+    </div>
+    <div style="padding:16px">
+      <div style="font-size:12px;font-weight:700;margin-bottom:4px">🧮 ตัวเลข <span style="font-weight:400;color:var(--muted);font-size:11px">(ดึงอัตโนมัติ หรือแก้ไขได้)</span></div><div style="font-size:11px;color:var(--muted);margin-bottom:10px">กรอกหรือแก้ไขได้เสมอ — คำนวณให้ทันที</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px">
+        <div class="input-group"><label>เงินจาก TSNU (บาท) <span id="lbl-tsnu" style="color:var(--green);font-size:10px"></span></label><input type="number" id="cf-tsnu-in" placeholder="ดึงอัตโนมัติ หรือกรอก" oninput="calcCF()"></div>
+        <div class="input-group"><label>AY จ่ายค่ารถ (บาท) <span id="lbl-ay" style="color:var(--green);font-size:10px"></span></label><input type="number" id="cf-ay-in" placeholder="ดึงอัตโนมัติ หรือกรอก" oninput="calcCF()"></div>
+        <div class="input-group"><label>Invoice ที่ต้องชำระ (บาท) <span id="lbl-inv" style="color:var(--green);font-size:10px"></span></label><input type="number" id="cf-invoice-out" placeholder="ดึงอัตโนมัติ หรือกรอก" oninput="calcCF()"></div>
+      </div>
+      <div style="background:var(--yellow-bg);border:1px solid var(--yellow-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:6px">⚠️ แผนรับมือสงกรานต์</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.9">
+          • <strong style="color:var(--text)">ก่อน 7 เม.ย.:</strong> โยก TSNU 27 คัน → รับเงินโอนกลับมาเปิดวงเงิน<br>
+          • <strong style="color:var(--text)">ก่อน 7 เม.ย.:</strong> ชำระ Invoice ครบกำหนด 3–8 เม.ย. ทั้งหมด<br>
+          • <strong style="color:var(--red)">7–20 เม.ย.:</strong> ไม่มีรถเข้า = ไม่มีเงินใหม่ → พึ่ง AY เท่านั้น<br>
+          • <strong style="color:var(--text)">หลัง 20 เม.ย.:</strong> TMT เริ่มผลิต → วงเงินหมุนใหม่ตามปกติ
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">📤 Invoice ที่ต้องชำระ เม.ย. 2569</div></div>
+    <table class="tbl">
+      <thead><tr><th>ครบกำหนด</th><th>ประมาณยอด</th><th>สถานะ</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td class="mono red fw7">3 เม.ย.</td><td class="mono">~1.8M</td><td><span class="badge b-danger">⚠️ ด่วนมาก!</span></td><td class="red fw7">กด E-Pay ทันที</td></tr>
+        <tr><td class="mono red fw7">4 เม.ย.</td><td class="mono">~2.0M</td><td><span class="badge b-danger">⚠️ พรุ่งนี้</span></td><td class="red fw7">เตรียมกด E-Pay</td></tr>
+        <tr><td class="mono yellow fw7">5 เม.ย.</td><td class="mono">~4.9M</td><td><span class="badge b-warn">อีก 2 วัน</span></td><td class="yellow">เตรียมพร้อม</td></tr>
+        <tr><td class="mono yellow fw7">8 เม.ย.</td><td class="mono">~5.1M</td><td><span class="badge b-warn">อีก 5 วัน</span></td><td class="yellow">วางแผนล่วงหน้า</td></tr>
+        <tr><td class="mono" style="color:var(--muted)">หลัง 20 เม.ย.</td><td class="mono">W.2</td><td><span class="badge b-ok">✓ ยังมีเวลา</span></td><td class="green">ปกติ</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PAGE: FLOW -->
+<div class="page" id="p-flow">
+  <div class="card">
+    <div class="card-header"><div class="card-title">🔄 Flow การบริหารวงเงิน TLT</div></div>
+    <div class="flow-section">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">① กระบวนการหลัก</div>
+      <div class="flow-row">
+        <div class="flow-box hl-blue"><div class="fl-label blue">TBR ซื้อรถ</div><div class="fl-val blue">Assign</div><div class="fl-desc">สั่งรถจาก TMT<br>Credit 30 วัน<br><strong>~฿8.4M / คัน เฉลี่ย</strong></div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box hl-yellow"><div class="fl-label yellow">TLT วงเงิน</div><div class="fl-val yellow">60M</div><div class="fl-desc">วงเงินสูงสุด 60M<br>ใช้ไป 55M<br><strong>คงเหลือ ~฿8.4M</strong></div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box hl-green"><div class="fl-label green">AY จ่ายค่ารถ</div><div class="fl-val green">65M</div><div class="fl-desc">จ่ายปิด Invoice<br>E-Pay Success to Pay<br><strong>วนกลับเปิดวงเงิน</strong></div></div>
+        <div class="flow-arrow">↩</div>
+        <div class="flow-box"><div class="fl-label muted">วงจรหมุน</div><div class="fl-val" style="color:var(--purple)">♻️</div><div class="fl-desc">AY จ่าย → TLT เปิด<br>TBR สั่งใหม่ → วนซ้ำ</div></div>
+      </div>
+
+      <div class="flow-condition">
+        <div class="fc-title">🎯 เงื่อนไขการตัดสินใจ: ยอดขาย (B) vs รถเข้า (A)</div>
+        <div class="fc-row">
+          <div class="fc-item good">
+            <div class="fc-head green">✅ B &gt; A — ยอดขาย &gt; รถเข้า</div>
+            <div class="fc-desc">• ไม่ต้องมีเงินต่อเกินไป<br>• ขายออกก่อน รถหมุนไว<br>• วงเงินยังหมุนได้ปกติ<br>• <strong style="color:var(--green)">สถานะดี ✓</strong></div>
+          </div>
+          <div class="fc-item bad">
+            <div class="fc-head red">⚠️ B &lt; A — รถเข้า &gt; ยอดขาย</div>
+            <div class="fc-desc">• ต้องหาเงินต่อ TBR เพิ่ม<br>• Invoice สะสม → วงเงินตัน<br>• ต้องโยก TSNU ออกด่วน<br>• <strong style="color:var(--red)">⚠️ สถานการณ์ตอนนี้!</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">④ Report &amp; Control</div>
+      <div class="flow-row">
+        <div class="flow-box"><div class="fl-label muted">Report ผบห.</div><div class="fl-desc" style="font-size:12px;line-height:2">📋 ดู Assign จากฝ่ายขาย<br>📊 ดู Invoice บริหารวงเงิน<br>💰 Campaign / ราคาย่อย<br>🔄 Refresh Tab TLT</div></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-box hl-blue"><div class="fl-label blue">New Car Process</div><div class="fl-desc" style="font-size:12px;line-height:2">🚗 รถใหม่ → Historical Report<br>📋 Copy Paste เฉพาะค่า<br>🔄 วาง Tab AY → Refresh<br>✅ ตรวจวงเงินคงเหลือ</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box hl-green"><div class="fl-label green">ผลลัพธ์</div><div class="fl-desc" style="font-size:12px;line-height:2">✅ วงเงินหมุนเวียนได้<br>✅ ไม่ติดค้าง Invoice<br>✅ ผบห. ตัดสินใจถูก<br>✅ กำไรไหลเข้าต่อเนื่อง</div></div>
+      </div>
+
+      <div style="background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:8px;padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px">💡 ปัจจัยที่ต้องพิจารณาเพิ่ม</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12px;color:var(--muted);line-height:1.8">
+          <div>• <strong style="color:var(--text)">Campaign</strong>: ส่วนลด TMT เพิ่ม/ลดยอดสั่ง<br>• <strong style="color:var(--text)">ราคาย่อย</strong>: แต่ละรุ่นต่างกัน ถ่วงน้ำหนัก<br>• <strong style="color:var(--text)">7–10 วันล่วงหน้า</strong>: ต้องรู้ก่อนว่ามีรถกี่คัน</div>
+          <div>• <strong style="color:var(--text)">TSNU</strong>: ช่วยหมุนเงิน โยกออกเร็ว<br>• <strong style="color:var(--text)">Paypoint E-Pay</strong>: กด Due Date ให้ถูก<br>• <strong style="color:var(--text)">Credit 30 วัน</strong>: นับจากวันที่ Invoice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: SALES -->
+<div class="page" id="p-sales">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">💰 ยอดขาย / ยอดจอง / วิเคราะห์เป้า</div>
+      <div style="font-size:11px;color:var(--muted)">อัปโหลดไฟล์ VSS เพื่อดึงอัตโนมัติ หรือกรอกด้านล่าง</div>
+    </div>
+    <div class="sa-grid">
+      <div class="input-group"><label>ยอดขาย TCS เดือนนี้ (คัน) <span style="color:var(--green);font-size:10px">AUTO จาก VSS</span></label><input type="number" id="sa-sold" placeholder="กรอก หรืออัปโหลดไฟล์ VSS" oninput="calcSales()"></div>
+      <div class="input-group"><label>ยอดจองรอส่งมอบ (คัน) <span style="color:var(--green);font-size:10px">AUTO จาก VSS</span></label><input type="number" id="sa-booking" placeholder="กรอก หรืออัปโหลดไฟล์ VSS" oninput="calcSales()"></div>
+      <div class="input-group"><label>เป้าขายเดือนนี้ (คัน)</label><input type="number" id="sa-target" placeholder="เช่น 60" oninput="calcSales()"></div>
+      <div class="input-group"><label>วันทำงานที่เหลือ (วัน)</label><input type="number" id="sa-days" placeholder="เช่น 15" oninput="calcSales()"></div>
+    </div>
+    <div class="sa-result" id="sa-result">
+      <div class="sa-cards">
+        <div class="sa-card" id="sa-c1"><div class="sa-label">ทำได้</div><div class="sa-val" id="sa-v1">—</div><div class="sa-desc" id="sa-d1">—</div><div class="bar-mini"><div class="bar-fill" id="sa-bar1" style="width:0%"></div></div></div>
+        <div class="sa-card" id="sa-c2"><div class="sa-label">ต้องขาย/วัน</div><div class="sa-val" id="sa-v2">—</div><div class="sa-desc" id="sa-d2">—</div></div>
+        <div class="sa-card" id="sa-c3"><div class="sa-label">ยอดจองช่วย</div><div class="sa-val" id="sa-v3">—</div><div class="sa-desc" id="sa-d3">—</div></div>
+      </div>
+      <div id="sa-rec" style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted)"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">📊 วิเคราะห์ตามรุ่น (จาก Assignment)</div></div>
+    <div class="scrollable"><table class="tbl"><thead><tr><th>รุ่นรถ</th><th>Total</th><th>TCS</th><th>TSNU</th><th>มีลูกค้า</th><th>ไม่มีลูกค้า</th><th>สถานะ</th></tr></thead><tbody id="tb-model"></tbody></table></div>
+  </div>
+</div>
+
+<!-- PAGE: WORKFLOW -->
+<div class="page" id="p-workflow">
+  <div class="card">
+    <div class="card-header"><div class="card-title">📖 ขั้นตอนการทำงานประจำวัน</div></div>
+    <div class="wf-grid">
+      <div class="wf-step"><div class="wf-num">1</div><div class="wf-title">TBR — ซื้อรถ</div><div class="wf-list">เปิด <span>VSS</span><br>เลือก <span>1 เม.ย. – วันนี้</span><br>Download → Copy (ไม่เอาหัว)<br>วางแบบ <span>Paste Value</span><br>อัปโหลดที่นี่ → AUTO</div></div>
+      <div class="wf-step"><div class="wf-num">2</div><div class="wf-title">TLT — วงเงิน E-Pay</div><div class="wf-list">เข้า <span>Paypoint E-Pay → Details</span><br>ดู Invoice Due Date, Bill Date<br>Copy Detail → Tab TLT<br>กรอก <span>Due Date</span> ทุกรายการ<br>อัปโหลดที่นี่ → AUTO</div></div>
+      <div class="wf-step"><div class="wf-num">3</div><div class="wf-title">AY — จ่ายค่ารถ</div><div class="wf-list">E-Pay → <span>Historical Report</span><br>กำหนดวันที่ต้องการ<br>กรอง <span>Success to Pay</span><br>Copy → <span>Special Value</span><br>Tab AY → <span>Refresh</span></div></div>
+      <div class="wf-step"><div class="wf-num">4</div><div class="wf-title">Report & ตัดสินใจ</div><div class="wf-list">ดู <span>Assignment ฝ่ายขาย</span><br>ตรวจ <span>B &gt; A / B &lt; A</span><br>ถ้า B &lt; A → <span>โยก TSNU</span><br>ดู Campaign / ราคาย่อย<br>วางแผน <span>7–10 วัน</span> ล่วงหน้า</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">☑️ Checklist รายวัน</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+      <div style="padding:16px;border-right:1px solid var(--border)">
+        <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:10px">🌅 งานเช้า (ก่อน 10.00 น.)</div>
+        <div id="cl-morning"></div>
+      </div>
+      <div style="padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--orange);margin-bottom:10px">🌆 งานบ่าย (ก่อน 17.00 น.)</div>
+        <div id="cl-afternoon"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const today=new Date();
+const tomorrow=new Date(today); tomorrow.setDate(today.getDate()+1);
+document.getElementById('todayDate').textContent=today.toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+document.getElementById('tmr-date-lbl').textContent=tomorrow.toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long'});
+
+function gotoPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function showTab(e,id){
+  const card=e.target.closest('.card');
+  card.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  card.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  e.target.classList.add('active');
+}
+
+let assignments=[
+  {no:1,series:'Ativ 1.2 Nightshade',color:'Ce Gray B',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:2,series:'Ativ 1.2 Premium Luxury',color:'Urban Met',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:3,series:'Ativ 1.2 Smart',color:'S.White',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:4,series:'B-CAB 4TREX 2.8 M/T',color:'S.White',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:5,series:'Yaris Cross HEV Prem Lux',color:'A.Black',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:6,series:'Yaris Cross HEV Smart',color:'A.Black',assignDate:'2026-04-01',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:7,series:'Ativ 1.2 Smart',color:'S.White',assignDate:'2026-04-02',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:8,series:'Ativ 1.2 Smart',color:'Met Stream',assignDate:'2026-04-02',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:9,series:'C-CAB 4x2 2.4 Entry',color:'Silver',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:10,series:'D-CAB 2x4 2.8 Premium M/T',color:'Silver',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:11,series:'D-CAB 2x4 2.8 Smart A/T',color:'Ash',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:12,series:'D-CAB 4TREX 2.8 Overland',color:'W.Pearl',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:13,series:'Yaris Cross HEV Premium',color:'A.Black',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:14,series:'Yaris Cross HEV Premium',color:'Met Stream',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:15,series:'Yaris Cross HEV Prem Lux',color:'W.Pearl',assignDate:'2026-04-02',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:16,series:'Ativ 1.2 Premium',color:'Met Stream',assignDate:'2026-04-03',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:17,series:'Ativ 1.2 Smart',color:'S.White',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:18,series:'C-CAB 2x4 2.8 Premium',color:'Silver',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:19,series:'Corolla Cross 1.8 HEV',color:'Met Stream',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:20,series:'D-CAB 2x4 2.8 Overland A/T',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:21,series:'D-CAB 2x4 2.8 Overland Plus',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:22,series:'D-CAB 2x4 2.8 Premium A/T',color:'Silver',assignDate:'2026-04-03',showroom:'TCS',hasCustomer:true,salesman:'ภุมรี (เมย์)',customer:'ธีรวัฒน์ แสงผา',note:''},
+  {no:23,series:'D-CAB 2x4 2.8 Premium A/T',color:'Ash',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:24,series:'D-CAB 2x4 2.8 Smart A/T',color:'Ash',assignDate:'2026-04-03',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:25,series:'Fortuner 2X4 2.4 Leader S',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:26,series:'Fortuner 2X4 2.4 Legender',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:27,series:'Hilux Champ 2.4 M/T',color:'S.White',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:28,series:'Yaris Cross HEV Prem TT',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:29,series:'Yaris Cross HEV Prem TT',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:30,series:'Yaris Cross Nightshade',color:'Ce Gray B',assignDate:'2026-04-03',showroom:'TCS',hasCustomer:true,salesman:'ภัทราภรณ์ (นุ่น)',customer:'พิสมัย สอนพรม',note:''},
+  {no:31,series:'Yaris Cross Nightshade',color:'W.Pearl',assignDate:'2026-04-03',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:32,series:'Commuter 2.8 A/T',color:'White',assignDate:'2026-04-04',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:''},
+  {no:33,series:'Ativ 1.2 Smart',color:'S.White',assignDate:'2026-04-06',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:34,series:'Fortuner 2X4 2.4 Legender',color:'W.Pearl',assignDate:'2026-04-06',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:''},
+  {no:35,series:'Yaris 1.2 Premium',color:'Urban Met',assignDate:'2026-04-07',showroom:'TSNU',hasCustomer:true,salesman:'',customer:'',note:'🏁 วันสุดท้ายก่อนสงกรานต์'},
+  {no:36,series:'Ativ 1.2 Smart',color:'A.Black',assignDate:'2026-04-14',showroom:'TCS',hasCustomer:true,salesman:'ภุมรี (เมย์)',customer:'ลิขิตร ขวาดก',note:'W.2'},
+  {no:37,series:'Ativ 1.2 Smart',color:'Met Stream',assignDate:'2026-04-14',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:'W.2'},
+  {no:38,series:'D-CAB 2x4 2.8 Overland Plus',color:'W.Pearl',assignDate:'2026-04-14',showroom:'TCS',hasCustomer:true,salesman:'ภัทราภรณ์ (นุ่น)',customer:'ปรียานุช สุวรรณบุผา',note:'W.2'},
+  {no:39,series:'Fortuner 2X4 Leader G Plus',color:'Gray',assignDate:'2026-04-14',showroom:'TSNU',hasCustomer:true,salesman:'เจษฎาภรณ์ (หรั่ง)',customer:'ธาตุ หงษามนุษย์',note:'⚠️ ให้ TCS/ไม่ซื้อคืน'},
+  {no:40,series:'Yaris Cross HEV Premium',color:'Urban Met',assignDate:'2026-04-14',showroom:'TCS',hasCustomer:false,salesman:'',customer:'',note:'W.2'},
+];
+
+function renderAll(){
+  const tcs=assignments.filter(r=>r.showroom==='TCS');
+  const tsnu=assignments.filter(r=>r.showroom==='TSNU');
+  const nc=assignments.filter(r=>!r.hasCustomer);
+  const hc=assignments.filter(r=>r.hasCustomer);
+  document.getElementById('c-all').textContent=assignments.length;
+  document.getElementById('c-tcs').textContent=tcs.length;
+  document.getElementById('c-tsnu').textContent=tsnu.length;
+  document.getElementById('c-nc').textContent=nc.length;
+  document.getElementById('assign-cnt').textContent=assignments.length+' คัน';
+  document.getElementById('s-tcs').textContent=tcs.length;
+  document.getElementById('s-tsnu').textContent=tsnu.length;
+  document.getElementById('s-cust').textContent=hc.length;
+  document.getElementById('s-nc').textContent=nc.length;
+  const tmrCars=getTmr();
+  document.getElementById('kpi-tmr').textContent=tmrCars.length||'0';
+  document.getElementById('kpi-tmr-sub').textContent=tmrCars.length+' คัน พรุ่งนี้';
+  document.getElementById('tb-all').innerHTML=assignments.map(rowAll).join('');
+  document.getElementById('tb-tcs').innerHTML=tcs.map(rowTCS).join('');
+  document.getElementById('tb-tsnu').innerHTML=tsnu.map(rowTSNU).join('');
+  document.getElementById('tb-nc').innerHTML=nc.map(rowNC).join('');
+  renderTmr();renderModelTable();
+}
+
+function getTmr(){return assignments.filter(r=>r.assignDate===tomorrow.toISOString().split('T')[0]);}
+
+function renderTmr(){
+  const cars=getTmr();
+  document.getElementById('tmr-count').textContent=cars.length>0?cars.length+' คัน':'ยังไม่มีข้อมูล';
+  document.getElementById('tmr-grid').innerHTML=cars.length===0
+    ?`<div class="no-data"><div class="no-icon">✅</div><div>ไม่มีรถออกพรุ่งนี้</div></div>`
+    :cars.map(r=>`<div class="tmr-item"><div><div style="font-size:12px;font-weight:600">${r.series}</div><div style="font-size:11px;color:var(--muted)">${r.color} · ${r.showroom==='TCS'?'🏪 TCS':'🤝 TSNU'}</div></div>${r.hasCustomer?'<span class="badge b-ok">✓</span>':'<span class="badge b-danger">⚠️</span>'}</div>`).join('');
+}
+
+function renderModelTable(){
+  const m={};
+  assignments.forEach(r=>{const k=r.series.split(' ').slice(0,3).join(' ');if(!m[k])m[k]={t:0,tcs:0,tsnu:0,hc:0,nc:0};m[k].t++;r.showroom==='TCS'?m[k].tcs++:m[k].tsnu++;r.hasCustomer?m[k].hc++:m[k].nc++;});
+  document.getElementById('tb-model').innerHTML=Object.entries(m).sort((a,b)=>b[1].t-a[1].t).map(([k,v])=>`<tr><td><b>${k}</b></td><td class="mono">${v.t}</td><td class="mono blue">${v.tcs}</td><td class="mono green">${v.tsnu}</td><td class="mono green">${v.hc}</td><td class="mono ${v.nc>0?'red':''}">${v.nc}</td><td>${v.nc>0?`<span class="badge b-warn">⚠️ หาลูกค้า ${v.nc} คัน</span>`:`<span class="badge b-ok">✓ OK</span>`}</td></tr>`).join('');
+}
+
+function bR(r){return r.showroom==='TCS'?'<span class="badge b-tcs">🏪 TCS</span>':'<span class="badge b-tsnu">🤝 TSNU</span>'}
+function cB(r){return r.hasCustomer?'<span class="badge b-ok">✓</span>':'<span class="badge b-danger">⚠️</span>'}
+function si(r){return r.customer?`<span style="font-size:11px;font-weight:600">${r.customer}</span><br><span class="muted" style="font-size:10px">${r.salesman}</span>`:'<span class="muted" style="font-size:11px">—</span>'}
+function dt(r){return r.assignDate.replace('2026-','')}
+
+function rowAll(r){return`<tr><td class="mono muted">${r.no}</td><td><b>${r.series}</b>${r.note?`<br><span style="font-size:10px;color:var(--yellow)">${r.note}</span>`:''}</td><td class="muted" style="font-size:11px">${r.color}</td><td class="mono blue" style="font-size:11px">${dt(r)}</td><td>${bR(r)}</td><td>${cB(r)}</td><td>${si(r)}</td><td style="font-size:10px;color:var(--muted)"></td></tr>`}
+function rowTCS(r){return`<tr><td class="mono muted">${r.no}</td><td><b>${r.series}</b></td><td class="muted" style="font-size:11px">${r.color}</td><td class="mono blue" style="font-size:11px">${dt(r)}</td><td>${cB(r)}</td><td style="font-size:11px">${r.salesman||'—'}</td><td style="font-size:11px">${r.customer||'—'}</td><td style="font-size:10px;color:var(--yellow)">${r.note||''}</td></tr>`}
+function rowTSNU(r){return`<tr><td class="mono muted">${r.no}</td><td><b>${r.series}</b></td><td class="muted" style="font-size:11px">${r.color}</td><td class="mono blue" style="font-size:11px">${dt(r)}</td><td>${cB(r)}</td><td style="font-size:10px;color:var(--yellow)">${r.note||'—'}</td></tr>`}
+function rowNC(r){return`<tr><td class="mono muted">${r.no}</td><td><b>${r.series}</b></td><td class="muted" style="font-size:11px">${r.color}</td><td class="mono blue" style="font-size:11px">${dt(r)}</td><td>${bR(r)}</td><td>${r.showroom==='TCS'?`<span class="red fw7">🔴 เร่งหาลูกค้า!</span>`:`<span class="yellow fw7">🟡 แจ้ง TSNU</span>`}</td></tr>`}
+
+function loadAssignment(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      const parsed=[];
+      rows.forEach(row=>{
+        if(typeof row[0]==='number'&&row[0]>0){
+          const ai=String(row[4]||'');let ad='';
+          const m=ai.match(/Ass\.(\d{2})\/(\d{2})\/(\d{4})/);
+          if(m)ad=`${m[3]}-${m[2]}-${m[1]}`;
+          else if(ai.includes('W.2'))ad='2026-04-14';
+          const sr=String(row[12]||'').includes('TCS')?'TCS':'TSNU';
+          const st=String(row[11]||'');
+          const hc=st.includes('มีลูกค้า')||(row[10]&&String(row[10]).trim().length>1);
+          parsed.push({no:row[0],series:String(row[2]||''),color:String(row[3]||''),assignDate:ad,showroom:sr,hasCustomer:hc,salesman:String(row[9]||''),customer:String(row[10]||''),note:String(row[12]||'').replace(/รถ TCS|รถ TSNU/g,'').trim()});
+        }
+      });
+      if(parsed.length>0){assignments=parsed;renderAll();markLoaded('box-assign','st-assign',`✓ ${parsed.length} คัน`);}
+      else alert('ไม่พบข้อมูลในไฟล์');
+    }catch(err){alert('Error: '+err.message)}
+  };
+  r.readAsArrayBuffer(f);
+}
+
+function loadSales(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      let sold=0,book=0;
+      rows.forEach(row=>{
+        if(row[0]&&(row[0] instanceof Date||(typeof row[0]==='number'&&row[0]>40000))){
+          if(String(row[12]||row[13]||row[19]||'').toLowerCase().includes('จอง'))book++;
+          else sold++;
+        }
+      });
+      document.getElementById('sa-sold').value=sold||'';
+      document.getElementById('sa-booking').value=book||'';
+      document.getElementById('kpi-sold').textContent=sold||'—';
+      document.getElementById('kpi-sold-sub').textContent=sold+' คัน จาก VSS';
+      document.getElementById('kpi-booking').textContent=book||'—';
+      calcSales();
+      markLoaded('box-sales','st-sales',`✓ ขาย ${sold} จอง ${book}`);
+    }catch(err){alert('Error: '+err.message)}
+  };
+  r.readAsArrayBuffer(f);
+}
+
+function loadTLT(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const shName=wb.SheetNames.find(s=>s.includes('สถานะ'))||wb.SheetNames[1]||wb.SheetNames[0];
+      const ws=wb.Sheets[shName];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      let used=0;
+      rows.forEach(row=>row.forEach(v=>{if(typeof v==='number'&&v>1000000&&v<60000000)used=Math.max(used,v);}));
+      if(used>0){
+        const rem=60000000-used,pct=(used/60000000*100).toFixed(1);
+        document.getElementById('kpi-remaining').textContent=(rem/1000000).toFixed(2)+'M';
+        document.getElementById('kpi-pct').textContent=pct+'%';
+        document.getElementById('prog-pct-lbl').textContent=pct+'%';
+        document.getElementById('prog-fill').style.width=pct+'%';
+        document.getElementById('prog-used-lbl').textContent=(used/1000000).toFixed(2)+'M ◄ ตอนนี้';
+      }
+      markLoaded('box-tlt','st-tlt','✓ วงเงินอัปเดต');
+    }catch(err){alert('Error: '+err.message)}
+  };
+  r.readAsArrayBuffer(f);
+}
+
+function loadAY(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      let total=0;
+      rows.forEach(row=>{if(String(row[18]||'').includes('Success')&&typeof row[15]==='number')total+=row[15];});
+      document.getElementById('cf-in').textContent=(total/1000000).toFixed(2)+'M';
+      document.getElementById('kpi-netcash').textContent=(total/1000000).toFixed(1)+'M';
+      markLoaded('box-ay','st-ay',`✓ AY ${(total/1000000).toFixed(1)}M`);
+    }catch(err){alert('Error: '+err.message)}
+  };
+  r.readAsArrayBuffer(f);
+}
+
+function markLoaded(boxId,stId,text){
+  document.getElementById(boxId).classList.add('loaded');
+  const el=document.getElementById(stId);el.style.display='block';el.textContent=text;
+}
+
+function calcSales(){
+  const sold=parseInt(document.getElementById('sa-sold').value)||0;
+  const book=parseInt(document.getElementById('sa-booking').value)||0;
+  const tgt=parseInt(document.getElementById('sa-target').value)||0;
+  const days=parseInt(document.getElementById('sa-days').value)||0;
+  if(!sold&&!book&&!tgt){document.getElementById('sa-result').style.display='none';return;}
+  document.getElementById('sa-result').style.display='block';
+  document.getElementById('kpi-sold').textContent=sold||'—';
+  document.getElementById('kpi-booking').textContent=book||'—';
+  const rem=Math.max(0,tgt-sold),pct=tgt>0?Math.round(sold/tgt*100):0;
+  const dpd=days>0?Math.ceil(rem/days):0,netRem=Math.max(0,rem-book);
+  document.getElementById('sa-c1').className='sa-card '+(pct>=100?'good':pct>=70?'warn':'bad');
+  document.getElementById('sa-v1').textContent=pct+'%';
+  document.getElementById('sa-d1').textContent=`ขาย ${sold} / เป้า ${tgt} คัน`;
+  document.getElementById('sa-bar1').style.width=Math.min(pct,100)+'%';
+  document.getElementById('sa-bar1').style.background=pct>=100?'var(--green)':pct>=70?'var(--yellow)':'var(--red)';
+  document.getElementById('sa-c2').className='sa-card '+(dpd<=2?'good':dpd<=4?'warn':'bad');
+  document.getElementById('sa-v2').textContent=dpd+' คัน';
+  document.getElementById('sa-d2').textContent=`เหลือ ${days} วัน · ขาดอีก ${rem} คัน`;
+  document.getElementById('sa-c3').className='sa-card '+(netRem===0?'good':netRem<=5?'warn':'bad');
+  document.getElementById('sa-v3').textContent='+'+book;
+  document.getElementById('sa-d3').textContent=`ขาดจริง ${netRem} คัน`;
+  const rec=pct>=100?'🎉 ถึงเป้าแล้ว! โฟกัสบริหารวงเงิน':netRem===0?'✅ ยอดจองช่วยครบ — ส่งมอบให้ทัน':dpd<=3?`🔵 ต้องขาย ${dpd} คัน/วัน — ทำได้`:`⚠️ ต้องขาย ${dpd} คัน/วัน — หนักมาก! เร่งปิดยอดจอง`;
+  document.getElementById('sa-rec').innerHTML=`<strong>วิเคราะห์:</strong> ${rec}`;
+}
+
+function calcCF(){
+  const cin=(parseInt(document.getElementById('cf-tsnu-in').value)||0)+(parseInt(document.getElementById('cf-ay-in').value)||0);
+  const cout=parseInt(document.getElementById('cf-invoice-out').value)||0;
+  const net=cin-cout;
+  if(cin||cout){
+    document.getElementById('cf-in').textContent=(cin/1000000).toFixed(2)+'M';
+    document.getElementById('cf-out').textContent=(cout/1000000).toFixed(2)+'M';
+    document.getElementById('cf-net').textContent=(net/1000000).toFixed(2)+'M';
+    document.getElementById('cf-net-sub').textContent=net>=0?'✅ เงินพอหมุน':'⚠️ เงินขาด!';
+    document.getElementById('kpi-netcash').textContent=(net/1000000).toFixed(1)+'M';
+  }
+}
+
+const morningTasks=['อัปโหลด Assignment ใหม่','ดาวน์โหลด TBR จาก VSS → Paste Value','เข้า E-Pay → ดู Invoice ครบกำหนดวันนี้','อัปเดต Tab TLT → กด Refresh','ตรวจวงเงินคงเหลือ','เช็ค B > A หรือ B < A'];
+const afternoonTasks=['รับไฟล์ AY จากฝ่ายบัญชี','Historical Report → Success to Pay → Special Value','Refresh Tab AY → ดูวงเงินคงเหลือ','วางแผนสั่งรถ 7–10 วันข้างหน้า','ตรวจ Invoice ที่จะครบกำหนดพรุ่งนี้','Report ผบห. ก่อนปิดทำการ'];
+
+function renderCL(){
+  ['cl-morning','cl-afternoon'].forEach((id,i)=>{
+    const tasks=i===0?morningTasks:afternoonTasks;
+    document.getElementById(id).innerHTML=tasks.map(t=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0f2f5;cursor:pointer" onclick="toggleCL(this)"><div style="width:18px;height:18px;border:2px solid var(--border2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px" class="cb"></div><span style="font-size:12px">${t}</span></div>`).join('');
+  });
+}
+function toggleCL(el){
+  const cb=el.querySelector('.cb'),txt=el.querySelector('span');
+  if(cb.dataset.checked){delete cb.dataset.checked;cb.style.background='';cb.style.borderColor='var(--border2)';cb.innerHTML='';txt.style.cssText='';}
+  else{cb.dataset.checked='1';cb.style.background='var(--green)';cb.style.borderColor='var(--green)';cb.innerHTML='<span style="color:white">✓</span>';txt.style.textDecoration='line-through';txt.style.color='var(--muted)';}
+}
+
+renderAll();renderCL();
+
+// ===== CF SOURCE SELECTOR =====
+function selectCFSource(mode){
+  const fBtn=document.getElementById('src-file-btn');
+  const cBtn=document.getElementById('src-chrome-btn');
+  const fMode=document.getElementById('cf-mode-file');
+  const cMode=document.getElementById('cf-mode-chrome');
+  const badge=document.getElementById('cf-source-badge');
+  if(mode==='file'){
+    if(fBtn){fBtn.style.borderColor='var(--blue)';fBtn.style.background='var(--blue-bg)';}
+    if(cBtn){cBtn.style.borderColor='var(--border)';cBtn.style.background='#fafbfc';}
+    if(fMode)fMode.style.display='block';
+    if(cMode)cMode.style.display='none';
+    if(badge)badge.textContent='📁 จากไฟล์';
+  } else {
+    if(cBtn){cBtn.style.borderColor='var(--blue)';cBtn.style.background='var(--blue-bg)';}
+    if(fBtn){fBtn.style.borderColor='var(--border)';fBtn.style.background='#fafbfc';}
+    if(cMode)cMode.style.display='block';
+    if(fMode)fMode.style.display='none';
+    if(badge)badge.textContent='🌐 จาก E-Pay/VSS';
+  }
+}
+
+// ===== CF FILE LOADERS =====
+function readXL(input,cb){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{try{cb(XLSX.read(e.target.result,{type:'array'}));}catch(err){alert('Error: '+err.message);}};
+  r.readAsArrayBuffer(f);
+}
+
+function setFieldAuto(id,val,lblId,lbl){
+  const el=document.getElementById(id);
+  if(el&&val>0){el.value=val;el.style.background='#f0fdf4';el.style.borderColor='var(--green)';}
+  const le=document.getElementById(lblId);
+  if(le&&val>0)le.textContent=lbl;
+}
+
+function markCF(boxId,stId,txt){
+  const b=document.getElementById(boxId);if(b)b.classList.add('loaded');
+  const s=document.getElementById(stId);if(s){s.style.display='block';s.textContent=txt;}
+}
+
+function loadAYcf(input){
+  readXL(input,wb=>{
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+    let total=0;
+    rows.forEach(row=>{if(String(row[18]||'').includes('Success')&&typeof row[15]==='number')total+=row[15];});
+    setFieldAuto('cf-ay-in',total,'lbl-ay','AUTO จากไฟล์');
+    markCF('cf-box-ay','cf-st-ay','✓ AY '+(total/1000000).toFixed(2)+'M');
+    calcCF();
+  });
+}
+
+function loadTLTcf(input){
+  readXL(input,wb=>{
+    const shName=wb.SheetNames.find(s=>s.includes('สถานะ'))||wb.SheetNames[1]||wb.SheetNames[0];
+    const ws=wb.Sheets[shName];
+    const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+    let used=0;
+    rows.forEach(row=>row.forEach(v=>{if(typeof v==='number'&&v>1000000&&v<60000000)used=Math.max(used,v);}));
+    // หา outstanding จาก sheet TLT
+    const sh2=wb.SheetNames.find(s=>s.includes('TLT')||s.includes('2.'))||wb.SheetNames[0];
+    const ws2=wb.Sheets[sh2];
+    let inv=0;
+    if(ws2){
+      const r2=XLSX.utils.sheet_to_json(ws2,{header:1,defval:''});
+      r2.forEach(row=>{if(typeof row[4]==='number'&&row[4]>100000)inv+=row[4];});
+    }
+    if(used>0){
+      const rem=60000000-used,pct=(used/60000000*100).toFixed(1);
+      ['kpi-remaining'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=(rem/1000000).toFixed(2)+'M';});
+      ['kpi-pct','prog-pct-lbl'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pct+'%';});
+      const pf=document.getElementById('prog-fill');if(pf)pf.style.width=pct+'%';
+      const pu=document.getElementById('prog-used-lbl');if(pu)pu.textContent=(used/1000000).toFixed(2)+'M ◄ ตอนนี้';
+    }
+    if(inv>0)setFieldAuto('cf-invoice-out',inv,'lbl-inv','AUTO จากไฟล์ TLT');
+    markCF('cf-box-tlt2','cf-st-tlt2','✓ TLT โหลดแล้ว');
+    calcCF();
+  });
+}
+
+function loadTSNUcf(input){
+  readXL(input,wb=>{
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+    let total=0;
+    rows.forEach(row=>row.forEach(v=>{if(typeof v==='number'&&v>100000&&v<30000000)total+=v;}));
+    setFieldAuto('cf-tsnu-in',total,'lbl-tsnu','AUTO จากไฟล์');
+    markCF('cf-box-tsnu','cf-st-tsnu','✓ TSNU '+(total/1000000).toFixed(2)+'M');
+    calcCF();
+  });
+}
+
+// ===== CHROME FETCH =====
+function showChromeLog(msg,isErr=false){
+  const el=document.getElementById('chrome-log');
+  if(!el)return;
+  el.style.display='block';
+  el.style.background=isErr?'var(--red-bg)':'var(--green-bg)';
+  el.style.borderColor=isErr?'var(--red-border)':'var(--green-border)';
+  el.style.color=isErr?'var(--red)':'var(--green)';
+  el.textContent=msg;
+}
+
+async function fetchEpay(){
+  showChromeLog('🔄 กำลังเชื่อมต่อ E-Pay...');
+  try{
+    if(typeof window.claude!=='undefined'&&window.claude.browser){
+      showChromeLog('✅ พบ Extension — Claude จะดึงข้อมูล E-Pay ให้อัตโนมัติ');
+    } else {
+      showChromeLog('⚠️ ไม่พบ Claude Extension บนเครื่องนี้ — กรุณาสลับไปใช้แบบอัปโหลดไฟล์',true);
+      setTimeout(()=>selectCFSource('file'),2500);
+    }
+  }catch(e){showChromeLog('⚠️ ต้องใช้คอมที่มี Claude in Chrome Extension',true);setTimeout(()=>selectCFSource('file'),2500);}
+}
+
+async function fetchVSS(){
+  showChromeLog('🔄 กำลังเชื่อมต่อ VSS...');
+  try{
+    if(typeof window.claude!=='undefined'&&window.claude.browser){
+      showChromeLog('✅ พบ Extension — Claude จะดึงยอดขายจาก VSS ให้อัตโนมัติ');
+    } else {
+      showChromeLog('⚠️ ไม่พบ Claude Extension — กรุณาอัปโหลดไฟล์ VSS แทน',true);
+      setTimeout(()=>selectCFSource('file'),2500);
+    }
+  }catch(e){showChromeLog('⚠️ ต้องใช้คอมที่มี Claude in Chrome Extension',true);setTimeout(()=>selectCFSource('file'),2500);}
+}
+
+async function fetchAllSources(){
+  await fetchEpay();
+  setTimeout(fetchVSS,1500);
+}
+
+</script>
+
+<!-- PAGE: กราฟแนวโน้ม -->
+<div class="page" id="p-chart">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <div style="font-size:13px;font-weight:700">📈 กราฟแนวโน้ม — ข้อมูลจาก Storage + ไฟล์อัปโหลด</div>
+    <div id="storage-chip" class="storage-chip" style="display:none">✅ มีข้อมูลบันทึกไว้</div>
+  </div>
+
+  <div class="g2">
+    <div class="chart-box">
+      <div class="chart-box-title">💸 วงเงิน TLT ที่ใช้ไป (ล้านบาท)</div>
+      <div class="chart-wrap"><canvas id="chart-tlt"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">🚗 ยอดจอง B/K vs ส่งมอบ R/S (คัน)</div>
+      <div class="chart-wrap"><canvas id="chart-sales"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="chart-box">
+      <div class="chart-box-title">💰 Cash Flow สะสม — รับ vs จ่าย (ล้านบาท)</div>
+      <div class="chart-wrap"><canvas id="chart-cf"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">🏎️ Assignment เม.ย.69 — TCS vs TSNU รายวัน</div>
+      <div class="chart-wrap"><canvas id="chart-assign"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Campaign + Margin Table -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📢 วิเคราะห์ Margin รายรุ่น — ราคาทุนจริง Effective Mar 21, 2026</div>
+      <span class="card-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)">🔒 ผบห. เท่านั้น</span>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="tbl" id="tbl-margin">
+        <thead><tr>
+          <th>รุ่น</th>
+          <th class="mono" style="text-align:right">ราคาทุน</th>
+          <th class="mono" style="text-align:right">MSRP</th>
+          <th class="mono" style="text-align:right">Room</th>
+          <th class="mono" style="text-align:right">Floor เซล์ 30%</th>
+          <th class="mono" style="text-align:right">Floor ผจก. 60%</th>
+          <th class="mono" style="text-align:right">ผบห. MAX 80%</th>
+          <th>Margin Status</th>
+        </tr></thead>
+        <tbody id="tb-margin"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ประวัติ Storage -->
+  <div class="card" style="margin-top:14px">
+    <div class="card-header">
+      <div class="card-title">📂 ประวัติข้อมูลที่บันทึกไว้ (30 วันย้อนหลัง)</div>
+      <button onclick="clearAllStorage()" style="font-size:11px;padding:4px 10px;border:1px solid var(--red-border);background:var(--red-bg);color:var(--red);border-radius:6px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:700">🗑️ ล้างทั้งหมด</button>
+    </div>
+    <div id="history-list" style="padding:4px 0">
+      <div style="text-align:center;color:var(--muted);font-size:12px;padding:20px">ยังไม่มีประวัติ — อัปโหลดไฟล์แล้วระบบบันทึกอัตโนมัติ</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: แจ้งเตือน -->
+<div class="page" id="p-alert">
+
+  <!-- สรุป -->
+  <div class="g4">
+    <div class="kpi-card k-red"><div class="k-label">🔴 วิกฤต</div><div class="k-value" id="nc-red">3</div><div class="k-sub">ต้องดำเนินการทันที</div></div>
+    <div class="kpi-card k-yellow"><div class="k-label">🟡 เตือน</div><div class="k-value" id="nc-yel">4</div><div class="k-sub">ต้องติดตาม</div></div>
+    <div class="kpi-card k-blue"><div class="k-label">🔵 ข้อมูล</div><div class="k-value" id="nc-blu">2</div><div class="k-sub">รายการข้อมูล</div></div>
+    <div class="kpi-card k-green"><div class="k-label">🟢 ปกติ</div><div class="k-value" id="nc-grn">1</div><div class="k-sub">ไม่มีปัญหา</div></div>
+  </div>
+
+  <div class="g2">
+    <!-- รายการ -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🔔 รายการแจ้งเตือน</div>
+        <span class="card-badge" id="alert-count">10 รายการ</span>
+      </div>
+      <div id="alert-list"></div>
+    </div>
+
+    <div>
+      <!-- ตั้งค่าเกณฑ์ -->
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-header"><div class="card-title">⚙️ ตั้งค่าเกณฑ์แจ้งเตือน</div></div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div class="input-group"><label>วงเงินเหลือวิกฤต (ล้านบาท)</label><input type="number" id="th-credit" value="5" step="0.5" onchange="saveSettings()"></div>
+          <div class="input-group"><label>เตือนก่อน Invoice ครบ (วัน)</label><input type="number" id="th-due" value="3" onchange="saveSettings()"></div>
+          <div class="input-group"><label>รถไม่มีลูกค้า วิกฤต (คัน)</label><input type="number" id="th-nocar" value="10" onchange="saveSettings()"></div>
+          <div class="input-group"><label>LINE Notify Token</label><input type="text" id="line-token" placeholder="รับที่ notify-bot.line.me" onchange="saveSettings()"></div>
+          <button onclick="testLineNotify()" style="width:100%;background:var(--green-bg);border:1.5px solid var(--green-border);color:var(--green);border-radius:8px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif">📱 ทดสอบส่ง LINE Notify</button>
+        </div>
+      </div>
+
+      <!-- ปฏิทิน Due Date -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">📅 ปฏิทินชำระ TLT — เม.ย. 69</div></div>
+        <div style="padding:12px 16px" id="due-cal"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

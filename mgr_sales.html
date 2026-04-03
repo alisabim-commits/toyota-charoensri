@@ -146,6 +146,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   <button class="tab on" onclick="sw(this,'t-approve')">✅ อนุมัติใบจอง <span id="pending-count" style="background:var(--toy);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px;">3</span></button>
   <button class="tab" onclick="sw(this,'t-team')">👥 ภาพรวมทีม</button>
   <button class="tab" onclick="sw(this,'t-deals')">📋 ดีลทั้งหมด</button>
+  <button class="tab" onclick="sw(this,'t-daily')">📅 ติดตามวัน</button>
   <button class="tab" onclick="sw(this,'t-campaign')">📢 แคมเปญ TMT</button>
 </div>
 
@@ -502,6 +503,122 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   </div>
 </div><!-- /campaign -->
 
+
+<!-- ===== ติดตามวัน ===== -->
+<div id="t-daily" style="display:none;">
+
+  <div class="g4">
+    <div class="kpi b"><div class="kl">🚶 Walk-in วันนี้</div><div class="kv b">5 ราย</div><div class="ks">เป้าวัน 4 ราย ✅</div></div>
+    <div class="kpi g"><div class="kl">✅ ปิดดีลวันนี้</div><div class="kv g">1 คัน</div><div class="ks">Hilux D-CAB</div></div>
+    <div class="kpi y"><div class="kl">📞 โทรติดตาม</div><div class="kv y">8/12 ราย</div><div class="ks">ต้องโทรอีก 4 ราย</div></div>
+    <div class="kpi r"><div class="kl">⚠️ ต้องดูด่วน</div><div class="kv r">2 ราย</div><div class="ks">จองนาน + ยังไม่โทร</div></div>
+  </div>
+
+  <div class="g2">
+    <!-- ติดตามลูกค้า -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📋 สถานะลูกค้าทุกรายวันนี้</div><span class="badge b">เรียลไทม์</span></div>
+      <table class="tbl">
+        <thead><tr><th>ลูกค้า</th><th>รุ่น</th><th>เซล์</th><th>ขั้นตอน</th><th>วันที่จอง</th><th>สถานะ</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="font-weight:700;">ธีรวัฒน์ แสงผา</div><div style="font-size:10px;" class="m">081-234-5678</div></td>
+            <td class="m">Hilux D-CAB 2.8</td><td class="m">ภุมรี</td>
+            <td><span class="badge g">✅ ส่งมอบวันนี้</span></td>
+            <td class="m">15/3/69</td><td><span class="badge g">เสร็จสิ้น</span></td>
+            <td><button style="background:var(--gd);color:var(--grn);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">QR</button></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:700;">วิภาวดี รักดี</div><div style="font-size:10px;" class="m">082-345-6789</div></td>
+            <td class="m">Fortuner Legender</td><td class="m">ภุมรี</td>
+            <td><span class="badge r">⏳ รอ ผบห.อนุมัติ</span></td>
+            <td class="m">2/4/69</td><td><span class="badge y">ส่วนลดเกิน floor</span></td>
+            <td><button style="background:var(--yd);color:var(--yel);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">ติดตาม</button></td>
+          </tr>
+          <tr style="background:var(--rd);">
+            <td><div style="font-weight:700;">สมชาย ก. <span class="badge r">35 วัน!</span></div><div style="font-size:10px;" class="m">083-456-7890</div></td>
+            <td class="m">Hilux D-CAB 2.8</td><td class="m">ภุมรี</td>
+            <td><span class="badge r">⚠️ เสี่ยงยกเลิก</span></td>
+            <td class="m">27/2/69</td><td><span class="badge r">ไม่รับสาย</span></td>
+            <td><button onclick="alert('📱 โทรด่วน! 083-456-7890')" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">โทรด่วน!</button></td>
+          </tr>
+          <tr style="background:var(--rd);">
+            <td><div style="font-weight:700;">วิภา พ. <span class="badge r">31 วัน!</span></div><div style="font-size:10px;" class="m">084-567-8901</div></td>
+            <td class="m">Fortuner</td><td class="m">ภัทราภรณ์</td>
+            <td><span class="badge r">⚠️ เสี่ยงยกเลิก</span></td>
+            <td class="m">3/3/69</td><td><span class="badge r">Finance ไม่ผ่าน?</span></td>
+            <td><button onclick="alert('📱 โทรด่วน! 084-567-8901')" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">โทรด่วน!</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Performance เซล์ + แนะนำ -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📈 Performance + แนะนำวิธีถึงเป้า</div></div>
+        <div style="padding:12px 14px;">
+
+          <!-- ภุมรี -->
+          <div style="margin-bottom:10px;padding:10px;background:var(--bg3);border-radius:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <span style="font-size:12px;font-weight:700;">ภุมรี ศรีรอด</span>
+              <span style="font-size:11px;color:var(--grn);font-weight:700;">4 คัน | 29%</span>
+            </div>
+            <div style="height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-bottom:5px;">
+              <div style="width:29%;height:100%;background:var(--grn);border-radius:3px;"></div>
+            </div>
+            <div style="font-size:10px;color:var(--blu);">💡 แนะนำ: ปิด 2 ดีลที่รอ ผบห. → ถึง 6 คัน → Commission +฿2,500/คัน</div>
+          </div>
+
+          <!-- ภัทราภรณ์ -->
+          <div style="margin-bottom:10px;padding:10px;background:var(--bg3);border-radius:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <span style="font-size:12px;font-weight:700;">ภัทราภรณ์ โบราณินทร์</span>
+              <span style="font-size:11px;color:var(--yel);font-weight:700;">3 คัน | 21%</span>
+            </div>
+            <div style="height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-bottom:5px;">
+              <div style="width:21%;height:100%;background:var(--yel);border-radius:3px;"></div>
+            </div>
+            <div style="font-size:10px;color:var(--red);">💡 แนะนำ: วิภา พ. รอ Finance 31 วัน → ช่วยประสานก่อนยกเลิก</div>
+          </div>
+
+          <!-- อรุณรักษ์ -->
+          <div style="padding:10px;background:var(--bg3);border-radius:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <span style="font-size:12px;font-weight:700;">อรุณรักษ์ พรรณา</span>
+              <span style="font-size:11px;color:var(--yel);font-weight:700;">3 คัน | 21%</span>
+            </div>
+            <div style="height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-bottom:5px;">
+              <div style="width:21%;height:100%;background:var(--yel);border-radius:3px;"></div>
+            </div>
+            <div style="font-size:10px;color:var(--blu);">💡 แนะนำ: ติดตาม Walk-in 5 รายวันนี้ → อาจปิดเพิ่มได้ 1-2 คัน</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- เป้าวัน -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">🎯 เป้าวัน 3 เม.ย.</div></div>
+        <div style="padding:12px 14px;font-size:12px;display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);">
+            <span>ต้องโทรติดตาม</span><span style="font-weight:700;color:var(--red);">สมชาย + วิภา (ด่วน)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);">
+            <span>Walk-in เป้า</span><span style="font-weight:700;">4 ราย/วัน</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);">
+            <span>ยอดขายสะสม</span><span style="font-weight:700;" class="b">12/42 คัน (29%)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;">
+            <span>ต้องขายเฉลี่ย/วัน</span><span style="font-weight:700;" class="r">~1.6 คัน/วัน (เหลือ 19 วัน)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /daily -->
+
 </div><!-- /main -->
 
 <script>
@@ -510,7 +627,7 @@ setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocal
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['t-approve','t-team','t-deals','t-campaign'].forEach(t=>{
+  ['t-approve','t-team','t-deals','t-campaign','t-daily'].forEach(t=>{
     document.getElementById(t).style.display=t===id?'':'none';
   });
 }

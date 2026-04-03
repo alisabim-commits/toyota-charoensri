@@ -100,7 +100,8 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   <button class="tab" onclick="sw(this,'t-cpu')">📦 CPU เป้า</button>
   <button class="tab" onclick="sw(this,'t-alivex')">⭐ ALIVE-X</button>
   <button class="tab" onclick="sw(this,'t-spare')">🔧 เบิกอะไหล่</button>
-  <button class="tab" onclick="sw(this,'t-sop')">📋 SOP</button>
+  <button class="tab" onclick="sw(this,\'t-csi\')">📊 CSI คะแนน</button>
+  
 </div>
 <div class="main">
 
@@ -338,7 +339,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
           <div style="font-size:11px;" class="m" style="margin-top:4px;line-height:1.9;">"ต้องการแลกคะแนนเป็นส่วนลดไหมคะ? (8 คะแนน = ฿1)"<br>→ ขอ OTP → กดแลกใน TOPSERV<br>แลกขั้นต่ำ 1,000 คะแนน = ส่วนลด ฿125</div>
         </div>
         <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-top:10px;font-size:11px;" class="m">
-          <strong>ลูกค้าลืมเบอร์:</strong> ส่งสำเนาบัตรประชาชนไปที่ the1callcenter@central.co.th<br>
+          <strong>ลูกค้าลืมเบอร์:</strong> ส่งสำเนาบัตรประชาชนไปที่ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbbfa3aefaa8aaa7a7a8aea5bfaeb98ba8aea5bfb9aaa7e5a8a4e5bfa3">[email&#160;protected]</a><br>
           โทร 02-660-1000 กด 5 กด 2 | แก้ไขได้ใน 1 ชม.
         </div>
       </div>
@@ -385,35 +386,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
           </tbody>
         </table>
       </div>
-      <div class="card">
-        <div class="ch"><div class="ct">📸 เบิกอะไหล่ใหม่</div><span class="badge b">OCR อ่านใบงาน</span></div>
-        <div style="padding:14px;">
-          <div class="f-group"><label class="f-label">ประเภทการเบิก</label>
-            <select class="f-select" id="spare-type" onchange="toggleSpareType()">
-              <option value="work">จากใบงาน TOPSERV (ช่าง)</option>
-              <option value="gift">จากใบอนุมัติขาย — ของแถม Package (เซล์)</option>
-              <option value="emergency">ฉุกเฉิน — ยังไม่มีใบงาน</option>
-            </select>
-          </div>
-          <div id="spare-work-box">
-            <div class="photo-zone" onclick="document.getElementById('spare-file').click()">
-              <div style="font-size:28px;">📸</div>
-              <div style="font-size:13px;font-weight:600;margin-top:6px;">ถ่ายรูปใบงาน TOPSERV</div>
-              <div style="font-size:11px;" class="m">ระบบ OCR อ่านเลขใบงานอัตโนมัติ</div>
-              <div id="ocr-result" style="display:none;margin-top:8px;background:var(--gd);border-radius:6px;padding:6px;font-size:11px;" class="g">✅ อ่านได้: <strong id="ocr-no">C26-01532</strong></div>
-              <input type="file" id="spare-file" style="display:none" accept="image/*" capture="environment" onchange="simulateOCR()">
-            </div>
-          </div>
-          <div id="spare-gift-box" style="display:none;"><div class="f-group"><label class="f-label">เลขใบอนุมัติขาย</label><input class="f-input" placeholder="TCS-2026-04-XXXX"></div></div>
-          <div id="spare-emergency-box" style="display:none;">
-            <div style="background:var(--yd);border-radius:8px;padding:10px;margin-bottom:10px;font-size:11px;" class="y">⚠️ ต้องแนบใบงานจริงใน 24 ชม. | ถ้าไม่แนบ → แจ้ง LINE ผจก.บัญชี + ผบห.</div>
-            <div class="f-group"><label class="f-label">เหตุผลฉุกเฉิน</label><input class="f-input" placeholder="เช่น รถลูกค้าเสียกลางทาง"></div>
-          </div>
-          <div class="f-group" style="margin-top:10px;"><label class="f-label">รายการอะไหล่</label><input class="f-input" id="spare-items" placeholder="เช่น ผ้าเบรก, น้ำมันเบรก"></div>
-          <button onclick="submitSpare()" class="btn-green" style="width:100%;">📤 ส่งขอเบิก</button>
-        </div>
-      </div>
-    </div>
+      
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div class="card" style="margin-bottom:0;">
         <div class="ch"><div class="ct">📜 กฎเบิกอะไหล่</div></div>
@@ -524,11 +497,11 @@ body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;fon
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
 function sw(el,id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
-  ['t-overview','t-commission','t-cpu','t-alivex','t-spare','t-sop'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+  ['t-overview','t-commission','t-cpu','t-alivex','t-spare','t-csi'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
   if(id==='t-sop')renderSOP();
 }
 const SOP=['1. รับนัดล่วงหน้า + ตรวจอะไหล่ก่อนวันนัด','2. คัดแยก/แก้ไขข้อมูลลูกค้าใน TOPSERV (N-18)','3. รับรถ + ตรวจสภาพ + เปิดใบงาน (SA)','4. อนุมัติงานซ่อม + แจ้งราคาลูกค้า','5. จ่ายงานช่าง + เบิกอะไหล่ถ่ายรูปใบงาน','6. ควบคุมงานซ่อม + แจ้งลูกค้าถ้างานเพิ่ม','7. Offer CPU: ยาง/แบต/Air Care ทุกคัน','8. ส่งมอบ + แคชเชียร์ขอ ALIVE-X ทุกราย'];
@@ -542,8 +515,4 @@ function simulateOCR(){setTimeout(()=>{document.getElementById('ocr-result').sty
 function approveSpare(btn,type){const row=btn.closest('tr');const msgs={ok:'✅ อนุมัติ\n📦 Stock ลดอัตโนมัติ',no:'❌ ปฏิเสธ — แจ้ง LINE ช่าง',emergency:'⚠️ อนุมัติฉุกเฉิน\n⏰ ต้องแนบใบงานใน 24 ชม.'};alert(msgs[type]);row.style.opacity='.4';row.style.pointerEvents='none';}
 function submitSpare(){const items=document.getElementById('spare-items').value;if(!items){alert('กรุณากรอกรายการ');return;}alert('✅ ส่งขอเบิกแล้ว');}
 function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(el=>{el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});});
-</script>
-</body>
-</html>
+functio

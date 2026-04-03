@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รปภ. — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#18233d;color:#fff;font-family:'Sarabun',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:24px;margin-top:10px;}
+.logo-bar{width:5px;height:28px;background:#eb0a1e;border-radius:3px;}
+.logo-text{font-weight:800;font-size:16px;}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.5);}
+.main-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px 24px;width:100%;max-width:400px;text-align:center;}
+.title{font-size:18px;font-weight:800;margin-bottom:6px;}
+.sub{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;}
+/* สแกนปุ่ม */
+.scan-btn{background:#1d52cc;border:none;border-radius:14px;padding:18px;width:100%;color:#fff;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;transition:all .2s;}
+.scan-btn:hover{background:#1642a8;}
+.scan-btn .icon{font-size:24px;}
+/* ผล */
+.result{border-radius:14px;padding:18px;margin-top:14px;display:none;}
+.result.ok{background:rgba(10,124,82,.2);border:2px solid #0a7c52;}
+.result.fail{background:rgba(220,34,68,.2);border:2px solid #dc2244;}
+.result-icon{font-size:40px;margin-bottom:8px;}
+.result-name{font-size:18px;font-weight:800;margin-bottom:4px;}
+.result-detail{font-size:12px;color:rgba(255,255,255,.7);line-height:1.6;}
+.result-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;}
+/* Manual -->
+.manual-section{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;margin-top:16px;}
+.manual-title{font-size:11px;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.f-input-dark{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;font-size:14px;font-family:'Sarabun',sans-serif;color:#fff;outline:none;margin-bottom:8px;}
+.f-input-dark::placeholder{color:rgba(255,255,255,.3);}
+.clock-display{font-family:'IBM Plex Mono',monospace;font-size:13px;color:rgba(255,255,255,.4);margin-top:16px;}
+/* log -->
+.log-section{background:rgba(255,255,255,.04);border-radius:12px;padding:12px;margin-top:14px;width:100%;max-width:400px;text-align:left;}
+.log-title{font-size:11px;color:rgba(255,255,255,.4);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.log-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;}
+.log-item:last-child{border-bottom:none;}
+.log-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<div class="logo">
+  <div class="logo-bar"></div>
+  <div>
+    <div class="logo-text">รปภ. — Gate Pass</div>
+    <div class="logo-sub">Toyota Charoensri · Dealer 14373</div>
+  </div>
+</div>
+
+<div class="main-card">
+  <div class="title">🛡️ ตรวจ Gate Pass</div>
+  <div class="sub">สแกน QR Code ที่พนักงานแสดง</div>
+
+  <button class="scan-btn" onclick="simulateScan()">
+    <span class="icon">📷</span>
+    <span>สแกน QR Gate Pass</span>
+  </button>
+
+  <!-- ผลการสแกน -->
+  <div class="result" id="result-box">
+    <div class="result-icon" id="result-icon">✅</div>
+    <div class="result-name" id="result-name">—</div>
+    <div class="result-detail" id="result-detail">—</div>
+    <div class="result-time" id="result-time">—</div>
+  </div>
+
+  <!-- กรอก Code เอง -->
+  <div class="manual-section">
+    <div class="manual-title">หรือ กรอก Code เอง</div>
+    <input class="f-input-dark" placeholder="รหัส Gate Pass เช่น TCS-GP-ABC123" id="manual-code" maxlength="20">
+    <button onclick="checkManual()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px;width:100%;color:#fff;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">ตรวจสอบ</button>
+  </div>
+</div>
+
+<!-- Log วันนี้ -->
+<div class="log-section">
+  <div class="log-title">Log วันนี้</div>
+  <div id="log-list">
+    <div class="log-item"><div class="log-dot" style="background:#0a7c52;"></div><span style="flex:1;">ภุมรี ศรีรอด</span><span style="color:rgba(255,255,255,.4);font-size:10px;">10:31 ✅ ผ่าน</span></div>
+    <div class="log-item"><div class="log-dot" style="background:#0a7c52;"></div><span style="flex:1;">ชัยวัฒน์ หอมจันทร์</span><span style="color:rgba(255,255,255,.4);font-size:10px;">09:02 ✅ ผ่าน</span></div>
+    <div class="log-item"><div class="log-dot" style="background:#0a7c52;"></div><span style="flex:1;">จรูญ บุผา</span><span style="color:rgba(255,255,255,.4);font-size:10px;">08:45 ✅ ผ่าน</span></div>
+  </div>
+</div>
+
+<div class="clock-display" id="clock">--:--:--</div>
+
+<script>
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+
+// Mock database Gate Pass
+const VALID_PASSES = {
+  'TCS-GP-ABC123': {name:'ประภาศิริ พิทักษ์วงษ์', dept:'การเงิน', dest:'ธนาคาร BAY', time:'14:00-15:00', approvedBy:'สมพงษ์ กองศรีเกษ'},
+  'TCS-GP-XYZ789': {name:'อรุณรักษ์ พรรณา', dept:'แผนกขาย', dest:'ขนส่งนครพนม', time:'15:30-16:30', approvedBy:'สมพงษ์ กองศรีเกษ'},
+};
+const USED_PASSES = new Set();
+
+const MOCK_NAMES = [
+  {name:'ภุมรี ศรีรอด', dept:'แผนกขาย', dest:'ส่งรถลูกค้า', time:'14:00-15:00', approvedBy:'สมพงษ์'},
+  {name:'สายัณห์ แดนรักษ์', dept:'แผนกวาววับ', dest:'ซื้อน้ำยาล้างรถ', time:'10:00-11:00', approvedBy:'นิชนันท์'},
+];
+
+let scanCount = 0;
+function simulateScan(){
+  const box = document.getElementById('result-box');
+  box.style.display = 'block';
+
+  // สลับระหว่าง valid/used/invalid
+  scanCount++;
+  const mod = scanCount % 3;
+
+  if(mod === 1){
+    // ✅ ผ่าน
+    const p = MOCK_NAMES[Math.floor(Math.random()*MOCK_NAMES.length)];
+    showResult(true, false, p);
+  } else if(mod === 2){
+    // ❌ ใช้แล้ว
+    showResult(false, true, MOCK_NAMES[0]);
+  } else {
+    // ❌ ไม่พบ
+    showResult(false, false, null);
+  }
+}
+
+function checkManual(){
+  const code = document.getElementById('manual-code').value.trim().toUpperCase();
+  const box = document.getElementById('result-box');
+  box.style.display = 'block';
+  if(VALID_PASSES[code]){
+    if(USED_PASSES.has(code)){
+      showResult(false, true, VALID_PASSES[code]);
+    } else {
+      USED_PASSES.add(code);
+      showResult(true, false, VALID_PASSES[code]);
+    }
+  } else {
+    showResult(false, false, null);
+  }
+}
+
+function showResult(isOk, isUsed, person){
+  const box = document.getElementById('result-box');
+  const icon = document.getElementById('result-icon');
+  const name = document.getElementById('result-name');
+  const detail = document.getElementById('result-detail');
+  const time = document.getElementById('result-time');
+
+  box.className = 'result ' + (isOk ? 'ok' : 'fail');
+  box.style.display = 'block';
+
+  if(isOk && person){
+    icon.textContent = '✅';
+    name.textContent = person.name;
+    detail.innerHTML = `แผนก: ${person.dept}<br>ออกไป: ${person.dest}<br>เวลา: ${person.time}<br>อนุมัติโดย: ${person.approvedBy}`;
+    time.textContent = 'สแกน: '+new Date().toLocaleTimeString('th-TH')+' — QR ใช้แล้ว ล็อคทันที';
+    addLog(person.name, true);
+  } else if(isUsed && person){
+    icon.textContent = '🔒';
+    name.textContent = '⚠️ QR ใช้แล้ว!';
+    detail.innerHTML = `${person.name}<br><strong style="color:#dc2244;">QR Code นี้ถูกใช้ไปแล้ว ใช้ไม่ได้อีก</strong><br>ติดต่อ HR ถ้าต้องการออกอีกครั้ง`;
+    time.textContent = 'เวลา: '+new Date().toLocaleTimeString('th-TH');
+  } else {
+    icon.textContent = '❌';
+    name.textContent = 'ไม่พบ Gate Pass';
+    detail.innerHTML = 'QR Code ไม่ถูกต้อง หรือหมดอายุ<br><strong style="color:#dc2244;">ห้ามปล่อยผ่าน — แจ้งหัวหน้า</strong>';
+    time.textContent = 'เวลา: '+new Date().toLocaleTimeString('th-TH');
+    addLog('ไม่ระบุ', false);
+  }
+
+  // Auto hide after 5 sec
+  setTimeout(()=>{box.style.display='none';}, 5000);
+}
+
+function addLog(name, isOk){
+  const log = document.getElementById('log-list');
+  const item = document.createElement('div');
+  item.className = 'log-item';
+  item.innerHTML = `<div class="log-dot" style="background:${isOk?'#0a7c52':'#dc2244'};"></div><span style="flex:1;">${name}</span><span style="color:rgba(255,255,255,.4);font-size:10px;">${new Date().toLocaleTimeString('th-TH')} ${isOk?'✅ ผ่าน':'❌ ปฏิเสธ'}</span>`;
+  log.insertBefore(item, log.firstChild);
+  if(log.children.length > 10) log.removeChild(log.lastChild);
+}
+</script>
+</body>
+</html>

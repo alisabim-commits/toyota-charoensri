@@ -1,717 +1,511 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ผู้จัดการบัญชี — Toyota Charoensri</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>หัวหน้าบัญชี — Toyota Charoensri</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#b5000f;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--ink:#0c0c0a;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
-.hdr{background:var(--ink);padding:0 20px;display:flex;align-items:center;height:52px;position:sticky;top:0;z-index:50;gap:0;border-bottom:2px solid var(--red)}
-.logo{font-size:12px;font-weight:600;color:#fff;padding-right:16px;border-right:1px solid rgba(255,255,255,.15);margin-right:16px}
-.logo span{color:#f5c842}
-.nav-tabs{display:flex;gap:0;height:100%;align-items:flex-end;overflow-x:auto}
-.nt{height:42px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
-.nt:hover{color:#fff}.nt.on{color:#fff;border-bottom-color:#f5c842}
-.content{max-width:1100px;margin:0 auto;padding:20px 16px}
-.page{display:none}.page.on{display:block}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
-.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
-.kpi.r{border-color:var(--rbr);background:var(--rbg)}.kpi.a{border-color:var(--abr);background:var(--abg)}.kpi.g{border-color:var(--gbr);background:var(--gbg)}
-.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
-.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid;line-height:1.6}
-.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
-th.r{text-align:right}td{padding:7px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}
-tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
-.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:.5px solid var(--br)}.brow:last-child{border-bottom:none}
-.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
-.bl{min-width:160px;color:var(--mu)}.bv{min-width:80px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
-.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
-.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}
-.btn-gr{background:var(--gbg);color:var(--grn);border-color:var(--gbr)}.btn-re{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
-.btn-sm{padding:4px 10px;font-size:11px}
-.sec{font-size:18px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:16px}
-.div{height:1px;background:var(--br);margin:12px 0}
-.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
-.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:7px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
-.fi:focus{outline:none;border-color:var(--tx)}
-.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:7px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
-.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
-.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}
-
-/* UPLOAD ZONE */
-.upload-zone{border:2px dashed var(--br2);border-radius:var(--rl);padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg)}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--tx);background:var(--w)}
-.upload-zone.done{border-color:var(--grn);background:var(--gbg);border-style:solid}
-.upload-icon{font-size:32px;margin-bottom:8px}
-.upload-title{font-size:14px;font-weight:600;margin-bottom:4px}
-.upload-sub{font-size:11px;color:var(--mu)}
-.upload-result{margin-top:10px;font-size:12px;color:var(--grn);font-weight:500}
-
-/* MONTH SELECTOR */
-.month-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
-.mtab{padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;border:1px solid var(--br);background:var(--w)}
-.mtab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.mtab:hover:not(.on){background:var(--bg)}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg2:#fff;--bg3:#f0f3fa;--bg4:#e8edf8;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1400px;margin:0 auto;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:12px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);}
+.kpi.r{border-top-color:var(--red);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--red);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg3);}
+.upload-zone:hover{border-color:var(--blu);background:var(--bd);}
+.upload-zone.done{border-color:var(--grn);background:var(--gd);border-style:solid;}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.f-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;}
+.btn-primary{background:var(--blu);color:#fff;}
+.btn-green{background:var(--grn);color:#fff;}
+.btn-red{background:var(--toy);color:#fff;}
+.btn-yel{background:var(--yd);color:var(--yel);border:1px solid rgba(194,106,0,.3);}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
+.signal{border-radius:10px;padding:10px 14px;display:flex;gap:10px;margin-bottom:8px;border:1px solid;}
+.signal.r{background:var(--rd);border-color:rgba(220,34,68,.25);}.signal.y{background:var(--yd);border-color:rgba(194,106,0,.2);}.signal.g{background:var(--gd);border-color:rgba(10,124,82,.18);}.signal.b{background:var(--bd);border-color:rgba(29,82,204,.18);}
+.st{font-size:12px;font-weight:700;}
+.signal.r .st{color:var(--red);}.signal.y .st{color:var(--yel);}.signal.g .st{color:var(--grn);}.signal.b .st{color:var(--blu);}
+.sd{font-size:11px;color:var(--text2);margin-top:2px;}
+.bank-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border2);}
+.bank-row:last-child{border-bottom:none;}
+.bank-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.bank-info{flex:1;}
+.bank-name{font-size:12px;font-weight:700;}
+.bank-no{font-size:10px;color:var(--text3);}
+.bank-amount{text-align:right;}
+.bank-balance{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:540px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}.f-row,.f-row3{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
-  <div class="nav-tabs">
-    <div class="nt on" onclick="gp('upload',this)">📤 Upload ไฟล์</div>
-    <div class="nt" onclick="gp('pl',this)">📊 P&L</div>
-    <div class="nt" onclick="gp('bs',this)">🏦 Balance Sheet</div>
-    <div class="nt" onclick="gp('kpi',this)">🎯 KPI</div>
-    <div class="nt" onclick="gp('cash',this)">💵 Cash Deposit</div>
-    <div class="nt" onclick="gp('approve',this)">✅ อนุมัติเบิกจ่าย</div>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">หัวหน้าบัญชี</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:11px;color:var(--text2);" id="date-badge"></span>
+    <div class="clock" id="clock">--:--:--</div>
   </div>
 </div>
 
-<div class="content">
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-upload')">📂 อัพโหลดไฟล์</button>
+  <button class="tab" onclick="sw(this,'t-cashflow')">💧 กระแสเงินสด</button>
+  <button class="tab" onclick="sw(this,'t-commission')">💳 Commission จ่าย</button>
+  <button class="tab" onclick="sw(this,'t-cashier')">🧾 แคชเชียร์</button>
+  <button class="tab" onclick="sw(this,'t-purchase')">🛒 จัดซื้อ</button>
+  <button class="tab" onclick="sw(this,'t-payroll')">💰 เงินเดือน</button>
+</div>
 
-<!-- UPLOAD -->
-<div class="page on" id="pg-upload">
-  <div class="sec">Upload ไฟล์ข้อมูล</div>
-  <div class="sec-s">อัพโหลดไฟล์ Excel จากระบบต่างๆ — ระบบจะอ่านและวิเคราะห์ให้อัตโนมัติ</div>
+<div class="main">
 
+<!-- ===== อัพโหลดไฟล์ ===== -->
+<div id="t-upload">
+  <div class="signal b" style="margin-bottom:14px;"><span>📌</span><div><div class="st">อัพโหลดไฟล์ — ระบบคำนวณให้อัตโนมัติ ไม่ต้องคีย์ข้อมูลเอง</div><div class="sd">อัพไฟล์ใหม่ทุกวัน/เดือน ระบบดึงตัวเลขล่าสุดอัพเดตทุกหน้าทันที</div></div></div>
+  <div class="g3">
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📊 TFIS รายงาน</div><span class="badge b">รายเดือน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-tfis" onclick="document.getElementById('f-tfis').click()"><input type="file" id="f-tfis" style="display:none" accept=".xlsx,.xls" onchange="handleUpload('uz-tfis','st-tfis',this)"><div style="font-size:24px;margin-bottom:4px;">📊</div><div style="font-size:13px;font-weight:700;">TFIS Year 2026</div><div style="font-size:10px;" class="m">TFIS_Year_2026.xlsx</div><div class="badge g" id="st-tfis" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+      <div style="font-size:10px;margin-top:8px;line-height:1.6;" class="m">ดึง: P4 รายได้รถ · P28 ส่วนลด · P36 Commission TLT · P37 IOI · P45 ของแถม · P84 ดอกเบี้ย OD</div>
+    </div></div>
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">🏦 TLT วงเงิน</div><span class="badge r">รายวัน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-tlt" onclick="document.getElementById('f-tlt').click()"><input type="file" id="f-tlt" style="display:none" accept=".xlsx,.xls" onchange="handleUpload('uz-tlt','st-tlt',this)"><div style="font-size:24px;margin-bottom:4px;">🏦</div><div style="font-size:13px;font-weight:700;">รายงานการใช้วงเงิน TLT</div><div style="font-size:10px;" class="m">รายงานการใช้วงเงิน_TLT.xlsx</div><div class="badge g" id="st-tlt" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+      <div style="font-size:10px;margin-top:8px;line-height:1.6;" class="m">ดึง: วงเงิน TLT ใช้จริง · Outstanding รายคัน · Due Date · AY จ่ายค่ารถ</div>
+    </div></div>
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">💧 กระแสเงินสด</div><span class="badge r">รายวัน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-cf" onclick="document.getElementById('f-cf').click()"><input type="file" id="f-cf" style="display:none" accept=".xlsx,.xls,.pdf" onchange="handleUpload('uz-cf','st-cf',this)"><div style="font-size:24px;margin-bottom:4px;">💧</div><div style="font-size:13px;font-weight:700;">กระแสเงินสดรายวัน</div><div style="font-size:10px;" class="m">กระแสเงินสด2023_TCS.pdf/.xlsx</div><div class="badge g" id="st-cf" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+      <div style="font-size:10px;margin-top:8px;line-height:1.6;" class="m">ดึง: ยอดรับ-จ่าย 5 บัญชี BAY/BBL/SCB/TTB · Aloan · กระแสสุทธิ</div>
+    </div></div>
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">💳 Commission SA</div><span class="badge b">รายเดือน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-sa" onclick="document.getElementById('f-sa').click()"><input type="file" id="f-sa" style="display:none" accept=".xlsx,.xls" onchange="handleUpload('uz-sa','st-sa',this)"><div style="font-size:24px;margin-bottom:4px;">💳</div><div style="font-size:13px;font-weight:700;">Commission SA บริการ</div><div style="font-size:10px;" class="m">com_service_xx_69.xlsx</div><div class="badge g" id="st-sa" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+      <div style="font-size:10px;margin-top:8px;" class="m">ดึง: ยอดขาย SA · Base Rate · CPU Bonus · Commission สุทธิรายคน</div>
+    </div></div>
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">🚗 P36 Commission TLT</div><span class="badge g">รายเดือน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-p36" onclick="document.getElementById('f-p36').click()"><input type="file" id="f-p36" style="display:none" accept=".xlsx,.xls" onchange="handleUpload('uz-p36','st-p36',this)"><div style="font-size:24px;margin-bottom:4px;">🚗</div><div style="font-size:13px;font-weight:700;">P36 Commission TLT</div><div style="font-size:10px;" class="m">P36_รายได้ค่าคอมมิชชั่น_TLT.xls</div><div class="badge g" id="st-p36" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+    </div></div>
+    <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">🛡️ P37 Commission IOI</div><span class="badge g">รายเดือน</span></div><div style="padding:14px;">
+      <div class="upload-zone" id="uz-p37" onclick="document.getElementById('f-p37').click()"><input type="file" id="f-p37" style="display:none" accept=".xlsx,.xls" onchange="handleUpload('uz-p37','st-p37',this)"><div style="font-size:24px;margin-bottom:4px;">🛡️</div><div style="font-size:13px;font-weight:700;">P37 Commission IOI</div><div style="font-size:10px;" class="m">รายได้ค่าคอมมิชชั่น_TLT.xls</div><div class="badge g" id="st-p37" style="display:none;margin-top:4px;">✅ อัพโหลดแล้ว</div></div>
+    </div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">📋 สถานะไฟล์ล่าสุด</div></div>
+    <table class="tbl"><thead><tr><th>ไฟล์</th><th>อัพโหลดล่าสุด</th><th>เดือน</th><th>สถานะ</th></tr></thead><tbody>
+      <tr><td><b>TFIS</b></td><td class="m">28/03/2569</td><td class="m">มี.ค. 69</td><td><span class="badge g">✅ ล่าสุด</span></td></tr>
+      <tr><td><b>TLT วงเงิน</b></td><td class="m">03/04/2569</td><td class="m">เม.ย. 69</td><td><span class="badge g">✅ ล่าสุด</span></td></tr>
+      <tr><td><b>Commission SA</b></td><td class="m">15/03/2569</td><td class="m">ก.พ. 69</td><td><span class="badge y">⚠️ ค้าง 1 เดือน</span></td></tr>
+      <tr><td><b>P36 Commission TLT</b></td><td class="m">28/03/2569</td><td class="m">มี.ค. 69</td><td><span class="badge g">✅ ล่าสุด</span></td></tr>
+      <tr><td><b>P37 Commission IOI</b></td><td class="m">28/03/2569</td><td class="m">มี.ค. 69</td><td><span class="badge g">✅ ล่าสุด</span></td></tr>
+      <tr><td><b>กระแสเงินสด</b></td><td class="m">31/03/2569</td><td class="m">มี.ค. 69</td><td><span class="badge y">⚠️ รอเม.ย.</span></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== กระแสเงินสด ===== -->
+<div id="t-cashflow" style="display:none;">
+  <div class="g4">
+    <div class="kpi b"><div class="kl">💧 ยอดยกมา</div><div class="kv b">฿7.9M</div><div class="ks">31 มี.ค. 69</div></div>
+    <div class="kpi g"><div class="kl">📥 รับรวม มี.ค.</div><div class="kv g">฿121.3M</div><div class="ks">จากไฟล์จริง</div></div>
+    <div class="kpi r"><div class="kl">📤 จ่ายรวม มี.ค.</div><div class="kv r">฿115.6M</div><div class="ks">รวม Aloan ฿1.73M</div></div>
+    <div class="kpi g"><div class="kl">💰 กระแสสุทธิ</div><div class="kv g">฿11.9M</div><div class="ks">กระแสเงินสดสุทธิ</div></div>
+  </div>
   <div class="g2">
-    <!-- TFIS -->
-    <div class="card">
-      <div class="ct">TFIS — งบการเงิน P&L + Balance Sheet <span class="badge bd-b">Excel</span></div>
-      <div class="upload-zone" id="zone-tfis" onclick="document.getElementById('file-tfis').click()"
-        ondragover="dragOver(event,'zone-tfis')" ondragleave="dragLeave('zone-tfis')" ondrop="dropFile(event,'tfis')">
-        <div class="upload-icon">📊</div>
-        <div class="upload-title">TFIS_Year_XXXX.xlsx</div>
-        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
-        <div class="upload-result" id="res-tfis"></div>
-      </div>
-      <input type="file" id="file-tfis" accept=".xlsx,.xls" style="display:none" onchange="loadTFIS(this)">
-      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
-        ระบบจะอ่าน: Sheet DT (ข้อมูลรายเดือน) + Sheet BS (งบดุล)<br>
-        แสดงผล: P&L รายเดือน · KPI แต่ละ P-Code · OD · Commission
-      </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🏦 ยอดบัญชีธนาคาร — คีย์รายวัน</div><button onclick="openModal('modal-bank')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">+ คีย์ยอดวันนี้</button></div>
+      <div class="bank-row"><div class="bank-dot" style="background:#1d52cc;"></div><div class="bank-info"><div class="bank-name">BAY C/A 275-0-00768-2 (OD 65M)</div><div class="bank-no">กรุงเทพ · นครพนม · TR 606-2</div></div><div class="bank-amount"><div class="bank-balance r">-฿164,771</div><div style="font-size:10px;" class="r">ใช้ OD · Headroom ฿64.8M</div></div></div>
+      <div class="bank-row"><div class="bank-dot" style="background:#1a3a8f;"></div><div class="bank-info"><div class="bank-name">BAY C/A 275-0-00795-8 (OD 20M)</div><div class="bank-no">กรุงเทพ · นครพนม</div></div><div class="bank-amount"><div class="bank-balance r">-฿6.84M</div><div style="font-size:10px;" class="r">ใช้ OD · Headroom ฿13.2M</div></div></div>
+      <div class="bank-row"><div class="bank-dot" style="background:#22c55e;"></div><div class="bank-info"><div class="bank-name">BBL S/A 496-7-05557-7</div><div class="bank-no">กรุงเทพ · บิ๊กซี-นครพนม · TR 033-7</div></div><div class="bank-amount"><div class="bank-balance g">฿147,571</div><div style="font-size:10px;" class="g">ออมทรัพย์</div></div></div>
+      <div class="bank-row"><div class="bank-dot" style="background:#4c2a85;"></div><div class="bank-info"><div class="bank-name">SCB S/A 407-4-31972-8</div><div class="bank-no">ไทยพาณิชย์ · บิ๊กซี-นครพนม · TR 933-4</div></div><div class="bank-amount"><div class="bank-balance g">฿1.29M</div><div style="font-size:10px;" class="g">ออมทรัพย์</div></div></div>
+      <div class="bank-row"><div class="bank-dot" style="background:#00a8e8;"></div><div class="bank-info"><div class="bank-name">TTB S/A 836-201928-6</div><div class="bank-no">ทหารไทยธนชาต · นครพนม · TR 126-9</div></div><div class="bank-amount"><div class="bank-balance g">฿52,336</div><div style="font-size:10px;" class="g">ออมทรัพย์</div></div></div>
     </div>
-
-    <!-- TOPSERV -->
-    <div class="card">
-      <div class="ct">TOPSERV — CPU/PBC รายพนักงาน <span class="badge bd-g">Excel</span></div>
-      <div class="upload-zone" id="zone-topserv" onclick="document.getElementById('file-topserv').click()"
-        ondragover="dragOver(event,'zone-topserv')" ondragleave="dragLeave('zone-topserv')" ondrop="dropFile(event,'topserv')">
-        <div class="upload-icon">🔧</div>
-        <div class="upload-title">TOPSERV_MMYYYY.xlsx</div>
-        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
-        <div class="upload-result" id="res-topserv"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📥 คีย์รายรับวันนี้</div><button onclick="openModal('modal-income')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">+ เพิ่ม</button></div>
+        <table class="tbl"><thead><tr><th>ประเภท</th><th>ยอด</th></tr></thead><tbody>
+          <tr><td>ค่ารถ-ไฟแนนซ์</td><td class="n g">฿1,201,537</td></tr>
+          <tr><td>เงินดาวน์</td><td class="n g">฿250,000</td></tr>
+          <tr><td>GS งานซ่อม</td><td class="n g">฿83,012</td></tr>
+          <tr style="background:var(--gd)"><td style="font-weight:700;">รวมรับ</td><td class="n g" style="font-weight:800;">฿1,534,549</td></tr>
+        </tbody></table>
       </div>
-      <input type="file" id="file-topserv" accept=".xlsx,.xls" style="display:none" onchange="loadTOPSERV(this)">
-      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
-        ระบบจะอ่าน: CPU · PBC · ค่าแรง · อะไหล่ · น้ำมัน รายพนักงาน<br>
-        แสดงผล: Ranking SA · Share % · Tire/Battery · ส่งมอบตรงเวลา
-      </div>
-    </div>
-
-    <!-- PAYROLL -->
-    <div class="card">
-      <div class="ct">Payroll Prosoft — เงินเดือนพนักงาน <span class="badge bd-a">Excel</span></div>
-      <div class="upload-zone" id="zone-payroll" onclick="document.getElementById('file-payroll').click()"
-        ondragover="dragOver(event,'zone-payroll')" ondragleave="dragLeave('zone-payroll')" ondrop="dropFile(event,'payroll')">
-        <div class="upload-icon">💰</div>
-        <div class="upload-title">Payroll_MMYYYY.xlsx</div>
-        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
-        <div class="upload-result" id="res-payroll"></div>
-      </div>
-      <input type="file" id="file-payroll" accept=".xlsx,.xls" style="display:none" onchange="loadPayroll(this)">
-      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
-        ระบบจะอ่าน: เงินเดือน · ค่าแรง · ประกันสังคม · Commission รายคน<br>
-        แสดงผล: Payslip · ยอดจ่ายรวม · เปรียบกับงบ
-      </div>
-    </div>
-
-    <!-- COMMISSION TLT -->
-    <div class="card">
-      <div class="ct">Commission TLT — GL รายเดือน <span class="badge bd-b">Excel</span></div>
-      <div class="upload-zone" id="zone-tlt" onclick="document.getElementById('file-tlt').click()"
-        ondragover="dragOver(event,'zone-tlt')" ondragleave="dragLeave('zone-tlt')" ondrop="dropFile(event,'tlt')">
-        <div class="upload-icon">🏦</div>
-        <div class="upload-title">GL_4610_01_XXXX.xlsx</div>
-        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
-        <div class="upload-result" id="res-tlt"></div>
-      </div>
-      <input type="file" id="file-tlt" accept=".xlsx,.xls" style="display:none" onchange="loadTLT(this)">
-      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
-        ระบบจะอ่าน: GL บัญชี 4610-01 · 4710-00 · 4710-02 · 4710-03<br>
-        แสดงผล: Commission รายเดือน · รายลูกค้า · เปรียบ attach rate
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📤 คีย์รายจ่ายวันนี้</div><button onclick="openModal('modal-expense')" class="btn btn-red" style="font-size:11px;padding:5px 12px;">+ เพิ่ม</button></div>
+        <table class="tbl"><thead><tr><th>ประเภท</th><th>ยอด</th></tr></thead><tbody>
+          <tr><td>ค่ารถ TLT</td><td class="n r">-฿1,766,240</td></tr>
+          <tr><td>เงินทดรอง</td><td class="n r">-฿13,450</td></tr>
+          <tr style="background:var(--rd)"><td style="font-weight:700;">รวมจ่าย</td><td class="n r" style="font-weight:800;">-฿1,779,690</td></tr>
+        </tbody></table>
       </div>
     </div>
   </div>
-
-  <!-- STATUS -->
-  <div class="card" id="upload-status" style="display:none">
-    <div class="ct">สถานะไฟล์ที่อัพโหลด</div>
-    <table>
-      <tr><th>ไฟล์</th><th>สถานะ</th><th>ข้อมูล</th><th>อัพโหลดเมื่อ</th></tr>
-      <tbody id="status-tbody"></tbody>
-    </table>
+  <div class="card"><div class="ch"><div class="ct">📊 สรุปกระแสเงินสด มี.ค. 69 — จากไฟล์จริง</div><span class="badge g">อัพโหลดแล้ว</span></div>
+    <table class="tbl"><thead><tr><th>รายการ</th><th>มี.ค. จริง</th><th>หมายเหตุ</th></tr></thead><tbody>
+      <tr style="background:var(--gd)"><td style="font-weight:700;" class="g">รวมเงินรับ (2)</td><td class="n g" style="font-weight:800;">฿121,317,829</td><td class="m">ตลอดเดือน</td></tr>
+      <tr><td style="padding-left:20px;" class="m">ค่ารถ-ไฟแนนซ์</td><td class="n">฿14,544,779</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">เงินดาวน์/ซื้อสด</td><td class="n">฿14,459,953</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">ค่ารถแลกเปลี่ยน</td><td class="n">฿87,096,502</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">GS</td><td class="n">฿1,817,694</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">เงินสนับสนุน TMT</td><td class="n">฿1,503,876</td><td></td></tr>
+      <tr style="background:var(--rd)"><td style="font-weight:700;" class="r">รวมเงินจ่าย (3)</td><td class="n r" style="font-weight:800;">-฿115,602,513</td><td class="m">ตลอดเดือน</td></tr>
+      <tr><td style="padding-left:20px;" class="m">ค่ารถ TLT/TMT</td><td class="n r">-฿94,066,749</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">เงินเดือน+commission</td><td class="n r">-฿1,479,738</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">ประกันสังคม/สพก.</td><td class="n r">-฿393,231</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">ค่าอะไหล่ TMT</td><td class="n r">-฿2,043,560</td><td></td></tr>
+      <tr style="background:var(--bd)"><td style="font-weight:700;" class="b">ชำระเงินกู้ (5)</td><td class="n b" style="font-weight:800;">-฿1,729,107</td><td class="m">Aloan+เช่าซื้อ</td></tr>
+      <tr><td style="padding-left:20px;" class="m">Aloan TLT</td><td class="n">-฿300,000</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">เช่าซื้อรถ 33+3 คัน TLT</td><td class="n">-฿820,747</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">ดอกเบี้ยเงินกู้ TLT</td><td class="n">-฿535,408</td><td></td></tr>
+      <tr><td style="padding-left:20px;" class="m">เช่าซื้อรถสไลด์</td><td class="n">-฿27,431</td><td></td></tr>
+      <tr style="background:var(--gd);border-top:2px solid var(--grn)"><td style="font-weight:800;font-size:13px;">กระแสเงินสดสุทธิ</td><td class="n g" style="font-weight:800;font-size:15px;">฿11,885,264</td><td class="m">ยอดยกไป</td></tr>
+    </tbody></table>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">🏦 เงินกู้ Aloan — สถานะ (จากไฟล์จริง)</div><span class="badge r">Confidential</span></div>
+    <table class="tbl"><thead><tr><th>รายการ</th><th>วงเงินรวม</th><th>จ่ายแล้ว</th><th>คงค้าง</th><th>ยอดคงเหลือ</th></tr></thead><tbody>
+      <tr><td><b>Aloan 15025</b></td><td class="n">฿32,840,000</td><td class="n m">116 งวด</td><td class="n y">46 งวด</td><td class="n r">~฿9.3M</td></tr>
+      <tr><td><b>Aloan 15026</b></td><td class="n">฿230,000,000</td><td class="n m">105 งวด</td><td class="n y">68 งวด</td><td class="n r">~฿90.2M</td></tr>
+      <tr><td><b>Aloan 16036</b></td><td class="n">฿33,000,000</td><td class="n m">100 งวด</td><td class="n y">57 งวด</td><td class="n r">~฿12.0M</td></tr>
+      <tr><td><b>เช่าซื้อรถ 33 คัน TLT</b></td><td class="n">฿45,764,820</td><td class="n m">42 งวด</td><td class="n y">18 งวด</td><td class="n r">฿14,492,193</td></tr>
+      <tr><td><b>เช่าซื้อรถ 3 คัน TLT</b></td><td class="n">฿3,480,000</td><td class="n m">42 งวด</td><td class="n y">18 งวด</td><td class="n r">฿1,102,000</td></tr>
+      <tr><td><b>เช่าซื้อรถสไลด์</b></td><td class="n">฿2,304,204</td><td class="n m">56 งวด</td><td class="n y">28 งวด</td><td class="n r">฿822,930</td></tr>
+      <tr style="background:var(--rd)"><td style="font-weight:700;">รวมภาระหนี้ทั้งหมด</td><td class="n r" style="font-weight:800;" colspan="3">฿318,663,681</td><td class="n r" style="font-weight:800;">฿185.1M คงเหลือ</td></tr>
+    </tbody></table>
   </div>
 </div>
 
-<!-- P&L -->
-<div class="page" id="pg-pl">
-  <div class="sec">P&L รายเดือน</div>
-  <div class="sec-s">คำนวณจากไฟล์ TFIS ที่อัพโหลด</div>
-
-  <div id="pl-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ TFIS — ไปที่แท็บ "Upload ไฟล์" แล้วอัพโหลด TFIS Excel ก่อนครับ</div></div>
-
-  <div id="pl-content" style="display:none">
-    <div class="month-tabs" id="month-tabs-pl"></div>
-    <div class="g4" id="pl-kpis" style="margin-bottom:14px"></div>
-    <div class="g2">
-      <div class="card">
-        <div class="ct">รายได้หลัก</div>
-        <div id="pl-revenue"></div>
-      </div>
-      <div class="card">
-        <div class="ct">ค่าใช้จ่ายหลัก</div>
-        <div id="pl-expense"></div>
-      </div>
+<!-- ===== COMMISSION ===== -->
+<div id="t-commission" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💳 Commission ฝ่ายขาย — ก.พ. 69</div><div style="display:flex;gap:6px;"><button onclick="openModal('modal-print-sale')" class="btn btn-yel" style="font-size:11px;padding:5px 12px;">🖨️ ปริ้น</button><button onclick="payAll('ขาย','฿40,000','6')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">💸 จ่ายทั้งหมด</button></div></div>
+      <table class="tbl"><thead><tr><th>ชื่อ</th><th>คัน</th><th>Base</th><th>Bonus</th><th>สุทธิ</th><th>สถานะ</th></tr></thead><tbody>
+        <tr><td><b>ภูมรี ศรีรอด</b></td><td class="n">4</td><td class="n">฿8,500</td><td class="n g">+฿4,500</td><td class="n g" style="font-weight:800;">฿13,000</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr><td><b>ภัทราภรณ์ โบราณินทร์</b></td><td class="n">3</td><td class="n">฿6,000</td><td class="n g">+฿2,000</td><td class="n g" style="font-weight:800;">฿8,000</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr><td><b>อรุณรักษ์ พรรณา</b></td><td class="n">3</td><td class="n">฿6,000</td><td class="n g">+฿2,500</td><td class="n g" style="font-weight:800;">฿8,500</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr><td><b>ภูริเนตร อภัยโส</b></td><td class="n">2</td><td class="n">฿4,000</td><td class="n g">+฿2,000</td><td class="n g" style="font-weight:800;">฿6,000</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr><td><b>ณดาหลัน นนท์เข็มพรหม</b></td><td class="n">1</td><td class="n">฿2,000</td><td class="n y">+฿500</td><td class="n y" style="font-weight:800;">฿2,500</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr><td><b>จินตนา เชื้อคำเพ็ง</b></td><td class="n">1</td><td class="n">฿2,000</td><td class="n">+฿0</td><td class="n m" style="font-weight:800;">฿2,000</td><td><span class="badge y">รอจ่าย</span></td></tr>
+        <tr style="background:var(--gd)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">14</td><td class="n" style="font-weight:700;">฿28,500</td><td class="n g" style="font-weight:700;">+฿11,500</td><td class="n g" style="font-weight:800;">฿40,000</td><td></td></tr>
+      </tbody></table>
+      <div style="padding:8px 14px;font-size:10px;" class="m" style="background:var(--bg3);">1-3คัน ฿2K · 4-6คัน ฿2.5K · 7-10คัน ฿3K · 11+คัน ฿3.5K | Finance≥75% +฿2K · Insurance≥75% +฿2K · ไม่มี Complaint +฿500</div>
     </div>
-    <div class="card">
-      <div class="ct">P&L รายแผนก</div>
-      <table>
-        <tr><th>แผนก</th><th class="r">Revenue</th><th class="r">Cost</th><th class="r">Gross Profit</th><th class="r">สุทธิ</th><th>สถานะ</th></tr>
-        <tbody id="pl-division"></tbody>
-      </table>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💳 Commission SA บริการ — ก.พ. 69</div><div style="display:flex;gap:6px;"><button onclick="openModal('modal-print-sa')" class="btn btn-yel" style="font-size:11px;padding:5px 12px;">🖨️ ปริ้น</button><button onclick="payAll('SA','฿6,894','3')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">💸 จ่ายทั้งหมด</button></div></div>
+      <table class="tbl"><thead><tr><th>SA</th><th>ยอดขาย</th><th>Base</th><th>CPU Bonus</th><th>หัก 15%</th><th>สุทธิ</th></tr></thead><tbody>
+        <tr><td><b>สุขธนัช นิตโย</b></td><td class="n">฿105,817</td><td class="n b">0.55%</td><td class="n g">฿2,940</td><td class="n r">-฿528</td><td class="n g" style="font-weight:800;">฿2,994</td></tr>
+        <tr><td><b>นิราวรรณ ดอนมุงคุณ</b></td><td class="n">฿72,104</td><td class="n y">0.30%</td><td class="n g">฿2,100</td><td class="n r">-฿347</td><td class="n y" style="font-weight:800;">฿1,969</td></tr>
+        <tr><td><b>อริศรา บุษปวรรธนะ</b></td><td class="n">฿70,768</td><td class="n y">0.30%</td><td class="n g">฿2,060</td><td class="n r">-฿341</td><td class="n y" style="font-weight:800;">฿1,931</td></tr>
+        <tr style="background:var(--gd)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">฿248,688</td><td></td><td class="n g" style="font-weight:700;">฿7,100</td><td class="n r">-฿1,216</td><td class="n g" style="font-weight:800;">฿6,894</td></tr>
+      </tbody></table>
+      <div style="padding:8px 14px;font-size:10px;" class="m">หักภาษี ณ ที่จ่าย 5% + กองกลาง GS 10%</div>
     </div>
   </div>
 </div>
 
-<!-- BALANCE SHEET -->
-<div class="page" id="pg-bs">
-  <div class="sec">Balance Sheet</div>
-  <div class="sec-s">คำนวณจากไฟล์ TFIS ที่อัพโหลด</div>
-
-  <div id="bs-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ TFIS</div></div>
-
-  <div id="bs-content" style="display:none">
-    <div class="month-tabs" id="month-tabs-bs"></div>
-    <div class="g4" id="bs-kpis" style="margin-bottom:14px"></div>
-    <div class="g2">
+<!-- ===== แคชเชียร์ ===== -->
+<div id="t-cashier" style="display:none;">
+  <div class="g2">
+    <div>
       <div class="card">
-        <div class="ct">สินทรัพย์</div>
-        <div id="bs-assets"></div>
+        <div class="ch"><div class="ct">🧾 รายการเงินสดวันนี้</div><button onclick="openModal('modal-cash-entry')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">+ เพิ่มรายการ</button></div>
+        <table class="tbl"><thead><tr><th>เวลา</th><th>ประเภท</th><th>รายละเอียด</th><th>ยอด</th></tr></thead>
+        <tbody id="cashier-table">
+          <tr><td class="m">08:42</td><td>เงินดาวน์รถ</td><td class="m">ธีรวัฒน์ · Hilux D-CAB</td><td class="n g">+฿250,000</td></tr>
+          <tr><td class="m">10:15</td><td>งานซ่อม GS</td><td class="m">นาง ร. บุสุวะ</td><td class="n g">+฿3,850</td></tr>
+          <tr><td class="m">13:30</td><td>ค่าจดทะเบียน</td><td class="m">ประสิทธิ์ · Hilux</td><td class="n r">-฿13,450</td></tr>
+          <tr><td class="m">14:20</td><td>ขายของเก่า</td><td class="m">แบตเก่า 2 ลูก</td><td class="n g">+฿800</td></tr>
+        </tbody></table>
+        <div style="padding:10px 14px;background:var(--bg3);display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;gap:8px;">
+          <div><div style="font-size:9px;" class="m">รับสด</div><div style="font-family:'IBM Plex Mono',monospace;font-weight:800;" class="g">+฿254,650</div></div>
+          <div><div style="font-size:9px;" class="m">จ่ายสด</div><div style="font-family:'IBM Plex Mono',monospace;font-weight:800;" class="r">-฿13,450</div></div>
+          <div><div style="font-size:9px;" class="m">สุทธิ</div><div style="font-family:'IBM Plex Mono',monospace;font-weight:800;" class="b">฿241,200</div></div>
+        </div>
       </div>
       <div class="card">
-        <div class="ct">หนี้สินและทุน</div>
-        <div id="bs-liabilities"></div>
+        <div class="ch"><div class="ct">🛢️ ขายของเก่า / น้ำมันหลอด</div><button onclick="openModal('modal-scrap')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">+ บันทึก</button></div>
+        <table class="tbl"><thead><tr><th>วันที่</th><th>รายการ</th><th>จำนวน</th><th>รวม</th></tr></thead><tbody>
+          <tr><td class="m">3/4/69</td><td>แบตเก่า</td><td class="n">2 ลูก</td><td class="n g">฿800</td></tr>
+          <tr><td class="m">28/3/69</td><td>น้ำมันหลอด</td><td class="n">15 หลอด</td><td class="n g">฿1,800</td></tr>
+          <tr><td class="m">25/3/69</td><td>ยางเก่า</td><td class="n">4 เส้น</td><td class="n g">฿600</td></tr>
+          <tr style="background:var(--gd)"><td style="font-weight:700;" colspan="3">รวมเดือนนี้</td><td class="n g" style="font-weight:800;">฿3,200</td></tr>
+        </tbody></table>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- KPI -->
-<div class="page" id="pg-kpi">
-  <div class="sec">KPI Dashboard</div>
-  <div class="sec-s">คำนวณจาก TFIS + TOPSERV ที่อัพโหลด</div>
-
-  <div id="kpi-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ — ไปที่แท็บ "Upload ไฟล์"</div></div>
-
-  <div id="kpi-content" style="display:none">
-    <div class="month-tabs" id="month-tabs-kpi"></div>
-    <div class="g4" id="kpi-cards" style="margin-bottom:14px"></div>
-    <div class="g2">
-      <div class="card">
-        <div class="ct">P45 ของแถม — ทุกเดือน</div>
-        <div id="kpi-p45"></div>
+    <div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="ch"><div class="ct">🧮 นับเงินสดปิดยอด</div><span class="badge y">สิ้นวัน</span></div>
+        <div style="padding:14px;"><div id="denom-list"></div>
+          <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-top:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span class="m">นับได้จริง</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="b" id="counted-total">฿0</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span class="m">ยอดในระบบ</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="b">฿241,200</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;border-top:1px solid var(--border);padding-top:6px;"><span>ผลต่าง</span><span style="font-family:'IBM Plex Mono',monospace;" id="cash-diff" class="g">฿0</span></div>
+          </div>
+          <button onclick="closeDayRegister()" class="btn btn-red" style="width:100%;margin-top:10px;">🔒 ปิดยอดสิ้นวัน + ส่ง ผบห.</button>
+        </div>
       </div>
-      <div class="card">
-        <div class="ct">Commission TLT (P36+P37)</div>
-        <div id="kpi-commission"></div>
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">🏦 นำฝากธนาคาร</div></div>
+        <div style="padding:12px 14px;">
+          <div class="f-group"><label class="f-label">ฝากเข้าบัญชี</label><select class="f-select"><option>BAY 275-0-00768-2 (OD 65M)</option><option>BAY 275-0-00795-8 (OD 20M)</option><option>BBL 496-7-05557-7</option><option>SCB 407-4-31972-8</option><option>TTB 836-201928-6</option></select></div>
+          <div class="f-group"><label class="f-label">ยอดนำฝาก (฿)</label><input class="f-input" type="number" placeholder="0" style="font-size:16px;font-weight:700;text-align:right;font-family:'IBM Plex Mono',monospace;"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CASH DEPOSIT -->
-<div class="page" id="pg-cash">
-  <div class="sec">Cash Deposit Crosscheck</div>
-  <div class="sec-s">กรอกยอดนับกับยอด SB เพื่อ crosscheck</div>
-  <div class="card">
-    <div class="g2">
-      <div>
-        <div class="fg"><label class="fl">วันที่รับเงิน</label><input class="fi" type="date" id="cash-date"></div>
-        <div class="fg"><label class="fl">ยอดนับได้ (บาท)</label><input class="fi" type="number" id="cash-count" placeholder="0.00"></div>
-        <div class="fg"><label class="fl">ยอดจาก SB (บาท)</label><input class="fi" type="number" id="cash-sb" placeholder="0.00"></div>
-        <div class="fg"><label class="fl">เลข Pay-in Slip</label><input class="fi" id="cash-payin" placeholder="เลขที่ใบฝาก"></div>
+<!-- ===== จัดซื้อ ===== -->
+<div id="t-purchase" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">⏳ รออนุมัติจัดซื้อ</div><span class="badge y">3 รายการ</span></div>
+      <div style="padding:8px 14px;font-size:10px;color:var(--blu);font-weight:700;background:var(--bd);border-bottom:1px solid var(--border2);">🏢 จัดซื้อบริษัท</div>
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border2);">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;">เครื่องเขียน + กระดาษ A4</div><div style="font-size:10px;" class="m">ขอโดย: ธุรการ · 3/4/69 · Office Mate</div></div>
+          <div style="text-align:right;"><div style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="y">฿2,850</div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="approvePO(this,'ok')" style="background:var(--gd);color:var(--grn);border:1px solid rgba(10,124,82,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="approvePO(this,'no')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></div>
+        </div>
       </div>
-      <div>
-        <div class="fg"><label class="fl">ผู้บันทึก</label><input class="fi" id="cash-by" placeholder="ชื่อ-นามสกุล"></div>
-        <div class="fg"><label class="fl">หมายเหตุ</label><input class="fi" id="cash-note" placeholder="(ถ้ามี)"></div>
-        <div id="cash-result" style="margin-top:12px;padding:12px;border-radius:var(--r);border:1px solid var(--br);font-size:13px;background:var(--bg)">กรอกยอดทั้งสองฝั่งเพื่อดูผลต่าง</div>
-        <button class="btn btn-p" style="margin-top:10px;width:100%" onclick="submitCash()">💾 บันทึกและส่ง Email</button>
+      <div style="padding:8px 14px;font-size:10px;color:var(--grn);font-weight:700;background:var(--gd);border-bottom:1px solid var(--border2);">🔧 จัดซื้อบริษัท — อะไหล่ (ผ่านบริการ)</div>
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border2);">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;">ผ้าเบรก Toyota Genuine × 4 ชุด</div><div style="font-size:10px;" class="m">ขอโดย: แผนกบริการ · Toyota Parts</div></div>
+          <div style="text-align:right;"><div style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="y">฿8,400</div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="approvePO(this,'ok')" style="background:var(--gd);color:var(--grn);border:1px solid rgba(10,124,82,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="approvePO(this,'no')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;">น้ำมันเครื่อง Toyota 5L × 12</div><div style="font-size:10px;" class="m">ขอโดย: แผนกบริการ · Toyota Parts</div></div>
+          <div style="text-align:right;"><div style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="y">฿14,400</div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="approvePO(this,'ok')" style="background:var(--gd);color:var(--grn);border:1px solid rgba(10,124,82,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button><button onclick="approvePO(this,'no')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📊 สรุปจัดซื้อเดือนนี้</div></div>
+        <table class="tbl"><thead><tr><th>ประเภท</th><th>รายการ</th><th>รวม</th></tr></thead><tbody>
+          <tr><td>🏢 บริษัท</td><td class="n">8</td><td class="n b">฿24,850</td></tr>
+          <tr><td>🔧 อะไหล่</td><td class="n">15</td><td class="n b">฿182,400</td></tr>
+          <tr style="background:var(--bd)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">23</td><td class="n b" style="font-weight:800;">฿207,250</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">🏪 ผู้ขายประจำ</div><button onclick="openModal('modal-add-vendor')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">+ เพิ่ม</button></div>
+        <div style="padding:12px 14px;font-size:12px;display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);"><span>Toyota Parts</span><span class="badge g">อะไหล่</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);"><span>Office Mate</span><span class="badge b">บริษัท</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);"><span>Thai Watsadu</span><span class="badge b">บริษัท</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;"><span>ร้านปิ่นโต</span><span class="badge b">บริษัท</span></div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="ct">ประวัติ Cash Deposit</div>
-    <table>
-      <tr><th>วันที่</th><th class="r">ยอดนับ</th><th class="r">ยอด SB</th><th class="r">ผลต่าง</th><th>สถานะ</th><th>Pay-in</th></tr>
-      <tbody id="cash-history">
-        <tr><td colspan="6" style="text-align:center;color:var(--mu);padding:20px">ยังไม่มีข้อมูล</td></tr>
-      </tbody>
-    </table>
+</div>
+
+<!-- ===== เงินเดือน ===== -->
+<div id="t-payroll" style="display:none;">
+  <div class="signal b" style="margin-bottom:14px;"><span>📌</span><div><div class="st">อัพโหลดไฟล์ Payroll — ระบบคำนวณหักและออกสลิปให้อัตโนมัติ</div><div class="sd">เงินเดือน · หัก ปกส. · หัก ภาษี · บวก OT · บวก Commission → สลิปรายคน → ส่ง LINE</div></div></div>
+  <div class="g21">
+    <div>
+      <div class="card">
+        <div class="ch"><div class="ct">💰 สรุปเงินเดือน เม.ย. 69</div><div style="display:flex;gap:6px;">
+          <button onclick="openModal('modal-upload-payroll')" class="btn btn-primary" style="font-size:11px;padding:5px 12px;">📂 อัพ Payroll</button>
+          <button onclick="openModal('modal-payslip')" class="btn btn-green" style="font-size:11px;padding:5px 12px;">🖨️ ออกสลิป</button>
+        </div></div>
+        <div style="padding:10px 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-bottom:1px solid var(--border);">
+          <div style="background:var(--bg3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="m">พนักงาน</div><div style="font-size:18px;font-weight:800;" class="b">83</div></div>
+          <div style="background:var(--gd);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="g">รวม</div><div style="font-size:16px;font-weight:800;" class="g">~฿1.48M</div></div>
+          <div style="background:var(--rd);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="r">หัก</div><div style="font-size:16px;font-weight:800;" class="r">~฿215K</div></div>
+          <div style="background:var(--bd);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="b">สุทธิ</div><div style="font-size:16px;font-weight:800;" class="b">~฿1.26M</div></div>
+        </div>
+        <table class="tbl"><thead><tr><th>ชื่อ</th><th>ตำแหน่ง</th><th>เงินเดือน</th><th>หัก ปกส.</th><th>หัก ภาษี</th><th>Commission</th><th>สุทธิ</th><th></th></tr></thead><tbody>
+          <tr><td><b>สมพงษ์ กองศรีเกษ</b></td><td class="m">ผจก.ขาย</td><td class="n">฿35,000</td><td class="n r">-฿1,575</td><td class="n r">-฿2,800</td><td class="n g">+฿40,000</td><td class="n g" style="font-weight:700;">฿70,625</td><td><button onclick="printSlip('สมพงษ์')" style="background:var(--bd);color:var(--blu);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">สลิป</button></td></tr>
+          <tr><td><b>ภุมรี ศรีรอด</b></td><td class="m">เซล์</td><td class="n">฿15,000</td><td class="n r">-฿675</td><td class="n r">-฿0</td><td class="n g">+฿13,000</td><td class="n g" style="font-weight:700;">฿27,325</td><td><button onclick="printSlip('ภุมรี')" style="background:var(--bd);color:var(--blu);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">สลิป</button></td></tr>
+          <tr><td><b>สุขธนัช นิตโย</b></td><td class="m">SA/GS</td><td class="n">฿18,000</td><td class="n r">-฿810</td><td class="n r">-฿0</td><td class="n g">+฿2,994</td><td class="n g" style="font-weight:700;">฿20,184</td><td><button onclick="printSlip('สุขธนัช')" style="background:var(--bd);color:var(--blu);border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Sarabun',sans-serif;">สลิป</button></td></tr>
+          <tr><td colspan="8" style="text-align:center;padding:8px;font-size:11px;" class="m">... และอีก 80 คน — อัพโหลด Payroll เพื่อดูครบ</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📋 รายการหัก</div></div>
+        <table class="tbl"><thead><tr><th>รายการ</th><th>อัตรา</th></tr></thead><tbody>
+          <tr><td>ประกันสังคม (ปกส.)</td><td class="n">5% (สูงสุด ฿750)</td></tr>
+          <tr><td>ภาษีเงินได้บุคคล</td><td class="n">ตามขั้น</td></tr>
+          <tr><td>ขาดงาน/มาสาย</td><td class="n">จาก HR</td></tr>
+          <tr><td>OT เพิ่ม</td><td class="n">1.5× / 3×</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card" style="margin-bottom:0;"><div class="ch"><div class="ct">📅 กำหนดจ่าย</div></div>
+        <div style="padding:12px 14px;font-size:12px;display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);"><span>จ่ายเงินเดือน</span><span style="font-weight:700;">ทุกวันที่ 1</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);"><span>ปิดยอด OT/ขาด/ลา</span><span style="font-weight:700;">วันที่ 25</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;"><span>Commission</span><span style="font-weight:700;">พร้อมเงินเดือน</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- APPROVE -->
-<div class="page" id="pg-approve">
-  <div class="sec">อนุมัติเบิกจ่าย</div>
-  <div class="sec-s">รายการที่รออนุมัติจากผู้จัดการบัญชี</div>
-  <div class="al al-b"><span>ℹ</span><div>รายการที่ต้องการอนุมัติจะแสดงที่นี่เมื่อพนักงานส่งคำขอผ่านระบบ</div></div>
-</div>
+</div><!-- /main -->
 
+<!-- MODALs -->
+<div class="modal-overlay" id="modal-bank">
+  <div class="modal"><div class="modal-title">🏦 คีย์ยอดบัญชีวันนี้</div><div class="modal-sub">3 เมษายน 2569 — กรอกจาก Statement</div>
+    <div class="f-group"><label class="f-label">BAY 275-0-00768-2 (OD 65M)</label><input class="f-input" type="number" placeholder="ยอดคงเหลือ (ติดลบถ้าใช้ OD)" style="font-family:'IBM Plex Mono',monospace;"></div>
+    <div class="f-group"><label class="f-label">BAY 275-0-00795-8 (OD 20M)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+    <div class="f-group"><label class="f-label">BBL 496-7-05557-7</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+    <div class="f-group"><label class="f-label">SCB 407-4-31972-8</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+    <div class="f-group"><label class="f-label">TTB 836-201928-6</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-bank')">ยกเลิก</button><button class="btn btn-green" onclick="closeModal('modal-bank');alert('✅ บันทึกยอดบัญชีแล้ว')">✅ บันทึก</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-income">
+  <div class="modal"><div class="modal-title">📥 คีย์รายรับ</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>ค่ารถ-ไฟแนนซ์ TLT</option><option>เงินดาวน์/ซื้อสด</option><option>ค่ารถแลกเปลี่ยน</option><option>GS งานซ่อม</option><option>เงินสนับสนุน TMT</option><option>Commission TLT/IOI</option><option>อื่นๆ</option></select></div>
+    <div class="f-row"><div class="f-group" style="margin:0;"><label class="f-label">ยอด (฿)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div><div class="f-group" style="margin:0;"><label class="f-label">บัญชีที่รับ</label><select class="f-select"><option>BAY 768-2</option><option>BAY 795-8</option><option>BBL</option><option>SCB</option><option>TTB</option><option>เงินสด</option></select></div></div>
+    <div class="f-group"><label class="f-label">อ้างอิง</label><input class="f-input" placeholder="ชื่อลูกค้า / เลขใบอนุมัติ"></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-income')">ยกเลิก</button><button class="btn btn-green" onclick="closeModal('modal-income');alert('✅ บันทึกรายรับแล้ว')">✅ บันทึก</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-expense">
+  <div class="modal"><div class="modal-title">📤 คีย์รายจ่าย</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>ค่ารถ TLT/TMT</option><option>เงินเดือน+Commission</option><option>ประกันสังคม/สพก.</option><option>ค่าอะไหล่ TMT</option><option>ไฟฟ้า/ประปา/โทรศัพท์</option><option>เงินทดรองจ่าย</option><option>ชำระ Aloan</option><option>อื่นๆ</option></select></div>
+    <div class="f-row"><div class="f-group" style="margin:0;"><label class="f-label">ยอด (฿)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div><div class="f-group" style="margin:0;"><label class="f-label">จ่ายจาก</label><select class="f-select"><option>BAY 768-2 (TLT)</option><option>BAY 795-8</option><option>BBL</option><option>SCB</option><option>TTB</option><option>เงินสด</option></select></div></div>
+    <div class="f-group"><label class="f-label">ผู้รับเงิน / อ้างอิง</label><input class="f-input" placeholder="TLT · Invoice 2026039360"></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-expense')">ยกเลิก</button><button class="btn btn-red" onclick="closeModal('modal-expense');alert('✅ บันทึกรายจ่ายแล้ว')">✅ บันทึก</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-cash-entry">
+  <div class="modal"><div class="modal-title">🧾 เพิ่มรายการเงินสด</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>เงินดาวน์รถ</option><option>งานซ่อม GS</option><option>ค่าจดทะเบียน</option><option>ขายของเก่า</option><option>ขายน้ำมันหลอด</option><option>เงินมัดจำ</option><option>อื่นๆ</option></select></div>
+    <div class="f-row"><div class="f-group" style="margin:0;"><label class="f-label">รับ/จ่าย</label><select class="f-select"><option>รับ (+)</option><option>จ่าย (-)</option></select></div><div class="f-group" style="margin:0;"><label class="f-label">ยอด (฿)</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div></div>
+    <div class="f-group"><label class="f-label">รายละเอียด</label><input class="f-input" placeholder="ชื่อลูกค้า / ใบงาน"></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-cash-entry')">ยกเลิก</button><button class="btn btn-green" onclick="closeModal('modal-cash-entry');alert('✅ บันทึกแล้ว')">✅ บันทึก</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-scrap">
+  <div class="modal"><div class="modal-title">🛢️ บันทึกขายของเก่า / น้ำมันหลอด</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>น้ำมันหลอด</option><option>แบตเก่า</option><option>ยางเก่า</option><option>เหล็กเก่า/อะไหล่เก่า</option><option>อื่นๆ</option></select></div>
+    <div class="f-row3"><div class="f-group" style="margin:0;"><label class="f-label">จำนวน</label><input class="f-input" type="number"></div><div class="f-group" style="margin:0;"><label class="f-label">หน่วย</label><input class="f-input" placeholder="หลอด/ลูก/เส้น"></div><div class="f-group" style="margin:0;"><label class="f-label">ราคา/หน่วย</label><input class="f-input" type="number" style="font-family:'IBM Plex Mono',monospace;"></div></div>
+    <div class="f-group"><label class="f-label">ผู้ซื้อ</label><input class="f-input"></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-scrap')">ยกเลิก</button><button class="btn btn-green" onclick="closeModal('modal-scrap');alert('✅ บันทึกแล้ว\n📊 เพิ่มรายรับอัตโนมัติ')">✅ บันทึก</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-add-vendor">
+  <div class="modal"><div class="modal-title">🏪 เพิ่มผู้ขาย</div>
+    <div class="f-group"><label class="f-label">ชื่อผู้ขาย/บริษัท</label><input class="f-input"></div>
+    <div class="f-row"><div class="f-group" style="margin:0;"><label class="f-label">ประเภท</label><select class="f-select"><option>บริษัท (ทั่วไป)</option><option>อะไหล่</option><option>IT</option><option>อาหาร/เครื่องดื่ม</option></select></div><div class="f-group" style="margin:0;"><label class="f-label">เบอร์โทร</label><input class="f-input" placeholder="0X-XXXX-XXXX"></div></div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-add-vendor')">ยกเลิก</button><button class="btn btn-primary" onclick="closeModal('modal-add-vendor');alert('✅ เพิ่มผู้ขายแล้ว')">✅ เพิ่ม</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-upload-payroll">
+  <div class="modal"><div class="modal-title">📂 อัพโหลด Payroll</div><div class="modal-sub">ระบบคำนวณหักและออกสลิปอัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">เดือน</label><input class="f-input" type="month" value="2026-04"></div>
+    <div class="upload-zone" onclick="document.getElementById('f-payroll').click()"><input type="file" id="f-payroll" style="display:none" accept=".xlsx,.xls"><div style="font-size:24px;">💰</div><div style="font-size:13px;font-weight:700;margin-top:4px;">ไฟล์ Payroll .xlsx</div></div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-top:10px;font-size:11px;" class="m">ระบบจะคำนวณ: เงินเดือน base · หัก ปกส.5% · หัก ภาษี · หัก ขาด/ลา · บวก OT · บวก Commission จากระบบ</div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-upload-payroll')">ยกเลิก</button><button class="btn btn-green" onclick="closeModal('modal-upload-payroll');alert('✅ คำนวณ Payroll สำเร็จ 83 คน\n🖨️ พร้อมออกสลิปและโอนจ่าย')">📊 คำนวณ</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-payslip">
+  <div class="modal"><div class="modal-title">🖨️ ออกสลิปเงินเดือน</div><div class="modal-sub">เม.ย. 69 | 83 คน</div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;font-size:12px;" class="m">สลิปจะส่งให้:<br>✅ LINE แต่ละคนอัตโนมัติ<br>✅ PDF รวม 83 คน สำหรับปริ้น<br>✅ ข้อมูลโอนเงินให้ธนาคาร</div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-payslip')">ยกเลิก</button><button class="btn btn-red" onclick="closeModal('modal-payslip');alert('✅ ออกสลิปและส่ง LINE ครบ 83 คน\n💸 ยอดโอนรวม ฿1,265,000')">🖨️ ออกสลิป + ส่ง LINE</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-print-sale">
+  <div class="modal"><div class="modal-title">🖨️ ปริ้น Commission ฝ่ายขาย</div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;font-size:12px;" class="m">✅ สรุปยอด Commission รายเซล์ (Base+Bonus)<br>✅ ยอดขายรายคัน (จากใบอนุมัติขาย)<br>✅ ยอดสุทธิโอนรายคน<br>✅ ลายเซ็น ผจก.ขาย + หัวหน้าบัญชี</div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-print-sale')">ยกเลิก</button><button class="btn btn-red" onclick="closeModal('modal-print-sale');alert('✅ สร้างเอกสาร Commission ฝ่ายขาย ก.พ.69')">🖨️ ปริ้น</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-print-sa">
+  <div class="modal"><div class="modal-title">🖨️ ปริ้น Commission SA</div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;font-size:12px;" class="m">✅ สรุปยอด Commission SA รายคน<br>✅ Base Rate + CPU Bonus รายการ<br>✅ หัก กองกลาง 10% + ภาษี 5%<br>✅ ยอดสุทธิจ่ายรายคน<br>✅ ลายเซ็น ผจก.GS + หัวหน้าบัญชี</div>
+    <div class="btn-row"><button class="btn btn-cancel" onclick="closeModal('modal-print-sa')">ยกเลิก</button><button class="btn btn-red" onclick="closeModal('modal-print-sa');alert('✅ สร้างเอกสาร Commission SA ก.พ.69')">🖨️ ปริ้น</button></div>
+  </div>
 </div>
 
 <script>
-// ======= STATE =======
-const state = {
-  tfis: null,
-  topserv: null,
-  payroll: null,
-  tlt: null,
-  selectedMonth: 'December',
-  uploadLog: []
-};
-
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const MONTHS_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-
-function gp(id,el){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));
-  document.getElementById('pg-'+id).classList.add('on');
-  if(el)el.classList.add('on');
+setInterval(()=>{
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('th-TH');
+  document.getElementById('date-badge').textContent=n.toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+},1000);
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-upload','t-cashflow','t-commission','t-cashier','t-purchase','t-payroll'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+  if(id==='t-cashier') renderDenoms();
 }
-
-function fmt(n){ return (parseFloat(n)||0).toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0}); }
-function fmtM(n){ return ((parseFloat(n)||0)/1000000).toFixed(2)+'ล.'; }
-
-// ======= DRAG & DROP =======
-function dragOver(e,id){ e.preventDefault(); document.getElementById(id).classList.add('drag'); }
-function dragLeave(id){ document.getElementById(id).classList.remove('drag'); }
-function dropFile(e,type){
-  e.preventDefault();
-  const id = 'zone-'+type;
-  document.getElementById(id).classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if(!file) return;
-  if(type==='tfis') loadTFIS({files:[file]});
-  else if(type==='topserv') loadTOPSERV({files:[file]});
-  else if(type==='payroll') loadPayroll({files:[file]});
-  else if(type==='tlt') loadTLT({files:[file]});
+function handleUpload(zoneId,statusId,input){
+  if(!input.files.length) return;
+  const zone=document.getElementById(zoneId);
+  const stat=document.getElementById(statusId);
+  zone.classList.add('done');
+  zone.querySelector('div').textContent='✅';
+  stat.style.display='inline-flex';
 }
-
-// ======= LOAD TFIS =======
-function loadTFIS(input) {
-  const file = input.files[0];
-  if(!file) return;
-  document.getElementById('res-tfis').textContent = '⏳ กำลังอ่าน...';
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const wb = XLSX.read(e.target.result, {type:'array'});
-
-      // อ่าน DT sheet
-      const dtWs = wb.Sheets['DT'];
-      const dtData = XLSX.utils.sheet_to_json(dtWs, {header:1});
-      const headers = dtData[0]; // ['AccCode','AccName','AccNameEng','Code','January',...]
-
-      // แปลงเป็น object array
-      const rows = dtData.slice(1).filter(r => r[0]).map(r => {
-        const obj = {};
-        headers.forEach((h,i) => obj[h] = r[i]);
-        return obj;
-      });
-
-      // อ่าน BS sheet
-      const bsWs = wb.Sheets['BS'];
-      const bsData = XLSX.utils.sheet_to_json(bsWs, {header:1});
-      const bsHeaders = bsData[0];
-      const bsRows = bsData.slice(1).filter(r => r[0]).map(r => {
-        const obj = {};
-        bsHeaders.forEach((h,i) => obj[h] = r[i]);
-        return obj;
-      });
-
-      state.tfis = { dt: rows, bs: bsRows, filename: file.name };
-      document.getElementById('res-tfis').textContent = `✅ อ่านแล้ว ${rows.length} แถว · ${file.name}`;
-      document.getElementById('zone-tfis').classList.add('done');
-
-      logUpload('TFIS', file.name, rows.length + ' แถว');
-      renderPL();
-      renderBS();
-      renderKPI();
-
-    } catch(err) {
-      document.getElementById('res-tfis').textContent = '❌ Error: ' + err.message;
-    }
-  };
-  reader.readAsArrayBuffer(file);
+const DENOMS=[1000,500,100,50,20,10,5,1];
+function renderDenoms(){
+  const el=document.getElementById('denom-list');
+  if(!el||el.children.length>0) return;
+  el.innerHTML=DENOMS.map(d=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;width:50px;text-align:right;">${d>=1000?d/1000+'K':d}</span><span style="font-size:11px;color:var(--text2);width:20px;text-align:center;">฿×</span><input type="number" min="0" value="0" class="f-input" data-val="${d}" oninput="calcCash()" style="width:70px;padding:5px 8px;text-align:center;"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);width:90px;text-align:right;" id="ds-${d}">= ฿0</span></div>`).join('');
 }
-
-// ======= LOAD TOPSERV =======
-function loadTOPSERV(input) {
-  const file = input.files[0];
-  if(!file) return;
-  document.getElementById('res-topserv').textContent = '⏳ กำลังอ่าน...';
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const wb = XLSX.read(e.target.result, {type:'array'});
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws);
-      state.topserv = { data, filename: file.name };
-      document.getElementById('res-topserv').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
-      document.getElementById('zone-topserv').classList.add('done');
-      logUpload('TOPSERV', file.name, data.length + ' แถว');
-    } catch(err) {
-      document.getElementById('res-topserv').textContent = '❌ Error: ' + err.message;
-    }
-  };
-  reader.readAsArrayBuffer(file);
+function calcCash(){
+  let total=0;
+  document.querySelectorAll('[data-val]').forEach(inp=>{
+    const qty=parseInt(inp.value)||0;const val=parseInt(inp.dataset.val);const sub=qty*val;total+=sub;
+    const el=document.getElementById('ds-'+val);if(el)el.textContent='= ฿'+sub.toLocaleString('th-TH');
+  });
+  const sys=241200;const diff=total-sys;
+  document.getElementById('counted-total').textContent='฿'+total.toLocaleString('th-TH');
+  const diffEl=document.getElementById('cash-diff');
+  diffEl.textContent=(diff>=0?'+':'')+'฿'+diff.toLocaleString('th-TH');
+  diffEl.className=diff===0?'g':diff>0?'b':'r';
 }
-
-// ======= LOAD PAYROLL =======
-function loadPayroll(input) {
-  const file = input.files[0];
-  if(!file) return;
-  document.getElementById('res-payroll').textContent = '⏳ กำลังอ่าน...';
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const wb = XLSX.read(e.target.result, {type:'array'});
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws);
-      state.payroll = { data, filename: file.name };
-      document.getElementById('res-payroll').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
-      document.getElementById('zone-payroll').classList.add('done');
-      logUpload('Payroll', file.name, data.length + ' แถว');
-    } catch(err) {
-      document.getElementById('res-payroll').textContent = '❌ Error: ' + err.message;
-    }
-  };
-  reader.readAsArrayBuffer(file);
+function closeDayRegister(){alert('🔒 ปิดยอดสิ้นวัน 3 เม.ย. 69 แล้ว\n📊 ส่งรายงานไป ผบห. + หัวหน้าบัญชีอัตโนมัติ\n📱 แจ้ง LINE สรุปยอด\n🔒 ล็อครายการแล้ว');}
+function payAll(type,amount,count){alert('✅ โอน Commission '+type+' '+amount+' ('+count+' คน)\n📱 แจ้ง LINE ทุกคนแล้ว\n📊 บันทึกรายจ่ายอัตโนมัติ');}
+function approvePO(btn,action){
+  const parent=btn.closest('div[style*="flex-end"]');
+  parent.innerHTML=action==='ok'?'<div style="color:var(--grn);font-size:12px;font-weight:700;">✅ อนุมัติแล้ว</div>':'<div style="color:var(--red);font-size:12px;font-weight:700;">❌ ปฏิเสธแล้ว</div>';
 }
-
-// ======= LOAD TLT =======
-function loadTLT(input) {
-  const file = input.files[0];
-  if(!file) return;
-  document.getElementById('res-tlt').textContent = '⏳ กำลังอ่าน...';
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const wb = XLSX.read(e.target.result, {type:'array'});
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws);
-      state.tlt = { data, filename: file.name };
-      document.getElementById('res-tlt').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
-      document.getElementById('zone-tlt').classList.add('done');
-      logUpload('GL TLT', file.name, data.length + ' แถว');
-    } catch(err) {
-      document.getElementById('res-tlt').textContent = '❌ Error: ' + err.message;
-    }
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-// ======= LOG UPLOAD =======
-function logUpload(type, filename, info) {
-  state.uploadLog.push({ type, filename, info, time: new Date().toLocaleTimeString('th-TH') });
-  const tbody = document.getElementById('status-tbody');
-  document.getElementById('upload-status').style.display = 'block';
-  tbody.innerHTML = state.uploadLog.map(u => `
-    <tr>
-      <td><strong>${u.type}</strong></td>
-      <td><span class="badge bd-g">✅ พร้อมใช้งาน</span></td>
-      <td style="color:var(--mu)">${u.info} · ${u.filename}</td>
-      <td style="font-family:var(--mono);font-size:11px">${u.time}</td>
-    </tr>
-  `).join('');
-}
-
-// ======= RENDER P&L =======
-function renderPL() {
-  if(!state.tfis) return;
-  document.getElementById('pl-no-data').style.display = 'none';
-  document.getElementById('pl-content').style.display = 'block';
-
-  const rows = state.tfis.dt;
-
-  // Month tabs
-  const tabsEl = document.getElementById('month-tabs-pl');
-  tabsEl.innerHTML = MONTHS.map((m,i) => `
-    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'pl')">${MONTHS_TH[i]}</div>
-  `).join('');
-
-  updatePL();
-}
-
-function selectMonth(month, el, page) {
-  state.selectedMonth = month;
-  document.querySelectorAll(`#month-tabs-${page} .mtab`).forEach(t => t.classList.remove('on'));
-  el.classList.add('on');
-  if(page==='pl') updatePL();
-  else if(page==='bs') updateBS();
-  else if(page==='kpi') updateKPI();
-}
-
-function sumByCode(rows, pcode, month) {
-  return rows.filter(r => r.Code === pcode).reduce((s,r) => s + (parseFloat(r[month])||0), 0);
-}
-
-function updatePL() {
-  if(!state.tfis) return;
-  const rows = state.tfis.dt;
-  const m = state.selectedMonth;
-
-  // คำนวณ P-Codes หลัก
-  const p4  = sumByCode(rows,'P4',m);
-  const p6  = sumByCode(rows,'P6',m);
-  const p7  = sumByCode(rows,'P7',m);
-  const p8  = sumByCode(rows,'P8',m);
-  const p28 = sumByCode(rows,'P28',m);
-  const p34 = sumByCode(rows,'P34',m);
-  const p36 = sumByCode(rows,'P36',m);
-  const p37 = sumByCode(rows,'P37',m);
-  const p38 = sumByCode(rows,'P38',m);
-  const p45 = sumByCode(rows,'P45',m);
-  const p50 = sumByCode(rows,'P50',m);
-  const p83 = sumByCode(rows,'P83',m);
-  const p84 = sumByCode(rows,'P84',m);
-
-  const totalRev = p4+p6+p7+p8+p34+p36+p37+p38;
-  const totalExp = Math.abs(p28)+p45+p50+p83+p84;
-  const net = totalRev - totalExp;
-
-  // KPIs
-  const kpiEl = document.getElementById('pl-kpis');
-  kpiEl.innerHTML = `
-    <div class="kpi ${net>=0?'g':'r'}"><div class="kl">กำไร/ขาดทุน</div><div class="kv" style="color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}฿${fmtM(net)}</div></div>
-    <div class="kpi"><div class="kl">รายได้รวม</div><div class="kv">฿${fmtM(totalRev)}</div></div>
-    <div class="kpi r"><div class="kl">P45 ของแถม</div><div class="kv" style="color:var(--red)">฿${fmtM(p45)}</div><div class="ks" style="color:var(--mu)">เป้า ≤฿409K</div></div>
-    <div class="kpi"><div class="kl">Commission F&I</div><div class="kv" style="color:var(--grn)">฿${fmt(p36+p37)}</div></div>
-  `;
-
-  // Revenue
-  const revEl = document.getElementById('pl-revenue');
-  revEl.innerHTML = [
-    ['P4 ขายรถ', p4, 'var(--grn)'],
-    ['P6 ค่าแรง GS', p6, 'var(--grn)'],
-    ['P7 อะไหล่ GS', p7, 'var(--grn)'],
-    ['P8 น้ำมัน GS', p8, 'var(--grn)'],
-    ['P34 TMT Support', p34, 'var(--grn)'],
-    ['P36 Commission TLT', p36, 'var(--grn)'],
-    ['P37 Commission ประกัน', p37, 'var(--grn)'],
-    ['P38 ค่าเช่า', p38, 'var(--grn)'],
-    ['P28 ส่วนลดจ่าย', p28, 'var(--red)'],
-  ].map(([label,val,color]) => `
-    <div class="brow">
-      <span class="bl">${label}</span>
-      <div class="pw"><div class="pf" style="width:${Math.min(100,Math.abs(val)/Math.max(p4,1)*100)}%;background:${color}"></div></div>
-      <span class="bv" style="color:${color}">฿${fmt(val)}</span>
-    </div>
-  `).join('');
-
-  // Expense
-  const expEl = document.getElementById('pl-expense');
-  expEl.innerHTML = [
-    ['P45 ของแถม', p45],
-    ['P50 เงินเดือน', p50],
-    ['P83 ดอกเบี้ย TLT', p83],
-    ['P84 ดอกเบี้ย OD', p84],
-  ].map(([label,val]) => `
-    <div class="brow">
-      <span class="bl">${label}</span>
-      <div class="pw"><div class="pf" style="width:${Math.min(100,val/Math.max(p50,1)*100)}%;background:var(--red)"></div></div>
-      <span class="bv" style="color:var(--red)">฿${fmt(val)}</span>
-    </div>
-  `).join('');
-
-  // Division
-  const divEl = document.getElementById('pl-division');
-  const divisions = ['Sale','GS','BP','Admin','Sure'];
-  divEl.innerHTML = divisions.map(div => {
-    const divRows = rows.filter(r => r.JobCode === div || r.DeptCode === div);
-    const rev = divRows.filter(r => r.Code && !r.Code.startsWith('P1') && !r.Code.startsWith('P2') && !r.Code.startsWith('P5') && !r.Code.startsWith('P4') && parseFloat(r[m]||0) > 0)
-                       .reduce((s,r) => s+(parseFloat(r[m])||0), 0);
-    const cost = divRows.filter(r => parseFloat(r[m]||0) < 0)
-                        .reduce((s,r) => s+Math.abs(parseFloat(r[m]||0)), 0);
-    const netDiv = rev - cost;
-    return `<tr>
-      <td><strong>${div}</strong></td>
-      <td class="r" style="color:var(--grn)">฿${fmt(rev)}</td>
-      <td class="r" style="color:var(--red)">฿${fmt(cost)}</td>
-      <td class="r">฿${fmt(rev-cost)}</td>
-      <td class="r" style="color:${netDiv>=0?'var(--grn)':'var(--red)'}"><strong>฿${fmt(netDiv)}</strong></td>
-      <td><span class="badge ${netDiv>=0?'bd-g':'bd-r'}">${netDiv>=0?'กำไร':'ขาดทุน'}</span></td>
-    </tr>`;
-  }).join('');
-}
-
-// ======= RENDER BS =======
-function renderBS() {
-  if(!state.tfis) return;
-  document.getElementById('bs-no-data').style.display = 'none';
-  document.getElementById('bs-content').style.display = 'block';
-
-  const tabsEl = document.getElementById('month-tabs-bs');
-  tabsEl.innerHTML = MONTHS.map((m,i) => `
-    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'bs')">${MONTHS_TH[i]}</div>
-  `).join('');
-
-  updateBS();
-}
-
-function updateBS() {
-  if(!state.tfis) return;
-  const rows = state.tfis.bs;
-  const m = state.selectedMonth;
-
-  function bsSum(code) {
-    return rows.filter(r => r['BS Code'] === code || r['Acc Code']?.startsWith(code))
-               .reduce((s,r) => s+(parseFloat(r[m])||0), 0);
-  }
-
-  const cash = bsSum('B4') + bsSum('B5');
-  const ar   = bsSum('B10') + bsSum('B11') + bsSum('B12') + bsSum('B13') + bsSum('B16');
-  const inv  = bsSum('B19') + bsSum('B21') + bsSum('B22');
-  const fa   = bsSum('B31') + bsSum('B32') + bsSum('B33') + bsSum('B36') + bsSum('B37') + bsSum('B38') + bsSum('B39') + bsSum('B40') + bsSum('B41');
-  const totalAssets = cash + ar + inv + fa;
-
-  const od   = Math.abs(bsSum('B71'));
-  const apTMT= bsSum('B54') + bsSum('B55');
-  const tlt  = bsSum('B86');
-  const dir  = bsSum('B88');
-  const totalLiab = od + apTMT + tlt + dir;
-  const equity = bsSum('B95') + bsSum('B96') + bsSum('B97');
-
-  const kpiEl = document.getElementById('bs-kpis');
-  kpiEl.innerHTML = `
-    <div class="kpi r"><div class="kl">OD BAY</div><div class="kv" style="color:var(--red)">฿${fmtM(od)}</div><div class="ks" style="color:var(--mu)">Headroom ฿${fmtM(84000000-od)}</div></div>
-    <div class="kpi"><div class="kl">สินทรัพย์รวม</div><div class="kv">฿${fmtM(totalAssets)}</div></div>
-    <div class="kpi r"><div class="kl">หนี้สินรวม</div><div class="kv" style="color:var(--red)">฿${fmtM(totalLiab)}</div></div>
-    <div class="kpi ${equity>=0?'g':'r'}"><div class="kl">Equity</div><div class="kv" style="color:${equity>=0?'var(--grn)':'var(--red)'}">฿${fmtM(equity)}</div></div>
-  `;
-
-  document.getElementById('bs-assets').innerHTML = [
-    ['เงินสด + เงินฝาก', cash],
-    ['ลูกหนี้การค้า', ar],
-    ['สินค้าคงเหลือ', inv],
-    ['สินทรัพย์ถาวร (net)', fa],
-  ].map(([l,v]) => `<div class="brow"><span class="bl">${l}</span><span class="bv">฿${fmt(v)}</span></div>`).join('');
-
-  document.getElementById('bs-liabilities').innerHTML = [
-    ['OD ธนาคาร BAY', od, 'var(--red)'],
-    ['เจ้าหนี้ TMT', apTMT, 'var(--red)'],
-    ['เงินกู้ TLT', tlt, 'var(--red)'],
-    ['เงินกู้กรรมการ', dir, 'var(--red)'],
-    ['Equity', equity, equity>=0?'var(--grn)':'var(--red)'],
-  ].map(([l,v,c]) => `<div class="brow"><span class="bl">${l}</span><span class="bv" style="color:${c}">฿${fmt(v)}</span></div>`).join('');
-}
-
-// ======= RENDER KPI =======
-function renderKPI() {
-  if(!state.tfis) return;
-  document.getElementById('kpi-no-data').style.display = 'none';
-  document.getElementById('kpi-content').style.display = 'block';
-
-  const tabsEl = document.getElementById('month-tabs-kpi');
-  tabsEl.innerHTML = MONTHS.map((m,i) => `
-    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'kpi')">${MONTHS_TH[i]}</div>
-  `).join('');
-
-  updateKPI();
-}
-
-function updateKPI() {
-  if(!state.tfis) return;
-  const rows = state.tfis.dt;
-
-  // P45 ทุกเดือน
-  const p45El = document.getElementById('kpi-p45');
-  p45El.innerHTML = MONTHS.map((m,i) => {
-    const val = Math.abs(sumByCode(rows,'P45',m));
-    const pct = Math.min(100, val/1500000*100);
-    const color = val > 409000 ? 'var(--red)' : 'var(--grn)';
-    return `<div class="brow">
-      <span class="bl">${MONTHS_TH[i]}</span>
-      <div class="pw"><div class="pf" style="width:${pct}%;background:${color}"></div></div>
-      <span class="bv" style="color:${color}">฿${fmt(val)}</span>
-      ${val>409000?'<span class="badge bd-r">เกินเป้า</span>':''}
-    </div>`;
-  }).join('');
-
-  // Commission
-  const comEl = document.getElementById('kpi-commission');
-  comEl.innerHTML = MONTHS.map((m,i) => {
-    const p36 = sumByCode(rows,'P36',m);
-    const p37 = sumByCode(rows,'P37',m);
-    const total = p36+p37;
-    return `<div class="brow">
-      <span class="bl">${MONTHS_TH[i]}</span>
-      <div class="pw"><div class="pf" style="width:${Math.min(100,total/500000*100)}%;background:var(--grn)"></div></div>
-      <span class="bv" style="color:var(--grn)">฿${fmt(total)}</span>
-    </div>`;
-  }).join('');
-}
-
-// ======= CASH DEPOSIT =======
-function checkCashDiff() {
-  const count = parseFloat(document.getElementById('cash-count').value)||0;
-  const sb = parseFloat(document.getElementById('cash-sb').value)||0;
-  if(!count && !sb) return;
-  const diff = count - sb;
-  const ok = Math.abs(diff) <= 100;
-  const el = document.getElementById('cash-result');
-  el.style.background = ok ? 'var(--gbg)' : 'var(--rbg)';
-  el.style.borderColor = ok ? 'var(--gbr)' : 'var(--rbr)';
-  el.style.color = ok ? 'var(--grn)' : 'var(--red)';
-  el.textContent = ok ? `✅ ตรง — ผลต่าง ฿${Math.abs(diff).toLocaleString()}` : `🔴 ผิดปกติ! ต่างกัน ฿${Math.abs(diff).toLocaleString()}`;
-}
-
-document.getElementById('cash-count').addEventListener('input', checkCashDiff);
-document.getElementById('cash-sb').addEventListener('input', checkCashDiff);
-
-async function submitCash() {
-  const data = {
-    receipt_date: document.getElementById('cash-date').value,
-    cash_amount: document.getElementById('cash-count').value,
-    sb_amount: document.getElementById('cash-sb').value,
-    payin_ref: document.getElementById('cash-payin').value,
-    recorded_by: document.getElementById('cash-by').value,
-    note: document.getElementById('cash-note').value
-  };
-  if(!data.cash_amount || !data.sb_amount) {
-    alert('กรุณากรอกยอดนับและยอด SB ก่อน');
-    return;
-  }
-  alert('💾 บันทึกแล้ว — ระบบจะส่ง Email แจ้งบัญชีอัตโนมัติ\n(เชื่อมต่อ Google Sheets แล้วข้อมูลจะบันทึกจริง)');
-}
-
-// Init date
-document.getElementById('cash-date').value = new Date().toISOString().split('T')[0];
+function printSlip(name){alert('🖨️ ออกสลิป: '+name+'\n📱 ส่ง LINE แล้ว');}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});});
 </script>
 </body>
 </html>
