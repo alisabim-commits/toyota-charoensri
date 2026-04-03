@@ -1,204 +1,188 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Toyota Charoensri — ระบบภายใน</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบภายใน — Toyota Charoensri</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#0c0c0a;--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--tx:#1a1a18;--mu:#6b6b68;--red:#b5000f;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);min-height:100vh}
-.hero{background:var(--ink);padding:28px 24px;text-align:center;border-bottom:3px solid var(--red)}
-.hero-logo{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
-.hero-title{font-size:24px;font-weight:600;color:#fff}.hero-title span{color:#f5c842}
-.hero-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
-.content{max-width:600px;margin:0 auto;padding:24px 16px}
-.section-label{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:'';flex:1;height:1px;background:var(--br)}
-.card{background:var(--w);border:1px solid var(--br);border-radius:10px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--tx);transition:all .15s}
-.card:hover{border-color:var(--tx);transform:translateX(2px)}
-.card-icon{font-size:22px;width:40px;text-align:center;flex-shrink:0}
-.card-body{flex:1}
-.card-title{font-size:14px;font-weight:600;margin-bottom:2px}
-.card-desc{font-size:11px;color:var(--mu);line-height:1.5}
-.card-arrow{font-size:16px;color:var(--mu)}
-.badge{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:600;letter-spacing:.06em;margin-left:6px}
-.badge-r{background:#fef2f2;color:var(--red)}.badge-g{background:var(--gbg);color:var(--grn)}.badge-b{background:#eff6ff;color:#1e40af}
-.update-box{background:var(--w);border:1px solid var(--br);border-radius:10px;padding:16px;margin-top:8px}
-.update-title{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-.update-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--br);font-size:12px;align-items:flex-start}
-.update-row:last-child{border-bottom:none}
-.update-who{min-width:120px;font-weight:500}
-.update-what{color:var(--mu);line-height:1.6;flex:1}
-.update-when{font-family:var(--mono);font-size:10px;color:var(--mu);white-space:nowrap}
-.footer{text-align:center;padding:20px;font-size:11px;color:var(--mu);font-family:var(--mono)}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Sarabun',sans-serif;background:#f5f0eb;color:#1a1a1a;min-height:100vh;}
+
+/* HEADER */
+.header{background:#111;color:#fff;text-align:center;padding:28px 20px 22px;}
+.header-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px;}
+.header-title{font-size:32px;font-weight:800;}
+.header-title span{color:#c9a227;}
+.header-desc{font-size:13px;color:rgba(255,255,255,.45);margin-top:6px;}
+.red-line{height:3px;background:linear-gradient(90deg,#eb0a1e,#c9a227);}
+
+/* MAIN */
+.main{max-width:720px;margin:0 auto;padding:28px 16px 60px;}
+
+/* SECTION */
+.section-label{font-size:12px;font-weight:700;color:#888;letter-spacing:.5px;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #ddd;}
+
+/* MENU ITEM */
+.menu-item{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none;color:inherit;border:1px solid rgba(0,0,0,.07);box-shadow:0 1px 4px rgba(0,0,0,.05);transition:all .15s;}
+.menu-item:hover{background:#fafafa;box-shadow:0 3px 12px rgba(0,0,0,.1);transform:translateY(-1px);}
+.menu-icon{font-size:26px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;flex-shrink:0;background:#f5f0eb;}
+.menu-info{flex:1;}
+.menu-name{font-size:15px;font-weight:700;display:flex;align-items:center;gap:7px;margin-bottom:3px;}
+.menu-desc{font-size:11px;color:#888;line-height:1.5;}
+.menu-arrow{color:#bbb;font-size:16px;flex-shrink:0;}
+.tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;}
+.tag-exec{background:#fce4e4;color:#c0392b;}
+.tag-mgr{background:#fde8b2;color:#c26a00;}
+.tag-sale{background:#dbeafe;color:#1d52cc;}
+.tag-service{background:#d1fae5;color:#065f46;}
+.tag-acc{background:#e8e0ff;color:#5b21b6;}
+.tag-hr{background:#fce7f3;color:#9d174d;}
+.tag-purchase{background:#fff3cd;color:#856404;}
+.tag-security{background:#e2e8f0;color:#475569;}
+.tag-finance{background:#ecfdf5;color:#065f46;}
+.tag-reg{background:#e0f2fe;color:#075985;}
+
+/* VERSION */
+.version{text-align:center;font-size:10px;color:#bbb;margin-top:28px;letter-spacing:.5px;}
 </style>
 </head>
 <body>
-<div class="hero">
-  <div class="hero-logo">Toyota Charoensri Co., Ltd. · Nakhon Phanom</div>
-  <div class="hero-title">ระบบ<span>ภายใน</span></div>
-  <div class="hero-sub">เลือกหน้าที่ต้องการใช้งาน · Internal System v1.0</div>
+
+<div class="header">
+  <div class="header-sub">TOYOTA CHAROENSRI CO., LTD. · NAKHON PHANOM</div>
+  <div class="header-title">ระบบ<span>ภายใน</span></div>
+  <div class="header-desc">เลือกหน้าที่ต้องการใช้งาน · Internal System v2.0</div>
 </div>
+<div class="red-line"></div>
 
-<div class="content">
+<div class="main">
 
+  <!-- ผู้บริหาร -->
   <div class="section-label">ผู้บริหาร</div>
 
-  <a class="card" href="exec_platform.html">
-    <div class="card-icon">👔</div>
-    <div class="card-body">
-      <div class="card-title">Executive Platform <span class="badge badge-r">ผบห.</span></div>
-      <div class="card-desc">Notice · สถานะธุรกิจ · ติดตามเงิน · อนุมัติ · KPI · เป้า 20ล. · Margin Calc</div>
+  <a class="menu-item" href="exec_platform.html">
+    <div class="menu-icon">👔</div>
+    <div class="menu-info">
+      <div class="menu-name">Executive Platform <span class="tag tag-exec">ผบห.</span></div>
+      <div class="menu-desc">War Room · TLT วงเงิน · Margin Calc · P45 · Cash Flow · Flash P&L</div>
     </div>
-    <div class="card-arrow">›</div>
+    <div class="menu-arrow">›</div>
   </a>
 
+  <a class="menu-item" href="dashboard_tlt_v4.html">
+    <div class="menu-icon">💰</div>
+    <div class="menu-info">
+      <div class="menu-name">วงเงิน Dashboard <span class="tag tag-exec">ผบห.</span></div>
+      <div class="menu-desc">TLT วงเงินจริง · Assignment รายคัน · Due Date · Invoice · Flow TSNU</div>
+    </div>
+    <div class="menu-arrow">›</div>
+  </a>
+
+  <!-- ผู้จัดการ -->
   <div class="section-label">ผู้จัดการ</div>
 
-  <a class="card" href="mgr_sales.html">
-    <div class="card-icon">🚗</div>
-    <div class="card-body">
-      <div class="card-title">ผู้จัดการฝ่ายขาย <span class="badge badge-b">ผจก.ขาย</span></div>
-      <div class="card-desc">Briefing · Dashboard · Pipeline · Package · Commission · Margin Calc</div>
+  <a class="menu-item" href="mgr_sales.html">
+    <div class="menu-icon">🚗</div>
+    <div class="menu-info">
+      <div class="menu-name">ผู้จัดการฝ่ายขาย <span class="tag tag-sale">ผจก.ขาย</span></div>
+      <div class="menu-desc">ติดตามวัน · อนุมัติดีล · Performance เซล์ · Pipeline · Commission · Margin</div>
     </div>
-    <div class="card-arrow">›</div>
+    <div class="menu-arrow">›</div>
   </a>
 
-  <a class="card" href="mgr_service.html">
-    <div class="card-icon">🔧</div>
-    <div class="card-body">
-      <div class="card-title">ผู้จัดการฝ่ายบริการ <span class="badge badge-b">ผจก.บริการ</span></div>
-      <div class="card-desc">Briefing · CPU/PBC · รับรถ EM+ · Tire/Battery · QR Rating · รายงาน 17:00</div>
+  <a class="menu-item" href="mgr_service.html">
+    <div class="menu-icon">🔧</div>
+    <div class="menu-info">
+      <div class="menu-name">ผู้จัดการฝ่ายบริการ <span class="tag tag-service">ผจก.GS</span></div>
+      <div class="menu-desc">ติดตามวัน · Commission SA · CPU Target · ALIVE-X · CSI · เบิกอะไหล่</div>
     </div>
-    <div class="card-arrow">›</div>
+    <div class="menu-arrow">›</div>
   </a>
 
-  <div class="section-label">ฝ่ายสนับสนุน</div>
-
-  <a class="card" href="accounting.html">
-    <div class="card-icon">💰</div>
-    <div class="card-body">
-      <div class="card-title">บัญชีและการเงิน <span class="badge badge-b">บัญชี</span></div>
-      <div class="card-desc">Flash P&L · Cash Deposit · น้ำมันหลอด · ขายของเก่า · Budget · หักเงิน</div>
+  <a class="menu-item" href="mgr_accounting.html">
+    <div class="menu-icon">📊</div>
+    <div class="menu-info">
+      <div class="menu-name">ผู้จัดการ / หัวหน้าบัญชี <span class="tag tag-acc">บัญชี</span></div>
+      <div class="menu-desc">อัพโหลดไฟล์ · กระแสเงินสด 5 บัญชี · Commission จ่าย · จัดซื้อ · เงินเดือน</div>
     </div>
-    <div class="card-arrow">›</div>
+    <div class="menu-arrow">›</div>
   </a>
 
-  <a class="card" href="hr_platform.html">
-    <div class="card-icon">👥</div>
-    <div class="card-body">
-      <div class="card-title">HR Platform <span class="badge badge-b">HR</span></div>
-      <div class="card-desc">Onboarding · ใบเตือน · กยศ. · เงินประกัน · Gate Pass · OT · Payroll · Blacklist</div>
-    </div>
-    <div class="card-arrow">›</div>
-  </a>
-
-  <a class="card" href="procurement.html">
-    <div class="card-icon">📦</div>
-    <div class="card-body">
-      <div class="card-title">จัดซื้อ <span class="badge badge-b">จัดซื้อ</span></div>
-      <div class="card-desc">Stock ต่ำ · ของค้างดัน Package · PO · Vendor match · รับของ</div>
-    </div>
-    <div class="card-arrow">›</div>
-  </a>
-
+  <!-- พนักงาน -->
   <div class="section-label">พนักงาน</div>
 
-  <a class="card" href="employee.html">
-    <div class="card-icon">🙋</div>
-    <div class="card-body">
-      <div class="card-title">พนักงาน <span class="badge badge-g">ทุกคน</span></div>
-      <div class="card-desc">วันลา · เบิกเงิน · Gate Pass · OT · รายงานประจำวัน · Payslip</div>
+  <a class="menu-item" href="employee_sales.html">
+    <div class="menu-icon">🏷️</div>
+    <div class="menu-info">
+      <div class="menu-name">ฝ่ายขาย — เซล์ <span class="tag tag-sale">เซล์</span></div>
+      <div class="menu-desc">ใบจอง 5 Step · Sale Kit · คำนวณค่างวด · Leaderboard · KPI · Package</div>
     </div>
-    <div class="card-arrow">›</div>
+    <div class="menu-arrow">›</div>
   </a>
 
-  <!-- UPDATE SCHEDULE -->
-  <div class="section-label">ตารางอัพเดทไฟล์</div>
-  <div class="update-box">
-    <div class="update-title">ใครต้องอัพไฟล์อะไร เมื่อไหร่</div>
+  <a class="menu-item" href="employee_service.html">
+    <div class="menu-icon">⭐</div>
+    <div class="menu-info">
+      <div class="menu-name">ฝ่ายบริการ — SA <span class="tag tag-service">SA</span></div>
+      <div class="menu-desc">งานวันนี้ · Commission · CPU Target · เบิกอะไหล่ถ่ายรูป · CSI Script</div>
+    </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-    <div class="update-row">
-      <div class="update-who">บัญชี/การเงิน</div>
-      <div class="update-what">
-        อัพ <strong>accounting.html</strong> ใหม่เมื่อมีการเปลี่ยน P-Code หรือเพิ่ม feature ใหม่<br>
-        ข้อมูลรายวัน (Flash P&L, Cash) → กรอกในหน้าเว็บได้เลย ไม่ต้องอัพไฟล์
-      </div>
-      <div class="update-when">เมื่อมีอัพเดท</div>
-    </div>
+  <!-- ฝ่ายสนับสนุน -->
+  <div class="section-label">ฝ่ายสนับสนุน</div>
 
-    <div class="update-row">
-      <div class="update-who">HR</div>
-      <div class="update-what">
-        อัพ <strong>hr_platform.html</strong> ใหม่เมื่อมีการเปลี่ยนกฎ/นโยบาย<br>
-        ข้อมูลพนักงาน (วันลา, OT, ใบเตือน) → กรอกในหน้าเว็บได้เลย
-      </div>
-      <div class="update-when">เมื่อมีอัพเดท</div>
+  <a class="menu-item" href="finance.html">
+    <div class="menu-icon">💵</div>
+    <div class="menu-info">
+      <div class="menu-name">การเงิน <span class="tag tag-finance">การเงิน</span></div>
+      <div class="menu-desc">รับ-จ่ายวันนี้ · Bank Balance · Commission รับ · เงินสด+ปิดยอด · รับไฟล์จากแผนก</div>
     </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-    <div class="update-row">
-      <div class="update-who">ผจก.ขาย</div>
-      <div class="update-what">
-        อัพ <strong>mgr_sales.html</strong> ใหม่เมื่อมีการเปลี่ยน Commission structure หรือ Package<br>
-        รายงานรายวัน → กรอกในหน้าเว็บได้เลย
-      </div>
-      <div class="update-when">เมื่อมีอัพเดท</div>
+  <a class="menu-item" href="registration.html">
+    <div class="menu-icon">📋</div>
+    <div class="menu-info">
+      <div class="menu-name">ทะเบียน <span class="tag tag-reg">ทะเบียน</span></div>
+      <div class="menu-desc">เบิกเงินจดทะเบียน · สถานะใบทะเบียน · QR ใบนำรถออก</div>
     </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-    <div class="update-row">
-      <div class="update-who">ผจก.บริการ</div>
-      <div class="update-what">
-        อัพ <strong>mgr_service.html</strong> ใหม่เมื่อมีการเปลี่ยน KPI หรือเป้าหมาย<br>
-        รายงาน 17:00 → กรอกในหน้าเว็บได้เลย
-      </div>
-      <div class="update-when">เมื่อมีอัพเดท</div>
+  <a class="menu-item" href="hr_platform.html">
+    <div class="menu-icon">👥</div>
+    <div class="menu-info">
+      <div class="menu-name">HR Platform <span class="tag tag-hr">HR</span></div>
+      <div class="menu-desc">Gate Pass QR · เลขไมล์ · ลา/OT · On/Offboarding · ม.76 · พนักงาน 83 คน</div>
     </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-    <div class="update-row">
-      <div class="update-who">ผบห. / IT</div>
-      <div class="update-what">
-        อัพ <strong>exec_platform.html</strong> เมื่อมีการเปลี่ยน Notice หรือ KPI target<br>
-        อัพ <strong>tc-api.js</strong> เมื่อมีการเปลี่ยน Web App URL (หลัง Deploy Apps Script ใหม่)
-      </div>
-      <div class="update-when">เมื่อมีอัพเดท</div>
+  <a class="menu-item" href="employee_purchase.html">
+    <div class="menu-icon">📦</div>
+    <div class="menu-info">
+      <div class="menu-name">จัดซื้อ <span class="tag tag-purchase">จัดซื้อ</span></div>
+      <div class="menu-desc">ขอจัดซื้อบริษัท · ขอจัดซื้ออะไหล่ · ผู้ขาย dropdown · รออนุมัติ</div>
     </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-    <div class="update-row">
-      <div class="update-who">ทุกคน</div>
-      <div class="update-what">
-        <strong>ข้อมูลที่กรอกในหน้าเว็บ</strong> → บันทึกลง Google Sheets อัตโนมัติ ไม่ต้องอัพไฟล์<br>
-        <strong>ดูข้อมูลย้อนหลัง</strong> → เปิด Google Sheets "Toyota Charoensri Database" ได้เลย
-      </div>
-      <div class="update-when">ตลอดเวลา</div>
-    </div>
+  <!-- รปภ. -->
+  <div class="section-label">รักษาความปลอดภัย</div>
 
-  </div>
+  <a class="menu-item" href="security.html">
+    <div class="menu-icon">🛡️</div>
+    <div class="menu-info">
+      <div class="menu-name">รปภ. — ตรวจ Gate Pass <span class="tag tag-security">รปภ.</span></div>
+      <div class="menu-desc">สแกน QR Gate Pass · ตรวจสอบ · Log การผ่านเข้า-ออก</div>
+    </div>
+    <div class="menu-arrow">›</div>
+  </a>
 
-  <!-- HOW TO UPDATE -->
-  <div class="section-label">วิธีอัพเดทไฟล์</div>
-  <div class="update-box">
-    <div class="update-title">ขั้นตอนอัพไฟล์ใหม่เข้า GitHub (ทุกครั้ง)</div>
-    <div class="update-row">
-      <div class="update-who">ขั้นที่ 1</div>
-      <div class="update-what">เปิด <strong>github.com/alisabim-commits/toyota-charoensri</strong></div>
-    </div>
-    <div class="update-row">
-      <div class="update-who">ขั้นที่ 2</div>
-      <div class="update-what">กด <strong>"Add file"</strong> → <strong>"Upload files"</strong></div>
-    </div>
-    <div class="update-row">
-      <div class="update-who">ขั้นที่ 3</div>
-      <div class="update-what">ลากไฟล์ใหม่มาวาง → กด <strong>"Commit changes"</strong></div>
-    </div>
-    <div class="update-row">
-      <div class="update-who">ขั้นที่ 4</div>
-      <div class="update-what">รอ 1-2 นาที → refresh หน้าเว็บ → ได้ไฟล์ใหม่ทันทีทุกคน</div>
-    </div>
-  </div>
+  <div class="version">Toyota Charoensri · Dealer 14373 · Internal System v2.0 · © 2569</div>
 
 </div>
-
-<div class="footer">Toyota Charoensri Co., Ltd. · Internal System · v1.0 · 2569</div>
 </body>
 </html>
