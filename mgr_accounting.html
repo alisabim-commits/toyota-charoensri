@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ผู้จัดการบัญชี — Toyota Charoensri</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#b5000f;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--ink:#0c0c0a;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
+.hdr{background:var(--ink);padding:0 20px;display:flex;align-items:center;height:52px;position:sticky;top:0;z-index:50;gap:0;border-bottom:2px solid var(--red)}
+.logo{font-size:12px;font-weight:600;color:#fff;padding-right:16px;border-right:1px solid rgba(255,255,255,.15);margin-right:16px}
+.logo span{color:#f5c842}
+.nav-tabs{display:flex;gap:0;height:100%;align-items:flex-end;overflow-x:auto}
+.nt{height:42px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.nt:hover{color:#fff}.nt.on{color:#fff;border-bottom-color:#f5c842}
+.content{max-width:1100px;margin:0 auto;padding:20px 16px}
+.page{display:none}.page.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
+.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
+.kpi.r{border-color:var(--rbr);background:var(--rbg)}.kpi.a{border-color:var(--abr);background:var(--abg)}.kpi.g{border-color:var(--gbr);background:var(--gbg)}
+.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
+.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid;line-height:1.6}
+.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
+th.r{text-align:right}td{padding:7px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}
+tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
+.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:.5px solid var(--br)}.brow:last-child{border-bottom:none}
+.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
+.bl{min-width:160px;color:var(--mu)}.bv{min-width:80px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
+.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
+.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}
+.btn-gr{background:var(--gbg);color:var(--grn);border-color:var(--gbr)}.btn-re{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
+.btn-sm{padding:4px 10px;font-size:11px}
+.sec{font-size:18px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:16px}
+.div{height:1px;background:var(--br);margin:12px 0}
+.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
+.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:7px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
+.fi:focus{outline:none;border-color:var(--tx)}
+.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:7px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
+.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
+.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--br2);border-radius:var(--rl);padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--tx);background:var(--w)}
+.upload-zone.done{border-color:var(--grn);background:var(--gbg);border-style:solid}
+.upload-icon{font-size:32px;margin-bottom:8px}
+.upload-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.upload-sub{font-size:11px;color:var(--mu)}
+.upload-result{margin-top:10px;font-size:12px;color:var(--grn);font-weight:500}
+
+/* MONTH SELECTOR */
+.month-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.mtab{padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;border:1px solid var(--br);background:var(--w)}
+.mtab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mtab:hover:not(.on){background:var(--bg)}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
+  <div class="nav-tabs">
+    <div class="nt on" onclick="gp('upload',this)">📤 Upload ไฟล์</div>
+    <div class="nt" onclick="gp('pl',this)">📊 P&L</div>
+    <div class="nt" onclick="gp('bs',this)">🏦 Balance Sheet</div>
+    <div class="nt" onclick="gp('kpi',this)">🎯 KPI</div>
+    <div class="nt" onclick="gp('cash',this)">💵 Cash Deposit</div>
+    <div class="nt" onclick="gp('approve',this)">✅ อนุมัติเบิกจ่าย</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- UPLOAD -->
+<div class="page on" id="pg-upload">
+  <div class="sec">Upload ไฟล์ข้อมูล</div>
+  <div class="sec-s">อัพโหลดไฟล์ Excel จากระบบต่างๆ — ระบบจะอ่านและวิเคราะห์ให้อัตโนมัติ</div>
+
+  <div class="g2">
+    <!-- TFIS -->
+    <div class="card">
+      <div class="ct">TFIS — งบการเงิน P&L + Balance Sheet <span class="badge bd-b">Excel</span></div>
+      <div class="upload-zone" id="zone-tfis" onclick="document.getElementById('file-tfis').click()"
+        ondragover="dragOver(event,'zone-tfis')" ondragleave="dragLeave('zone-tfis')" ondrop="dropFile(event,'tfis')">
+        <div class="upload-icon">📊</div>
+        <div class="upload-title">TFIS_Year_XXXX.xlsx</div>
+        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
+        <div class="upload-result" id="res-tfis"></div>
+      </div>
+      <input type="file" id="file-tfis" accept=".xlsx,.xls" style="display:none" onchange="loadTFIS(this)">
+      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
+        ระบบจะอ่าน: Sheet DT (ข้อมูลรายเดือน) + Sheet BS (งบดุล)<br>
+        แสดงผล: P&L รายเดือน · KPI แต่ละ P-Code · OD · Commission
+      </div>
+    </div>
+
+    <!-- TOPSERV -->
+    <div class="card">
+      <div class="ct">TOPSERV — CPU/PBC รายพนักงาน <span class="badge bd-g">Excel</span></div>
+      <div class="upload-zone" id="zone-topserv" onclick="document.getElementById('file-topserv').click()"
+        ondragover="dragOver(event,'zone-topserv')" ondragleave="dragLeave('zone-topserv')" ondrop="dropFile(event,'topserv')">
+        <div class="upload-icon">🔧</div>
+        <div class="upload-title">TOPSERV_MMYYYY.xlsx</div>
+        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
+        <div class="upload-result" id="res-topserv"></div>
+      </div>
+      <input type="file" id="file-topserv" accept=".xlsx,.xls" style="display:none" onchange="loadTOPSERV(this)">
+      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
+        ระบบจะอ่าน: CPU · PBC · ค่าแรง · อะไหล่ · น้ำมัน รายพนักงาน<br>
+        แสดงผล: Ranking SA · Share % · Tire/Battery · ส่งมอบตรงเวลา
+      </div>
+    </div>
+
+    <!-- PAYROLL -->
+    <div class="card">
+      <div class="ct">Payroll Prosoft — เงินเดือนพนักงาน <span class="badge bd-a">Excel</span></div>
+      <div class="upload-zone" id="zone-payroll" onclick="document.getElementById('file-payroll').click()"
+        ondragover="dragOver(event,'zone-payroll')" ondragleave="dragLeave('zone-payroll')" ondrop="dropFile(event,'payroll')">
+        <div class="upload-icon">💰</div>
+        <div class="upload-title">Payroll_MMYYYY.xlsx</div>
+        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
+        <div class="upload-result" id="res-payroll"></div>
+      </div>
+      <input type="file" id="file-payroll" accept=".xlsx,.xls" style="display:none" onchange="loadPayroll(this)">
+      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
+        ระบบจะอ่าน: เงินเดือน · ค่าแรง · ประกันสังคม · Commission รายคน<br>
+        แสดงผล: Payslip · ยอดจ่ายรวม · เปรียบกับงบ
+      </div>
+    </div>
+
+    <!-- COMMISSION TLT -->
+    <div class="card">
+      <div class="ct">Commission TLT — GL รายเดือน <span class="badge bd-b">Excel</span></div>
+      <div class="upload-zone" id="zone-tlt" onclick="document.getElementById('file-tlt').click()"
+        ondragover="dragOver(event,'zone-tlt')" ondragleave="dragLeave('zone-tlt')" ondrop="dropFile(event,'tlt')">
+        <div class="upload-icon">🏦</div>
+        <div class="upload-title">GL_4610_01_XXXX.xlsx</div>
+        <div class="upload-sub">คลิกหรือลากไฟล์มาวาง</div>
+        <div class="upload-result" id="res-tlt"></div>
+      </div>
+      <input type="file" id="file-tlt" accept=".xlsx,.xls" style="display:none" onchange="loadTLT(this)">
+      <div style="margin-top:10px;font-size:11px;color:var(--mu)">
+        ระบบจะอ่าน: GL บัญชี 4610-01 · 4710-00 · 4710-02 · 4710-03<br>
+        แสดงผล: Commission รายเดือน · รายลูกค้า · เปรียบ attach rate
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card" id="upload-status" style="display:none">
+    <div class="ct">สถานะไฟล์ที่อัพโหลด</div>
+    <table>
+      <tr><th>ไฟล์</th><th>สถานะ</th><th>ข้อมูล</th><th>อัพโหลดเมื่อ</th></tr>
+      <tbody id="status-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- P&L -->
+<div class="page" id="pg-pl">
+  <div class="sec">P&L รายเดือน</div>
+  <div class="sec-s">คำนวณจากไฟล์ TFIS ที่อัพโหลด</div>
+
+  <div id="pl-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ TFIS — ไปที่แท็บ "Upload ไฟล์" แล้วอัพโหลด TFIS Excel ก่อนครับ</div></div>
+
+  <div id="pl-content" style="display:none">
+    <div class="month-tabs" id="month-tabs-pl"></div>
+    <div class="g4" id="pl-kpis" style="margin-bottom:14px"></div>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">รายได้หลัก</div>
+        <div id="pl-revenue"></div>
+      </div>
+      <div class="card">
+        <div class="ct">ค่าใช้จ่ายหลัก</div>
+        <div id="pl-expense"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">P&L รายแผนก</div>
+      <table>
+        <tr><th>แผนก</th><th class="r">Revenue</th><th class="r">Cost</th><th class="r">Gross Profit</th><th class="r">สุทธิ</th><th>สถานะ</th></tr>
+        <tbody id="pl-division"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- BALANCE SHEET -->
+<div class="page" id="pg-bs">
+  <div class="sec">Balance Sheet</div>
+  <div class="sec-s">คำนวณจากไฟล์ TFIS ที่อัพโหลด</div>
+
+  <div id="bs-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ TFIS</div></div>
+
+  <div id="bs-content" style="display:none">
+    <div class="month-tabs" id="month-tabs-bs"></div>
+    <div class="g4" id="bs-kpis" style="margin-bottom:14px"></div>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">สินทรัพย์</div>
+        <div id="bs-assets"></div>
+      </div>
+      <div class="card">
+        <div class="ct">หนี้สินและทุน</div>
+        <div id="bs-liabilities"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="page" id="pg-kpi">
+  <div class="sec">KPI Dashboard</div>
+  <div class="sec-s">คำนวณจาก TFIS + TOPSERV ที่อัพโหลด</div>
+
+  <div id="kpi-no-data" class="al al-a"><span>!</span><div>ยังไม่ได้อัพโหลดไฟล์ — ไปที่แท็บ "Upload ไฟล์"</div></div>
+
+  <div id="kpi-content" style="display:none">
+    <div class="month-tabs" id="month-tabs-kpi"></div>
+    <div class="g4" id="kpi-cards" style="margin-bottom:14px"></div>
+    <div class="g2">
+      <div class="card">
+        <div class="ct">P45 ของแถม — ทุกเดือน</div>
+        <div id="kpi-p45"></div>
+      </div>
+      <div class="card">
+        <div class="ct">Commission TLT (P36+P37)</div>
+        <div id="kpi-commission"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASH DEPOSIT -->
+<div class="page" id="pg-cash">
+  <div class="sec">Cash Deposit Crosscheck</div>
+  <div class="sec-s">กรอกยอดนับกับยอด SB เพื่อ crosscheck</div>
+  <div class="card">
+    <div class="g2">
+      <div>
+        <div class="fg"><label class="fl">วันที่รับเงิน</label><input class="fi" type="date" id="cash-date"></div>
+        <div class="fg"><label class="fl">ยอดนับได้ (บาท)</label><input class="fi" type="number" id="cash-count" placeholder="0.00"></div>
+        <div class="fg"><label class="fl">ยอดจาก SB (บาท)</label><input class="fi" type="number" id="cash-sb" placeholder="0.00"></div>
+        <div class="fg"><label class="fl">เลข Pay-in Slip</label><input class="fi" id="cash-payin" placeholder="เลขที่ใบฝาก"></div>
+      </div>
+      <div>
+        <div class="fg"><label class="fl">ผู้บันทึก</label><input class="fi" id="cash-by" placeholder="ชื่อ-นามสกุล"></div>
+        <div class="fg"><label class="fl">หมายเหตุ</label><input class="fi" id="cash-note" placeholder="(ถ้ามี)"></div>
+        <div id="cash-result" style="margin-top:12px;padding:12px;border-radius:var(--r);border:1px solid var(--br);font-size:13px;background:var(--bg)">กรอกยอดทั้งสองฝั่งเพื่อดูผลต่าง</div>
+        <button class="btn btn-p" style="margin-top:10px;width:100%" onclick="submitCash()">💾 บันทึกและส่ง Email</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">ประวัติ Cash Deposit</div>
+    <table>
+      <tr><th>วันที่</th><th class="r">ยอดนับ</th><th class="r">ยอด SB</th><th class="r">ผลต่าง</th><th>สถานะ</th><th>Pay-in</th></tr>
+      <tbody id="cash-history">
+        <tr><td colspan="6" style="text-align:center;color:var(--mu);padding:20px">ยังไม่มีข้อมูล</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- APPROVE -->
+<div class="page" id="pg-approve">
+  <div class="sec">อนุมัติเบิกจ่าย</div>
+  <div class="sec-s">รายการที่รออนุมัติจากผู้จัดการบัญชี</div>
+  <div class="al al-b"><span>ℹ</span><div>รายการที่ต้องการอนุมัติจะแสดงที่นี่เมื่อพนักงานส่งคำขอผ่านระบบ</div></div>
+</div>
+
+</div>
+
+<script>
+// ======= STATE =======
+const state = {
+  tfis: null,
+  topserv: null,
+  payroll: null,
+  tlt: null,
+  selectedMonth: 'December',
+  uploadLog: []
+};
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+
+function gp(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  if(el)el.classList.add('on');
+}
+
+function fmt(n){ return (parseFloat(n)||0).toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function fmtM(n){ return ((parseFloat(n)||0)/1000000).toFixed(2)+'ล.'; }
+
+// ======= DRAG & DROP =======
+function dragOver(e,id){ e.preventDefault(); document.getElementById(id).classList.add('drag'); }
+function dragLeave(id){ document.getElementById(id).classList.remove('drag'); }
+function dropFile(e,type){
+  e.preventDefault();
+  const id = 'zone-'+type;
+  document.getElementById(id).classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if(!file) return;
+  if(type==='tfis') loadTFIS({files:[file]});
+  else if(type==='topserv') loadTOPSERV({files:[file]});
+  else if(type==='payroll') loadPayroll({files:[file]});
+  else if(type==='tlt') loadTLT({files:[file]});
+}
+
+// ======= LOAD TFIS =======
+function loadTFIS(input) {
+  const file = input.files[0];
+  if(!file) return;
+  document.getElementById('res-tfis').textContent = '⏳ กำลังอ่าน...';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+
+      // อ่าน DT sheet
+      const dtWs = wb.Sheets['DT'];
+      const dtData = XLSX.utils.sheet_to_json(dtWs, {header:1});
+      const headers = dtData[0]; // ['AccCode','AccName','AccNameEng','Code','January',...]
+
+      // แปลงเป็น object array
+      const rows = dtData.slice(1).filter(r => r[0]).map(r => {
+        const obj = {};
+        headers.forEach((h,i) => obj[h] = r[i]);
+        return obj;
+      });
+
+      // อ่าน BS sheet
+      const bsWs = wb.Sheets['BS'];
+      const bsData = XLSX.utils.sheet_to_json(bsWs, {header:1});
+      const bsHeaders = bsData[0];
+      const bsRows = bsData.slice(1).filter(r => r[0]).map(r => {
+        const obj = {};
+        bsHeaders.forEach((h,i) => obj[h] = r[i]);
+        return obj;
+      });
+
+      state.tfis = { dt: rows, bs: bsRows, filename: file.name };
+      document.getElementById('res-tfis').textContent = `✅ อ่านแล้ว ${rows.length} แถว · ${file.name}`;
+      document.getElementById('zone-tfis').classList.add('done');
+
+      logUpload('TFIS', file.name, rows.length + ' แถว');
+      renderPL();
+      renderBS();
+      renderKPI();
+
+    } catch(err) {
+      document.getElementById('res-tfis').textContent = '❌ Error: ' + err.message;
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ======= LOAD TOPSERV =======
+function loadTOPSERV(input) {
+  const file = input.files[0];
+  if(!file) return;
+  document.getElementById('res-topserv').textContent = '⏳ กำลังอ่าน...';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws);
+      state.topserv = { data, filename: file.name };
+      document.getElementById('res-topserv').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
+      document.getElementById('zone-topserv').classList.add('done');
+      logUpload('TOPSERV', file.name, data.length + ' แถว');
+    } catch(err) {
+      document.getElementById('res-topserv').textContent = '❌ Error: ' + err.message;
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ======= LOAD PAYROLL =======
+function loadPayroll(input) {
+  const file = input.files[0];
+  if(!file) return;
+  document.getElementById('res-payroll').textContent = '⏳ กำลังอ่าน...';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws);
+      state.payroll = { data, filename: file.name };
+      document.getElementById('res-payroll').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
+      document.getElementById('zone-payroll').classList.add('done');
+      logUpload('Payroll', file.name, data.length + ' แถว');
+    } catch(err) {
+      document.getElementById('res-payroll').textContent = '❌ Error: ' + err.message;
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ======= LOAD TLT =======
+function loadTLT(input) {
+  const file = input.files[0];
+  if(!file) return;
+  document.getElementById('res-tlt').textContent = '⏳ กำลังอ่าน...';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws);
+      state.tlt = { data, filename: file.name };
+      document.getElementById('res-tlt').textContent = `✅ อ่านแล้ว ${data.length} แถว · ${file.name}`;
+      document.getElementById('zone-tlt').classList.add('done');
+      logUpload('GL TLT', file.name, data.length + ' แถว');
+    } catch(err) {
+      document.getElementById('res-tlt').textContent = '❌ Error: ' + err.message;
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ======= LOG UPLOAD =======
+function logUpload(type, filename, info) {
+  state.uploadLog.push({ type, filename, info, time: new Date().toLocaleTimeString('th-TH') });
+  const tbody = document.getElementById('status-tbody');
+  document.getElementById('upload-status').style.display = 'block';
+  tbody.innerHTML = state.uploadLog.map(u => `
+    <tr>
+      <td><strong>${u.type}</strong></td>
+      <td><span class="badge bd-g">✅ พร้อมใช้งาน</span></td>
+      <td style="color:var(--mu)">${u.info} · ${u.filename}</td>
+      <td style="font-family:var(--mono);font-size:11px">${u.time}</td>
+    </tr>
+  `).join('');
+}
+
+// ======= RENDER P&L =======
+function renderPL() {
+  if(!state.tfis) return;
+  document.getElementById('pl-no-data').style.display = 'none';
+  document.getElementById('pl-content').style.display = 'block';
+
+  const rows = state.tfis.dt;
+
+  // Month tabs
+  const tabsEl = document.getElementById('month-tabs-pl');
+  tabsEl.innerHTML = MONTHS.map((m,i) => `
+    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'pl')">${MONTHS_TH[i]}</div>
+  `).join('');
+
+  updatePL();
+}
+
+function selectMonth(month, el, page) {
+  state.selectedMonth = month;
+  document.querySelectorAll(`#month-tabs-${page} .mtab`).forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  if(page==='pl') updatePL();
+  else if(page==='bs') updateBS();
+  else if(page==='kpi') updateKPI();
+}
+
+function sumByCode(rows, pcode, month) {
+  return rows.filter(r => r.Code === pcode).reduce((s,r) => s + (parseFloat(r[month])||0), 0);
+}
+
+function updatePL() {
+  if(!state.tfis) return;
+  const rows = state.tfis.dt;
+  const m = state.selectedMonth;
+
+  // คำนวณ P-Codes หลัก
+  const p4  = sumByCode(rows,'P4',m);
+  const p6  = sumByCode(rows,'P6',m);
+  const p7  = sumByCode(rows,'P7',m);
+  const p8  = sumByCode(rows,'P8',m);
+  const p28 = sumByCode(rows,'P28',m);
+  const p34 = sumByCode(rows,'P34',m);
+  const p36 = sumByCode(rows,'P36',m);
+  const p37 = sumByCode(rows,'P37',m);
+  const p38 = sumByCode(rows,'P38',m);
+  const p45 = sumByCode(rows,'P45',m);
+  const p50 = sumByCode(rows,'P50',m);
+  const p83 = sumByCode(rows,'P83',m);
+  const p84 = sumByCode(rows,'P84',m);
+
+  const totalRev = p4+p6+p7+p8+p34+p36+p37+p38;
+  const totalExp = Math.abs(p28)+p45+p50+p83+p84;
+  const net = totalRev - totalExp;
+
+  // KPIs
+  const kpiEl = document.getElementById('pl-kpis');
+  kpiEl.innerHTML = `
+    <div class="kpi ${net>=0?'g':'r'}"><div class="kl">กำไร/ขาดทุน</div><div class="kv" style="color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}฿${fmtM(net)}</div></div>
+    <div class="kpi"><div class="kl">รายได้รวม</div><div class="kv">฿${fmtM(totalRev)}</div></div>
+    <div class="kpi r"><div class="kl">P45 ของแถม</div><div class="kv" style="color:var(--red)">฿${fmtM(p45)}</div><div class="ks" style="color:var(--mu)">เป้า ≤฿409K</div></div>
+    <div class="kpi"><div class="kl">Commission F&I</div><div class="kv" style="color:var(--grn)">฿${fmt(p36+p37)}</div></div>
+  `;
+
+  // Revenue
+  const revEl = document.getElementById('pl-revenue');
+  revEl.innerHTML = [
+    ['P4 ขายรถ', p4, 'var(--grn)'],
+    ['P6 ค่าแรง GS', p6, 'var(--grn)'],
+    ['P7 อะไหล่ GS', p7, 'var(--grn)'],
+    ['P8 น้ำมัน GS', p8, 'var(--grn)'],
+    ['P34 TMT Support', p34, 'var(--grn)'],
+    ['P36 Commission TLT', p36, 'var(--grn)'],
+    ['P37 Commission ประกัน', p37, 'var(--grn)'],
+    ['P38 ค่าเช่า', p38, 'var(--grn)'],
+    ['P28 ส่วนลดจ่าย', p28, 'var(--red)'],
+  ].map(([label,val,color]) => `
+    <div class="brow">
+      <span class="bl">${label}</span>
+      <div class="pw"><div class="pf" style="width:${Math.min(100,Math.abs(val)/Math.max(p4,1)*100)}%;background:${color}"></div></div>
+      <span class="bv" style="color:${color}">฿${fmt(val)}</span>
+    </div>
+  `).join('');
+
+  // Expense
+  const expEl = document.getElementById('pl-expense');
+  expEl.innerHTML = [
+    ['P45 ของแถม', p45],
+    ['P50 เงินเดือน', p50],
+    ['P83 ดอกเบี้ย TLT', p83],
+    ['P84 ดอกเบี้ย OD', p84],
+  ].map(([label,val]) => `
+    <div class="brow">
+      <span class="bl">${label}</span>
+      <div class="pw"><div class="pf" style="width:${Math.min(100,val/Math.max(p50,1)*100)}%;background:var(--red)"></div></div>
+      <span class="bv" style="color:var(--red)">฿${fmt(val)}</span>
+    </div>
+  `).join('');
+
+  // Division
+  const divEl = document.getElementById('pl-division');
+  const divisions = ['Sale','GS','BP','Admin','Sure'];
+  divEl.innerHTML = divisions.map(div => {
+    const divRows = rows.filter(r => r.JobCode === div || r.DeptCode === div);
+    const rev = divRows.filter(r => r.Code && !r.Code.startsWith('P1') && !r.Code.startsWith('P2') && !r.Code.startsWith('P5') && !r.Code.startsWith('P4') && parseFloat(r[m]||0) > 0)
+                       .reduce((s,r) => s+(parseFloat(r[m])||0), 0);
+    const cost = divRows.filter(r => parseFloat(r[m]||0) < 0)
+                        .reduce((s,r) => s+Math.abs(parseFloat(r[m]||0)), 0);
+    const netDiv = rev - cost;
+    return `<tr>
+      <td><strong>${div}</strong></td>
+      <td class="r" style="color:var(--grn)">฿${fmt(rev)}</td>
+      <td class="r" style="color:var(--red)">฿${fmt(cost)}</td>
+      <td class="r">฿${fmt(rev-cost)}</td>
+      <td class="r" style="color:${netDiv>=0?'var(--grn)':'var(--red)'}"><strong>฿${fmt(netDiv)}</strong></td>
+      <td><span class="badge ${netDiv>=0?'bd-g':'bd-r'}">${netDiv>=0?'กำไร':'ขาดทุน'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ======= RENDER BS =======
+function renderBS() {
+  if(!state.tfis) return;
+  document.getElementById('bs-no-data').style.display = 'none';
+  document.getElementById('bs-content').style.display = 'block';
+
+  const tabsEl = document.getElementById('month-tabs-bs');
+  tabsEl.innerHTML = MONTHS.map((m,i) => `
+    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'bs')">${MONTHS_TH[i]}</div>
+  `).join('');
+
+  updateBS();
+}
+
+function updateBS() {
+  if(!state.tfis) return;
+  const rows = state.tfis.bs;
+  const m = state.selectedMonth;
+
+  function bsSum(code) {
+    return rows.filter(r => r['BS Code'] === code || r['Acc Code']?.startsWith(code))
+               .reduce((s,r) => s+(parseFloat(r[m])||0), 0);
+  }
+
+  const cash = bsSum('B4') + bsSum('B5');
+  const ar   = bsSum('B10') + bsSum('B11') + bsSum('B12') + bsSum('B13') + bsSum('B16');
+  const inv  = bsSum('B19') + bsSum('B21') + bsSum('B22');
+  const fa   = bsSum('B31') + bsSum('B32') + bsSum('B33') + bsSum('B36') + bsSum('B37') + bsSum('B38') + bsSum('B39') + bsSum('B40') + bsSum('B41');
+  const totalAssets = cash + ar + inv + fa;
+
+  const od   = Math.abs(bsSum('B71'));
+  const apTMT= bsSum('B54') + bsSum('B55');
+  const tlt  = bsSum('B86');
+  const dir  = bsSum('B88');
+  const totalLiab = od + apTMT + tlt + dir;
+  const equity = bsSum('B95') + bsSum('B96') + bsSum('B97');
+
+  const kpiEl = document.getElementById('bs-kpis');
+  kpiEl.innerHTML = `
+    <div class="kpi r"><div class="kl">OD BAY</div><div class="kv" style="color:var(--red)">฿${fmtM(od)}</div><div class="ks" style="color:var(--mu)">Headroom ฿${fmtM(84000000-od)}</div></div>
+    <div class="kpi"><div class="kl">สินทรัพย์รวม</div><div class="kv">฿${fmtM(totalAssets)}</div></div>
+    <div class="kpi r"><div class="kl">หนี้สินรวม</div><div class="kv" style="color:var(--red)">฿${fmtM(totalLiab)}</div></div>
+    <div class="kpi ${equity>=0?'g':'r'}"><div class="kl">Equity</div><div class="kv" style="color:${equity>=0?'var(--grn)':'var(--red)'}">฿${fmtM(equity)}</div></div>
+  `;
+
+  document.getElementById('bs-assets').innerHTML = [
+    ['เงินสด + เงินฝาก', cash],
+    ['ลูกหนี้การค้า', ar],
+    ['สินค้าคงเหลือ', inv],
+    ['สินทรัพย์ถาวร (net)', fa],
+  ].map(([l,v]) => `<div class="brow"><span class="bl">${l}</span><span class="bv">฿${fmt(v)}</span></div>`).join('');
+
+  document.getElementById('bs-liabilities').innerHTML = [
+    ['OD ธนาคาร BAY', od, 'var(--red)'],
+    ['เจ้าหนี้ TMT', apTMT, 'var(--red)'],
+    ['เงินกู้ TLT', tlt, 'var(--red)'],
+    ['เงินกู้กรรมการ', dir, 'var(--red)'],
+    ['Equity', equity, equity>=0?'var(--grn)':'var(--red)'],
+  ].map(([l,v,c]) => `<div class="brow"><span class="bl">${l}</span><span class="bv" style="color:${c}">฿${fmt(v)}</span></div>`).join('');
+}
+
+// ======= RENDER KPI =======
+function renderKPI() {
+  if(!state.tfis) return;
+  document.getElementById('kpi-no-data').style.display = 'none';
+  document.getElementById('kpi-content').style.display = 'block';
+
+  const tabsEl = document.getElementById('month-tabs-kpi');
+  tabsEl.innerHTML = MONTHS.map((m,i) => `
+    <div class="mtab ${m===state.selectedMonth?'on':''}" onclick="selectMonth('${m}',this,'kpi')">${MONTHS_TH[i]}</div>
+  `).join('');
+
+  updateKPI();
+}
+
+function updateKPI() {
+  if(!state.tfis) return;
+  const rows = state.tfis.dt;
+
+  // P45 ทุกเดือน
+  const p45El = document.getElementById('kpi-p45');
+  p45El.innerHTML = MONTHS.map((m,i) => {
+    const val = Math.abs(sumByCode(rows,'P45',m));
+    const pct = Math.min(100, val/1500000*100);
+    const color = val > 409000 ? 'var(--red)' : 'var(--grn)';
+    return `<div class="brow">
+      <span class="bl">${MONTHS_TH[i]}</span>
+      <div class="pw"><div class="pf" style="width:${pct}%;background:${color}"></div></div>
+      <span class="bv" style="color:${color}">฿${fmt(val)}</span>
+      ${val>409000?'<span class="badge bd-r">เกินเป้า</span>':''}
+    </div>`;
+  }).join('');
+
+  // Commission
+  const comEl = document.getElementById('kpi-commission');
+  comEl.innerHTML = MONTHS.map((m,i) => {
+    const p36 = sumByCode(rows,'P36',m);
+    const p37 = sumByCode(rows,'P37',m);
+    const total = p36+p37;
+    return `<div class="brow">
+      <span class="bl">${MONTHS_TH[i]}</span>
+      <div class="pw"><div class="pf" style="width:${Math.min(100,total/500000*100)}%;background:var(--grn)"></div></div>
+      <span class="bv" style="color:var(--grn)">฿${fmt(total)}</span>
+    </div>`;
+  }).join('');
+}
+
+// ======= CASH DEPOSIT =======
+function checkCashDiff() {
+  const count = parseFloat(document.getElementById('cash-count').value)||0;
+  const sb = parseFloat(document.getElementById('cash-sb').value)||0;
+  if(!count && !sb) return;
+  const diff = count - sb;
+  const ok = Math.abs(diff) <= 100;
+  const el = document.getElementById('cash-result');
+  el.style.background = ok ? 'var(--gbg)' : 'var(--rbg)';
+  el.style.borderColor = ok ? 'var(--gbr)' : 'var(--rbr)';
+  el.style.color = ok ? 'var(--grn)' : 'var(--red)';
+  el.textContent = ok ? `✅ ตรง — ผลต่าง ฿${Math.abs(diff).toLocaleString()}` : `🔴 ผิดปกติ! ต่างกัน ฿${Math.abs(diff).toLocaleString()}`;
+}
+
+document.getElementById('cash-count').addEventListener('input', checkCashDiff);
+document.getElementById('cash-sb').addEventListener('input', checkCashDiff);
+
+async function submitCash() {
+  const data = {
+    receipt_date: document.getElementById('cash-date').value,
+    cash_amount: document.getElementById('cash-count').value,
+    sb_amount: document.getElementById('cash-sb').value,
+    payin_ref: document.getElementById('cash-payin').value,
+    recorded_by: document.getElementById('cash-by').value,
+    note: document.getElementById('cash-note').value
+  };
+  if(!data.cash_amount || !data.sb_amount) {
+    alert('กรุณากรอกยอดนับและยอด SB ก่อน');
+    return;
+  }
+  alert('💾 บันทึกแล้ว — ระบบจะส่ง Email แจ้งบัญชีอัตโนมัติ\n(เชื่อมต่อ Google Sheets แล้วข้อมูลจะบันทึกจริง)');
+}
+
+// Init date
+document.getElementById('cash-date').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
