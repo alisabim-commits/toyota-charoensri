@@ -1,250 +1,549 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ผู้จัดการบริการ — Toyota Charoensri</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ผู้จัดการบริการ GS — Toyota Charoensri</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--pur:#4c1d95;--pbg:#f5f3ff;--pbr:#c4b5fd;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
-.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 24px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50}
-.logo{font-size:13px;font-weight:600;padding-right:20px;border-right:1px solid var(--br);margin-right:20px}.logo span{color:var(--red)}
-.nt{height:44px;display:flex;align-items:center;padding:0 13px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
-.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
-.hr-r{margin-left:auto;font-size:11px;color:var(--mu)}
-.content{max-width:1100px;margin:0 auto;padding:22px 20px}
-.page{display:none}.page.on{display:block}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
-.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
-.kpi.r{border-color:var(--rbr);background:var(--rbg)}.kpi.g{border-color:var(--gbr);background:var(--gbg)}
-.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
-.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
-.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}.bd-p{background:var(--pbg);color:var(--pur)}
-.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid}
-.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
-th.r{text-align:right}td{padding:8px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
-.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
-.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
-.fi:focus{outline:none;border-color:var(--tx)}
-.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
-.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}.btn-sm{padding:4px 10px;font-size:11px}
-.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
-.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
-.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}.bl{min-width:170px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
-.brief-block{background:#0a1628;border-radius:var(--rl);padding:16px;color:rgba(255,255,255,.9);margin-bottom:12px}
-.bb-title{font-size:11px;color:#c9a84c;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-.bb-item{display:flex;gap:8px;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,.1);font-size:12px}
-.bb-item:last-child{border-bottom:none}.bb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg2:#fff;--bg3:#f0f3fa;--bg4:#e8edf8;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--pur:#6b2fd4;--pud:rgba(107,47,212,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1300px;margin:0 auto;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:12px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);position:relative;}
+.kpi.r{border-top-color:var(--red);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--red);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.pt{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:7px;}
+.pf{height:100%;border-radius:3px;}
+.pf.r{background:var(--red);}.pf.g{background:var(--grn);}.pf.b{background:var(--blu);}.pf.y{background:var(--yel);}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.signal{border-radius:10px;padding:10px 14px;display:flex;gap:10px;margin-bottom:8px;border:1px solid;}
+.signal.r{background:var(--rd);border-color:rgba(220,34,68,.25);}.signal.y{background:var(--yd);border-color:rgba(194,106,0,.2);}.signal.g{background:var(--gd);border-color:rgba(10,124,82,.18);}.signal.b{background:var(--bd);border-color:rgba(29,82,204,.18);}
+.st{font-size:12px;font-weight:700;}
+.signal.r .st{color:var(--red);}.signal.y .st{color:var(--yel);}.signal.g .st{color:var(--grn);}.signal.b .st{color:var(--blu);}
+.sd{font-size:11px;color:var(--text2);margin-top:2px;}
+.sa-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,40,.06);}
+.cpu-item{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid var(--border2);}
+.cpu-item:last-child{border-bottom:none;}
+.cpu-name{font-size:11px;font-weight:600;width:100px;flex-shrink:0;}
+.cpu-bar-wrap{flex:1;}
+.cpu-bar-bg{height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.cpu-bar-fill{height:100%;border-radius:4px;}
+.cpu-nums{font-size:11px;font-family:'IBM Plex Mono',monospace;width:70px;text-align:right;font-weight:600;}
+.cpu-bonus{font-size:10px;color:var(--grn);width:60px;text-align:right;}
+.main-badge{display:inline-flex;align-items:center;background:var(--rd);color:var(--red);font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:4px;}
+.alivex-panel{background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:14px;padding:18px 20px;color:#fff;margin-bottom:14px;}
+.reward-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
+.reward-card{background:rgba(255,255,255,.07);border-radius:10px;padding:10px;text-align:center;border:1px solid rgba(255,255,255,.1);}
+.reward-card.active{background:rgba(16,217,138,.15);border-color:rgba(16,217,138,.4);}
+.reward-pct{font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;}
+.reward-amt{font-size:14px;font-weight:700;color:#10d98a;}
+.reward-range{font-size:10px;opacity:.6;margin-top:2px;}
+.praise{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-group{margin-bottom:10px;}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.btn-primary{background:var(--blu);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-green{background:var(--grn);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-red{background:var(--toy);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:500px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+.photo-zone{border:2px dashed var(--border);border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;}
+.photo-zone:hover,.photo-zone.has{border-color:var(--grn);background:var(--gd);}
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}.reward-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
-  <div class="nt on" onclick="gp('brief',this)">☀️ Briefing</div>
-  <div class="nt" onclick="gp('dash',this)">📊 Dashboard</div>
-  <div class="nt" onclick="gp('intake',this)">🚗 รับรถวันนี้</div>
-  <div class="nt" onclick="gp('tire',this)">🔵 Tire & Battery</div>
-  <div class="nt" onclick="gp('qr',this)">⭐ QR Rating</div>
-  <div class="nt" onclick="gp('report',this)">📁 รายงาน</div>
-  <div class="hr-r" id="dt"></div>
+<div class="topbar">
+  <div class="brand"><div class="bbar"></div><div><div class="bname">ผู้จัดการบริการ GS</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button onclick="openModal('modal-upload')" style="background:var(--toy);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">📂 อัพข้อมูล GS</button>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
 </div>
-<div class="content">
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-overview')">📊 ภาพรวม</button>
+  <button class="tab" onclick="sw(this,'t-commission')">💳 Commission SA</button>
+  <button class="tab" onclick="sw(this,'t-cpu')">📦 CPU เป้า</button>
+  <button class="tab" onclick="sw(this,'t-alivex')">⭐ ALIVE-X</button>
+  <button class="tab" onclick="sw(this,'t-spare')">🔧 เบิกอะไหล่</button>
+  <button class="tab" onclick="sw(this,'t-sop')">📋 SOP</button>
+</div>
+<div class="main">
 
-<!-- BRIEFING -->
-<div class="page on" id="pg-brief">
-<div class="sec">Morning Briefing — บริการ</div>
-<div class="sec-s">ทุกวัน 8:00 น. · ผจก.บริการนำ · SA ทุกคนต้องรับรู้ก่อนเริ่มงาน</div>
-<div class="g2">
-  <div>
-    <div class="brief-block">
-      <div class="bb-title">🎯 Focus วันนี้</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div><strong>Tire & Battery = 0 เส้น/ชิ้น MTD!</strong> ทุกรถ Out-of-Warranty ต้องเสนอทันที ไม่มีข้อยกเว้น</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>รถวันนี้ 17 คัน · 5 คันเป็น EM+ = โอกาส Upsell สูงสุด</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>CPU เป้า 31 คัน/วัน ทำได้ 17 — ต้องนัดเพิ่ม</div></div>
-    </div>
-    <div class="brief-block">
-      <div class="bb-title">📊 Q1/69 จริง — จาก TOPSERV</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>ม.ค. CPU 604 · PBC ฿2.53ล. · Battery 24 ชิ้น (ดีสุด)</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--abr)"></div><div>ก.พ. CPU 551 · PBC ฿2.20ล. (ต่ำสุด Q1) ต้องกลับขึ้น</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>มี.ค. CPU 599 · PBC ฿2.57ล. (ฟื้นตัว)</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>Tire เฉลี่ย 4 เส้น/เดือน ห่างเป้า 40 มากที่สุด</div></div>
-    </div>
-    <div class="brief-block">
-      <div class="bb-title">🌙 Evening Briefing — 17:00</div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>รายงาน: CPU จริง · Tire · Battery · PBC · รถค้างคืน</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>ลูกค้าบริการที่สนใจรถใหม่ — ส่งให้ Sales ทันที</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>QR Rating วันนี้ดาวเฉลี่ย + complaint ถ้ามี</div></div>
-    </div>
+<!-- OVERVIEW -->
+<div id="t-overview">
+  <div class="g4">
+    <div class="kpi g"><div class="kl">💰 รายได้ GS/เดือน</div><div class="kv g">฿1.08M</div><div class="ks">มี.ค.69 | เป้า ฿1.2M</div><div class="pt"><div class="pf g" style="width:90%"></div></div></div>
+    <div class="kpi r"><span style="position:absolute;top:10px;right:10px;" class="badge r">❌ 10%</span><div class="kl">🔵 ยาง — ตัวหลัก</div><div class="kv r">4/40 เส้น</div><div class="ks">ขาด ฿90K margin</div><div class="pt"><div class="pf r" style="width:10%"></div></div></div>
+    <div class="kpi y"><div class="kl">🔋 แบต — ตัวหลัก</div><div class="kv y">13/43 ชิ้น</div><div class="ks">30% ของเป้า</div><div class="pt"><div class="pf y" style="width:30%"></div></div></div>
+    <div class="kpi b"><div class="kl">⭐ ALIVE-X สัดส่วน</div><div class="kv b">2.3%</div><div class="ks">เป้า 3% → ฿4,000</div><div class="pt"><div class="pf b" style="width:46%"></div></div></div>
   </div>
-  <div>
-    <div class="brief-block">
-      <div class="bb-title">🔵 Script เสนอ Tire/Battery</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 1</strong> ตรวจ Tire ทุกคัน ถ่ายรูปสภาพยางพร้อม</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 2</strong> แสดงรูปลูกค้า: "ยางใกล้ถึงเวลาเปลี่ยนแล้วครับ ทำวันนี้สะดวกไหม?"</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div><strong>ขั้นที่ 3</strong> เสนอราคา + แพ็กเกจ Tire+Wheel Alignment</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>Battery: ใช้ Tester วัดและแสดงผลให้ลูกค้าเห็น — ลูกค้าตัดสินใจเองง่ายขึ้น</div></div>
-    </div>
-    <div class="brief-block">
-      <div class="bb-title">🔄 ส่งลูกค้าบริการ → ขาย</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>รถอายุ >5 ปี หรือวิ่ง >100K km = แจ้ง Sales</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>ลูกค้าถาม trade-in = ประสาน Sales ทันที</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>SA ที่ส่งลูกค้าซื้อรถได้รับค่าแนะนำ ฿5,000</div></div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- DASHBOARD -->
-<div class="page" id="pg-dash">
-<div class="sec">Dashboard บริการ</div>
-<div class="sec-s">KPI รายวัน · อัพเดทจาก SA ทุก 17:00</div>
-<div class="al al-r"><span>⚠</span><div>Tire MTD = 0 เส้น · Battery MTD = 0 ชิ้น · 2 วันแรกเดือน เม.ย. ห่างเป้ามาก</div></div>
-<div class="g5" style="margin-bottom:14px">
-  <div class="kpi r"><div class="kl">Tire MTD</div><div class="kv" style="color:var(--red)">0 เส้น</div><div class="ks" style="color:var(--red)">เป้า 40</div></div>
-  <div class="kpi r"><div class="kl">Battery MTD</div><div class="kv" style="color:var(--red)">0 ชิ้น</div><div class="ks" style="color:var(--red)">เป้า 43</div></div>
-  <div class="kpi"><div class="kl">CPU MTD</div><div class="kv">33</div><div class="ks" style="color:var(--mu)">เป้า 720/เดือน</div></div>
-  <div class="kpi"><div class="kl">PBC MTD</div><div class="kv">฿52K</div><div class="ks" style="color:var(--mu)">เป้า ฿3.30ล.</div></div>
-  <div class="kpi g"><div class="kl">Appt. Rate</div><div class="kv" style="color:var(--grn)">100%</div><div class="ks" style="color:var(--grn)">12/12 ✓</div></div>
-</div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">KPI vs เป้า</div>
-    <div class="brow"><span class="bl">CPU (720/เดือน)</span><div class="pw"><div class="pf" style="width:4.6%;background:var(--amb)"></div></div><span class="bv" style="color:var(--amb)">33</span></div>
-    <div class="brow"><span class="bl">PBC Revenue (฿3.30ล.)</span><div class="pw"><div class="pf" style="width:1.6%;background:var(--amb)"></div></div><span class="bv" style="color:var(--amb)">฿52K</span></div>
-    <div class="brow"><span class="bl">Tire (40 เส้น)</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">0</span></div>
-    <div class="brow"><span class="bl">Battery (43 ชิ้น)</span><div class="pw"><div class="pf" style="width:0%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">0</span></div>
-  </div>
-  <div class="card">
-    <div class="ct">Q1/69 จาก TOPSERV จริง</div>
-    <table>
-      <tr><th>เดือน</th><th class="r">CPU</th><th class="r">PBC</th><th class="r">Battery</th><th class="r">Tire</th></tr>
-      <tr><td>ม.ค. 69</td><td class="r">604</td><td class="r">฿2.53ล.</td><td class="r" style="color:var(--grn)">24 ✓</td><td class="r" style="color:var(--red)">-</td></tr>
-      <tr><td>ก.พ. 69</td><td class="r" style="color:var(--red)">551</td><td class="r" style="color:var(--red)">฿2.20ล.</td><td class="r">18</td><td class="r" style="color:var(--red)">-</td></tr>
-      <tr><td>มี.ค. 69</td><td class="r">599</td><td class="r">฿2.57ล.</td><td class="r" style="color:var(--grn)">24 ✓</td><td class="r" style="color:var(--red)">4</td></tr>
-      <tr style="background:var(--bg)"><td>เป้าเดือน เม.ย.</td><td class="r" style="color:var(--grn)">720</td><td class="r" style="color:var(--grn)">฿3.30ล.</td><td class="r" style="color:var(--grn)">43</td><td class="r" style="color:var(--grn)">40</td></tr>
-    </table>
-  </div>
-</div>
-</div>
-
-<!-- INTAKE -->
-<div class="page" id="pg-intake">
-<div class="sec">รับรถวันนี้</div>
-<div class="sec-s">รายการนัดหมายวันนี้ · EM+ = เสนอ Tire/Battery ทุกคัน</div>
-<div class="al al-g"><span>✓</span><div>5 คัน EM+ วันนี้ = โอกาส Tire/Battery สูงสุด · SA ต้องตรวจทุกคันและแสดงผลลูกค้า</div></div>
-<div class="card">
-  <table>
-    <tr><th>เวลา</th><th>ทะเบียน</th><th>รุ่น / ไมล์</th><th>ประเภท</th><th>Tire</th><th>Battery</th><th>SA</th><th>สถานะ</th></tr>
-    <tr><td>08:30</td><td class="bd bd-hi" style="font-family:var(--mono)">นพ-1234</td><td><div style="font-size:11px">REVO D-CAB<br><span style="color:var(--mu)">85,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-a">ตรวจแล้ว</span></td><td><span class="bd bd-a">เสนอแล้ว</span></td><td>สุขธนัช</td><td><span class="bd bd-b">ดำเนินการ</span></td></tr>
-    <tr><td>09:00</td><td class="bd bd-hi" style="font-family:var(--mono)">ขก-5678</td><td><div style="font-size:11px">COMMUTER<br><span style="color:var(--mu)">45,000 km</span></div></td><td><span class="bd bd-g">GS</span></td><td><span class="bd bd-r">ยังไม่ตรวจ</span></td><td><span class="bd bd-r">ยังไม่ตรวจ</span></td><td>นิราวรรณ</td><td><span class="bd bd-a">รอ SA</span></td></tr>
-    <tr><td>09:30</td><td class="bd bd-hi" style="font-family:var(--mono)">สน-9012</td><td><div style="font-size:11px">FORTUNER 4×4<br><span style="color:var(--mu)">120,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-g">เปลี่ยน 2 เส้น ✓</span></td><td><span class="bd bd-g">เปลี่ยน ✓</span></td><td>สุขธนัช</td><td><span class="bd bd-g">เสร็จ</span></td></tr>
-    <tr><td>10:00</td><td class="bd bd-hi" style="font-family:var(--mono)">นม-3456</td><td><div style="font-size:11px">ATIV<br><span style="color:var(--mu)">30,000 km</span></div></td><td><span class="bd bd-b">EM</span></td><td><span class="bd bd-hi">ไม่เสนอ (ใหม่)</span></td><td><span class="bd bd-hi">ไม่เสนอ (ใหม่)</span></td><td>อริศรา</td><td><span class="bd bd-b">ดำเนินการ</span></td></tr>
-    <tr><td>10:30</td><td class="bd bd-hi" style="font-family:var(--mono)">นพ-7890</td><td><div style="font-size:11px">Yaris Cross<br><span style="color:var(--mu)">65,000 km</span></div></td><td><span class="bd bd-p">EM+</span></td><td><span class="bd bd-a">รอ</span></td><td><span class="bd bd-a">รอ</span></td><td>นิราวรรณ</td><td><span class="bd bd-a">รอ</span></td></tr>
-  </table>
-</div>
-</div>
-
-<!-- TIRE BATTERY -->
-<div class="page" id="pg-tire">
-<div class="sec">Tire & Battery</div>
-<div class="sec-s">KPI ที่ห่างเป้ามากที่สุด · ทำได้ +฿2.5ล./ปี โดยไม่ลงทุนเพิ่มเลย</div>
-<div class="al al-r"><span>🔴</span><div>Tire เฉลี่ยเดิม 4 เส้น/เดือน เป้า 40 เส้น · ห่าง 10 เท่า · SA รู้อยู่แต่ไม่เสนอ = ปัญหาพฤติกรรม</div></div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">บันทึก Tire & Battery วันนี้</div>
-    <div class="fr">
-      <div class="fg"><label class="fl">ทะเบียนรถ</label><input class="fi" type="text" id="tb_car" placeholder="นพ-XXXX"></div>
-      <div class="fg"><label class="fl">SA</label><select style="width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)"><option>สุขธนัช</option><option>นิราวรรณ</option><option>อริศรา</option></select></div>
-    </div>
-    <div class="fr">
-      <div class="fg"><label class="fl">Tire เปลี่ยน (เส้น)</label><input class="fi" type="number" id="tb_tire" placeholder="0" min="0"></div>
-      <div class="fg"><label class="fl">Battery เปลี่ยน (ชิ้น)</label><input class="fi" type="number" id="tb_bat" placeholder="0" min="0"></div>
-      <div class="fg"><label class="fl">PBC วันนี้ (บาท)</label><input class="fi" type="number" id="tb_pbc" placeholder="0"></div>
-    </div>
-    <button class="btn btn-p btn-sm" onclick="alert('บันทึกยอดบริการแล้ว — ผบห.เห็นทันที')">บันทึกและส่งผบห.</button>
-  </div>
-  <div class="card">
-    <div class="ct">เปรียบเทียบ — Tire Q1/69</div>
-    <div class="brow"><span class="bl">ม.ค. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">~4 เส้น</span></div>
-    <div class="brow"><span class="bl">ก.พ. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">~4 เส้น</span></div>
-    <div class="brow"><span class="bl">มี.ค. 69</span><div class="pw"><div class="pf" style="width:10%;background:var(--red)"></div></div><span class="bv" style="color:var(--red)">4 เส้น</span></div>
-    <div class="brow"><span class="bl">เป้า เม.ย.</span><div class="pw"><div class="pf" style="width:100%;background:var(--grn)"></div></div><span class="bv" style="color:var(--grn)">40 เส้น</span></div>
-    <div class="al al-a" style="margin-top:8px"><span>!</span><div>Tire เส้นละ margin ~฿750 · 40 เส้น = ฿30,000/เดือน = ฿360K/ปี เพิ่มจากการเสนอเท่านั้น</div></div>
-  </div>
-</div>
-</div>
-
-<!-- QR RATING -->
-<div class="page" id="pg-qr">
-<div class="sec">QR Rating ลูกค้า</div>
-<div class="sec-s">วางที่แคชเชียร์ · QR เปลี่ยนรายวัน · ผล → หัก/บวก incentive SA อัตโนมัติ</div>
-<div class="g2">
-  <div class="card">
-    <div class="ct">ผล Rating MTD — เม.ย.</div>
-    <table>
-      <tr><th>SA</th><th class="r">ตอบ</th><th class="r">คะแนน</th><th class="r">Complaint</th><th>หัก incentive</th></tr>
-      <tr><td>สุขธนัช</td><td class="r">22</td><td class="r" style="color:var(--grn)">4.7 ★</td><td class="r">1</td><td><span class="bd bd-a">-0.05%</span></td></tr>
-      <tr><td>นิราวรรณ</td><td class="r">19</td><td class="r" style="color:var(--grn)">4.5 ★</td><td class="r">0</td><td><span class="bd bd-g">+0.05% bonus</span></td></tr>
-      <tr><td>อริศรา</td><td class="r">18</td><td class="r" style="color:var(--amb)">4.1 ★</td><td class="r">3</td><td><span class="bd bd-r">-0.10%</span></td></tr>
-    </table>
-  </div>
-  <div class="card">
-    <div class="ct">Complaint ที่พบบ่อย</div>
-    <table>
-      <tr><th>หัวข้อ</th><th class="r">ครั้ง</th><th>แนวทางแก้</th></tr>
-      <tr><td>รอนานเกิน</td><td class="r">5</td><td style="font-size:11px">เพิ่ม QS bay / จัด slot ดีขึ้น</td></tr>
-      <tr><td>ไม่แนะนำ Tire/Battery</td><td class="r">4</td><td style="font-size:11px">ตรงกับ Tire MTD=0 SA ต้องฝึก</td></tr>
-      <tr><td>ราคาไม่ตรง</td><td class="r">2</td><td style="font-size:11px">SA ยืนยันราคาก่อนทุกครั้ง</td></tr>
-    </table>
-    <div class="al al-a" style="margin-top:8px"><span>!</span><div>Complaint "ไม่แนะนำ Tire" ตรงกับ KPI Tire ต่ำ — เป็นปัญหาเดียวกัน ต้องฝึก SA ด่วน</div></div>
-  </div>
-</div>
-</div>
-
-<!-- REPORT -->
-<div class="page" id="pg-report">
-<div class="sec">กรอกรายงานประจำวัน</div>
-<div class="sec-s">17:00 ทุกวัน · กรอกครบ ผบห.เห็นทันที</div>
-<div class="card">
-  <div class="ct">รายงาน 5 ตัวเลข — <span id="rp_date"></span></div>
   <div class="g2">
     <div>
-      <div class="fg"><label class="fl">CPU จริงวันนี้</label><input class="fi" type="number" id="rp_cpu" placeholder="0"></div>
-      <div class="fg"><label class="fl">Tire เปลี่ยนวันนี้ (เส้น)</label><input class="fi" type="number" id="rp_tire" placeholder="0"></div>
-      <div class="fg"><label class="fl">Battery เปลี่ยนวันนี้ (ชิ้น)</label><input class="fi" type="number" id="rp_bat" placeholder="0"></div>
+      <div class="signal r"><span style="font-size:14px;">🚨</span><div><div class="st">ยาง 4 เส้น/40 — SA ต้อง Offer ทุกคัน</div><div class="sd">นิราวรรณ + อริศรา = 0 เส้น | ขาดรายได้ ~฿90K/เดือน</div></div></div>
+      <div class="signal r"><span style="font-size:14px;">🔒</span><div><div class="st">P45 ของแถม — SA ไม่มีอำนาจ ผบห.เท่านั้น</div><div class="sd">ทุกรายการต้องส่งให้ผบห.อนุมัติก่อนเสมอ</div></div></div>
+      <div class="signal y"><span style="font-size:14px;">⚠️</span><div><div class="st">แบต 13/43 — วัดค่าแบตทุกคันอายุ 2+ ปี</div><div class="sd">แสดงผลให้ลูกค้าเห็น → ปิดขายได้ง่ายขึ้น</div></div></div>
+      <div class="signal y"><span style="font-size:14px;">⭐</span><div><div class="st">ALIVE-X 2.3% — ต้องเพิ่มอีก 0.7% ถึงรับ ฿4,000</div><div class="sd">แคชเชียร์ต้องขอเบอร์ + ขอแลกคะแนนทุกราย</div></div></div>
+      <div class="signal g"><span style="font-size:14px;">🏆</span><div><div class="st">ไม่มี Complaint — commission ไม่ถูกหัก</div><div class="sd">สุขธนัช ยอดสูงสุด | อริศรา เขม่า 84 ชิ้น 🏆 | นิราวรรณ กระจก 46 🏆</div></div></div>
     </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💳 Commission สรุป ก.พ.69</div>
+        <button onclick="openModal('modal-print')" style="background:var(--toy);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">🖨️ ปริ้นแนบเบิก</button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>SA</th><th>ยอดขาย</th><th>Base</th><th>CPU</th><th>สุทธิ</th></tr></thead>
+        <tbody>
+          <tr><td><div style="font-weight:700;">สุขธนัช</div><div style="font-size:9px;" class="y">ยาง 8 ⚠️</div></td><td class="n">฿105,817</td><td class="n b">0.55%</td><td class="n g">฿2,940</td><td class="n g" style="font-weight:800;">฿2,994</td></tr>
+          <tr><td><div style="font-weight:700;">นิราวรรณ</div><div style="font-size:9px;" class="r">ยาง 0 ❌</div></td><td class="n">฿72,104</td><td class="n y">0.30%</td><td class="n g">฿2,100</td><td class="n y" style="font-weight:800;">฿1,969</td></tr>
+          <tr><td><div style="font-weight:700;">อริศรา</div><div style="font-size:9px;" class="r">ยาง 0 ❌</div></td><td class="n">฿70,768</td><td class="n y">0.30%</td><td class="n g">฿2,060</td><td class="n y" style="font-weight:800;">฿1,931</td></tr>
+          <tr style="background:var(--gd)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">฿248,688</td><td></td><td class="n g" style="font-weight:700;">฿7,100</td><td class="n g" style="font-weight:800;">฿6,894</td></tr>
+        </tbody>
+      </table>
+      <div style="padding:8px 14px;font-size:11px;" class="y" style="background:var(--yd);">* ถ้าขายยาง 13+แบต 14 ครบเป้า → commission รวม ฿14.2K/เดือน</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMISSION -->
+<div id="t-commission" style="display:none;">
+  <div class="g3">
+    <div class="sa-card">
+      <div style="padding:14px;border-bottom:1px solid var(--border);background:var(--gd);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div style="font-size:14px;font-weight:800;">สุขธนัช นิตโย</div><div style="font-size:10px;" class="m">SA/GS · 6208-0310</div></div>
+          <span class="praise">🏆 อันดับ 1</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:800;" class="g">฿105,817</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin:6px 0 3px;">
+          <span style="background:var(--bd);color:var(--blu);padding:2px 8px;border-radius:10px;font-weight:700;">Tier 1.00% (Base 0.55%)</span>
+          <span class="y">→ ฿150K = 0.75%</span>
+        </div>
+        <div style="height:7px;background:rgba(255,255,255,.5);border-radius:4px;overflow:hidden;"><div style="width:70%;height:100%;background:linear-gradient(90deg,var(--blu),var(--grn));border-radius:4px;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;" class="m"><span>฿100K ✓</span><span class="b">฿105.8K</span><span>฿150K</span></div>
+      </div>
+      <div style="padding:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+          <div style="background:var(--bg3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="m">Base</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;">฿582</div></div>
+          <div style="background:var(--gd);border-radius:8px;padding:8px;text-align:center;border:1px solid rgba(10,124,82,.2);"><div style="font-size:9px;" class="g">CPU Bonus</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;" class="g">฿2,940</div></div>
+        </div>
+        <div style="background:var(--bg3);border-radius:8px;padding:8px;font-size:11px;margin-bottom:8px;">
+          ยาง <strong class="y">8 เส้น ⚠️</strong> · แบต <strong class="y">6 ⚠️</strong> · เขม่า <strong class="g">50 ✅</strong> · Air Care <strong>6</strong>
+        </div>
+        <div style="background:var(--gd);border-radius:8px;padding:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(10,124,82,.2);">
+          <span style="font-size:12px;font-weight:700;" class="g">Commission สุทธิ</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;" class="g">฿2,994</span>
+        </div>
+        <div style="font-size:10px;margin-top:5px;text-align:center;" class="y">ถ้าขายยาง 13+แบต 14 → ฿4,984 (+฿1,990)</div>
+      </div>
+    </div>
+
+    <div class="sa-card">
+      <div style="padding:14px;border-bottom:1px solid var(--border);background:var(--yd);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div style="font-size:14px;font-weight:800;">นิราวรรณ ดอนมุงคุณ</div><div style="font-size:10px;" class="m">SA/GS · 6203-0277</div></div>
+          <span style="background:var(--rd);color:var(--red);font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;">ยาง 0 ❌</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:800;" class="y">฿72,104</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin:6px 0 3px;">
+          <span style="background:var(--yd);color:var(--yel);padding:2px 8px;border-radius:10px;font-weight:700;">Tier 0.75% (Base 0.30%)</span>
+          <span class="b">→ ฿100K = 0.50%</span>
+        </div>
+        <div style="height:7px;background:rgba(255,255,255,.5);border-radius:4px;overflow:hidden;"><div style="width:44%;height:100%;background:linear-gradient(90deg,var(--yel),var(--blu));border-radius:4px;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;" class="m"><span>฿50K</span><span class="y">฿72.1K</span><span>฿100K</span></div>
+      </div>
+      <div style="padding:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+          <div style="background:var(--bg3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="m">Base</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;">฿216</div></div>
+          <div style="background:var(--gd);border-radius:8px;padding:8px;text-align:center;border:1px solid rgba(10,124,82,.2);"><div style="font-size:9px;" class="g">CPU Bonus</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;" class="g">฿2,100</div></div>
+        </div>
+        <div style="background:var(--bg3);border-radius:8px;padding:8px;font-size:11px;margin-bottom:8px;">
+          กระจก <strong class="g">46 🏆</strong> · เขม่า <strong class="g">76</strong> · ยาง <strong class="r">0 ❌</strong> · แบต <strong>3</strong>
+        </div>
+        <div style="background:var(--yd);border-radius:8px;padding:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(194,106,0,.2);">
+          <span style="font-size:12px;font-weight:700;" class="y">Commission สุทธิ</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;" class="y">฿1,969</span>
+        </div>
+        <div style="font-size:10px;margin-top:5px;text-align:center;" class="g">ถ้าขายยาง 13+แบต 14 → ฿4,616 (+฿2,647)</div>
+      </div>
+    </div>
+
+    <div class="sa-card">
+      <div style="padding:14px;border-bottom:1px solid var(--border);background:var(--bd);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div style="font-size:14px;font-weight:800;">อริศรา บุษปวรรธนะ</div><div style="font-size:10px;" class="m">SA/GS · 6808-0615</div></div>
+          <span style="background:var(--rd);color:var(--red);font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;">ยาง 0 ❌</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:800;" class="b">฿70,768</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin:6px 0 3px;">
+          <span style="background:var(--bd);color:var(--blu);padding:2px 8px;border-radius:10px;font-weight:700;">Tier 0.75% (Base 0.30%)</span>
+          <span class="g">→ ฿100K = 0.50%</span>
+        </div>
+        <div style="height:7px;background:rgba(255,255,255,.5);border-radius:4px;overflow:hidden;"><div style="width:42%;height:100%;background:linear-gradient(90deg,var(--blu),var(--pur));border-radius:4px;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;" class="m"><span>฿50K</span><span class="b">฿70.8K</span><span>฿100K</span></div>
+      </div>
+      <div style="padding:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+          <div style="background:var(--bg3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:9px;" class="m">Base</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;">฿212</div></div>
+          <div style="background:var(--gd);border-radius:8px;padding:8px;text-align:center;border:1px solid rgba(10,124,82,.2);"><div style="font-size:9px;" class="g">CPU Bonus</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;" class="g">฿2,060</div></div>
+        </div>
+        <div style="background:var(--bg3);border-radius:8px;padding:8px;font-size:11px;margin-bottom:8px;">
+          เขม่า <strong class="g">84 🏆</strong> · กระจก <strong>40</strong> · ยาง <strong class="r">0 ❌</strong> · หล่อลื่น <strong class="g">7</strong>
+        </div>
+        <div style="background:var(--bd);border-radius:8px;padding:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(29,82,204,.2);">
+          <span style="font-size:12px;font-weight:700;" class="b">Commission สุทธิ</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;" class="b">฿1,931</span>
+        </div>
+        <div style="font-size:10px;margin-top:5px;text-align:center;" class="g">ถ้าขายยาง 13+แบต 14 → ฿4,610 (+฿2,679)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">📊 Base Rate + CPU Bonus</div><span class="badge b">โครงสร้างใหม่</span></div>
+    <div class="g2" style="padding:14px;margin:0;gap:10px;">
+      <table class="tbl">
+        <thead><tr><th>ยอดขาย</th><th>Base Rate</th><th>Penalty</th></tr></thead>
+        <tbody>
+          <tr><td>≥ ฿350K</td><td class="n g" style="font-weight:700;">1.50%</td><td class="m">—</td></tr>
+          <tr><td>≥ ฿250K</td><td class="n g">1.20%</td><td class="m">—</td></tr>
+          <tr><td>≥ ฿150K</td><td class="n">0.90%</td><td class="m">—</td></tr>
+          <tr style="background:var(--bd)"><td>≥ ฿100K ← สุขธนัช</td><td class="n b" style="font-weight:700;">0.75%</td><td style="font-size:10px;" class="r">ยาง&lt;10 → -0.1%</td></tr>
+          <tr style="background:var(--yd)"><td>≥ ฿50K ← นิราวรรณ,อริศรา</td><td class="n y" style="font-weight:700;">0.50%</td><td style="font-size:10px;" class="r">ยาง&lt;10 → -0.1%</td></tr>
+          <tr><td>&lt; ฿50K</td><td class="n">0.25%</td><td class="m">—</td></tr>
+        </tbody>
+      </table>
+      <table class="tbl">
+        <thead><tr><th>CPU Bonus</th><th>ต่อหน่วย</th><th>Margin</th></tr></thead>
+        <tbody>
+          <tr style="background:var(--rd)"><td>🔵 ยาง<span class="main-badge">หลัก</span></td><td class="n r" style="font-weight:700;">+฿150/เส้น</td><td class="n m">~฿2,500</td></tr>
+          <tr style="background:var(--rd)"><td>🔋 แบต<span class="main-badge">หลัก</span></td><td class="n r" style="font-weight:700;">+฿100/ชิ้น</td><td class="n m">~฿800</td></tr>
+          <tr><td>❄️ Air Care</td><td class="n g">+฿50/ชิ้น</td><td class="n m">~฿400</td></tr>
+          <tr><td>💨 เขม่า</td><td class="n g">+฿15/ชิ้น</td><td class="n m">~฿100</td></tr>
+          <tr><td>🔵 กระจก</td><td class="n g">+฿10/ชิ้น</td><td class="n m">~฿70</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CPU -->
+<div id="t-cpu" style="display:none;">
+  <div class="g21">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📦 CPU เป้า vs จริง ก.พ.69</div>
+        <button onclick="openModal('modal-upload')" style="background:var(--blu);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">📤 อัพ CPU</button>
+      </div>
+      <div class="cpu-item" style="background:var(--rd);"><div style="font-size:14px;width:20px;text-align:center;">🔵</div><div class="cpu-name">ยาง<span class="main-badge">หลัก</span></div><div class="cpu-bar-wrap"><div class="cpu-bar-bg"><div class="cpu-bar-fill" style="width:10%;background:var(--red);"></div></div><div style="font-size:9px;" class="m">สุขธนัช 8 · นิราวรรณ 0 · อริศรา 0</div></div><div class="cpu-nums r"><strong>4</strong>/40</div><div class="cpu-bonus">+฿150/เส้น</div></div>
+      <div class="cpu-item" style="background:rgba(194,106,0,.03);"><div style="font-size:14px;width:20px;text-align:center;">🔋</div><div class="cpu-name">แบต<span class="main-badge">หลัก</span></div><div class="cpu-bar-wrap"><div class="cpu-bar-bg"><div class="cpu-bar-fill" style="width:30%;background:var(--yel);"></div></div><div style="font-size:9px;" class="m">สุขธนัช 6 · นิราวรรณ 3 · อริศรา 3</div></div><div class="cpu-nums y"><strong>13</strong>/43</div><div class="cpu-bonus">+฿100/ชิ้น</div></div>
+      <div class="cpu-item"><div style="font-size:14px;width:20px;text-align:center;">❄️</div><div class="cpu-name">Air Care</div><div class="cpu-bar-wrap"><div class="cpu-bar-bg"><div class="cpu-bar-fill" style="width:60%;background:var(--yel);"></div></div><div style="font-size:9px;" class="m">สุขธนัช 6 · นิราวรรณ 4 · อริศรา 2</div></div><div class="cpu-nums y"><strong>12</strong>/20</div><div class="cpu-bonus">+฿50/ชิ้น</div></div>
+      <div class="cpu-item"><div style="font-size:14px;width:20px;text-align:center;">💨</div><div class="cpu-name">เขม่า</div><div class="cpu-bar-wrap"><div class="cpu-bar-bg"><div class="cpu-bar-fill" style="width:100%;background:var(--grn);"></div></div><div style="font-size:9px;" class="m">สุขธนัช 50 · นิราวรรณ 76 · อริศรา 84 🏆</div></div><div class="cpu-nums g"><strong>210</strong></div><div class="cpu-bonus">+฿15/ชิ้น</div></div>
+      <div class="cpu-item"><div style="font-size:14px;width:20px;text-align:center;">🔵</div><div class="cpu-name">กระจก</div><div class="cpu-bar-wrap"><div class="cpu-bar-bg"><div class="cpu-bar-fill" style="width:100%;background:var(--grn);"></div></div><div style="font-size:9px;" class="m">สุขธนัช 9 · นิราวรรณ 46 🏆 · อริศรา 40</div></div><div class="cpu-nums g"><strong>95</strong></div><div class="cpu-bonus">+฿10/ชิ้น</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">🎯 เป้า/คน/เดือน</div></div>
+        <table class="tbl">
+          <thead><tr><th>สินค้า</th><th>เป้า</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--rd)"><td>🔵 ยาง</td><td class="n r"><strong>13 เส้น</strong></td></tr>
+            <tr style="background:var(--rd)"><td>🔋 แบต</td><td class="n r"><strong>14 ชิ้น</strong></td></tr>
+            <tr><td>❄️ Air Care</td><td class="n">7 ชิ้น</td></tr>
+            <tr><td>💨 เขม่า</td><td class="n">70 ชิ้น</td></tr>
+            <tr><td>🔵 กระจก</td><td class="n">32 ชิ้น</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">💰 กำไรถ้าครบเป้า</div></div>
+        <table class="tbl">
+          <thead><tr><th>สินค้า</th><th>กำไรสุทธิ/เดือน</th></tr></thead>
+          <tbody>
+            <tr><td>🔵 ยาง 40 เส้น</td><td class="n g" style="font-weight:700;">฿82,000</td></tr>
+            <tr><td>🔋 แบต 43 ชิ้น</td><td class="n g" style="font-weight:700;">฿21,500</td></tr>
+            <tr style="background:var(--gd)"><td style="font-weight:700;">รวม/เดือน</td><td class="n g" style="font-weight:800;">฿103,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALIVE-X -->
+<div id="t-alivex" style="display:none;">
+  <div class="alivex-panel">
+    <div style="font-size:16px;font-weight:800;">⭐ TOYOTA ALIVE-X Motivation Program เฟส 12</div>
+    <div style="font-size:11px;opacity:.7;margin-top:4px;">เม.ย. – มิ.ย. 2569 | ขนาด M (CPU 500-999/เดือน) | จ่ายรางวัล ส.ค. 2569</div>
+    <div class="reward-grid">
+      <div class="reward-card"><div class="reward-pct">3%</div><div class="reward-amt">฿4,000</div><div class="reward-range">3.0–4.99%</div></div>
+      <div class="reward-card"><div class="reward-pct">5%</div><div class="reward-amt">฿6,000</div><div class="reward-range">5.0–9.99%</div></div>
+      <div class="reward-card"><div class="reward-pct">10%</div><div class="reward-amt">฿8,000</div><div class="reward-range">10–14.99%</div></div>
+      <div class="reward-card"><div class="reward-pct">15%</div><div class="reward-amt">฿10,000</div><div class="reward-range">≥ 15%</div></div>
+    </div>
+    <div style="margin-top:14px;background:rgba(255,255,255,.1);border-radius:10px;padding:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:12px;opacity:.8;">สัดส่วนปัจจุบัน</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;color:#10d98a;">2.3%</span>
+      </div>
+      <div style="height:10px;background:rgba(255,255,255,.1);border-radius:5px;overflow:hidden;">
+        <div style="width:46%;height:100%;background:linear-gradient(90deg,#10d98a,#3b82f6);border-radius:5px;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;opacity:.6;margin-top:4px;"><span>0%</span><span>3%</span><span>5%</span><span>10%</span><span>15%</span></div>
+      <div style="font-size:12px;margin-top:8px;color:#fbbf24;">⚠️ ต้องเพิ่มอีก 0.7% → ฿4,000 | แคชเชียร์ต้องขอทุกราย</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📋 สคริปต์แคชเชียร์</div></div>
+      <div style="padding:14px;">
+        <div style="background:var(--gd);border-radius:8px;padding:12px;border:1px solid rgba(10,124,82,.2);margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;" class="g">ขั้นตอนสะสมคะแนน</div>
+          <div style="font-size:11px;" class="m" style="margin-top:4px;line-height:1.9;">"ขอทราบเบอร์ ALIVE-X สะสมคะแนนด้วยนะคะ"<br>→ กรอกใน TOPSERV → ออกใบเสร็จ</div>
+        </div>
+        <div style="background:var(--bd);border-radius:8px;padding:12px;border:1px solid rgba(29,82,204,.18);">
+          <div style="font-size:11px;font-weight:700;" class="b">ขั้นตอนแลกคะแนน</div>
+          <div style="font-size:11px;" class="m" style="margin-top:4px;line-height:1.9;">"ต้องการแลกคะแนนเป็นส่วนลดไหมคะ? (8 คะแนน = ฿1)"<br>→ ขอ OTP → กดแลกใน TOPSERV<br>แลกขั้นต่ำ 1,000 คะแนน = ส่วนลด ฿125</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-top:10px;font-size:11px;" class="m">
+          <strong>ลูกค้าลืมเบอร์:</strong> ส่งสำเนาบัตรประชาชนไปที่ the1callcenter@central.co.th<br>
+          โทร 02-660-1000 กด 5 กด 2 | แก้ไขได้ใน 1 ชม.
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🔒 P45 — ผบห.เท่านั้น</div><span class="badge r">ล็อค</span></div>
+      <div style="padding:14px;">
+        <div style="background:linear-gradient(135deg,#1e3a8a,#1d52cc);border-radius:10px;padding:14px;color:#fff;text-align:center;margin-bottom:12px;">
+          <div style="font-size:14px;font-weight:800;">🔐 SA ไม่มีอำนาจแถม</div>
+          <div style="font-size:11px;opacity:.8;margin-top:4px;">ส่งให้ผบห.อนุมัติก่อนทุกรายการ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:800;color:#fca5a5;margin-top:8px;">-฿253K</div>
+          <div style="font-size:10px;opacity:.7;">เกิน Budget เดือนนี้</div>
+        </div>
+        <button onclick="openModal('modal-p45')" class="btn-primary" style="width:100%;">📤 ส่งขอของแถม → ผบห.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPARE -->
+<div id="t-spare" style="display:none;">
+  <div class="g2">
     <div>
-      <div class="fg"><label class="fl">PBC Revenue วันนี้ (บาท)</label><input class="fi" type="number" id="rp_pbc" placeholder="0"></div>
-      <div class="fg"><label class="fl">รถค้างคืน (คัน)</label><input class="fi" type="number" id="rp_wip" placeholder="0"></div>
-      <div class="fg"><label class="fl">ลูกค้าที่สนใจซื้อรถใหม่</label><input class="fi" type="text" placeholder="ชื่อ/ทะเบียน..."></div>
+      <div class="card">
+        <div class="ch"><div class="ct">⏳ รออนุมัติ</div><span class="badge y">2 รายการ</span></div>
+        <table class="tbl">
+          <thead><tr><th>ช่าง/เซล์</th><th>รายการ</th><th>สถานะ</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div style="font-weight:700;">วิชัย ช่าง</div><div style="font-size:10px;" class="m">ใบงาน C26-01532</div></td>
+              <td>ผ้าเบรก Genuine</td>
+              <td><span class="badge g">✅ มีใบงาน</span></td>
+              <td><div style="display:flex;gap:4px;">
+                <button onclick="approveSpare(this,'ok')" style="background:var(--gd);color:var(--grn);border:1px solid rgba(10,124,82,.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">✅</button>
+                <button onclick="approveSpare(this,'no')" style="background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">❌</button>
+              </div></td>
+            </tr>
+            <tr style="background:var(--rd)">
+              <td><div style="font-weight:700;">สมศักดิ์ ช่าง</div><div style="font-size:10px;" class="r">🚨 ฉุกเฉิน ไม่มีใบงาน</div></td>
+              <td>น้ำมันเบรก DOT3</td>
+              <td><span class="badge r">ไม่มีใบงาน</span></td>
+              <td><button onclick="approveSpare(this,'emergency')" style="background:var(--yel);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">อนุมัติฉุกเฉิน</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct">📸 เบิกอะไหล่ใหม่</div><span class="badge b">OCR อ่านใบงาน</span></div>
+        <div style="padding:14px;">
+          <div class="f-group"><label class="f-label">ประเภทการเบิก</label>
+            <select class="f-select" id="spare-type" onchange="toggleSpareType()">
+              <option value="work">จากใบงาน TOPSERV (ช่าง)</option>
+              <option value="gift">จากใบอนุมัติขาย — ของแถม Package (เซล์)</option>
+              <option value="emergency">ฉุกเฉิน — ยังไม่มีใบงาน</option>
+            </select>
+          </div>
+          <div id="spare-work-box">
+            <div class="photo-zone" onclick="document.getElementById('spare-file').click()">
+              <div style="font-size:28px;">📸</div>
+              <div style="font-size:13px;font-weight:600;margin-top:6px;">ถ่ายรูปใบงาน TOPSERV</div>
+              <div style="font-size:11px;" class="m">ระบบ OCR อ่านเลขใบงานอัตโนมัติ</div>
+              <div id="ocr-result" style="display:none;margin-top:8px;background:var(--gd);border-radius:6px;padding:6px;font-size:11px;" class="g">✅ อ่านได้: <strong id="ocr-no">C26-01532</strong></div>
+              <input type="file" id="spare-file" style="display:none" accept="image/*" capture="environment" onchange="simulateOCR()">
+            </div>
+          </div>
+          <div id="spare-gift-box" style="display:none;"><div class="f-group"><label class="f-label">เลขใบอนุมัติขาย</label><input class="f-input" placeholder="TCS-2026-04-XXXX"></div></div>
+          <div id="spare-emergency-box" style="display:none;">
+            <div style="background:var(--yd);border-radius:8px;padding:10px;margin-bottom:10px;font-size:11px;" class="y">⚠️ ต้องแนบใบงานจริงใน 24 ชม. | ถ้าไม่แนบ → แจ้ง LINE ผจก.บัญชี + ผบห.</div>
+            <div class="f-group"><label class="f-label">เหตุผลฉุกเฉิน</label><input class="f-input" placeholder="เช่น รถลูกค้าเสียกลางทาง"></div>
+          </div>
+          <div class="f-group" style="margin-top:10px;"><label class="f-label">รายการอะไหล่</label><input class="f-input" id="spare-items" placeholder="เช่น ผ้าเบรก, น้ำมันเบรก"></div>
+          <button onclick="submitSpare()" class="btn-green" style="width:100%;">📤 ส่งขอเบิก</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📜 กฎเบิกอะไหล่</div></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:11px;">
+          <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border2);"><span class="g">✅</span><span><strong>ใบงาน TOPSERV</strong> → ถ่ายรูป OCR → เบิกได้เลย</span></div>
+          <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border2);"><span class="g">✅</span><span><strong>ใบอนุมัติขาย</strong> → เบิก Package ของแถมได้</span></div>
+          <div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border2);"><span class="y">⚠️</span><span><strong>ฉุกเฉิน</strong> → อนุมัติ LINE + แนบใบงานใน 24 ชม.</span></div>
+          <div style="display:flex;gap:8px;padding:8px;background:var(--rd);border-radius:6px;"><span class="r">🚨</span><span class="r"><strong>ไม่มีเลย</strong> → เบิกไม่ได้ + แจ้ง LINE ผจก.บัญชี + ผบห.</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📊 สรุปการเบิกเดือนนี้</div></div>
+        <table class="tbl">
+          <thead><tr><th>ประเภท</th><th>จำนวน</th><th>สถานะ</th></tr></thead>
+          <tbody>
+            <tr><td>จากใบงาน</td><td class="n g">142</td><td><span class="badge g">ปกติ</span></td></tr>
+            <tr><td>ของแถม Package</td><td class="n b">12</td><td><span class="badge g">ตรงยอดขาย</span></td></tr>
+            <tr><td>ฉุกเฉิน</td><td class="n y">2</td><td><span class="badge y">มีใบงานแล้ว</span></td></tr>
+            <tr style="background:var(--gd)"><td style="font-weight:700;">ไม่มีใบงาน</td><td class="n g">0</td><td><span class="badge g">✅ ไม่มี</span></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <div class="fg"><label class="fl">หมายเหตุ/เหตุการณ์พิเศษ</label><textarea class="fi" rows="2" placeholder="..."></textarea></div>
-  <button class="btn btn-p" onclick="alert('ส่งรายงานให้ผบห.แล้ว — อัพเดท Dashboard ทันที')">ส่งรายงาน 17:00</button>
 </div>
-<div class="card">
-  <div class="ct">อัพโหลด TOPSERV</div>
-  <div style="border:2px dashed var(--br2);border-radius:var(--r);padding:24px;text-align:center;cursor:pointer" onclick="document.getElementById('ts_file').click()">
-    <div style="font-size:24px;margin-bottom:8px">📁</div>
-    <div style="font-size:13px;font-weight:500">คลิกเพื่ออัพโหลดไฟล์ TOPSERV</div>
-    <div style="font-size:11px;color:var(--mu);margin-top:4px">ทุกวันที่ 5 ของเดือน · ระบบดึง CPU/PBC อัตโนมัติ</div>
-    <input type="file" id="ts_file" style="display:none" accept=".xls,.xlsx,.csv" onchange="alert('อัพโหลด TOPSERV แล้ว — ระบบกำลัง process...')">
+
+<!-- SOP -->
+<div id="t-sop" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📋 SOP Checklist ประจำวัน</div><span class="badge b">8 ขั้นตอน</span></div>
+      <div style="padding:14px;" id="sop-list"></div>
+      <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px;">
+        <button onclick="resetSOP()" class="btn-cancel">รีเซ็ต</button>
+        <button onclick="saveSOP()" class="btn-green">✅ บันทึกประจำวัน</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">✂️ ขั้นตอนที่ลดได้</div><span class="badge y">แนะนำ</span></div>
+        <div style="padding:10px 14px;display:flex;flex-direction:column;gap:7px;">
+          <div class="signal y"><span>⏱️</span><div><div class="st">ติดตามหลังซ่อม 14 วัน → 3 วัน</div><div class="sd">โทรถามครั้งเดียว ลดภาระ SA</div></div></div>
+          <div class="signal y"><span>📋</span><div><div class="st">N-18 + Reception → รวมเป็นขั้นตอนเดียว</div><div class="sd">WI Tablet ทำได้ในจอเดียว</div></div></div>
+          <div class="signal g"><span>✅</span><div><div class="st">เบิกอะไหล่ถ่ายรูป OCR — ดีแล้ว</div><div class="sd">ดึงจาก TOPSERV อัตโนมัติ ไม่ต้องกรอกซ้ำ</div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </div>
 
 </div>
+
+<!-- MODAL: Print -->
+<div class="modal-overlay" id="modal-print">
+  <div class="modal">
+    <div class="modal-title">🖨️ ปริ้นสรุป Commission SA</div>
+    <div class="modal-sub">แนบเอกสารเบิกจ่ายได้เลย — ไม่ต้องสรุปเอง</div>
+    <div class="f-group"><label class="f-label">เดือน</label><input class="f-input" type="month" value="2026-02"></div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;font-size:12px;" class="m">
+      เอกสารที่จะออก:<br>
+      ✅ สรุปยอด Commission SA รายบุคคล<br>
+      ✅ Base Rate + CPU Bonus รายการ<br>
+      ✅ หัก: กองกลาง 10% + ภาษี 5%<br>
+      ✅ ยอดสุทธิจ่ายรายคน<br>
+      ✅ ลายเซ็น ผจก.GS + ผจก.บัญชี
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-print')">ยกเลิก</button>
+      <button class="btn-red" onclick="closeModal('modal-print');alert('✅ สร้างเอกสาร Commission SA ก.พ.69\n📤 ส่งให้ผจก.บัญชีแนบเบิกจ่ายแล้ว\n📱 แจ้ง LINE ผจก.บัญชีอัตโนมัติ')">🖨️ ปริ้น + ส่งบัญชี</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: P45 -->
+<div class="modal-overlay" id="modal-p45">
+  <div class="modal">
+    <div class="modal-title">🔒 ขอของแถม → ผบห.</div>
+    <div class="modal-sub">SA ไม่มีอำนาจ — ส่งให้ผบห.อนุมัติก่อนเสมอ</div>
+    <div class="f-group"><label class="f-label">SA ที่ขอ</label><select class="f-select"><option>สุขธนัช</option><option>นิราวรรณ</option><option>อริศรา</option></select></div>
+    <div class="f-group"><label class="f-label">รายการ</label><input class="f-input" placeholder="เช่น ประกันภัยชั้น 1"></div>
+    <div class="f-group"><label class="f-label">มูลค่า (฿)</label><input class="f-input" type="number" placeholder="0"></div>
+    <div class="f-group"><label class="f-label">เหตุผล</label><input class="f-input" placeholder="เช่น ลูกค้า VIP มาครั้งที่ 5"></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-p45')">ยกเลิก</button>
+      <button class="btn-primary" onclick="closeModal('modal-p45');alert('📤 ส่งให้ผบห.แล้ว\n📱 แจ้ง LINE ผบห. รอการอนุมัติ')">📤 ส่ง ผบห.</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Upload -->
+<div class="modal-overlay" id="modal-upload">
+  <div class="modal">
+    <div class="modal-title">📂 อัพโหลดข้อมูล GS</div>
+    <div class="modal-sub">Commission SA / CPU รายเดือน / รายงาน GS</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>Commission SA รายเดือน</option><option>CPU รายบุคคล</option><option>รายงานรายรับ GS</option></select></div>
+    <div class="f-group"><label class="f-label">เดือน</label><input class="f-input" type="month" value="2026-03"></div>
+    <div class="photo-zone" onclick="document.getElementById('up-file').click()">
+      <div style="font-size:28px;">📊</div>
+      <div style="font-size:13px;font-weight:600;margin-top:6px;">คลิกหรือลากไฟล์</div>
+      <div style="font-size:11px;" class="m">.xlsx · .xls · .pdf</div>
+      <div id="up-fname" style="font-size:11px;font-weight:600;" class="b"></div>
+      <input type="file" id="up-file" style="display:none" onchange="document.getElementById('up-fname').textContent='📎 '+this.files[0].name">
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-upload')">ยกเลิก</button>
+      <button class="btn-red" onclick="closeModal('modal-upload');alert('✅ อัพโหลดสำเร็จ\nระบบอัพเดต Dashboard + Commission + CPU')">📤 อัพโหลด</button>
+    </div>
+  </div>
+</div>
+
 <script>
-document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
-document.getElementById('rp_date').textContent=new Date().toLocaleDateString('th-TH');
-function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-overview','t-commission','t-cpu','t-alivex','t-spare','t-sop'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+  if(id==='t-sop')renderSOP();
+}
+const SOP=['1. รับนัดล่วงหน้า + ตรวจอะไหล่ก่อนวันนัด','2. คัดแยก/แก้ไขข้อมูลลูกค้าใน TOPSERV (N-18)','3. รับรถ + ตรวจสภาพ + เปิดใบงาน (SA)','4. อนุมัติงานซ่อม + แจ้งราคาลูกค้า','5. จ่ายงานช่าง + เบิกอะไหล่ถ่ายรูปใบงาน','6. ควบคุมงานซ่อม + แจ้งลูกค้าถ้างานเพิ่ม','7. Offer CPU: ยาง/แบต/Air Care ทุกคัน','8. ส่งมอบ + แคชเชียร์ขอ ALIVE-X ทุกราย'];
+let sopS=new Array(SOP.length).fill(false);
+function renderSOP(){document.getElementById('sop-list').innerHTML=SOP.map((s,i)=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2);cursor:pointer;" onclick="toggleSOP(${i})"><div style="width:20px;height:20px;border-radius:5px;border:2px solid ${sopS[i]?'var(--grn)':'var(--border)'};background:${sopS[i]?'var(--grn)':'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">${sopS[i]?'<span style="color:#fff;font-size:11px;">✓</span>':''}</div><span style="font-size:12px;color:${sopS[i]?'var(--grn)':'var(--text)'};text-decoration:${sopS[i]?'line-through':'none'};">${s}</span></div>`).join('');}
+function toggleSOP(i){sopS[i]=!sopS[i];renderSOP();}
+function resetSOP(){sopS=new Array(SOP.length).fill(false);renderSOP();}
+function saveSOP(){alert('✅ บันทึก SOP '+new Date().toLocaleDateString('th-TH'));}
+function toggleSpareType(){const t=document.getElementById('spare-type').value;document.getElementById('spare-work-box').style.display=t==='work'?'':'none';document.getElementById('spare-gift-box').style.display=t==='gift'?'':'none';document.getElementById('spare-emergency-box').style.display=t==='emergency'?'':'none';}
+function simulateOCR(){setTimeout(()=>{document.getElementById('ocr-result').style.display='block';document.getElementById('ocr-no').textContent='C26-0'+(Math.floor(Math.random()*9000)+1000);},800);}
+function approveSpare(btn,type){const row=btn.closest('tr');const msgs={ok:'✅ อนุมัติ\n📦 Stock ลดอัตโนมัติ',no:'❌ ปฏิเสธ — แจ้ง LINE ช่าง',emergency:'⚠️ อนุมัติฉุกเฉิน\n⏰ ต้องแนบใบงานใน 24 ชม.'};alert(msgs[type]);row.style.opacity='.4';row.style.pointerEvents='none';}
+function submitSpare(){const items=document.getElementById('spare-items').value;if(!items){alert('กรุณากรอกรายการ');return;}alert('✅ ส่งขอเบิกแล้ว');}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});});
 </script>
 </body>
 </html>

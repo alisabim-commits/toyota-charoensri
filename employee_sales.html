@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f4f6fb;--bg2:#fff;--bg3:#f0f3fa;--bg4:#e8edf8;
+  --border:#dde3f0;--border2:#eaecf5;
+  --text:#18233d;--text2:#546080;--text3:#9aaac0;
+  --red:#dc2244;--rd:rgba(220,34,68,.07);
+  --yel:#c26a00;--yd:rgba(194,106,0,.08);
+  --grn:#0a7c52;--gd:rgba(10,124,82,.07);
+  --blu:#1d52cc;--bd:rgba(29,82,204,.07);
+  --toy:#eb0a1e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}
+.bsub{font-size:11px;color:var(--text2);}
+.user-badge{display:flex;align-items:center;gap:8px;background:var(--bg3);border-radius:20px;padding:5px 12px 5px 5px;}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--toy),#ff6b6b);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;}
+.user-name{font-size:12px;font-weight:700;}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+
+.main{padding:16px 20px;max-width:1200px;margin:0 auto;}
+
+/* MY KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;}
+.kpi.r{border-top-color:var(--toy);}
+.kpi.g{border-top-color:var(--grn);}
+.kpi.b{border-top-color:var(--blu);}
+.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--toy);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.pt{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:7px;}
+.pf{height:100%;border-radius:3px;}
+.pf.r{background:var(--toy);}.pf.g{background:var(--grn);}.pf.b{background:var(--blu);}.pf.y{background:var(--yel);}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+
+/* FORM */
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;transition:border .2s;}
+.f-input:focus{border-color:var(--blu);background:#fff;}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.f-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+
+/* FLOOR DISPLAY */
+.floor-display{background:linear-gradient(135deg,var(--bg3),#e0e8ff);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+.floor-title{font-size:10px;color:var(--text2);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.floor-amount{font-size:28px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);}
+.floor-sub{font-size:11px;color:var(--text2);margin-top:2px;}
+.floor-bar{margin-top:10px;}
+.floor-track{height:8px;background:rgba(255,255,255,.6);border-radius:4px;overflow:hidden;position:relative;}
+.floor-fill{height:100%;border-radius:4px;transition:width .5s;}
+.floor-markers{display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:3px;}
+
+/* PACKAGE CARDS */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px;}
+.pkg-card{border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;position:relative;}
+.pkg-card:hover{border-color:var(--blu);transform:translateY(-2px);box-shadow:0 4px 16px rgba(29,82,204,.12);}
+.pkg-card.selected{border-color:var(--blu);background:var(--bd);}
+.pkg-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--blu);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
+.pkg-value{font-size:18px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--blu);margin-bottom:8px;}
+.pkg-name{font-size:13px;font-weight:700;margin-bottom:8px;}
+.pkg-items{list-style:none;display:flex;flex-direction:column;gap:3px;}
+.pkg-items li{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px;}
+.pkg-items li::before{content:'✓';color:var(--grn);font-weight:700;font-size:10px;}
+.pkg-slow{position:absolute;top:10px;left:12px;background:var(--yd);color:var(--yel);font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 16px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);}
+.tbl td{padding:10px 16px;border-bottom:1px solid var(--border2);font-size:12px;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+
+/* LEADERBOARD */
+.lb-item{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border2);}
+.lb-item:last-child{border-bottom:none;}
+.lb-rank{font-size:20px;width:32px;text-align:center;flex-shrink:0;}
+.lb-info{flex:1;}
+.lb-name{font-size:13px;font-weight:700;}
+.lb-sub{font-size:10px;color:var(--text3);margin-top:1px;}
+.lb-bar-bg{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:5px;}
+.lb-bar-fill{height:100%;border-radius:3px;}
+.lb-val{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;text-align:right;}
+.me-badge{display:inline-flex;align-items:center;gap:3px;background:var(--bd);color:var(--blu);font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:5px;}
+
+/* STEP INDICATOR */
+.steps{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;}
+.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid var(--border);}
+.step-circle.done{background:var(--grn);border-color:var(--grn);color:#fff;}
+.step-circle.active{background:var(--blu);border-color:var(--blu);color:#fff;}
+.step-circle.todo{background:var(--bg3);color:var(--text3);}
+.step-label{font-size:9px;color:var(--text3);text-align:center;}
+.step-line{flex:1;height:2px;margin-bottom:18px;}
+.step-line.done{background:var(--grn);}
+.step-line.todo{background:var(--border);}
+
+/* STATUS DOTS */
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sdot.g{background:var(--grn);}.sdot.y{background:var(--yel);}.sdot.r{background:var(--red);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:560px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:18px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;}
+.btn{padding:9px 22px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;transition:all .2s;}
+.btn-primary{background:var(--blu);color:#fff;}
+.btn-red{background:var(--toy);color:#fff;}
+.btn-green{background:var(--grn);color:#fff;}
+.btn-cancel{background:var(--bg3);color:var(--text2);}
+
+/* QR BOX */
+.qr-box{background:linear-gradient(135deg,#0a7c52,#0d9e6a);border-radius:14px;padding:20px;color:#fff;text-align:center;}
+.qr-placeholder{width:120px;height:120px;background:#fff;border-radius:10px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+
+/* OVER FLOOR WARNING */
+.over-warn{background:rgba(220,34,68,.07);border:1px solid rgba(220,34,68,.3);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.over-warn.hide{display:none;}
+
+/* PRAISE BADGE */
+.praise{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;}
+
+@media(max-width:768px){.kpi-strip,.g2,.g3,.f-row,.f-row3{grid-template-columns:1fr 1fr;}.pkg-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">พนักงานขาย</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="user-badge">
+      <div class="user-avatar">สพ</div>
+      <div class="user-name">สมพงษ์ กองศรีเกษ</div>
+    </div>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-booking')">📝 กรอกใบจอง</button>
+  <button class="tab" onclick="sw(this,'t-mydeals')">📋 ดีลของฉัน</button>
+  <button class="tab" onclick="sw(this,'t-leaderboard')">🏆 Leaderboard</button>
+  <button class="tab" onclick="sw(this,'t-kpi')">📊 KPI ของฉัน</button>
+</div>
+
+<div class="main">
+
+<!-- ===== ใบจอง ===== -->
+<div id="t-booking">
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step"><div class="step-circle active" id="s1">1</div><div class="step-label">ข้อมูล<br>ลูกค้า</div></div>
+    <div class="step-line todo" id="l1"></div>
+    <div class="step"><div class="step-circle todo" id="s2">2</div><div class="step-label">เลือกรถ<br>+ ราคา</div></div>
+    <div class="step-line todo" id="l2"></div>
+    <div class="step"><div class="step-circle todo" id="s3">3</div><div class="step-label">เลือก<br>Package</div></div>
+    <div class="step-line todo" id="l3"></div>
+    <div class="step"><div class="step-circle todo" id="s4">4</div><div class="step-label">Finance<br>+ ประกัน</div></div>
+    <div class="step-line todo" id="l4"></div>
+    <div class="step"><div class="step-circle todo" id="s5">✓</div><div class="step-label">ส่ง<br>อนุมัติ</div></div>
+  </div>
+
+  <!-- STEP 1: ลูกค้า -->
+  <div id="step-panel-1">
+    <div class="card">
+      <div class="ch"><div class="ct">👤 ข้อมูลลูกค้า</div></div>
+      <div style="padding:16px;">
+        <div class="f-row" style="margin-bottom:10px;">
+          <div class="f-group" style="margin:0;"><label class="f-label">ชื่อ-นามสกุล</label><input class="f-input" id="cust-name" placeholder="เช่น นาย ธีรวัฒน์ แสงผา"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">เบอร์โทรศัพท์</label><input class="f-input" id="cust-tel" placeholder="08X-XXX-XXXX" type="tel"></div>
+        </div>
+        <div class="f-row" style="margin-bottom:10px;">
+          <div class="f-group" style="margin:0;"><label class="f-label">ที่อยู่ / จังหวัด</label><input class="f-input" id="cust-addr" placeholder="เช่น นครพนม"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">LINE ID (ถ้ามี)</label><input class="f-input" id="cust-line" placeholder="@line_id"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:6px;">
+          <button onclick="goStep(2)" class="btn btn-primary">ถัดไป →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: รถ + ราคา -->
+  <div id="step-panel-2" style="display:none;">
+    <div class="card">
+      <div class="ch"><div class="ct">🚗 เลือกรุ่นรถ + ราคา</div></div>
+      <div style="padding:16px;">
+        <div class="f-row" style="margin-bottom:10px;">
+          <div class="f-group" style="margin:0;">
+            <label class="f-label">รุ่นรถ</label>
+            <select class="f-select" id="car-model" onchange="updateFloor()">
+              <option value="hilux24">Hilux Revo D-CAB 2.4 Entry — ฿737,000</option>
+              <option value="hilux28">Hilux Revo D-CAB 2.8 Premium — ฿815,000</option>
+              <option value="hilux28ov">Hilux Revo D-CAB 2.8 Overland — ฿924,000</option>
+              <option value="yariscross">Yaris Cross HEV Premium — ฿849,000</option>
+              <option value="ativ">Ativ 1.2 Smart — ฿549,000</option>
+              <option value="fortuner">Fortuner 2.4 Leader S — ฿1,239,000</option>
+              <option value="corollax">Corolla Cross HEV Premium — ฿1,094,000</option>
+            </select>
+          </div>
+          <div class="f-group" style="margin:0;"><label class="f-label">สี</label><input class="f-input" id="car-color" placeholder="เช่น Silver Metallic"></div>
+        </div>
+        <div class="f-row" style="margin-bottom:12px;">
+          <div class="f-group" style="margin:0;"><label class="f-label">VIN / เลขตัวถัง</label><input class="f-input" id="car-vin" placeholder="GUN2XXR-XXXXX"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">วันที่รับรถ (ประมาณ)</label><input class="f-input" type="date" id="car-delivery"></div>
+        </div>
+
+        <!-- FLOOR DISPLAY -->
+        <div class="floor-display">
+          <div class="floor-title">💰 ส่วนลดสูงสุดที่คุณให้ได้</div>
+          <div class="floor-amount" id="fl-amount">฿17,000</div>
+          <div class="floor-sub" id="fl-sub">Hilux D-CAB 2.4 | ถ้าต้องการลดมากกว่านี้ กด "ขออนุมัติผจก."</div>
+          <div class="floor-bar">
+            <div class="floor-track">
+              <div class="floor-fill pf g" id="fl-bar" style="width:0%;background:var(--grn);"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label class="f-label">ส่วนลดที่ขอให้ลูกค้า (฿)</label>
+          <input class="f-input" type="number" id="disc-amount" placeholder="0" oninput="checkDiscount(this.value)" style="font-size:16px;font-weight:700;">
+        </div>
+
+        <div class="over-warn hide" id="over-warn">
+          <span style="font-size:18px;">⚠️</span>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--red);">ส่วนลดเกิน Floor ของคุณ</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px;">ระบบจะส่งให้ผจก.ขายอนุมัติก่อน — กรอกเหตุผลด้านล่าง</div>
+            <textarea id="over-reason" class="f-input" style="margin-top:8px;height:60px;resize:none;" placeholder="เหตุผลที่ขอส่วนลดเพิ่ม..."></textarea>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:6px;">
+          <button onclick="goStep(1)" class="btn btn-cancel">← ย้อนกลับ</button>
+          <button onclick="goStep(3)" class="btn btn-primary">ถัดไป →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Package -->
+  <div id="step-panel-3" style="display:none;">
+    <div class="card">
+      <div class="ch">
+        <div class="ct">📦 เลือก Package ของแถม</div>
+        <span class="badge b">ระบบแนะนำจาก Stock</span>
+      </div>
+      <div class="pkg-grid" id="pkg-grid">
+        <!-- rendered by JS -->
+      </div>
+      <div style="padding:0 16px 16px;display:flex;justify-content:space-between;">
+        <button onclick="goStep(2)" class="btn btn-cancel">← ย้อนกลับ</button>
+        <button onclick="goStep(4)" class="btn btn-primary">ถัดไป →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Finance + ประกัน -->
+  <div id="step-panel-4" style="display:none;">
+    <div class="card">
+      <div class="ch"><div class="ct">💳 Finance + ประกัน</div></div>
+      <div style="padding:16px;">
+        <div class="g2" style="margin-bottom:12px;">
+          <div>
+            <label class="f-label">Finance (สินเชื่อ)</label>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="finance" value="tlt" checked style="accent-color:var(--blu);"> TLT (Toyota Leasing Thailand)
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="finance" value="kbank" style="accent-color:var(--blu);"> กสิกรไทย
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="finance" value="cash" style="accent-color:var(--blu);"> เงินสด (ไม่ใช้ Finance)
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="f-label">ประกันภัย</label>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="insurance" value="ioi" checked style="accent-color:var(--blu);"> IOI (Toyota ประกันภัย) ชั้น 1
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="insurance" value="other" style="accent-color:var(--blu);"> บริษัทอื่น
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="insurance" value="none" style="accent-color:var(--blu);"> ไม่มี
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="f-row" style="margin-bottom:10px;">
+          <div class="f-group" style="margin:0;"><label class="f-label">เงินดาวน์ (฿)</label><input class="f-input" type="number" id="down-payment" placeholder="0"></div>
+          <div class="f-group" style="margin:0;"><label class="f-label">ระยะผ่อน (เดือน)</label><select class="f-select"><option>48</option><option>60</option><option>72</option><option>เงินสด</option></select></div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">วิธีรับรถ</label>
+          <select class="f-select" id="delivery-type" onchange="toggleDeliveryAddr()">
+            <option value="self">รับที่บริษัทเอง</option>
+            <option value="city">ส่งในตัวเมือง (≤30 กม.) ฟรี</option>
+            <option value="far">ส่งไกล — รถสไลด์ (คิดตามระยะทาง)</option>
+          </select>
+        </div>
+        <div id="delivery-addr-box" style="display:none;" class="f-group">
+          <label class="f-label">ที่อยู่ส่งรถ + ระยะทาง (กม.)</label>
+          <div class="f-row">
+            <input class="f-input" placeholder="ที่อยู่ส่งรถ">
+            <input class="f-input" type="number" placeholder="ระยะทาง กม.">
+          </div>
+        </div>
+
+        <!-- COMMISSION PREVIEW -->
+        <div style="background:var(--gd);border:1px solid rgba(10,124,82,.2);border-radius:10px;padding:12px 14px;margin-top:8px;">
+          <div style="font-size:10px;color:var(--grn);font-weight:700;margin-bottom:4px;">💰 Commission ที่คุณจะได้รับ (ประมาณ)</div>
+          <div style="font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--grn);" id="comm-preview">฿3,700</div>
+          <div style="font-size:10px;color:var(--text2);margin-top:2px;">จ่ายสิ้นเดือน หลังส่งมอบรถแล้ว</div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:14px;">
+          <button onclick="goStep(3)" class="btn btn-cancel">← ย้อนกลับ</button>
+          <button onclick="goStep(5)" class="btn btn-primary">ถัดไป → สรุปใบจอง</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: สรุป + ส่งอนุมัติ -->
+  <div id="step-panel-5" style="display:none;">
+    <div class="card">
+      <div class="ch"><div class="ct">✅ สรุปใบจอง — ส่งอนุมัติ</div><span class="badge b">ตรวจสอบก่อนส่ง</span></div>
+      <div style="padding:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <div style="font-size:10px;color:var(--text3);font-weight:600;margin-bottom:8px;text-transform:uppercase;">ข้อมูลลูกค้า</div>
+            <div style="font-size:13px;font-weight:700;" id="sum-name">—</div>
+            <div style="font-size:12px;color:var(--text2);" id="sum-tel">—</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--text3);font-weight:600;margin-bottom:8px;text-transform:uppercase;">รถ</div>
+            <div style="font-size:13px;font-weight:700;" id="sum-car">—</div>
+            <div style="font-size:12px;color:var(--text2);" id="sum-color">—</div>
+          </div>
+        </div>
+        <table class="tbl" style="margin-bottom:16px;">
+          <tbody>
+            <tr><td class="m">ราคาขาย</td><td class="n" id="sum-price">—</td></tr>
+            <tr><td class="m">ส่วนลด</td><td class="n r" id="sum-disc">—</td></tr>
+            <tr><td class="m">Package ของแถม</td><td class="n b" id="sum-pkg">—</td></tr>
+            <tr><td class="m">Finance</td><td class="n" id="sum-finance">TLT</td></tr>
+            <tr><td class="m">ประกัน</td><td class="n" id="sum-ins">IOI ชั้น 1</td></tr>
+            <tr style="background:var(--gd);"><td style="font-weight:700;color:var(--grn);">Commission ของคุณ</td><td class="n g" style="font-weight:800;" id="sum-comm">฿3,700</td></tr>
+          </tbody>
+        </table>
+
+        <div style="background:var(--bd);border:1px solid rgba(29,82,204,.2);border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px;color:var(--blu);">
+          📤 กดส่ง → ระบบแจ้ง LINE ผจก.ขายทันที<br>
+          📱 ถ้าอยู่ใน Floor → อนุมัติได้เลย | ถ้าเกิน Floor → รอผจก./ผบห.
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <button onclick="goStep(4)" class="btn btn-cancel" style="flex:1;">← แก้ไข</button>
+          <button onclick="submitBooking()" class="btn btn-red" style="flex:2;">📤 ส่งขออนุมัติ → ผจก.ขาย</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /booking -->
+
+<!-- ===== ดีลของฉัน ===== -->
+<div id="t-mydeals" style="display:none;">
+  <div class="card">
+    <div class="ch"><div class="ct">📋 ดีลของสมพงษ์ — เม.ย. 69</div><span class="badge g">5 คัน</span></div>
+    <table class="tbl">
+      <thead><tr><th>ลูกค้า</th><th>รุ่น</th><th>ราคา</th><th>Package</th><th>สถานะ</th><th>Commission</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div style="font-weight:700;">ธีรวัฒน์ แสงผา</div><div style="font-size:10px;color:var(--text3);">081-234-5678</div></td>
+          <td class="m">D-CAB 2.8 Prem</td>
+          <td class="n">฿815,000</td>
+          <td><span class="badge b">Package A</span></td>
+          <td><span class="badge g">✅ อนุมัติแล้ว</span></td>
+          <td class="n g">฿4,200</td>
+          <td><button onclick="openModal('modal-qr')" style="background:var(--bd);color:var(--blu);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">QR ส่งมอบ</button></td>
+        </tr>
+        <tr>
+          <td><div style="font-weight:700;">วิไลลักษณ์ สุวรรณ</div><div style="font-size:10px;color:var(--text3);">082-345-6789</div></td>
+          <td class="m">Yaris Cross HEV</td>
+          <td class="n">฿849,000</td>
+          <td><span class="badge b">Package C</span></td>
+          <td><span class="badge g">✅ ส่งมอบแล้ว</span></td>
+          <td class="n g">฿3,700</td>
+          <td><span style="font-size:10px;color:var(--grn);">✅ เสร็จสิ้น</span></td>
+        </tr>
+        <tr>
+          <td><div style="font-weight:700;">สมชาย กิจเจริญ</div><div style="font-size:10px;color:var(--text3);">083-456-7890</div></td>
+          <td class="m">Hilux D-CAB 2.4</td>
+          <td class="n">฿737,000</td>
+          <td><span class="badge b">Package B</span></td>
+          <td><span class="badge y">⏳ รออนุมัติ ผบห.</span></td>
+          <td class="n m">฿3,200</td>
+          <td><button onclick="alert('รอผบห.อนุมัติ ส่วนลดที่ขอ')" style="background:var(--yd);color:var(--yel);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">ติดตาม</button></td>
+        </tr>
+        <tr style="background:rgba(220,34,68,.03);">
+          <td><div style="font-weight:700;">สมชาย ก. <span style="font-size:9px;background:var(--rd);color:var(--red);padding:1px 6px;border-radius:10px;">⚠️ 35 วัน</span></div><div style="font-size:10px;color:var(--text3);">084-567-8901</div></td>
+          <td class="m">Hilux D-CAB 2.8</td>
+          <td class="n">฿815,000</td>
+          <td><span class="badge b">Package A</span></td>
+          <td><span class="badge r">⚠️ เสี่ยงยกเลิก</span></td>
+          <td class="n m">฿4,200</td>
+          <td><button onclick="alert('📱 โทรหาลูกค้าด่วน!')" style="background:var(--rd);color:var(--red);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">โทรด่วน!</button></td>
+        </tr>
+        <tr>
+          <td><div style="font-weight:700;">ประสิทธิ์ มีโชค</div><div style="font-size:10px;color:var(--text3);">085-678-9012</div></td>
+          <td class="m">Hilux D-CAB 2.4</td>
+          <td class="n">฿737,000</td>
+          <td><span class="badge b">Package B</span></td>
+          <td><span class="badge g">✅ อนุมัติแล้ว</span></td>
+          <td class="n g">฿3,200</td>
+          <td><button onclick="openModal('modal-qr')" style="background:var(--bd);color:var(--blu);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">QR ส่งมอบ</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="padding:12px 16px;background:var(--gd);display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:12px;color:var(--grn);font-weight:700;">Commission รวมที่จะได้รับสิ้นเดือน</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;color:var(--grn);">฿18,500</span>
+    </div>
+  </div>
+</div><!-- /mydeals -->
+
+<!-- ===== LEADERBOARD ===== -->
+<div id="t-leaderboard" style="display:none;">
+  <div class="card">
+    <div class="ch"><div class="ct">🏆 Sales Leaderboard — เม.ย. 69</div><span class="badge g">Real-time</span></div>
+    <div style="padding:10px 16px;background:var(--gd);border-bottom:1px solid rgba(10,124,82,.2);display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-size:12px;color:var(--grn);font-weight:700;">🥇 คุณอยู่อันดับ 1 เดือนนี้!</div>
+      <span class="praise">🔥 MVP ของทีม</span>
+    </div>
+    <div>
+      <div class="lb-item">
+        <div class="lb-rank">🥇</div>
+        <div class="lb-info">
+          <div class="lb-name">สมพงษ์ กองศรีเกษ <span class="me-badge">คุณ</span></div>
+          <div class="lb-sub">5 คัน · เป้า 14 คัน · Commission ฿18,500</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:36%;background:#f59e0b;"></div></div>
+        </div>
+        <div class="lb-val" style="color:#f59e0b;">36%</div>
+      </div>
+      <div class="lb-item">
+        <div class="lb-rank">🥈</div>
+        <div class="lb-info">
+          <div class="lb-name">ภุมรี สวัสดี</div>
+          <div class="lb-sub">4 คัน · เป้า 14 คัน · Commission ฿14,800</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:29%;background:#94a3b8;"></div></div>
+        </div>
+        <div class="lb-val" style="color:#94a3b8;">29%</div>
+      </div>
+      <div class="lb-item">
+        <div class="lb-rank">🥉</div>
+        <div class="lb-info">
+          <div class="lb-name">ภัทราภรณ์ ใจดี</div>
+          <div class="lb-sub">2 คัน · เป้า 7 คัน · Commission ฿7,400</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:29%;background:#b45309;"></div></div>
+        </div>
+        <div class="lb-val" style="color:#b45309;">29%</div>
+      </div>
+      <div class="lb-item">
+        <div class="lb-rank" style="color:var(--text3);">4</div>
+        <div class="lb-info">
+          <div class="lb-name">ชัยวัฒน์ หมอจันทร์</div>
+          <div class="lb-sub">1 คัน · เป้า 7 คัน · Commission ฿3,700</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:14%;background:var(--grn);"></div></div>
+        </div>
+        <div class="lb-val" style="color:var(--text3);">14%</div>
+      </div>
+    </div>
+    <div style="padding:12px 16px;font-size:11px;color:var(--text2);border-top:1px solid var(--border);">
+      🎯 เป้าทีม: 42 คัน/เดือน | สะสม: 12 คัน | เหลือ 30 คัน ใน 19 วันทำการ
+    </div>
+  </div>
+</div><!-- /leaderboard -->
+
+<!-- ===== KPI ===== -->
+<div id="t-kpi" style="display:none;">
+  <div class="kpi-strip" style="margin-bottom:14px;">
+    <div class="kpi r"><div class="kl">🏆 ยอดขาย เม.ย.</div><div class="kv r">5 คัน</div><div class="ks">เป้า 14 คัน | เหลือ 9 คัน</div><div class="pt"><div class="pf r" style="width:36%"></div></div></div>
+    <div class="kpi g"><div class="kl">💰 Commission สะสม</div><div class="kv g">฿18,500</div><div class="ks">เป้า ฿51,800 | ถึงได้ 36%</div><div class="pt"><div class="pf g" style="width:36%"></div></div></div>
+    <div class="kpi b"><div class="kl">💳 Finance Attach</div><div class="kv b">4/5</div><div class="ks">80% | เป้า 75% ✅</div><div class="pt"><div class="pf b" style="width:80%"></div></div></div>
+    <div class="kpi y"><div class="kl">🛡️ Insurance Attach</div><div class="kv y">3/5</div><div class="ks">60% | เป้า 85% ⚠️</div><div class="pt"><div class="pf y" style="width:60%"></div></div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">📈 ถ้าทำได้ครบเป้า</div></div>
+      <div style="padding:14px 18px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;">
+            <span style="font-size:12px;">ขายครบ 14 คัน</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--grn);">฿51,800</span>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;">
+            <span style="font-size:12px;">Finance 75%+</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--blu);">+฿2,000 bonus</span>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;">
+            <span style="font-size:12px;">Insurance 85%+</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--blu);">+฿2,000 bonus</span>
+          </div>
+          <div style="background:var(--gd);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;border:1px solid rgba(10,124,82,.2);">
+            <span style="font-size:12px;font-weight:700;color:var(--grn);">รวมถ้าทำได้ครบ</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:16px;color:var(--grn);">฿55,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🎯 ต้องทำอะไรวันนี้</div></div>
+      <div style="padding:12px 18px;display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border2);align-items:flex-start;">
+          <input type="checkbox" style="accent-color:var(--grn);width:14px;height:14px;margin-top:2px;flex-shrink:0;">
+          <span style="font-size:12px;">โทรหา สมชาย ก. ที่จองมา 35 วันแล้ว</span>
+        </div>
+        <div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border2);align-items:flex-start;">
+          <input type="checkbox" style="accent-color:var(--grn);width:14px;height:14px;margin-top:2px;flex-shrink:0;">
+          <span style="font-size:12px;">ส่ง QR ส่งมอบให้ ธีรวัฒน์ (วันนี้รับรถ)</span>
+        </div>
+        <div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border2);align-items:flex-start;">
+          <input type="checkbox" style="accent-color:var(--grn);width:14px;height:14px;margin-top:2px;flex-shrink:0;">
+          <span style="font-size:12px;">เสนอประกันให้ลูกค้าที่ยังไม่มี (Insurance ยัง 60%)</span>
+        </div>
+        <div style="display:flex;gap:8px;padding:7px 0;align-items:flex-start;">
+          <input type="checkbox" style="accent-color:var(--grn);width:14px;height:14px;margin-top:2px;flex-shrink:0;">
+          <span style="font-size:12px;">กรอกใบจองลูกค้าใหม่ที่นัดวันนี้</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /kpi -->
+
+</div><!-- /main -->
+
+<!-- MODAL: QR ส่งมอบ -->
+<div class="modal-overlay" id="modal-qr">
+  <div class="modal" style="max-width:420px;text-align:center;">
+    <div class="modal-title">📱 QR ส่งมอบรถ</div>
+    <div class="modal-sub">ลูกค้าสแกน → อ่านข้อความ → OTP → เซ็นนิ้ว → ยืนยันรับรถ</div>
+    <div class="qr-box">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;">ธีรวัฒน์ แสงผา — Hilux D-CAB 2.8</div>
+      <div class="qr-placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <rect x="5" y="5" width="30" height="30" rx="3" fill="white"/>
+          <rect x="10" y="10" width="20" height="20" fill="#1d52cc"/>
+          <rect x="13" y="13" width="14" height="14" fill="white"/>
+          <rect x="16" y="16" width="8" height="8" fill="#1d52cc"/>
+          <rect x="45" y="5" width="30" height="30" rx="3" fill="white"/>
+          <rect x="50" y="10" width="20" height="20" fill="#1d52cc"/>
+          <rect x="53" y="13" width="14" height="14" fill="white"/>
+          <rect x="56" y="16" width="8" height="8" fill="#1d52cc"/>
+          <rect x="5" y="45" width="30" height="30" rx="3" fill="white"/>
+          <rect x="10" y="50" width="20" height="20" fill="#1d52cc"/>
+          <rect x="13" y="53" width="14" height="14" fill="white"/>
+          <rect x="16" y="56" width="8" height="8" fill="#1d52cc"/>
+          <rect x="45" y="45" width="8" height="8" fill="white"/>
+          <rect x="57" y="45" width="8" height="8" fill="white"/>
+          <rect x="45" y="57" width="8" height="8" fill="white"/>
+          <rect x="57" y="57" width="18" height="18" fill="white"/>
+          <rect x="60" y="60" width="12" height="12" fill="#1d52cc"/>
+        </svg>
+      </div>
+      <div style="font-size:12px;opacity:.85;margin-bottom:4px;">สแกนเพื่อยืนยันรับรถ</div>
+      <div style="font-size:10px;opacity:.7;">ลูกค้ายืนยันด้วย OTP SMS + เซ็นนิ้ว</div>
+    </div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-top:14px;text-align:left;font-size:11px;color:var(--text2);">
+      เมื่อลูกค้ายืนยันแล้ว ระบบจะ:<br>
+      📊 แจ้งบัญชีว่าเงินเข้าวันนี้<br>
+      💰 เพิ่ม Commission เข้าคิวจ่าย<br>
+      📦 ตัด Stock ของแถมอัตโนมัติ<br>
+      📱 ส่ง PDF ยืนยันให้ลูกค้าทาง LINE
+    </div>
+    <div class="btn-row" style="justify-content:center;margin-top:14px;">
+      <button class="btn btn-cancel" onclick="closeModal('modal-qr')">ปิด</button>
+      <button class="btn btn-green" onclick="closeModal('modal-qr');alert('📱 ส่ง QR ให้ลูกค้าทาง LINE แล้ว')">📱 ส่ง QR ทาง LINE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// CLOCK
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+
+// TABS
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  ['t-booking','t-mydeals','t-leaderboard','t-kpi'].forEach(t=>{
+    document.getElementById(t).style.display=t===id?'':'none';
+  });
+}
+
+// MODELS DATA
+const MODELS={
+  hilux24:  {name:'Hilux D-CAB 2.4 Entry',   price:737000,  floor:17000},
+  hilux28:  {name:'Hilux D-CAB 2.8 Premium',  price:815000,  floor:32000},
+  hilux28ov:{name:'Hilux D-CAB 2.8 Overland', price:924000,  floor:32000},
+  yariscross:{name:'Yaris Cross HEV Premium', price:849000,  floor:10000},
+  ativ:     {name:'Ativ 1.2 Smart',            price:549000,  floor:10000},
+  fortuner: {name:'Fortuner 2.4 Leader S',    price:1239000, floor:20000},
+  corollax: {name:'Corolla Cross HEV',         price:1094000, floor:27000},
+};
+
+// PACKAGES — ราคาเท่ากัน เปลี่ยนของข้างใน ของค้างนานมาก่อน
+const PACKAGES=[
+  {id:'A', value:15000, name:'Package A',
+   items:['ฟิล์มกรองแสง UV400','พรมปูพื้น 4 ชิ้น','น้ำมันเครื่อง Toyota Genuine 1 กล่อง'],
+   slow:true, slowText:'ค้าง 60+ วัน'},
+  {id:'B', value:15000, name:'Package B',
+   items:['กล้องหน้าหลัง Full HD','พรมปูพื้น 4 ชิ้น','น้ำยาล้างรถ 1 ปี (12 ขวด)'],
+   slow:true, slowText:'ค้าง 45 วัน'},
+  {id:'C', value:15000, name:'Package C',
+   items:['เช็กระยะฟรี 2 ครั้ง','ประกัน พรบ. 1 ปี','น้ำมันเครื่อง 1 กล่อง + ฟิลเตอร์'],
+   slow:false},
+];
+
+let selectedPkg = null;
+
+function updateFloor(){
+  const m = MODELS[document.getElementById('car-model').value];
+  document.getElementById('fl-amount').textContent = '฿'+m.floor.toLocaleString('th-TH');
+  document.getElementById('fl-sub').textContent = m.name+' | ถ้าต้องการลดมากกว่านี้ กด "ขออนุมัติผจก."';
+  document.getElementById('disc-amount').value='';
+  document.getElementById('fl-bar').style.width='0%';
+  document.getElementById('over-warn').className='over-warn hide';
+  document.getElementById('comm-preview').textContent='฿'+Math.round(m.price*0.005).toLocaleString('th-TH');
+}
+
+function checkDiscount(val){
+  const m = MODELS[document.getElementById('car-model').value];
+  const disc = parseFloat(val)||0;
+  const pct = Math.min(disc/m.floor*100,100);
+  const bar = document.getElementById('fl-bar');
+  bar.style.width = pct+'%';
+  bar.style.background = disc>m.floor?'var(--red)':disc>m.floor*.7?'var(--yel)':'var(--grn)';
+  const warn = document.getElementById('over-warn');
+  warn.className = disc>m.floor?'over-warn':'over-warn hide';
+}
+
+function renderPackages(){
+  document.getElementById('pkg-grid').innerHTML = PACKAGES.map((p,i)=>`
+    <div class="pkg-card ${selectedPkg===p.id?'selected':''}" onclick="selectPkg('${p.id}')">
+      ${p.slow?`<span class="pkg-slow">⭐ ${p.slowText}</span>`:''}
+      <div class="pkg-value">฿${p.value.toLocaleString('th-TH')}</div>
+      <div class="pkg-name">${p.name}</div>
+      <ul class="pkg-items">${p.items.map(it=>`<li>${it}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function selectPkg(id){
+  selectedPkg=id;
+  renderPackages();
+}
+
+// STEPS
+function goStep(n){
+  for(let i=1;i<=5;i++){
+    const panel=document.getElementById('step-panel-'+i);
+    if(panel) panel.style.display=i===n?'':'none';
+    const circle=document.getElementById('s'+i);
+    if(circle){
+      circle.className=i<n?'step-circle done':i===n?'step-circle active':'step-circle todo';
+      circle.textContent=i<n?'✓':i;
+    }
+    const line=document.getElementById('l'+i);
+    if(line) line.className=i<n?'step-line done':'step-line todo';
+  }
+  if(n===3) renderPackages();
+  if(n===5) fillSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function fillSummary(){
+  const m=MODELS[document.getElementById('car-model').value];
+  const disc=parseFloat(document.getElementById('disc-amount').value)||0;
+  const pkg=PACKAGES.find(p=>p.id===selectedPkg)||PACKAGES[0];
+  document.getElementById('sum-name').textContent=document.getElementById('cust-name').value||'ไม่ระบุ';
+  document.getElementById('sum-tel').textContent=document.getElementById('cust-tel').value||'—';
+  document.getElementById('sum-car').textContent=m.name;
+  document.getElementById('sum-color').textContent='สี: '+(document.getElementById('car-color').value||'—');
+  document.getElementById('sum-price').textContent='฿'+m.price.toLocaleString('th-TH');
+  document.getElementById('sum-disc').textContent='-฿'+disc.toLocaleString('th-TH');
+  document.getElementById('sum-pkg').textContent=pkg.name+' (฿'+pkg.value.toLocaleString('th-TH')+')';
+  document.getElementById('sum-comm').textContent='฿'+Math.round(m.price*0.005).toLocaleString('th-TH');
+}
+
+function submitBooking(){
+  const name=document.getElementById('cust-name').value||'ลูกค้า';
+  const m=MODELS[document.getElementById('car-model').value];
+  const disc=parseFloat(document.getElementById('disc-amount').value)||0;
+  const overFloor=disc>m.floor;
+  closeModal('modal-qr');
+  alert('✅ ส่งใบจองแล้ว!\n\n👤 ลูกค้า: '+name+'\n🚗 รุ่น: '+m.name+
+    (overFloor?'\n\n⚠️ ส่วนลดเกิน Floor → รอผจก.ขายอนุมัติก่อน':
+    '\n\n✅ อยู่ใน Floor → ผจก.ขายได้รับแจ้ง LINE แล้ว')+
+    '\n📱 ระบบแจ้งทุกแผนกอัตโนมัติ');
+}
+
+function toggleDeliveryAddr(){
+  const t=document.getElementById('delivery-type').value;
+  document.getElementById('delivery-addr-box').style.display=t==='far'?'':'none';
+}
+
+// MODAL
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+});
+
+// INIT
+updateFloor();
+</script>
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>การเงิน — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--bg:#f4f6fb;--bg2:#fff;--bg3:#f0f3fa;--bg4:#e8edf8;--border:#dde3f0;--border2:#eaecf5;--text:#18233d;--text2:#546080;--text3:#9aaac0;--red:#dc2244;--rd:rgba(220,34,68,.07);--yel:#c26a00;--yd:rgba(194,106,0,.08);--grn:#0a7c52;--gd:rgba(10,124,82,.07);--blu:#1d52cc;--bd:rgba(29,82,204,.07);--toy:#eb0a1e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}.bsub{font-size:11px;color:var(--text2);}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1300px;margin:0 auto;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:12px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);}
+.kpi.r{border-top-color:var(--red);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--red);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.pt{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:7px;}
+.pf{height:100%;border-radius:3px;}
+.pf.r{background:var(--red);}.pf.g{background:var(--grn);}.pf.b{background:var(--blu);}.pf.y{background:var(--yel);}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-group{margin-bottom:10px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.f-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.f-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.btn-primary{background:var(--blu);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-green{background:var(--grn);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-red{background:var(--toy);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-sm{padding:5px 12px;border-radius:6px;border:none;cursor:pointer;font-size:11px;font-weight:700;font-family:'Sarabun',sans-serif;}
+.btn-sm.g{background:var(--gd);color:var(--grn);border:1px solid rgba(10,124,82,.3);}
+.btn-sm.r{background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);}
+.btn-sm.b{background:var(--bd);color:var(--blu);border:1px solid rgba(29,82,204,.2);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:520px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+
+/* BANK CARD */
+.bank-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;border-left:4px solid;}
+.bank-card.bay{border-left-color:#f59e0b;}
+.bank-card.bbl{border-left-color:#1d52cc;}
+.bank-card.scb{border-left-color:#6b2fd4;}
+.bank-card.ttb{border-left-color:#0a7c52;}
+.bank-card.od{border-left-color:var(--red);}
+.bank-name{font-size:11px;font-weight:700;color:var(--text2);margin-bottom:4px;}
+.bank-balance{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:800;}
+.bank-sub{font-size:10px;color:var(--text3);margin-top:3px;}
+
+/* SIGNAL */
+.signal{border-radius:10px;padding:9px 12px;display:flex;gap:9px;margin-bottom:7px;border:1px solid;}
+.signal.r{background:var(--rd);border-color:rgba(220,34,68,.25);}
+.signal.y{background:var(--yd);border-color:rgba(194,106,0,.2);}
+.signal.g{background:var(--gd);border-color:rgba(10,124,82,.18);}
+.signal.b{background:var(--bd);border-color:rgba(29,82,204,.18);}
+.st{font-size:12px;font-weight:700;}
+.signal.r .st{color:var(--red);}.signal.y .st{color:var(--yel);}.signal.g .st{color:var(--grn);}.signal.b .st{color:var(--blu);}
+.sd{font-size:11px;color:var(--text2);margin-top:2px;}
+
+/* TRANSACTION ROW */
+.tx-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border2);}
+.tx-row:last-child{border-bottom:none;}
+.tx-type{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.tx-type.in{background:var(--gd);}
+.tx-type.out{background:var(--rd);}
+.tx-info{flex:1;}
+.tx-name{font-size:13px;font-weight:600;}
+.tx-detail{font-size:10px;color:var(--text3);margin-top:1px;}
+.tx-amount{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:800;}
+.tx-amount.in{color:var(--grn);}
+.tx-amount.out{color:var(--red);}
+.tx-time{font-size:10px;color:var(--text3);text-align:right;min-width:50px;}
+
+/* OD METER */
+.od-meter{background:linear-gradient(135deg,#fee2e2,#fecaca);border:1px solid rgba(220,34,68,.3);border-radius:12px;padding:16px;}
+.od-track{height:14px;background:rgba(255,255,255,.6);border-radius:7px;overflow:hidden;margin:10px 0;}
+.od-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--grn),var(--yel),var(--red));}
+
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">การเงิน</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button onclick="openModal('modal-receipt')" class="btn-sm b">+ ลงรายรับ</button>
+    <button onclick="openModal('modal-payment')" class="btn-sm r">+ ลงรายจ่าย</button>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-daily')">💰 รายวันวันนี้</button>
+  <button class="tab" onclick="sw(this,'t-bank')">🏦 Bank Recon</button>
+  <button class="tab" onclick="sw(this,'t-od')">⚠️ OD Monitor</button>
+  <button class="tab" onclick="sw(this,'t-commission')">💳 รับ Commission</button>
+  <button class="tab" onclick="sw(this,'t-petty')">🧾 เงินสดย่อย</button>
+  <button class="tab" onclick="sw(this,'t-cash')">💵 เงินสด + ปิดยอด</button>
+</div>
+
+<div class="main">
+
+<!-- ===== รายวัน ===== -->
+<div id="t-daily">
+  <div class="g4">
+    <div class="kpi g"><div class="kl">💰 รับเงินวันนี้</div><div class="kv g">฿2.35M</div><div class="ks">ส่งมอบรถ 3 คัน</div><div class="pt"><div class="pf g" style="width:70%"></div></div></div>
+    <div class="kpi r"><div class="kl">💸 จ่ายวันนี้</div><div class="kv r">฿1.80M</div><div class="ks">ค่ารถ TLT Aloan</div><div class="pt"><div class="pf r" style="width:80%"></div></div></div>
+    <div class="kpi b"><div class="kl">📊 ยอดสุทธิวันนี้</div><div class="kv b">+฿550K</div><div class="ks">รับ - จ่าย</div><div class="pt"><div class="pf b" style="width:55%"></div></div></div>
+    <div class="kpi y"><div class="kl">⏳ รอรับเพิ่ม</div><div class="kv y">฿824K</div><div class="ks">Commission TLT+IOI วันที่ 5</div></div>
+  </div>
+
+  <div class="g21">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch">
+        <div class="ct">📋 รายการวันนี้ — 3 เม.ย. 69</div>
+        <div style="display:flex;gap:6px;">
+          <button onclick="openModal('modal-receipt')" class="btn-sm g">+ รับ</button>
+          <button onclick="openModal('modal-payment')" class="btn-sm r">+ จ่าย</button>
+          <button onclick="exportDaily()" class="btn-sm b">📤 Export</button>
+        </div>
+      </div>
+
+      <!-- รายรับ -->
+      <div style="padding:8px 16px 4px;font-size:10px;color:var(--grn);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--gd);">รายรับ</div>
+      <div class="tx-row">
+        <div class="tx-type in">💰</div>
+        <div class="tx-info">
+          <div class="tx-name">รับเงินดาวน์ — ธีรวัฒน์ แสงผา (Hilux D-CAB 2.8)</div>
+          <div class="tx-detail">TLT Finance | เช็ค BBL | เลขที่ TCS-2026-04-001</div>
+        </div>
+        <div class="tx-amount in">+฿163,000</div>
+        <div class="tx-time">08:30</div>
+      </div>
+      <div class="tx-row">
+        <div class="tx-type in">💰</div>
+        <div class="tx-info">
+          <div class="tx-name">รับเงินค่ารถครบ — วิไลลักษณ์ สุวรรณ (Yaris Cross)</div>
+          <div class="tx-detail">เงินสด | เลขที่ TCS-2026-04-002</div>
+        </div>
+        <div class="tx-amount in">+฿849,000</div>
+        <div class="tx-time">10:15</div>
+      </div>
+      <div class="tx-row">
+        <div class="tx-type in">🏦</div>
+        <div class="tx-info">
+          <div class="tx-name">รับโอนจาก TLT — Finance ครบ ประสิทธิ์ มีโชค</div>
+          <div class="tx-detail">TLT โอนเข้า BAY | เลขอ้างอิง TLT-20260403-001</div>
+        </div>
+        <div class="tx-amount in">+฿1,340,000</div>
+        <div class="tx-time">11:00</div>
+      </div>
+
+      <!-- รายจ่าย -->
+      <div style="padding:8px 16px 4px;font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--rd);">รายจ่าย</div>
+      <div class="tx-row">
+        <div class="tx-type out">🚗</div>
+        <div class="tx-info">
+          <div class="tx-name">ค่ารถ TLT Aloan — Hilux D-CAB 2.8 Premium (VIN: GUN236R)</div>
+          <div class="tx-detail">หักจาก OD BAY | เลขที่ ALOAN-20260403-001</div>
+        </div>
+        <div class="tx-amount out">-฿815,000</div>
+        <div class="tx-time">09:00</div>
+      </div>
+      <div class="tx-row">
+        <div class="tx-type out">🚗</div>
+        <div class="tx-info">
+          <div class="tx-name">ค่ารถ TLT Aloan — Yaris Cross HEV Premium</div>
+          <div class="tx-detail">หักจาก OD BAY | เลขที่ ALOAN-20260403-002</div>
+        </div>
+        <div class="tx-amount out">-฿849,000</div>
+        <div class="tx-time">09:00</div>
+      </div>
+      <div class="tx-row">
+        <div class="tx-type out">🚛</div>
+        <div class="tx-info">
+          <div class="tx-name">ค่าส่งรถสไลด์ — ประสิทธิ์ มีโชค (ฉะเชิงเทรา 1,564 กม.)</div>
+          <div class="tx-detail">เงินสดจ่ายคนขับ | อนุมัติโดย ผบห. | SALES00041/2569</div>
+        </div>
+        <div class="tx-amount out">-฿13,450</div>
+        <div class="tx-time">06:00</div>
+      </div>
+
+      <!-- สรุปวัน -->
+      <div style="padding:12px 16px;background:var(--bg3);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:12px;color:var(--text2);">รับ ฿2,352,000 | จ่าย ฿1,677,450</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;color:var(--grn);">+฿674,550</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <!-- รอรับเงิน -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">⏳ รอรับเงิน</div><span class="badge y">3 รายการ</span></div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>วันที่</th><th>ยอด</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:11px;">Commission TLT</td><td style="font-size:11px;" class="m">5 เม.ย.</td><td class="n g">฿190K</td></tr>
+            <tr><td style="font-size:11px;">Commission IOI ประกัน</td><td style="font-size:11px;" class="m">5 เม.ย.</td><td class="n g">฿117K</td></tr>
+            <tr><td style="font-size:11px;">TMT Payment ก.พ.</td><td style="font-size:11px;" class="m">10 เม.ย.</td><td class="n g">฿517K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- รอจ่าย -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📅 รอจ่าย</div><span class="badge r">สำคัญ</span></div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>วันที่</th><th>ยอด</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--rd)"><td style="font-size:11px;" class="r">TLT Assignment เม.ย.</td><td style="font-size:11px;" class="r">8 เม.ย.</td><td class="n r">฿16.4M</td></tr>
+            <tr><td style="font-size:11px;">เงินเดือน พนักงาน</td><td style="font-size:11px;" class="m">15 เม.ย.</td><td class="n r">฿650K</td></tr>
+            <tr><td style="font-size:11px;">Commission SA เม.ย.</td><td style="font-size:11px;" class="m">สิ้นเดือน</td><td class="n r">฿6,894</td></tr>
+            <tr><td style="font-size:11px;">ดอกเบี้ย OD BAY</td><td style="font-size:11px;" class="m">สิ้นเดือน</td><td class="n r">฿222K</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- /daily -->
+
+<!-- ===== BANK RECON ===== -->
+<div id="t-bank" style="display:none;">
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;">
+    <div class="bank-card od">
+      <div class="bank-name">🔴 OD BAY — วงเงินหลัก</div>
+      <div class="bank-balance r">฿81.3M</div>
+      <div class="bank-sub">วงเงิน ฿84M | Headroom ฿2.7M</div>
+      <div class="bank-sub" style="color:var(--red);margin-top:4px;">MOR 6.5% = ฿222K/เดือน</div>
+    </div>
+    <div class="bank-card bay">
+      <div class="bank-name">🟡 BAY — บัญชีหลัก</div>
+      <div class="bank-balance y">฿1,245,320</div>
+      <div class="bank-sub">อัพเดต 08:00 น.</div>
+    </div>
+    <div class="bank-card bbl">
+      <div class="bank-name">🔵 BBL — รับเช็ค</div>
+      <div class="bank-balance b">฿892,450</div>
+      <div class="bank-sub">อัพเดต 08:00 น.</div>
+    </div>
+    <div class="bank-card scb">
+      <div class="bank-name">🟣 SCB — สำรอง</div>
+      <div class="bank-balance" style="color:var(--pur);">฿234,800</div>
+      <div class="bank-sub">อัพเดต 08:00 น.</div>
+    </div>
+    <div class="bank-card ttb">
+      <div class="bank-name">🟢 TTB — เงินสดย่อย</div>
+      <div class="bank-balance g">฿125,000</div>
+      <div class="bank-sub">อัพเดต 08:00 น.</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch">
+        <div class="ct">🏦 Bank Reconciliation — 3 เม.ย. 69</div>
+        <button onclick="openModal('modal-recon')" style="background:var(--blu);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">📤 อัพ Statement</button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>บัญชี</th><th>ยอดระบบ</th><th>ยอด Statement</th><th>ส่วนต่าง</th><th>สถานะ</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BAY</strong></td><td class="n">฿1,245,320</td><td class="n">฿1,245,320</td><td class="n g">฿0</td><td><span class="badge g">✅ ตรง</span></td></tr>
+          <tr><td><strong>BBL</strong></td><td class="n">฿892,450</td><td class="n">฿892,450</td><td class="n g">฿0</td><td><span class="badge g">✅ ตรง</span></td></tr>
+          <tr><td><strong>SCB</strong></td><td class="n">฿234,800</td><td class="n y">฿234,300</td><td class="n y">฿500</td><td><span class="badge y">⚠️ ตรวจสอบ</span></td></tr>
+          <tr><td><strong>TTB</strong></td><td class="n">฿125,000</td><td class="n">฿125,000</td><td class="n g">฿0</td><td><span class="badge g">✅ ตรง</span></td></tr>
+          <tr style="background:var(--rd)"><td><strong>OD BAY</strong></td><td class="n r">฿81,300,000</td><td class="n r">฿81,300,000</td><td class="n g">฿0</td><td><span class="badge g">✅ ตรง</span></td></tr>
+        </tbody>
+      </table>
+      <div style="padding:8px 14px;font-size:11px;color:var(--yel);background:var(--yd);">
+        ⚠️ SCB ต่าง ฿500 — ตรวจสอบรายการโอนค้างในวันที่ 2 เม.ย.
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📊 เช็ครับค้าง</div><span class="badge b">3 ฉบับ</span></div>
+        <table class="tbl">
+          <thead><tr><th>จาก</th><th>วันที่</th><th>มูลค่า</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:11px;">ธีรวัฒน์ แสงผา</td><td style="font-size:11px;" class="m">5 เม.ย.</td><td class="n b">฿163,000</td></tr>
+            <tr><td style="font-size:11px;">สมชาย กิจเจริญ</td><td style="font-size:11px;" class="m">7 เม.ย.</td><td class="n b">฿148,000</td></tr>
+            <tr><td style="font-size:11px;">วิภาวดี รักดี</td><td style="font-size:11px;" class="m">10 เม.ย.</td><td class="n b">฿328,600</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📋 ตั๋ว P/N</div></div>
+        <div style="padding:12px 16px;">
+          <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-bottom:8px;">
+            <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">วงเงิน P/N</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:800;color:var(--blu);">฿15,000,000</div>
+            <div style="height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;margin:6px 0;"><div style="width:63%;height:100%;background:var(--yel);border-radius:3px;"></div></div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);"><span>ใช้ไป ฿9.5M</span><span style="color:var(--grn);">เหลือ ฿5.5M</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /bank -->
+
+<!-- ===== OD MONITOR ===== -->
+<div id="t-od" style="display:none;">
+  <div class="od-meter" style="margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div>
+        <div style="font-size:14px;font-weight:800;color:var(--red);">⚠️ OD BAY — วงเงิน Floorplan</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:2px;">MOR (BBL) 6.50% มีผลตั้งแต่ 26 ก.พ. 2569</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:800;color:var(--red);">฿81.3M</div>
+        <div style="font-size:11px;color:var(--red);">Headroom เหลือ ฿2.7M</div>
+      </div>
+    </div>
+    <div class="od-track"><div class="od-fill" style="width:97%;"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-top:4px;">
+      <span>฿0</span><span style="color:var(--grn);">Safe ≤70%</span><span style="color:var(--yel);">Warning 85%</span><span style="color:var(--red);">วงเงิน ฿84M (97%)</span>
+    </div>
+    <div style="margin-top:12px;background:rgba(255,255,255,.5);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);font-weight:700;">
+      🚨 ดอกเบี้ย OD = ฿222,000/เดือน (MOR 6.5%) | ทุก ฿1M ที่ลดได้ = ประหยัด ฿5,417/เดือน
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">🚗 รถใน Aloan — รอส่งมอบ</div><span class="badge r">กระทบ OD</span></div>
+      <table class="tbl">
+        <thead><tr><th>รุ่น</th><th>ราคาทุน</th><th>วันที่เข้า</th><th>นาน</th><th>สถานะ</th></tr></thead>
+        <tbody>
+          <tr><td>Hilux D-CAB 2.8 Prem</td><td class="n">฿815K</td><td class="m">1/4</td><td class="m">3 วัน</td><td><span class="badge y">รอส่งมอบ</span></td></tr>
+          <tr><td>Fortuner 2.4 Leg.</td><td class="n">฿1,643K</td><td class="m">28/3</td><td class="m">6 วัน</td><td><span class="badge y">รออนุมัติ</span></td></tr>
+          <tr><td>Yaris Cross HEV</td><td class="n">฿849K</td><td class="m">25/3</td><td class="m">9 วัน</td><td><span class="badge g">ส่งมอบวันนี้</span></td></tr>
+          <tr><td>Ativ 1.2 Smart ×5</td><td class="n">฿3.27M</td><td class="m">20/3</td><td class="m">14 วัน</td><td><span class="badge r">ยังไม่มีลูกค้า</span></td></tr>
+          <tr><td>Hilux D-CAB 2.4 ×8</td><td class="n">฿5.9M</td><td class="m">15/3</td><td class="m">19 วัน</td><td><span class="badge r">4 คันยังไม่มีลูกค้า</span></td></tr>
+          <tr style="background:var(--rd)"><td style="font-weight:700;color:var(--red);" colspan="2">รวม OD ทั้งหมด</td><td colspan="3"><div class="n r" style="font-weight:800;font-family:'IBM Plex Mono',monospace;font-size:16px;">฿81.3M</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📅 Forecast OD 14 วัน</div></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;padding:7px 10px;background:var(--gd);border-radius:7px;">
+            <span style="font-size:11px;" class="g">วันนี้ (ส่งมอบ 3 คัน)</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;" class="g">-฿2.35M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:7px 10px;background:var(--rd);border-radius:7px;">
+            <span style="font-size:11px;" class="r">8 เม.ย. (TLT Assignment)</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;" class="r">+฿16.4M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:7px;">
+            <span style="font-size:11px;" class="m">8 เม.ย. worst case OD</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;" class="r">฿95.7M ⚠️</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:7px 10px;background:var(--gd);border-radius:7px;">
+            <span style="font-size:11px;" class="g">ถ้าส่งมอบได้ 8 คันก่อน</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;" class="g">฿79.4M ✅</span>
+          </div>
+        </div>
+        <div style="padding:8px 14px;font-size:11px;color:var(--red);background:var(--rd);">
+          ต้องส่งมอบรถอย่างน้อย 8 คันก่อนวันที่ 8 เม.ย.
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">💸 ดอกเบี้ย OD รายเดือน</div></div>
+        <div style="padding:12px 14px;font-size:12px;color:var(--text2);line-height:2;">
+          อัตราอ้างอิง: <strong>MOR (BBL) 6.50%</strong><br>
+          มีผลตั้งแต่: 26 กุมภาพันธ์ 2569<br>
+          ดอกเบี้ยต่อเดือน: <strong style="color:var(--red);">฿222,000</strong><br>
+          ต่อวัน: <strong style="color:var(--red);">~฿7,400</strong><br>
+          ทุก ฿10M ที่ลด OD ได้ = ประหยัด <strong style="color:var(--grn);">฿54,167/เดือน</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /od -->
+
+<!-- ===== COMMISSION รับ ===== -->
+<div id="t-commission" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">💳 Commission รับจาก TMT/TLT/IOI</div>
+        <button onclick="openModal('modal-comm-upload')" style="background:var(--blu);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">📤 อัพ Statement</button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>ประเภท</th><th>แหล่ง</th><th>รอบ</th><th>ยอด</th><th>สถานะ</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="font-weight:700;">Commission TLT</div><div style="font-size:10px;" class="m">P36 — ค่าตอบแทนไฟแนนซ์</div></td>
+            <td class="m">TLT</td><td class="m">ก.พ.69</td>
+            <td class="n g" style="font-weight:700;">฿190,000</td>
+            <td><span class="badge y">รอรับ 5 เม.ย.</span></td>
+            <td><button class="btn-sm b" onclick="markReceived(this)">รับแล้ว</button></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:700;">Commission ประกัน IOI</div><div style="font-size:10px;" class="m">P37 — ค่าตอบแทนประกัน</div></td>
+            <td class="m">IOI</td><td class="m">ก.พ.69</td>
+            <td class="n g" style="font-weight:700;">฿117,000</td>
+            <td><span class="badge y">รอรับ 5 เม.ย.</span></td>
+            <td><button class="btn-sm b" onclick="markReceived(this)">รับแล้ว</button></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:700;">TMT Payment ก.พ.</div><div style="font-size:10px;" class="m">ค่าตอบแทนยอดขาย</div></td>
+            <td class="m">TMT</td><td class="m">ก.พ.69</td>
+            <td class="n g" style="font-weight:700;">฿517,000</td>
+            <td><span class="badge y">รอรับ 10 เม.ย.</span></td>
+            <td><button class="btn-sm b" onclick="markReceived(this)">รับแล้ว</button></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:700;">ALIVE-X Motivation เฟส 11</div><div style="font-size:10px;" class="m">รางวัล ม.ค.-มี.ค. 69</div></td>
+            <td class="m">TMT</td><td class="m">Q1/69</td>
+            <td class="n g" style="font-weight:700;">฿4,000</td>
+            <td><span class="badge g">รับแล้ว</span></td>
+            <td><span style="font-size:10px;" class="m">15/3/69</span></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:700;">Commission TLT</div><div style="font-size:10px;" class="m">P36 — มี.ค.69</div></td>
+            <td class="m">TLT</td><td class="m">มี.ค.69</td>
+            <td class="n g" style="font-weight:700;">฿210,000</td>
+            <td><span class="badge g">รับแล้ว</span></td>
+            <td><span style="font-size:10px;" class="m">1/4/69</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="padding:10px 16px;background:var(--gd);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;font-weight:700;" class="g">รอรับรวม</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;" class="g">฿824,000</span>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <!-- Commission จ่าย SA -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">💰 Commission จ่าย SA บริการ</div>
+          <button onclick="openModal('modal-comm-pay')" style="background:var(--toy);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">จ่าย</button>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>SA</th><th>ยอด</th><th>สถานะ</th></tr></thead>
+          <tbody>
+            <tr><td>สุขธนัช</td><td class="n">฿2,994</td><td><span class="badge y">รอจ่ายสิ้นเดือน</span></td></tr>
+            <tr><td>นิราวรรณ</td><td class="n">฿1,969</td><td><span class="badge y">รอจ่ายสิ้นเดือน</span></td></tr>
+            <tr><td>อริศรา</td><td class="n">฿1,931</td><td><span class="badge y">รอจ่ายสิ้นเดือน</span></td></tr>
+            <tr style="background:var(--bg3)"><td style="font-weight:700;">รวม</td><td class="n" style="font-weight:700;">฿6,894</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Commission จ่ายเซล์ -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">💰 Commission จ่ายเซล์ขาย</div>
+          <button onclick="openModal('modal-comm-pay')" style="background:var(--toy);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">จ่าย</button>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>เซล์</th><th>คัน</th><th>Commission</th><th>สถานะ</th></tr></thead>
+          <tbody>
+            <tr><td>ภูมรี ศรีรอด</td><td class="n">6</td><td class="n">฿14,500</td><td><span class="badge y">รอสิ้นเดือน</span></td></tr>
+            <tr><td>ภัทราภรณ์</td><td class="n">5</td><td class="n">฿11,500</td><td><span class="badge y">รอสิ้นเดือน</span></td></tr>
+            <tr><td>อรุณรักษ์</td><td class="n">4</td><td class="n">฿8,500</td><td><span class="badge y">รอสิ้นเดือน</span></td></tr>
+            <tr style="background:var(--bg3)"><td style="font-weight:700;">รวม</td><td class="n">24</td><td class="n" style="font-weight:700;">฿58,500</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- /commission -->
+
+<!-- ===== เงินสดย่อย ===== -->
+<div id="t-petty" style="display:none;">
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch">
+        <div class="ct">🧾 เงินสดย่อย / เบิกทดรองจ่าย</div>
+        <button onclick="openModal('modal-petty')" class="btn-sm g">+ เบิก</button>
+      </div>
+      <div style="padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border);">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:12px;font-weight:700;">ยอดเงินสดย่อยคงเหลือ</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:800;color:var(--grn);">฿18,450</span>
+        </div>
+        <div style="height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-top:8px;"><div style="width:37%;height:100%;background:var(--grn);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:3px;"><span>฿0</span><span>วงเงิน ฿50,000</span></div>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>วันที่</th><th>รายการ</th><th>ผู้เบิก</th><th>ยอด</th><th>สถานะ</th></tr></thead>
+        <tbody>
+          <tr><td class="m">3/4</td><td>ค่าน้ำมันรถส่งรถ</td><td class="m">ชัยวัฒน์</td><td class="n r">-฿2,500</td><td><span class="badge g">มีใบเสร็จ</span></td></tr>
+          <tr><td class="m">3/4</td><td>ค่าอาหารประชุม</td><td class="m">ธุรการ</td><td class="n r">-฿850</td><td><span class="badge g">มีใบเสร็จ</span></td></tr>
+          <tr><td class="m">2/4</td><td>ค่าพัสดุสำนักงาน</td><td class="m">บัญชี</td><td class="n r">-฿1,200</td><td><span class="badge g">มีใบเสร็จ</span></td></tr>
+          <tr><td class="m">1/4</td><td>เติมเงินสดย่อย</td><td class="m">การเงิน</td><td class="n g">+฿20,000</td><td><span class="badge g">✅</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📋 รอเคลียค่าใช้จ่าย</div><span class="badge y">3 รายการ</span></div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>ผู้เบิก</th><th>วันที่</th><th>ยอด</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-size:11px;">ค่าส่งรถสไลด์ ฉะเชิงเทรา</td>
+              <td class="m" style="font-size:11px;">ชัยวัฒน์</td>
+              <td class="m" style="font-size:11px;">3/4</td>
+              <td class="n r">฿13,450</td>
+            </tr>
+            <tr>
+              <td style="font-size:11px;">ค่าจดทะเบียนรถ (เบิกไว้)</td>
+              <td class="m" style="font-size:11px;">ทะเบียน</td>
+              <td class="m" style="font-size:11px;">1/4</td>
+              <td class="n y">฿7,800 ยังไม่เคลีย</td>
+            </tr>
+            <tr>
+              <td style="font-size:11px;">ค่าทดรองซ่อมฉุกเฉิน</td>
+              <td class="m" style="font-size:11px;">ช่าง</td>
+              <td class="m" style="font-size:11px;">31/3</td>
+              <td class="n r">฿2,300</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding:8px 14px;font-size:11px;color:var(--yel);background:var(--yd);">
+          ⚠️ ค่าจดทะเบียน ฿7,800 เกิน 3 วันยังไม่เคลีย — แจ้ง ผบห. แล้ว
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📅 ปฏิทินการเงินเดือนนี้</div></div>
+        <div style="padding:10px 14px;font-size:11px;display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);"><span style="color:var(--grn);font-weight:700;">5 เม.ย.</span><span>รับ Commission TLT+IOI ฿307K</span></div>
+          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);"><span style="color:var(--red);font-weight:700;">8 เม.ย.</span><span class="r">TLT ตัด Assignment ฿16.4M ⚠️</span></div>
+          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);"><span style="color:var(--yel);font-weight:700;">10 เม.ย.</span><span>รับ TMT Payment ฿517K</span></div>
+          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);"><span style="color:var(--red);font-weight:700;">15 เม.ย.</span><span class="r">จ่ายเงินเดือน ฿650K</span></div>
+          <div style="display:flex;gap:8px;padding:5px 0;"><span style="color:var(--red);font-weight:700;">สิ้นเดือน</span><span class="r">จ่าย Commission + ดอกเบี้ย OD</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /petty -->
+
+
+<!-- ===== เงินสด + ปิดยอดแคชเชียร์ ===== -->
+<div id="t-cash" style="display:none;">
+
+  <!-- แจ้งเตือน -->
+  <div style="background:var(--bd);border:1px solid rgba(29,82,204,.2);border-radius:10px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="font-size:12px;font-weight:700;" class="b">💵 ยอดเงินสดวันนี้ — 3 เม.ย. 69</div>
+    <button onclick="openModal('modal-close-day')" style="background:var(--toy);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">🔒 ปิดยอดสิ้นวัน</button>
+  </div>
+
+  <div class="g21">
+    <div>
+      <!-- บันทึกรับเงินสด -->
+      <div class="card">
+        <div class="ch">
+          <div class="ct">💵 บันทึกรับเงินสด</div>
+          <button onclick="addCashTx()" style="background:var(--grn);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">+ เพิ่มรายการ</button>
+        </div>
+        <div style="padding:12px 14px;" id="cash-form-area">
+          <!-- form รายการ -->
+          <div id="cash-entries">
+            <div class="cash-entry" style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;">
+              <input class="f-input" placeholder="รายการ เช่น รับเงินดาวน์ ธีรวัฒน์" oninput="calcCash()">
+              <select class="f-select" onchange="calcCash()">
+                <option value="in">รับเข้า (+)</option>
+                <option value="out">จ่ายออก (-)</option>
+              </select>
+              <input class="f-input" type="number" placeholder="฿" oninput="calcCash()" style="text-align:right;font-family:'IBM Plex Mono',monospace;">
+              <button onclick="this.closest('.cash-entry').remove();calcCash()" style="background:var(--rd);color:var(--red);border:none;border-radius:6px;padding:6px 8px;cursor:pointer;font-size:14px;">×</button>
+            </div>
+            <div class="cash-entry" style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;">
+              <input class="f-input" placeholder="รายการ เช่น รับค่าซ่อม GS" oninput="calcCash()">
+              <select class="f-select" onchange="calcCash()">
+                <option value="in">รับเข้า (+)</option>
+                <option value="out">จ่ายออก (-)</option>
+              </select>
+              <input class="f-input" type="number" placeholder="฿" oninput="calcCash()" style="text-align:right;font-family:'IBM Plex Mono',monospace;">
+              <button onclick="this.closest('.cash-entry').remove();calcCash()" style="background:var(--rd);color:var(--red);border:none;border-radius:6px;padding:6px 8px;cursor:pointer;font-size:14px;">×</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- รายการเงินสดวันนี้ -->
+      <div class="card">
+        <div class="ch"><div class="ct">📋 รายการเงินสดวันนี้</div><span class="badge b">3 รายการ</span></div>
+        <div class="tx-row">
+          <div class="tx-icon in">💵</div>
+          <div class="tx-info"><div class="tx-title">รับเงินดาวน์ — ธีรวัฒน์ แสงผา</div><div class="tx-sub">08:42 น. · เงินสด · ใบเสร็จ RC-69-0041</div></div>
+          <div class="tx-amount in">+฿250,000</div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-icon in">💵</div>
+          <div class="tx-info"><div class="tx-title">รับค่าซ่อม GS — นาง ร. บุสุวะ</div><div class="tx-sub">10:15 น. · เงินสด · ใบเสร็จ RC-69-0042</div></div>
+          <div class="tx-amount in">+฿3,850</div>
+        </div>
+        <div class="tx-row">
+          <div class="tx-icon out">💵</div>
+          <div class="tx-info"><div class="tx-title">จ่ายค่าจดทะเบียน — ประสิทธิ์ มีโชค</div><div class="tx-sub">13:30 น. · เงินสด · ใบเสร็จขนส่ง</div></div>
+          <div class="tx-amount out">-฿13,450</div>
+        </div>
+        <!-- สรุปบรรทัด -->
+        <div style="padding:10px 14px;background:var(--bg3);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;gap:8px;">
+          <div><div style="font-size:9px;" class="m">รับเงินสด</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:800;" class="g">+฿253,850</div></div>
+          <div><div style="font-size:9px;" class="m">จ่ายเงินสด</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:800;" class="r">-฿13,450</div></div>
+          <div><div style="font-size:9px;" class="m">ยอดสุทธิ</div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:800;" class="b">฿240,400</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ปิดยอดแคชเชียร์ -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <!-- นับเงิน -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">🧮 นับเงินสดจริง</div><span class="badge y">กรอกก่อนปิดยอด</span></div>
+        <div style="padding:12px 14px;">
+          <div style="font-size:10px;color:var(--text2);font-weight:700;margin-bottom:8px;text-transform:uppercase;">ธนบัตร + เหรียญ</div>
+          <div id="cash-denominations">
+            <!-- rendered by JS -->
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-top:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+              <span class="m">เงินสดนับได้</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" id="counted-total" class="b">฿0</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+              <span class="m">ยอดในระบบ</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;" class="b">฿240,400</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;border-top:1px solid var(--border);padding-top:6px;margin-top:4px;">
+              <span>ผลต่าง</span>
+              <span style="font-family:'IBM Plex Mono',monospace;" id="cash-diff" class="g">฿0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ยอดนำฝาก -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">🏦 นำฝากธนาคาร</div></div>
+        <div style="padding:12px 14px;">
+          <div class="f-group">
+            <label class="f-label">ฝากเข้าบัญชี</label>
+            <select class="f-select">
+              <option>BAY (ชำระ OD)</option><option>BBL</option><option>SCB</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label class="f-label">ยอดนำฝาก (฿)</label>
+            <input class="f-input" type="number" id="deposit-amount" placeholder="0" style="font-size:16px;font-weight:700;text-align:right;font-family:'IBM Plex Mono',monospace;">
+          </div>
+          <div class="f-group">
+            <label class="f-label">เงินสดเก็บไว้</label>
+            <input class="f-input" type="number" placeholder="0" style="font-size:14px;font-weight:700;text-align:right;font-family:'IBM Plex Mono',monospace;">
+          </div>
+          <button onclick="openModal('modal-close-day')" class="btn-red" style="width:100%;">🔒 ปิดยอด + ส่ง ผจก.บัญชี</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /cash -->
+
+</div><!-- /main -->
+
+<!-- MODAL: ลงรายรับ -->
+<div class="modal-overlay" id="modal-receipt">
+  <div class="modal">
+    <div class="modal-title">💰 ลงรายรับ</div>
+    <div class="modal-sub">บันทึกเงินเข้า — ระบบอัพเดต Bank Balance อัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">ประเภทรายรับ</label>
+      <select class="f-select">
+        <option>รับเงินดาวน์ลูกค้า</option>
+        <option>รับโอน Finance จาก TLT</option>
+        <option>รับ Commission TLT/IOI/TMT</option>
+        <option>รับชำระค่าซ่อม GS</option>
+        <option>อื่นๆ</option>
+      </select>
+    </div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">จำนวนเงิน (฿)</label><input class="f-input" type="number" placeholder="0"></div>
+      <div class="f-group"><label class="f-label">บัญชีที่รับ</label><select class="f-select"><option>BAY</option><option>BBL</option><option>SCB</option><option>TTB</option><option>เงินสด</option></select></div>
+    </div>
+    <div class="f-group"><label class="f-label">อ้างอิง / หมายเหตุ</label><input class="f-input" placeholder="เช่น เลขที่ใบจอง, ชื่อลูกค้า"></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-receipt')">ยกเลิก</button>
+      <button class="btn-green" onclick="closeModal('modal-receipt');alert('✅ บันทึกรายรับแล้ว\n📊 อัพเดต Balance + รายงานประจำวัน\n📱 แจ้ง LINE ผจก.บัญชีอัตโนมัติ')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ลงรายจ่าย -->
+<div class="modal-overlay" id="modal-payment">
+  <div class="modal">
+    <div class="modal-title">💸 ลงรายจ่าย</div>
+    <div class="modal-sub">บันทึกเงินออก — ระบบอัพเดต Balance อัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">ประเภทรายจ่าย</label>
+      <select class="f-select">
+        <option>ค่ารถ TLT Aloan</option>
+        <option>ค่าส่งรถสไลด์</option>
+        <option>ค่าจดทะเบียนรถ</option>
+        <option>Commission SA บริการ</option>
+        <option>Commission เซล์ขาย</option>
+        <option>เงินเดือนพนักงาน</option>
+        <option>ดอกเบี้ย OD</option>
+        <option>ค่าอะไหล่/สต็อก</option>
+        <option>เงินสดย่อย</option>
+        <option>อื่นๆ</option>
+      </select>
+    </div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">จำนวนเงิน (฿)</label><input class="f-input" type="number" placeholder="0"></div>
+      <div class="f-group"><label class="f-label">บัญชีที่จ่าย</label><select class="f-select"><option>OD BAY</option><option>BAY</option><option>BBL</option><option>SCB</option><option>TTB</option><option>เงินสด</option></select></div>
+    </div>
+    <div class="f-group"><label class="f-label">อ้างอิง / หมายเหตุ</label><input class="f-input" placeholder="เช่น เลขที่ใบแจ้งหนี้, เลข VIN"></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-payment')">ยกเลิก</button>
+      <button class="btn-red" onclick="closeModal('modal-payment');alert('✅ บันทึกรายจ่ายแล้ว\n📊 อัพเดต OD Balance อัตโนมัติ\n📱 แจ้ง LINE ผจก.บัญชี')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Recon Upload -->
+<div class="modal-overlay" id="modal-recon">
+  <div class="modal">
+    <div class="modal-title">📤 อัพโหลด Bank Statement</div>
+    <div class="modal-sub">ระบบเปรียบเทียบกับยอดในระบบอัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">บัญชี</label><select class="f-select"><option>BAY</option><option>BBL</option><option>SCB</option><option>TTB</option></select></div>
+    <div class="f-group"><label class="f-label">วันที่</label><input class="f-input" type="date"></div>
+    <div style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;" onclick="document.getElementById('stmt-file').click()">
+      <div style="font-size:24px;">📄</div>
+      <div style="font-size:13px;font-weight:600;margin-top:6px;">คลิกเพื่อเลือกไฟล์ Statement</div>
+      <div style="font-size:11px;color:var(--text2);">.pdf · .xlsx · .csv</div>
+      <input type="file" id="stmt-file" style="display:none">
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-recon')">ยกเลิก</button>
+      <button class="btn-primary" onclick="closeModal('modal-recon');alert('✅ อัพโหลดแล้ว\nระบบกำลัง Reconcile อัตโนมัติ\nถ้ามีส่วนต่าง → แจ้ง LINE ผจก.บัญชี')">✅ อัพโหลด + Recon</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Commission Upload -->
+<div class="modal-overlay" id="modal-comm-upload">
+  <div class="modal">
+    <div class="modal-title">📤 อัพโหลด Commission Statement</div>
+    <div class="modal-sub">TLT / IOI / TMT — ระบบบันทึกและแจ้งผจก.บัญชีอัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">แหล่ง Commission</label><select class="f-select"><option>TLT (Toyota Leasing)</option><option>IOI (ประกันภัย)</option><option>TMT Payment</option><option>ALIVE-X รางวัล</option></select></div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">รอบ</label><input class="f-input" type="month" value="2026-02"></div>
+      <div class="f-group"><label class="f-label">ยอดที่ได้รับ (฿)</label><input class="f-input" type="number" placeholder="0"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-comm-upload')">ยกเลิก</button>
+      <button class="btn-green" onclick="closeModal('modal-comm-upload');alert('✅ บันทึก Commission แล้ว\n📊 อัพเดต P&L อัตโนมัติ\n📱 แจ้ง LINE ผจก.บัญชี')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Commission Pay -->
+<div class="modal-overlay" id="modal-comm-pay">
+  <div class="modal">
+    <div class="modal-title">💰 จ่าย Commission</div>
+    <div class="modal-sub">จ่ายสิ้นเดือน — ระบบออกสลิปและแจ้ง LINE พนักงานอัตโนมัติ</div>
+    <div class="f-group"><label class="f-label">ประเภท</label><select class="f-select"><option>Commission SA บริการ (รายบุคคล)</option><option>Commission เซล์ขาย (รายบุคคล)</option></select></div>
+    <div class="f-group"><label class="f-label">เดือน</label><input class="f-input" type="month" value="2026-02"></div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:11px;color:var(--text2);">
+      ระบบจะดึงข้อมูล Commission จากที่ผจก.บัญชีสรุปไว้ → ออกสลิปรายคน → แจ้ง LINE พนักงานแต่ละคน
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-comm-pay')">ยกเลิก</button>
+      <button class="btn-red" onclick="closeModal('modal-comm-pay');alert('✅ ประมวลผล Commission แล้ว\n📱 แจ้ง LINE พนักงานทุกคนพร้อมยอดของตัวเอง\n💰 โอนเงินเข้าบัญชีพนักงาน')">💰 จ่าย Commission</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: เบิกเงินสดย่อย -->
+<div class="modal-overlay" id="modal-petty">
+  <div class="modal">
+    <div class="modal-title">🧾 เบิกเงินสดย่อย</div>
+    <div class="modal-sub">ต้องมีใบเสร็จ/ใบอนุมัติก่อนทุกครั้ง</div>
+    <div class="f-group"><label class="f-label">รายการ</label><input class="f-input" placeholder="เช่น ค่าน้ำมัน, ค่าพัสดุ"></div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">จำนวนเงิน (฿)</label><input class="f-input" type="number" placeholder="0"></div>
+      <div class="f-group"><label class="f-label">ผู้เบิก</label><input class="f-input" placeholder="ชื่อพนักงาน"></div>
+    </div>
+    <div class="f-group"><label class="f-label">ถ่ายรูปใบเสร็จ/อนุมัติ</label>
+      <div style="border:2px dashed var(--border);border-radius:8px;padding:12px;text-align:center;cursor:pointer;" onclick="document.getElementById('petty-file').click()">
+        <div style="font-size:20px;">📸</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px;">แนบใบเสร็จ</div>
+        <input type="file" id="petty-file" style="display:none" accept="image/*" capture="environment">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-petty')">ยกเลิก</button>
+      <button class="btn-green" onclick="closeModal('modal-petty');alert('✅ บันทึกเบิกเงินสดย่อยแล้ว\n📊 หักยอดคงเหลืออัตโนมัติ')">✅ บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<script>
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['t-daily','t-bank','t-od','t-commission','t-petty'].forEach(t=>{document.getElementById(t).style.display=t===id?'':'none';});
+}
+function markReceived(btn){
+  const row=btn.closest('tr');
+  row.querySelector('.badge').className='badge g';
+  row.querySelector('.badge').textContent='✅ รับแล้ว';
+  btn.style.display='none';
+  alert('✅ บันทึกรับ Commission แล้ว\n📊 อัพเดต P&L อัตโนมัติ\n📱 แจ้ง LINE ผจก.บัญชี');
+}
+function exportDaily(){alert('📤 Export รายงานประจำวัน 3 เม.ย. 69\n📊 ส่ง PDF ให้ผจก.บัญชีแล้ว');}
+
+// ===== CASH TAB =====
+const DENOMS = [1000,500,100,50,20,10,5,1];
+function renderDenominations(){
+  const el = document.getElementById('cash-denominations');
+  if(!el||el.children.length>0) return;
+  el.innerHTML = DENOMS.map(d=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;width:45px;text-align:right;">${d>=1000?d/1000+'K':d}</span>
+      <span style="font-size:11px;color:var(--text2);width:30px;">บาท ×</span>
+      <input type="number" min="0" value="0" class="f-input denom-input" data-val="${d}" oninput="calcCounted()" style="width:70px;text-align:center;padding:5px 8px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);width:80px;text-align:right;" id="denom-sub-${d}">= ฿0</span>
+    </div>`).join('');
+}
+
+function calcCounted(){
+  let total=0;
+  document.querySelectorAll('.denom-input').forEach(inp=>{
+    const qty=parseInt(inp.value)||0;
+    const val=parseInt(inp.getAttribute('data-val'));
+    const sub=qty*val;
+    total+=sub;
+    const subEl=document.getElementById('denom-sub-'+val);
+    if(subEl) subEl.textContent='= ฿'+sub.toLocaleString('th-TH');
+  });
+  const systemTotal=240400;
+  const diff=total-systemTotal;
+  const ctEl=document.getElementById('counted-total');
+  const diffEl=document.getElementById('cash-diff');
+  if(ctEl) ctEl.textContent='฿'+total.toLocaleString('th-TH');
+  if(diffEl){
+    diffEl.textContent=(diff>=0?'+':'')+'฿'+diff.toLocaleString('th-TH');
+    diffEl.className=diff===0?'g':diff>0?'b':'r';
+  }
+  // อัพ modal
+  const mc=document.getElementById('modal-counted');
+  const md=document.getElementById('modal-diff');
+  const ms=document.getElementById('modal-status');
+  if(mc) mc.textContent='฿'+total.toLocaleString('th-TH');
+  if(md){
+    md.textContent=(diff>=0?'+':'')+'฿'+diff.toLocaleString('th-TH');
+    md.className=diff===0?'g':diff>0?'b':'r';
+  }
+  if(ms){
+    ms.className='';
+    ms.style.background=diff===0?'var(--gd)':diff>0?'var(--bd)':'var(--rd)';
+    ms.style.borderRadius='8px';
+    ms.style.padding='10px';
+    ms.style.fontSize='11px';
+    ms.style.color=diff===0?'var(--grn)':diff>0?'var(--blu)':'var(--red)';
+    ms.textContent=diff===0?'✅ ยอดตรงพอดี':diff>0?'⚠️ เงินสดเกิน +฿'+Math.abs(diff).toLocaleString('th-TH'):
+      '🚨 เงินสดขาด -฿'+Math.abs(diff).toLocaleString('th-TH')+' — ต้องตรวจสอบ';
+  }
+}
+
+function addCashTx(){
+  const div=document.createElement('div');
+  div.className='cash-entry';
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;';
+  div.innerHTML=`
+    <input class="f-input" placeholder="รายการ" oninput="calcCash()">
+    <select class="f-select" onchange="calcCash()">
+      <option value="in">รับเข้า (+)</option>
+      <option value="out">จ่ายออก (-)</option>
+    </select>
+    <input class="f-input" type="number" placeholder="฿" oninput="calcCash()" style="text-align:right;font-family:'IBM Plex Mono',monospace;">
+    <button onclick="this.closest('.cash-entry').remove();calcCash()" style="background:var(--rd);color:var(--red);border:none;border-radius:6px;padding:6px 8px;cursor:pointer;font-size:14px;">×</button>`;
+  document.getElementById('cash-entries').appendChild(div);
+}
+
+function calcCash(){/* placeholder */}
+
+// render denoms when cash tab opens
+const origSw = sw;
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});});
+</script>
+
+<!-- MODAL: ปิดยอดสิ้นวัน -->
+<div class="modal-overlay" id="modal-close-day">
+  <div class="modal">
+    <div class="modal-title">🔒 ปิดยอดสิ้นวัน</div>
+    <div class="modal-sub">3 เมษายน 2569 | การเงิน ยืนยันยอดก่อนปิด</div>
+    <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span class="m">รับเงินสดรวม</span><span class="g" style="font-family:'IBM Plex Mono',monospace;font-weight:700;">+฿253,850</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span class="m">จ่ายเงินสดรวม</span><span class="r" style="font-family:'IBM Plex Mono',monospace;font-weight:700;">-฿13,450</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span class="m">เงินสดนับได้จริง</span><span class="b" style="font-family:'IBM Plex Mono',monospace;font-weight:700;" id="modal-counted">฿0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;border-top:1px solid var(--border);padding-top:8px;margin-top:4px;">
+        <span>ผลต่าง (Over/Short)</span>
+        <span class="g" style="font-family:'IBM Plex Mono',monospace;" id="modal-diff">฿0</span>
+      </div>
+    </div>
+    <div style="background:var(--gd);border-radius:8px;padding:10px;font-size:11px;" class="g" id="modal-status">
+      ✅ ยอดตรง — พร้อมปิดยอด
+    </div>
+    <div style="margin-top:10px;font-size:11px;" class="m">
+      เมื่อปิดยอด ระบบจะ:<br>
+      📊 ส่งรายงานไป ผจก.บัญชี + ผบห. อัตโนมัติ<br>
+      📱 แจ้ง LINE สรุปยอดรับ-จ่ายประจำวัน<br>
+      🔒 ล็อครายการวันนี้ แก้ไขไม่ได้
+    </div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeModal('modal-close-day')">ยกเลิก</button>
+      <button class="btn-red" onclick="closeModal('modal-close-day');alert('✅ ปิดยอดสิ้นวัน 3 เม.ย. 69 แล้ว\n📊 ส่งรายงานไป ผจก.บัญชี + ผบห.\n📱 แจ้ง LINE สรุปยอดแล้ว\n🔒 ล็อครายการแล้ว')">🔒 ยืนยันปิดยอด</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

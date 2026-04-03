@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบทะเบียนรถ — Toyota Charoensri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:#f5f7fc; --bg2:#ffffff; --bg3:#f0f3fa; --bg4:#e8edf8;
+  --border:#dde3f0; --border2:#eaecf5;
+  --text:#18233d; --text2:#546080; --text3:#9aaac0;
+  --red:#dc2244; --red-dim:rgba(220,34,68,0.07);
+  --yellow:#c26a00; --yellow-dim:rgba(194,106,0,0.08);
+  --green:#0a7c52; --green-dim:rgba(10,124,82,0.07);
+  --blue:#1d52cc; --blue-dim:rgba(29,82,204,0.07);
+  --orange:#c45200; --orange-dim:rgba(196,82,0,0.08);
+  --purple:#6b2fd4; --purple-dim:rgba(107,47,212,0.07);
+  --toyota:#eb0a1e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;min-height:100vh;}
+
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,0.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-bar{width:5px;height:26px;background:var(--toyota);border-radius:3px;}
+.brand-name{font-weight:800;font-size:15px;}
+.brand-sub{font-size:11px;color:var(--text2);}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.clock-box{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+
+/* TABS */
+.tab-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;gap:0;}
+.tab-btn{padding:11px 18px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:'Sarabun',sans-serif;}
+.tab-btn.active{color:var(--toyota);border-bottom-color:var(--toyota);}
+.tab-btn:hover{color:var(--text);}
+
+/* MAIN */
+.main{padding:20px 24px;max-width:1400px;margin:0 auto;}
+
+/* SUMMARY ROW */
+.summary-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
+.sum-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,40,0.05);border-top:3px solid transparent;}
+.sum-card.all{border-top-color:#1d52cc;}
+.sum-card.pending{border-top-color:#c26a00;}
+.sum-card.ready{border-top-color:#0a7c52;}
+.sum-card.reserve{border-top-color:#6b2fd4;}
+.sum-card.money{border-top-color:#dc2244;}
+.sum-label{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.sum-value{font-size:24px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.sum-value.blue{color:var(--blue);}
+.sum-value.yellow{color:var(--yellow);}
+.sum-value.green{color:var(--green);}
+.sum-value.purple{color:var(--purple);}
+.sum-value.red{color:var(--red);}
+.sum-sub{font-size:10px;color:var(--text3);margin-top:3px;}
+
+/* FILTER ROW */
+.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.search-box{flex:1;min-width:200px;position:relative;}
+.search-box input{width:100%;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px 8px 34px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;transition:border .2s;}
+.search-box input:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;}
+.filter-select{background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;cursor:pointer;}
+.upload-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;font-family:'Sarabun',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s;}
+.upload-btn:hover{opacity:.88;}
+.upload-btn.red{background:var(--toyota);}
+
+/* TABLE */
+.table-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,40,0.06);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl thead tr{background:var(--bg3);}
+.tbl th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text2);letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,0.025);}
+.tbl .num{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.tbl .center{text-align:center;}
+
+/* STATUS BADGE */
+.st{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap;}
+.st.done{background:var(--green-dim);color:var(--green);}
+.st.wait{background:var(--yellow-dim);color:var(--yellow);}
+.st.block{background:var(--red-dim);color:var(--red);}
+.st.ready{background:var(--blue-dim);color:var(--blue);}
+.st.reserve{background:var(--purple-dim);color:var(--purple);}
+.st.none{background:var(--bg3);color:var(--text3);}
+
+/* STEP PIPELINE */
+.pipeline{display:flex;align-items:center;gap:2px;}
+.step{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;cursor:default;}
+.step.done{background:var(--green);color:#fff;}
+.step.current{background:var(--yellow);color:#fff;box-shadow:0 0 0 2px rgba(194,106,0,0.3);}
+.step.todo{background:var(--bg4);color:var(--text3);border:1px solid var(--border);}
+.step-line{width:8px;height:2px;background:var(--border);border-radius:1px;}
+.step-line.done{background:var(--green);}
+
+/* PROGRESS COUNT */
+.prog-frac{font-family:'IBM Plex Mono',monospace;font-size:11px;}
+
+/* DETAIL PANEL */
+.detail-panel{display:none;position:fixed;inset:0;background:rgba(0,0,30,0.45);z-index:200;align-items:flex-start;justify-content:flex-end;padding:20px;}
+.detail-panel.open{display:flex;}
+.detail-box{background:#fff;border-radius:14px;width:420px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,40,0.18);}
+.detail-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;}
+.detail-title{font-weight:800;font-size:15px;}
+.detail-close{width:28px;height:28px;border-radius:50%;border:none;background:var(--bg3);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.detail-body{padding:16px 20px;}
+.field-row{display:flex;gap:8px;margin-bottom:10px;}
+.field{flex:1;}
+.field label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px;}
+.field-val{font-size:13px;font-weight:500;}
+.field-val.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;}
+.sep{border:none;border-top:1px solid var(--border);margin:12px 0;}
+
+/* STEP DETAIL */
+.step-detail{display:flex;flex-direction:column;gap:6px;}
+.step-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg3);}
+.step-item.done-item{background:var(--green-dim);}
+.step-item.current-item{background:var(--yellow-dim);border:1px solid rgba(194,106,0,0.2);}
+.step-check{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.step-check.done{background:var(--green);color:#fff;}
+.step-check.current{background:var(--yellow);color:#fff;}
+.step-check.todo{background:var(--bg4);color:var(--text3);border:1px solid var(--border);}
+.step-info{flex:1;}
+.step-name{font-size:12px;font-weight:600;}
+.step-date{font-size:10px;color:var(--text2);margin-top:1px;}
+
+/* MONEY SECTION */
+.money-card{background:var(--red-dim);border:1px solid rgba(220,34,68,0.2);border-radius:10px;padding:12px 14px;margin-top:10px;}
+.money-title{font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px;}
+.money-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
+.money-total{display:flex;justify-content:space-between;font-size:13px;font-weight:700;border-top:1px solid rgba(220,34,68,0.2);margin-top:6px;padding-top:6px;}
+
+/* UPLOAD MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,0.5);z-index:300;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:14px;padding:24px;width:90%;max-width:500px;box-shadow:0 8px 40px rgba(0,0,40,0.18);}
+.modal-title{font-weight:800;font-size:16px;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:20px;}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:28px;text-align:center;cursor:pointer;transition:border .2s;}
+.upload-zone:hover{border-color:var(--blue);}
+.upload-zone.dragover{border-color:var(--blue);background:var(--blue-dim);}
+.upload-icon-big{font-size:36px;margin-bottom:8px;}
+.upload-text-main{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.upload-text-sub{font-size:12px;color:var(--text2);}
+.upload-file-name{margin-top:10px;font-size:12px;color:var(--blue);font-weight:600;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-red{background:var(--toyota);color:#fff;}
+.btn-cancel{background:var(--bg3);color:var(--text2);}
+
+/* PLATE RESERVED */
+.plate-badge{display:inline-flex;align-items:center;gap:5px;background:#fff;border:2px solid var(--text);border-radius:6px;padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;}
+.plate-badge.reserved{border-color:var(--purple);color:var(--purple);}
+
+/* ALERT ROW */
+.alert-row{background:rgba(220,34,68,0.06);border:1px solid rgba(220,34,68,0.2);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.alert-row-text{font-size:12px;color:var(--red);font-weight:600;}
+
+@media(max-width:768px){
+  .summary-row{grid-template-columns:repeat(2,1fr);}
+  .tbl th:nth-child(n+5),.tbl td:nth-child(n+5){display:none;}
+  .detail-panel{padding:0;}
+  .detail-box{width:100%;border-radius:14px 14px 0 0;margin-top:auto;}
+}
+/* FORM INPUT */
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;transition:border .2s;}
+.f-input:focus{border-color:var(--blue);background:#fff;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.f-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
+.f-group{margin-bottom:10px;}
+/* APPROVAL FLOW */
+.approval-flow{display:flex;align-items:center;gap:0;margin:12px 0;}
+.ap-node{flex:1;text-align:center;}
+.ap-node-circle{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;margin:0 auto 4px;border:2px solid var(--border);}
+.ap-node-circle.done{background:var(--green);border-color:var(--green);color:#fff;}
+.ap-node-circle.active{background:var(--yellow);border-color:var(--yellow);color:#fff;box-shadow:0 0 0 3px rgba(194,106,0,.2);}
+.ap-node-circle.wait{background:var(--bg3);color:var(--text3);}
+.ap-node-label{font-size:9px;color:var(--text2);font-weight:700;text-transform:uppercase;}
+.ap-node-sub{font-size:8px;color:var(--text3);}
+.ap-line{flex-shrink:0;height:2px;width:20px;background:var(--border);align-self:center;margin-bottom:18px;}
+.ap-line.done{background:var(--green);}
+/* MONEY FORM */
+.money-form{background:#fff;border:1px solid rgba(220,34,68,.2);border-radius:10px;overflow:hidden;margin-top:10px;}
+.money-form-head{background:rgba(220,34,68,.05);padding:10px 14px;border-bottom:1px solid rgba(220,34,68,.12);display:flex;justify-content:space-between;align-items:center;}
+.money-form-title{font-size:12px;font-weight:700;color:var(--red);}
+.money-form-body{padding:12px 14px;}
+.money-line{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.money-line-label{font-size:12px;flex:1;}
+.money-input{width:110px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:'IBM Plex Mono',monospace;color:var(--text);outline:none;text-align:right;}
+.money-input:focus{border-color:var(--blue);background:#fff;}
+.money-total-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(220,34,68,.12);margin-top:2px;}
+.money-total-val{font-size:16px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--red);}
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:flex;gap:12px;position:relative;}
+.tl-item:not(:last-child)::before{content:'';position:absolute;left:10px;top:24px;width:2px;height:calc(100% - 8px);background:var(--border2);}
+.tl-item.done-tl::before{background:rgba(10,124,82,.3);}
+.tl-dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px;z-index:1;}
+.tl-dot.done{background:var(--green);border-color:var(--green);color:#fff;}
+.tl-dot.active{background:var(--yellow);border-color:var(--yellow);color:#fff;}
+.tl-dot.wait{background:var(--bg3);color:var(--text3);}
+.tl-content{flex:1;padding-bottom:14px;}
+.tl-name{font-size:12px;font-weight:600;}
+.tl-date{font-size:10px;color:var(--text2);margin-top:1px;}
+
+/* CLEAR MONEY */
+.clear-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:8px;}
+.clear-head{padding:9px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.clear-head.wait{background:rgba(194,106,0,.06);border-bottom-color:rgba(194,106,0,.15);}
+.clear-head.overdue{background:rgba(220,34,68,.07);border-bottom-color:rgba(220,34,68,.2);}
+.clear-head.done{background:rgba(10,124,82,.06);border-bottom-color:rgba(10,124,82,.15);}
+.overdue-badge{display:inline-flex;align-items:center;gap:4px;background:var(--red-dim);color:var(--red);padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+/* PHOTO UPLOAD */
+.photo-zone{border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
+.photo-zone:hover{border-color:var(--blue);background:var(--blue-dim);}
+.photo-zone.has-photo{border-color:var(--green);background:var(--green-dim);}
+.photo-preview{width:100%;max-height:160px;object-fit:cover;border-radius:6px;margin-top:8px;display:none;}
+/* DAYS COUNTER */
+.days-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.days-pill.ok{background:var(--green-dim);color:var(--green);}
+.days-pill.warn{background:var(--yellow-dim);color:var(--yellow);}
+.days-pill.late{background:var(--red-dim);color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-bar"></div>
+    <div>
+      <div class="brand-name">ระบบทะเบียนรถ</div>
+      <div class="brand-sub">Toyota Charoensri · Dealer 14373</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="upload-btn red" onclick="openModal('modal-upload')">📂 อัพไฟล์ทะเบียน</button>
+    <div class="clock-box" id="clock">--:--:--</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab(this,'tab-all')">ทั้งหมด</button>
+  <button class="tab-btn" onclick="switchTab(this,'tab-pending')">⏳ รอดำเนินการ</button>
+  <button class="tab-btn" onclick="switchTab(this,'tab-ready')">✅ จดได้เลย</button>
+  <button class="tab-btn" onclick="switchTab(this,'tab-reserve')">🔖 จองเลข</button>
+  <button class="tab-btn" onclick="switchTab(this,'tab-money')">💰 รอเบิกเงิน</button>
+  <button class="tab-btn" onclick="switchTab(this,'tab-sure')">📋 SURE</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ALERT: รถค้าง -->
+  <div class="alert-row">
+    <span style="font-size:16px;">⚠️</span>
+    <div class="alert-row-text">มีรถรอดำเนินการ 7 คัน | รอเบิกเงิน 4 คัน | จองเลข 3 เลข (กท 6808, บน 9635, นข 3546)</div>
+  </div>
+  <div class="alert-row" style="background:rgba(220,34,68,.08);border-color:rgba(220,34,68,.3);">
+    <span style="font-size:16px;">🚨</span>
+    <div>
+      <div class="alert-row-text" style="color:var(--red);">เกินกำหนดเคลียเงิน! รถ 1 คัน ยังไม่ส่งใบเสร็จเคลีย — เกิน 3 วันแล้ว → แจ้ง LINE ผบห. อัตโนมัติ</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:2px;">รุ้งทิวา บุสุวะ | จ่ายไป ฿7,800 เมื่อ 1/4/69 | รอเคลียมา 3+ วัน</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-row">
+    <div class="sum-card all">
+      <div class="sum-label">ทั้งหมด มี.ค. 69</div>
+      <div class="sum-value blue" id="cnt-all">22</div>
+      <div class="sum-sub">รถทุกสถานะ</div>
+    </div>
+    <div class="sum-card pending">
+      <div class="sum-label">⏳ รอดำเนินการ</div>
+      <div class="sum-value yellow" id="cnt-pending">9</div>
+      <div class="sum-sub">ยังไม่ครบขั้นตอน</div>
+    </div>
+    <div class="sum-card ready">
+      <div class="sum-label">✅ จดได้เลย</div>
+      <div class="sum-value green" id="cnt-ready">9</div>
+      <div class="sum-sub">เอกสารครบ</div>
+    </div>
+    <div class="sum-card reserve">
+      <div class="sum-label">🔖 จองเลข</div>
+      <div class="sum-value purple" id="cnt-reserve">3</div>
+      <div class="sum-sub">กท 6808, บน 9635, นข 3546</div>
+    </div>
+    <div class="sum-card money">
+      <div class="sum-label">💰 รอเบิกเงิน</div>
+      <div class="sum-value red" id="cnt-money">4</div>
+      <div class="sum-sub">ต้องเบิกก่อนยื่นขนส่ง</div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-row">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="ค้นหาชื่อลูกค้า, เลขปิดการขาย, เลขตัวถัง..." oninput="filterTable()">
+    </div>
+    <select class="filter-select" id="filter-status" onchange="filterTable()">
+      <option value="">ทุกสถานะ</option>
+      <option value="จดได้เลย">จดได้เลย</option>
+      <option value="รอเอกสาร">รอเอกสาร</option>
+      <option value="จองเลข">จองเลข</option>
+      <option value="รอเบิก">รอเบิกเงิน</option>
+      <option value="SURE">SURE</option>
+      <option value="อื่น">จดต่างจังหวัด</option>
+    </select>
+    <select class="filter-select" id="filter-province" onchange="filterTable()">
+      <option value="">ทุกจังหวัด</option>
+      <option value="นครพนม">นครพนม</option>
+      <option value="กรุงเทพ">กรุงเทพ</option>
+      <option value="สกลนคร">สกลนคร</option>
+      <option value="อุดรธานี">อุดรธานี</option>
+    </select>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap" id="tab-all">
+    <table class="tbl" id="main-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>เลขปิดการขาย</th>
+          <th>ชื่อลูกค้า</th>
+          <th>ประเภท</th>
+          <th>จังหวัด</th>
+          <th style="min-width:200px;">ขั้นตอน</th>
+          <th>สถานะ</th>
+          <th>ทะเบียน</th>
+          <th>หมายเหตุ</th>
+          <th>รายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody id="main-tbody">
+        <!-- rendered by JS -->
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /main -->
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detail-panel" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-box">
+    <div class="detail-head">
+      <div class="detail-title" id="dp-title">รายละเอียด</div>
+      <button class="detail-close" onclick="closeDetail()">×</button>
+    </div>
+    <div class="detail-body" id="dp-body">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div class="modal-overlay" id="modal-upload">
+  <div class="modal">
+    <div class="modal-title">📂 อัพโหลดไฟล์ทะเบียน</div>
+    <div class="modal-sub">อัพไฟล์ Excel/PDF ทะเบียนรายเดือน — ระบบจะอัพเดตสถานะอัตโนมัติ</div>
+    <div class="upload-zone" id="upload-zone"
+      ondragover="event.preventDefault();this.classList.add('dragover')"
+      ondragleave="this.classList.remove('dragover')"
+      ondrop="handleDrop(event)"
+      onclick="document.getElementById('file-input').click()">
+      <div class="upload-icon-big">📋</div>
+      <div class="upload-text-main">คลิกหรือลากไฟล์มาวาง</div>
+      <div class="upload-text-sub">รองรับ .xlsx, .xls, .pdf · ไฟล์รายงานทะเบียน TCS</div>
+      <div class="upload-file-name" id="upload-filename"></div>
+      <input type="file" id="file-input" accept=".xlsx,.xls,.pdf" style="display:none" onchange="handleFile(this)">
+    </div>
+    <div style="margin-top:12px;">
+      <div style="font-size:11px;color:var(--text2);font-weight:600;margin-bottom:6px;">เลือกเดือน</div>
+      <input type="month" class="filter-select" style="width:100%;" value="2026-03">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-upload')">ยกเลิก</button>
+      <button class="btn btn-red" onclick="fakeUpload()">📤 อัพโหลด → อัพเดตสถานะ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== DATA (มี.ค. 69 จากไฟล์จริง) ======
+const STEPS = ['ชุดจดไฟแนนซ์','ใบแจ้งจำหน่าย','เตรียมเอกสาร','ส่งคุณบิ๊กเซ็น','เบิกเงิน','ยื่นขนส่ง','ได้ทะเบียน','คืนป้ายแดง'];
+
+const cars = [
+  // จดได้เลย — นครพนม
+  {id:'HO26IN00217',name:'นฤพร วงษา',type:'01 TLTUD',chassis:'MHFAB1BY200119292',province:'นครพนม',
+   steps:['11/3','16/3','16/3','16/3','18/3','27/3','27/3',''],plate:'',status:'จดได้เลย',
+   note:'เสร็จแล้ว',money:0,group:'ready'},
+  {id:'HO26IN00204',name:'พงษ์ศักดิ์ นครังสุ',type:'MHFAB1BY100119476',chassis:'MHFAB1BY100119476',province:'นครพนม',
+   steps:['13/3','16/3','16/3','16/3','18/3','27/3','27/3',''],plate:'',status:'จดได้เลย',
+   note:'',money:0,group:'ready'},
+  {id:'HO26IN00267',name:'วัชรวีร์ ปั้นงาม',type:'03 TLTUD รถตู้',chassis:'MMKBBHCP406551047',province:'นครพนม',
+   steps:['20/3','23/3','20/3','20/3','','30/3','',''],plate:'',status:'รอเบิก',
+   note:'รถตู้',money:8500,group:'money'},
+  {id:'HO26IN00275',name:'อนัญญา ปั้นงาม',type:'03 TLTUD รถตู้',chassis:'MMKBBHCP906550931',province:'นครพนม',
+   steps:['23/3','19/2','25/3','26/3','','30/3','',''],plate:'',status:'รอเบิก',
+   note:'รถตู้',money:8500,group:'money'},
+  {id:'HO26IN00292',name:'สุภรัตน์ อิงอาจ',type:'01 TLTUD',chassis:'MR2KC3F3101482614',province:'นครพนม',
+   steps:['24/3','25/3','','','','1/4','',''],plate:'',status:'รอเอกสาร',
+   note:'รอส่งคุณบิ๊กเซ็น',money:0,group:'pending'},
+  {id:'HO26IN00295',name:'มาลัย ปารีสรอย',type:'02 TLTUD',chassis:'MR0CB8CB104335765',province:'นครพนม',
+   steps:['27/3','11/3','26/3','','','31/3','',''],plate:'',status:'รอเบิก',
+   note:'ต่อตู้ทึบ+เสริมแหนม',money:12000,group:'money'},
+  {id:'HO26IN00308',name:'จิราทิพย์ อุทำกา',type:'01 TLTUD',chassis:'MR2BD8A3X00185347',province:'นครพนม',
+   steps:['31/3','11/3','31/3','','','','',''],plate:'',status:'รอเบิก',
+   note:'',money:7800,group:'money'},
+  {id:'HO26IN00268',name:'จิรวดี แก้วชาลุน',type:'04 TLTUD',chassis:'MR2A78BF804089365',province:'นครพนม',
+   steps:['31/3','10/3','31/3','31/3','','','',''],plate:'',status:'รอเบิก',
+   note:'',money:8200,group:'pending'},
+  {id:'HO26IN00306',name:'สวาง อุดมกัน',type:'02 Dealer TLTUD',chassis:'MR0CB8CC804707384',province:'นครพนม',
+   steps:['1/4','9/3','1/4','1/4','','','',''],plate:'',status:'รอเบิก',
+   note:'',money:7600,group:'pending'},
+  {id:'HO26IN00294',name:'กิตติพัฒน์ เสาวดี',type:'01 TLTUD',chassis:'MR2BD8A3100180490',province:'นครพนม',
+   steps:['5/2','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'รอใบแจ้งจำหน่าย',money:0,group:'pending'},
+  {id:'HO26IN00316',name:'จุฑามาส อุสุภราช',type:'01 TLTUD',chassis:'MR2B78D3600022441',province:'นครพนม',
+   steps:['17/3','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'',money:0,group:'pending'},
+  {id:'HO26IN00321',name:'สมชาย อาจสมดี',type:'03 TLTUD รถตู้',chassis:'MMKBBHCP706547154',province:'นครพนม',
+   steps:['1/4','10/3','1/4','1/4','','','',''],plate:'',status:'รอเบิก',
+   note:'รถตู้',money:8500,group:'pending'},
+  {id:'HO26IN00322',name:'ดารุณี แก้วพิกุล',type:'01 TLTUD',chassis:'MR2BD8A3600187483',province:'นครพนม',
+   steps:['','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'ยังไม่มีชุดจดไฟแนนซ์',money:0,group:'pending'},
+  {id:'HO26IN00307',name:'CHEN CHEN',type:'01 Dealer TLTUD',chassis:'MR2BD8A3800183080',province:'นครพนม',
+   steps:['24/2','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'',money:0,group:'pending'},
+  {id:'HO26IN00335',name:'โสภิดา ดวงศรี',type:'01 TLTUD',chassis:'MR2BD8A3300188185',province:'นครพนม',
+   steps:['','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'',money:0,group:'pending'},
+  {id:'HO26IN00340',name:'สสิธร ไชยโกษี',type:'04 TLTUD',chassis:'MR2A78BF904091576',province:'นครพนม',
+   steps:['','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'',money:0,group:'pending'},
+  {id:'HO26IN00341',name:'วัชรวีร์ ปั้นงาม',type:'03 AYUD รถตู้',chassis:'MMKBBHCP806548359',province:'นครพนม',
+   steps:['18/3','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'รถตู้',money:0,group:'pending'},
+  // จดต่างจังหวัด
+  {id:'HO26IN00262',name:'บริษัท BCC เมดิคอล',type:'02 Dealer TLTUD',chassis:'MR05A3JV701901022',province:'กรุงเทพ',
+   steps:['24/3','24/3','24/3','26/3','','','',''],plate:'',status:'จองเลข',
+   note:'จองเลขกรุงเทพ รอแจ้งย้าย',money:0,group:'reserve'},
+  {id:'HO26IN00315',name:'พิชิต พรมมา',type:'02 TLTUD',chassis:'MR0CB8CB304335427',province:'สกลนคร',
+   steps:['31/3','','','','','','',''],plate:'',status:'รอเอกสาร',
+   note:'TSNU 25/3',money:0,group:'pending'},
+  // จองเลข
+  {id:'HO26IN00224',name:'ณัฐพล ตันนาดี',type:'MR05A3JV801900929',chassis:'MR05A3JV801900929',province:'นครพนม',
+   steps:['14/3','19/2','14/3','14/3','1/4','','',''],plate:'กท 6588 นพ',status:'จองเลข',
+   note:'จองเลข กท 6588 นพ',money:0,group:'reserve',clearStatus:'',clearDate:'',payDate:'',receiptImg:''},
+  {id:'HO26IN00301',name:'รุ้งทิวา บุสุวะ',type:'01 TLTUD',chassis:'MR2BD8A3400181181',province:'นครพนม',
+   steps:['31/3','11/2','26/3','31/3','','','',''],plate:'',status:'รอเบิก',
+   note:'',money:7800,group:'money',clearStatus:'paid',clearDate:'2/4',payDate:'1/4',receiptImg:''},
+  {id:'HO26IN00293',name:'ปนัดดา นิยมสัตย์',type:'04 TLTUD',chassis:'MR2A78BF904089553',province:'นครพนม',
+   steps:['27/3','11/3','26/3','31/3','','','',''],plate:'',status:'รอเบิก',
+   note:'',money:8200,group:'money',clearStatus:'uploaded',clearDate:'1/4',payDate:'',receiptImg:'sample'},
+  // SURE
+  {id:'SU26IN00002',name:'จันทรฉาย บุญระมี',type:'02 ซื้อสด',chassis:'MR03A8JV600800015',province:'นครพนม',
+   steps:['','','','','','','',''],plate:'',status:'SURE',
+   note:'ซื้อสด',money:0,group:'sure'},
+  {id:'SU26IN00004',name:'ถึงใจ บุญมาผึ้ง',type:'02 TLTUD',chassis:'MR0YA3AV703070025',province:'นครพนม',
+   steps:['3/4','','','','','','',''],plate:'',status:'SURE',
+   note:'',money:0,group:'sure'},
+];
+
+// จองเลขที่ขนส่ง
+const reservedPlates = [
+  {plate:'กท 6808', owner:'ชาติชาย แสงโพธิ์'},
+  {plate:'บน 9635', owner:'เกียรติยศ เกษรราช', note:'รอลูกค้าจ่ายค่าเปลี่ยนแปลงเอกสาร 20/3/69'},
+  {plate:'นข 3546', owner:'หจก.ยูดีโฮม', note:'จดอุดร ปายประมูล'},
+];
+
+let filteredCars = [...cars];
+
+// ====== CLOCK ======
+setInterval(()=>{
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH');
+},1000);
+
+// ====== RENDER TABLE ======
+function getStepDone(steps){ return steps.filter(s=>s&&s.trim()).length; }
+function getStatus(car){
+  const done = getStepDone(car.steps);
+  if(car.group==='sure') return {cls:'reserve',txt:'SURE'};
+  if(car.group==='ready'&&done>=6) return {cls:'done',txt:'จดเสร็จ'};
+  if(car.status==='จองเลข') return {cls:'reserve',txt:'จองเลข'};
+  if(car.money>0&&!car.steps[4]) return {cls:'wait',txt:'รอเบิกเงิน'};
+  if(done<=1) return {cls:'block',txt:'รอเอกสาร'};
+  if(done>=4) return {cls:'ready',txt:'พร้อมยื่น'};
+  return {cls:'wait',txt:'กำลังดำเนินการ'};
+}
+
+function renderPipeline(steps){
+  const total = STEPS.length;
+  let html = '<div class="pipeline">';
+  steps.forEach((s,i)=>{
+    const isDone = s&&s.trim();
+    const isNext = !isDone && i>0 && steps[i-1]&&steps[i-1].trim();
+    const cls = isDone?'done':isNext?'current':'todo';
+    const titles = ['💳','📄','📝','✍️','💰','🏛️','🔖','↩️'];
+    html += `<div class="step ${cls}" title="${STEPS[i]}${s?': '+s:''}">${isDone?'✓':titles[i]}</div>`;
+    if(i<total-1) html += `<div class="step-line ${isDone&&steps[i+1]?'done':''}"></div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderTable(data){
+  const tbody = document.getElementById('main-tbody');
+  tbody.innerHTML = data.map((c,i)=>{
+    const st = getStatus(c);
+    const done = getStepDone(c.steps);
+    const moneyBadge = c.money>0&&!c.steps[4]
+      ? `<span style="color:var(--red);font-weight:700;font-size:10px;">฿${c.money.toLocaleString('th-TH')}</span>` : '';
+    const plateHtml = c.plate
+      ? `<span class="plate-badge reserved">${c.plate}</span>`
+      : `<span style="color:var(--text3);font-size:11px;">—</span>`;
+    const provBadge = c.province!=='นครพนม'
+      ? `<span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;">${c.province}</span>`
+      : `<span style="font-size:12px;">${c.province}</span>`;
+    return `<tr data-id="${c.id}" data-group="${c.group}" data-status="${c.status}" data-province="${c.province}">
+      <td style="color:var(--text3);font-size:11px;">${i+1}</td>
+      <td><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--blue);">${c.id}</div></td>
+      <td><div style="font-weight:600;">${c.name}</div><div style="font-size:10px;color:var(--text2);">${c.type}</div></td>
+      <td>${provBadge}</td>
+      <td style="text-align:center;"><span class="st ${st.cls}">${st.txt}</span></td>
+      <td>${renderPipeline(c.steps)}<div style="font-size:10px;color:var(--text3);margin-top:3px;">${done}/${STEPS.length} ขั้นตอน</div></td>
+      <td>${plateHtml}</td>
+      <td>${moneyBadge}</td>
+      <td style="font-size:11px;color:var(--text2);max-width:120px;">${c.note}</td>
+      <td><button onclick="openDetail('${c.id}')" style="background:var(--blue-dim);color:var(--blue);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;">ดู</button></td>
+    </tr>`;
+  }).join('');
+  updateCounts(data);
+}
+
+function updateCounts(data){
+  document.getElementById('cnt-all').textContent = data.length;
+  document.getElementById('cnt-pending').textContent = data.filter(c=>['pending'].includes(c.group)).length;
+  document.getElementById('cnt-ready').textContent = data.filter(c=>c.group==='ready').length;
+  document.getElementById('cnt-reserve').textContent = data.filter(c=>c.group==='reserve').length;
+  document.getElementById('cnt-money').textContent = data.filter(c=>c.money>0&&!c.steps[4]).length;
+}
+
+// ====== FILTER ======
+function filterTable(){
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const st = document.getElementById('filter-status').value;
+  const pv = document.getElementById('filter-province').value;
+  filteredCars = cars.filter(c=>{
+    const matchQ = !q || c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q) || c.chassis.toLowerCase().includes(q);
+    const matchSt = !st || c.status.includes(st) || c.group.includes(st.toLowerCase());
+    const matchPv = !pv || c.province===pv;
+    return matchQ && matchSt && matchPv;
+  });
+  renderTable(filteredCars);
+}
+
+// ====== TABS ======
+function switchTab(el, tabId){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  // filter by group
+  const map = {'tab-all':'','tab-pending':'pending','tab-ready':'ready','tab-reserve':'reserve','tab-money':'money','tab-sure':'sure'};
+  const grp = map[tabId]||'';
+  filteredCars = grp ? cars.filter(c=>c.group===grp) : [...cars];
+  renderTable(filteredCars);
+}
+
+// ====== DETAIL PANEL ======
+function openDetail(id){
+  const c = cars.find(x=>x.id===id);
+  if(!c) return;
+  const st = getStatus(c);
+  const done = getStepDone(c.steps);
+  const totalMoney = c.money;
+  
+  let stepsHtml = c.steps.map((s,i)=>{
+    const isDone = s&&s.trim();
+    const isNext = !isDone&&i>0&&c.steps[i-1]&&c.steps[i-1].trim();
+    const cls = isDone?'done-item':isNext?'current-item':'';
+    const chkCls = isDone?'done':isNext?'current':'todo';
+    return `<div class="step-item ${cls}">
+      <div class="step-check ${chkCls}">${isDone?'✓':i+1}</div>
+      <div class="step-info">
+        <div class="step-name">${STEPS[i]}</div>
+        <div class="step-date">${isDone?s:'รอดำเนินการ'}</div>
+      </div>
+    </div>`;
+  }).join('');
+  
+  const needsMoney = !c.steps[4];
+  let moneyHtml = '';
+  if(needsMoney){
+    const approvedAmt = c.money||0;
+    const moneyStatus = approvedAmt>0 ? 
+      `<span class="st wait">รอจ่าย ฿${approvedAmt.toLocaleString('th-TH')}</span>` :
+      `<span class="st block">ยังไม่ได้กรอกยอด</span>`;
+    moneyHtml = `<div style="border:1px solid rgba(220,34,68,.2);border-radius:10px;overflow:hidden;margin-top:10px;">
+      <div style="background:rgba(220,34,68,.05);padding:9px 14px;border-bottom:1px solid rgba(220,34,68,.12);display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:12px;font-weight:700;color:var(--red);">💰 เบิกเงินจดทะเบียน</div>
+        ${moneyStatus}
+      </div>
+      <div style="padding:12px 14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0 6px;">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--yellow);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;">📝</div>
+          <div style="flex:1;">
+            <div style="font-size:11px;font-weight:600;">ทะเบียน → กรอกยอด</div>
+            <div style="font-size:10px;color:var(--text2);">${approvedAmt>0?'กรอกแล้ว ฿'+approvedAmt.toLocaleString('th-TH'):'ยังไม่ได้กรอก'}</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0 6px;">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--bg3);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:10px;border:1px solid var(--border);">✍️</div>
+          <div style="flex:1;">
+            <div style="font-size:11px;font-weight:600;">ผจก.บัญชี → อนุมัติ</div>
+            <div style="font-size:10px;color:var(--text3);">รอการอนุมัติ</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--bg3);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:10px;border:1px solid var(--border);">💳</div>
+          <div style="flex:1;">
+            <div style="font-size:11px;font-weight:600;">การเงิน → จ่ายเงิน</div>
+            <div style="font-size:10px;color:var(--text3);">รอจ่ายเงิน</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="openMoneyModal('${id}')" style="flex:1;min-width:120px;padding:8px;background:var(--red);color:#fff;border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">📝 กรอกยอดเบิก</button>
+          ${approvedAmt>0?`<button onclick="openPayConfirm('${id}')" style="flex:1;min-width:120px;padding:8px;background:var(--green);color:#fff;border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">✅ ยืนยันจ่ายแล้ว</button>`:''}
+        </div>
+      </div>
+    </div>`;
+  } else {
+    // เช็คสถานะเคลีย
+    const clearSt = c.clearStatus||'';
+    const clearLabel = clearSt==='uploaded'?'🧾 รอผจก.บัญชีเคลีย':clearSt==='cleared'?'✅ เคลียแล้ว':'⚪ ยังไม่ได้เคลีย';
+    const clearColor = clearSt==='uploaded'?'var(--yellow)':clearSt==='cleared'?'var(--green)':'var(--text3)';
+    // เช็คว่าเกิน 3 วันไหม
+    let overdueHtml = '';
+    if(c.payDate && clearSt!=='cleared'){
+      const [d,m] = c.payDate.split('/');
+      const payD = new Date(2026, parseInt(m)-1, parseInt(d));
+      const diffDays = Math.floor((new Date()-payD)/(1000*60*60*24));
+      if(diffDays>3) overdueHtml = '<span style="background:var(--red-dim);color:var(--red);font-size:10px;font-weight:700;padding:2px 7px;border-radius:12px;margin-left:6px;">⚠️ เกิน '+diffDays+' วัน — แจ้งผบห.</span>';
+    }
+    moneyHtml = \`<div style="background:var(--green-dim);border:1px solid rgba(10,124,82,.2);border-radius:8px;padding:10px 14px;margin-top:10px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="font-size:16px;">✅</span>
+        <div style="flex:1;">
+          <div style="font-size:12px;font-weight:700;color:var(--green);">จ่ายเงินแล้ว วันที่ \${c.steps[4]}</div>
+          <div style="font-size:10px;display:flex;align-items:center;">
+            <span style="color:\${clearColor};">\${clearLabel}</span>\${overdueHtml}
+          </div>
+        </div>
+      </div>
+      <button onclick="openClearModal('\${id}')" style="width:100%;padding:8px;background:\${clearSt==='cleared'?'var(--bg3)':'var(--blue)'};color:\${clearSt==='cleared'?'var(--text2)':'#fff'};border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">
+        \${clearSt==='cleared'?'✅ เคลียแล้ว':'🧾 ถ่ายรูปใบเสร็จ → เคลียเงิน'}
+      </button>
+    </div>\`;
+  }
+
+  const plateHtml = c.plate
+    ? `<span class="plate-badge reserved" style="font-size:14px;">${c.plate}</span>`
+    : `<span style="color:var(--text3);">ยังไม่มี</span>`;
+
+  document.getElementById('dp-title').textContent = c.name;
+  document.getElementById('dp-body').innerHTML = `
+    <div class="field-row">
+      <div class="field"><label>เลขปิดการขาย</label><div class="field-val mono">${c.id}</div></div>
+      <div class="field"><label>สถานะ</label><span class="st ${st.cls}">${st.txt}</span></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>จังหวัดที่จด</label><div class="field-val">${c.province}</div></div>
+      <div class="field"><label>ประเภทรถ</label><div class="field-val" style="font-size:11px;">${c.type}</div></div>
+    </div>
+    <div class="field"><label>เลขตัวถัง</label><div class="field-val mono">${c.chassis}</div></div>
+    ${c.plate?`<div class="field" style="margin-top:8px;"><label>ทะเบียนที่จอง</label><div>${plateHtml}</div></div>`:''}
+    ${c.note?`<div class="field" style="margin-top:8px;"><label>หมายเหตุ</label><div class="field-val" style="color:var(--yellow);">${c.note}</div></div>`:''}
+    <hr class="sep">
+    <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">ขั้นตอน (${done}/${STEPS.length})</div>
+    <div class="step-detail">${stepsHtml}</div>
+    ${moneyHtml}
+  `;
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetail(){
+  document.getElementById('detail-panel').classList.remove('open');
+}
+
+function markMoneyDone(id){
+  const c = cars.find(x=>x.id===id);
+  if(c){ c.steps[4] = new Date().toLocaleDateString('th-TH',{day:'numeric',month:'numeric'}); c.money=0; }
+  closeDetail();
+  renderTable(filteredCars);
+  alert('✅ บันทึกการเบิกเงินแล้ว');
+}
+
+// ====== MODAL ======
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
+});
+
+function handleFile(input){
+  if(input.files[0]) document.getElementById('upload-filename').textContent = '📎 '+input.files[0].name;
+}
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('dragover');
+  const f = e.dataTransfer.files[0];
+  if(f) document.getElementById('upload-filename').textContent = '📎 '+f.name;
+}
+function fakeUpload(){
+  closeModal('modal-upload');
+  alert('✅ อัพโหลดสำเร็จ\nระบบอัพเดตสถานะทะเบียนแล้ว\n\nรถทั้งหมด 22 คัน | รอดำเนินการ 9 | เสร็จแล้ว 2');
+}
+
+
+
+// ====== CLEAR MONEY ======
+let currentClearId = '';
+
+function openClearModal(id){
+  currentClearId = id;
+  const c = cars.find(x=>x.id===id);
+  if(!c) return;
+  document.getElementById('clr-carname').textContent = c.name;
+  document.getElementById('clr-amt').textContent = '฿'+(c.money||0).toLocaleString('th-TH');
+  document.getElementById('clr-paydate').textContent = c.payDate||'—';
+  document.getElementById('clr-real-amt').value = '';
+  document.getElementById('clr-diff-box').style.display = 'none';
+  document.getElementById('clr-note').value = '';
+  // รีเซ็ตรูป
+  const zone = document.getElementById('clr-photo-zone');
+  zone.className = 'photo-zone';
+  document.getElementById('clr-photo-icon').textContent = '📷';
+  document.getElementById('clr-photo-text').textContent = 'แตะเพื่อถ่ายรูปหรือเลือกรูปใบเสร็จ';
+  document.getElementById('clr-preview').style.display = 'none';
+  // คำนวณวันที่เกินกำหนด
+  if(c.payDate){
+    const [d,m] = c.payDate.split('/');
+    const payD = new Date(2026, parseInt(m)-1, parseInt(d));
+    const diffDays = Math.floor((new Date()-payD)/(1000*60*60*24));
+    const pillEl = document.getElementById('clr-days-pill');
+    const cls = diffDays>3?'late':diffDays>1?'warn':'ok';
+    const txt = diffDays>3?'⚠️ เกิน '+diffDays+' วัน':diffDays+' วันที่ผ่านมา';
+    pillEl.innerHTML = '<span class="days-pill '+cls+'">'+txt+'</span>';
+  }
+  closeDetail();
+  openModal('modal-clear');
+}
+
+function clrFileSelect(input){
+  if(!input.files[0]) return;
+  const file = input.files[0];
+  const zone = document.getElementById('clr-photo-zone');
+  zone.classList.add('has-photo');
+  document.getElementById('clr-photo-icon').textContent = '✅';
+  document.getElementById('clr-photo-text').textContent = file.name;
+  if(file.type.startsWith('image/')){
+    const reader = new FileReader();
+    reader.onload = e=>{
+      const img = document.getElementById('clr-preview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function clrDrop(e){
+  e.preventDefault();
+  const f = e.dataTransfer.files[0];
+  if(f){ const dt = new DataTransfer(); dt.items.add(f); document.getElementById('clr-file').files = dt.files; clrFileSelect(document.getElementById('clr-file')); }
+}
+
+function clrCalcDiff(){
+  const taken = parseFloat(document.getElementById('clr-amt').textContent.replace(/[฿,]/g,''))||0;
+  const real = parseFloat(document.getElementById('clr-real-amt').value)||0;
+  if(!real){ document.getElementById('clr-diff-box').style.display='none'; return; }
+  const diff = taken - real;
+  const box = document.getElementById('clr-diff-box');
+  box.style.display = 'block';
+  box.style.background = diff>0?'rgba(10,124,82,.07)':diff<0?'rgba(220,34,68,.07)':'rgba(29,82,204,.07)';
+  document.getElementById('clr-diff-taken').textContent = '฿'+taken.toLocaleString('th-TH');
+  document.getElementById('clr-diff-real').textContent = '฿'+real.toLocaleString('th-TH');
+  const label = diff>0?'💰 ส่งคืนเงิน':diff<0?'⚠️ จ่ายเพิ่ม':'✅ ยอดตรงพอดี';
+  const color = diff>0?'var(--green)':diff<0?'var(--red)':'var(--blue)';
+  document.getElementById('clr-diff-label').textContent = label;
+  document.getElementById('clr-diff-val').textContent = diff===0?'—':(diff>0?'+':'')+diff.toLocaleString('th-TH')+' บาท';
+  document.getElementById('clr-diff-val').style.color = color;
+}
+
+function submitClear(){
+  const real = parseFloat(document.getElementById('clr-real-amt').value)||0;
+  const note = document.getElementById('clr-note').value;
+  const hasPhoto = document.getElementById('clr-photo-zone').classList.contains('has-photo');
+  if(!real){ alert('กรุณากรอกยอดจริงในใบเสร็จ'); return; }
+  if(!hasPhoto){ 
+    if(!confirm('ยังไม่ได้แนบรูปใบเสร็จ ต้องการส่งเคลียก่อนได้ไหม?')) return;
+  }
+  const c = cars.find(x=>x.id===currentClearId);
+  if(c){ 
+    const taken = c.money||0;
+    const diff = taken - real;
+    c.clearStatus = 'uploaded';
+    c.clearDate = new Date().toLocaleDateString('th-TH',{day:'numeric',month:'numeric'});
+    c.clearReal = real;
+    c.clearDiff = diff;
+  }
+  closeModal('modal-clear');
+  renderTable(filteredCars);
+  const diff = c ? c.clearDiff : 0;
+  const diffMsg = diff>0 ? '\n💰 มีเงินส่งคืน ฿'+diff.toLocaleString('th-TH') : diff<0 ? '\n⚠️ ต้องจ่ายเพิ่ม ฿'+Math.abs(diff).toLocaleString('th-TH') : '\n✅ ยอดตรงพอดี';
+  alert('✅ ส่งเคลียเงินแล้ว'+diffMsg+'\n📱 แจ้ง LINE ผจก.บัญชีแล้ว\n⏰ ถ้าไม่เคลียภายใน 3 วัน — ระบบแจ้งผบห.');
+}
+
+// ====== MONEY MODAL ======
+let currentMoneyId = '';
+function openMoneyModal(id){
+  currentMoneyId = id;
+  const c = cars.find(x=>x.id===id);
+  document.getElementById('mm-carname').textContent = c?c.name:'';
+  ['m-reg','m-fee','m-inspect','m-change','m-other'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('m-total').textContent = '฿0';
+  document.getElementById('m-note').value = '';
+  closeDetail();
+  openModal('modal-money');
+}
+function calcMoney(){
+  const mainIds = ['m-reg','m-plate','m-inspect','m-change'];
+  const mainTotal = mainIds.reduce((s,id)=>{
+    const el = document.getElementById(id);
+    return s + (el ? parseFloat(el.value)||0 : 0);
+  }, 0);
+
+  // คำนวณค่าเบ็ดเตล็ด
+  let extraTotal = 0;
+  document.querySelectorAll('#extras-list .extra-row').forEach(row=>{
+    const numEl = row.querySelector('input[type=number]');
+    extraTotal += numEl ? (parseFloat(numEl.value)||0) : 0;
+  });
+
+  const total = mainTotal + extraTotal;
+  const mainEl = document.getElementById('m-sub-main');
+  const extraEl = document.getElementById('m-sub-extra');
+  const totalEl = document.getElementById('m-total');
+  if(mainEl) mainEl.textContent = '฿'+mainTotal.toLocaleString('th-TH');
+  if(extraEl) extraEl.textContent = '฿'+extraTotal.toLocaleString('th-TH');
+  if(totalEl) totalEl.textContent = '฿'+total.toLocaleString('th-TH');
+}
+
+function addExtra(){
+  const list = document.getElementById('extras-list');
+  const div = document.createElement('div');
+  div.className = 'extra-row';
+  div.style.cssText = 'display:flex;gap:8px;margin-bottom:7px;';
+  div.innerHTML = `<input class="f-input" type="text" placeholder="ชื่อรายการ" style="flex:1;font-size:12px;" oninput="calcMoney()">
+    <input class="money-input" type="number" placeholder="0" oninput="calcMoney()">
+    <button onclick="removeExtra(this)" style="background:var(--red-dim);color:var(--red);border:none;border-radius:6px;padding:0 8px;cursor:pointer;font-size:14px;">×</button>`;
+  list.appendChild(div);
+}
+
+function removeExtra(btn){
+  btn.parentElement.remove();
+  calcMoney();
+}
+function submitMoneyRequest(){
+  const mainIds = ['m-reg','m-plate','m-inspect','m-change'];
+  const mainTotal = mainIds.reduce((s,id)=>{
+    const el = document.getElementById(id); return s+(el?parseFloat(el.value)||0:0);
+  },0);
+  let extraTotal = 0;
+  const extraLines = [];
+  document.querySelectorAll('#extras-list .extra-row').forEach(row=>{
+    const nameEl = row.querySelector('input[type=text]');
+    const numEl  = row.querySelector('input[type=number]');
+    const amt = numEl ? parseFloat(numEl.value)||0 : 0;
+    const name = nameEl ? nameEl.value.trim() : '';
+    if(amt>0){ extraTotal+=amt; extraLines.push((name||'ค่าเบ็ดเตล็ด')+' ฿'+amt.toLocaleString('th-TH')); }
+  });
+  const total = mainTotal+extraTotal;
+  if(total===0){ alert('กรุณากรอกยอดเบิกอย่างน้อย 1 รายการ'); return; }
+  const receiptReady = document.getElementById('m-receipt-ready').checked;
+  const receiptPending = document.getElementById('m-receipt-pending').checked;
+  const note = document.getElementById('m-note').value;
+  const c = cars.find(x=>x.id===currentMoneyId);
+  if(c){ c.money=total; c.moneyNote=note; c.extraLines=extraLines; c.receiptReady=receiptReady; }
+  closeModal('modal-money');
+  renderTable(filteredCars);
+  const extraMsg = extraLines.length>0 ? '\nค่าเบ็ดเตล็ด: '+extraLines.join(', ') : '';
+  const receiptMsg = receiptPending ? '\n⚠️ ยังรอใบเสร็จเพิ่มเติม' : '';
+  alert('✅ ส่งคำขอเบิก ฿'+total.toLocaleString('th-TH')+' แล้ว\n📱 แจ้ง LINE ผจก.บัญชี\nรถ: '+(c?c.name:'')+extraMsg+receiptMsg);
+}
+
+function openPayConfirm(id){
+  currentMoneyId = id;
+  const c = cars.find(x=>x.id===id);
+  document.getElementById('pc-carname').textContent = c?c.name:'';
+  document.getElementById('pc-amount').textContent = c?'฿'+c.money.toLocaleString('th-TH'):'฿0';
+  document.getElementById('pc-date').value = new Date().toISOString().split('T')[0];
+  closeDetail();
+  openModal('modal-pay-confirm');
+}
+function confirmPay(){
+  const c = cars.find(x=>x.id===currentMoneyId);
+  const d = document.getElementById('pc-date').value;
+  const dThai = d ? new Date(d).toLocaleDateString('th-TH',{day:'numeric',month:'numeric'}) : '';
+  if(c){ c.steps[4] = dThai; }
+  closeModal('modal-pay-confirm');
+  renderTable(filteredCars);
+  alert('✅ บันทึกการจ่ายเงินแล้ว\n📱 แจ้ง LINE น้องทะเบียน — พร้อมยื่นขนส่ง');
+}
+
+// ====== INIT ======
+renderTable(cars);
+</script>
+
+<!-- MODAL: ฟอร์มเบิกเงินจดทะเบียน -->
+<div class="modal-overlay" id="modal-money">
+  <div class="modal" style="max-width:540px;">
+    <div class="modal-title">💰 เบิกเงินจดทะเบียน</div>
+    <div class="modal-sub" id="mm-carname">รถของ: —</div>
+
+    <!-- Approval Flow -->
+    <div style="font-size:10px;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">ขั้นตอน</div>
+    <div class="approval-flow" style="margin-bottom:16px;">
+      <div class="ap-node"><div class="ap-node-circle active">📝</div><div class="ap-node-label">ทะเบียน</div><div class="ap-node-sub">กรอกยอด</div></div>
+      <div class="ap-line"></div>
+      <div class="ap-node"><div class="ap-node-circle wait">✍️</div><div class="ap-node-label">ผจก.บัญชี</div><div class="ap-node-sub">อนุมัติ</div></div>
+      <div class="ap-line"></div>
+      <div class="ap-node"><div class="ap-node-circle wait">💳</div><div class="ap-node-label">การเงิน</div><div class="ap-node-sub">จ่ายเงิน</div></div>
+      <div class="ap-line"></div>
+      <div class="ap-node"><div class="ap-node-circle wait">🏛️</div><div class="ap-node-label">ยื่นขนส่ง</div><div class="ap-node-sub">จดทะเบียน</div></div>
+    </div>
+
+    <!-- ส่วนที่ 1: ยอดหลักที่รู้แน่นอน -->
+    <div class="money-form">
+      <div class="money-form-head">
+        <div class="money-form-title">📋 ยอดหลัก (รู้แน่นอน)</div>
+        <div style="font-size:10px;color:var(--text2);">กรอกก่อนไปขนส่ง</div>
+      </div>
+      <div class="money-form-body">
+        <div class="money-line">
+          <div class="money-line-label">ค่าจดทะเบียน / ภาษีป้าย</div>
+          <input class="money-input" type="number" id="m-reg" placeholder="0" oninput="calcMoney()">
+        </div>
+        <div class="money-line">
+          <div class="money-line-label">ค่าคัดเลข / ค่าจองเลข</div>
+          <input class="money-input" type="number" id="m-plate" placeholder="0" oninput="calcMoney()">
+        </div>
+        <div class="money-line">
+          <div class="money-line-label">ค่าตรวจสภาพรถ (ถ้ามี)</div>
+          <input class="money-input" type="number" id="m-inspect" placeholder="0" oninput="calcMoney()">
+        </div>
+        <div class="money-line">
+          <div class="money-line-label">ค่าเปลี่ยนแปลงเอกสาร (ถ้ามี)</div>
+          <input class="money-input" type="number" id="m-change" placeholder="0" oninput="calcMoney()">
+        </div>
+      </div>
+    </div>
+
+    <!-- ส่วนที่ 2: ยอดเบ็ดเตล็ดจากใบเสร็จ -->
+    <div class="money-form" style="margin-top:8px;border-color:rgba(194,106,0,.25);">
+      <div class="money-form-head" style="background:rgba(194,106,0,.06);border-bottom-color:rgba(194,106,0,.15);">
+        <div class="money-form-title" style="color:var(--yellow);">🧾 ค่าเบ็ดเตล็ดในใบเสร็จ</div>
+        <div style="font-size:10px;color:var(--text2);">กรอกหลังกลับจากขนส่ง</div>
+      </div>
+      <div class="money-form-body">
+        <div style="font-size:11px;color:var(--yellow);background:var(--yellow-dim);border-radius:6px;padding:7px 10px;margin-bottom:10px;">
+          ⚠️ รายการที่ขนส่งบวกเพิ่มในใบเสร็จ เช่น ค่าบริการ +200, ค่าอากร ฯลฯ — กรอกหลังได้ใบเสร็จจริง
+        </div>
+        <div id="extras-list">
+          <div class="extra-row" style="display:flex;gap:8px;margin-bottom:7px;" data-idx="0">
+            <input class="f-input" type="text" placeholder="ชื่อรายการ เช่น ค่าบริการ" style="flex:1;font-size:12px;" oninput="calcMoney()">
+            <input class="money-input" type="number" placeholder="0" oninput="calcMoney()">
+            <button onclick="removeExtra(this)" style="background:var(--red-dim);color:var(--red);border:none;border-radius:6px;padding:0 8px;cursor:pointer;font-size:14px;">×</button>
+          </div>
+        </div>
+        <button onclick="addExtra()" style="background:var(--bg3);border:1px dashed var(--border);border-radius:7px;padding:7px;width:100%;font-family:'Sarabun',sans-serif;font-size:12px;color:var(--text2);cursor:pointer;margin-top:2px;">
+          + เพิ่มรายการ
+        </button>
+      </div>
+    </div>
+
+    <!-- สรุปยอด -->
+    <div style="background:var(--bg3);border-radius:10px;padding:12px 14px;margin-top:10px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px;">
+        <span style="color:var(--text2);">ยอดหลัก</span>
+        <span id="m-sub-main" style="font-family:'IBM Plex Mono',monospace;font-weight:600;">฿0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px;">
+        <span style="color:var(--yellow);">+ ค่าเบ็ดเตล็ดในใบเสร็จ</span>
+        <span id="m-sub-extra" style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--yellow);">฿0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border);">
+        <span style="font-size:14px;font-weight:700;">รวมยอดเบิกทั้งสิ้น</span>
+        <span id="m-total" style="font-size:18px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--red);">฿0</span>
+      </div>
+    </div>
+
+    <div class="f-group" style="margin-top:10px;">
+      <label class="f-label">หมายเหตุ</label>
+      <input class="f-input" type="text" id="m-note" placeholder="เช่น จดนครพนม, จองเลขพิเศษ, รอใบเสร็จเพิ่มเติม...">
+    </div>
+
+    <!-- สถานะใบเสร็จ -->
+    <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+      <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="m-receipt-ready" style="width:15px;height:15px;accent-color:var(--green);">
+        ได้ใบเสร็จครบแล้ว (ยอดสุดท้าย)
+      </label>
+      <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="m-receipt-pending" style="width:15px;height:15px;accent-color:var(--yellow);">
+        ยังรอใบเสร็จเพิ่ม
+      </label>
+    </div>
+
+    <div style="background:var(--blue-dim);border:1px solid rgba(29,82,204,.15);border-radius:8px;padding:9px 12px;margin-top:10px;font-size:11px;color:var(--blue);">
+      📱 กดส่งคำขอ → ระบบแจ้ง LINE ผจก.บัญชีพร้อมยอดและรายการทันที
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-money')">ยกเลิก</button>
+      <button class="btn btn-red" onclick="submitMoneyRequest()">📤 ส่งคำขอเบิก → แจ้ง LINE ผจก.บัญชี</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ยืนยันการจ่ายเงิน (สำหรับการเงิน) -->
+<div class="modal-overlay" id="modal-pay-confirm">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-title">✅ ยืนยันจ่ายเงินแล้ว</div>
+    <div class="modal-sub" id="pc-carname">—</div>
+    <div style="background:var(--green-dim);border:1px solid rgba(10,124,82,.2);border-radius:8px;padding:12px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--text2);">ยอดที่จ่าย</div>
+      <div style="font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--green);" id="pc-amount">฿0</div>
+    </div>
+    <div class="f-group">
+      <label class="f-label">วันที่จ่าย</label>
+      <input class="f-input" type="date" id="pc-date">
+    </div>
+    <div class="f-group">
+      <label class="f-label">ช่องทางการจ่าย</label>
+      <select class="f-input" id="pc-method">
+        <option>เงินสดย่อย</option>
+        <option>โอนธนาคาร</option>
+        <option>เช็ค</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-pay-confirm')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="confirmPay()">✅ ยืนยัน — บันทึกและแจ้ง LINE ทะเบียน</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: เคลียเงินจดทะเบียน -->
+<div class="modal-overlay" id="modal-clear">
+  <div class="modal" style="max-width:500px;">
+    <div class="modal-title">🧾 เคลียเงินจดทะเบียน</div>
+    <div class="modal-sub" id="clr-carname">รถของ: —</div>
+
+    <!-- ยอดที่เบิกไป -->
+    <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:10px;color:var(--text2);font-weight:600;">ยอดที่เบิกไป</div>
+        <div style="font-size:20px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--blue);" id="clr-amt">฿0</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:10px;color:var(--text2);">วันที่เบิก</div>
+        <div style="font-size:12px;font-weight:600;" id="clr-paydate">—</div>
+        <div id="clr-days-pill"></div>
+      </div>
+    </div>
+
+    <!-- อัพรูปใบเสร็จ -->
+    <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">📸 ถ่ายรูปใบเสร็จ</div>
+    <div class="photo-zone" id="clr-photo-zone"
+      onclick="document.getElementById('clr-file').click()"
+      ondragover="event.preventDefault();this.style.borderColor='#1d52cc'"
+      ondragleave="this.style.borderColor=''"
+      ondrop="clrDrop(event)">
+      <div style="font-size:28px;" id="clr-photo-icon">📷</div>
+      <div style="font-size:13px;font-weight:600;margin-top:4px;" id="clr-photo-text">แตะเพื่อถ่ายรูปหรือเลือกรูปใบเสร็จ</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:2px;">รองรับ JPG, PNG, PDF</div>
+      <img id="clr-preview" class="photo-preview">
+      <input type="file" id="clr-file" accept="image/*,application/pdf" capture="environment" style="display:none" onchange="clrFileSelect(this)">
+    </div>
+
+    <!-- ยอดจริงในใบเสร็จ -->
+    <div style="margin-top:12px;" class="f-group">
+      <label class="f-label">ยอดจริงในใบเสร็จ (บาท)</label>
+      <input class="f-input" type="number" id="clr-real-amt" placeholder="กรอกยอดจริงจากใบเสร็จ" oninput="clrCalcDiff()" style="font-size:16px;font-weight:700;">
+    </div>
+
+    <!-- ส่วนต่าง -->
+    <div id="clr-diff-box" style="display:none;border-radius:8px;padding:10px 14px;margin-top:4px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+        <span>เบิกไป</span><span id="clr-diff-taken" style="font-family:'IBM Plex Mono',monospace;">฿0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span>ใช้จริง</span><span id="clr-diff-real" style="font-family:'IBM Plex Mono',monospace;">฿0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;border-top:1px solid var(--border);padding-top:6px;">
+        <span id="clr-diff-label">ส่งคืน / จ่ายเพิ่ม</span>
+        <span id="clr-diff-val" style="font-family:'IBM Plex Mono',monospace;font-size:16px;"></span>
+      </div>
+    </div>
+
+    <div class="f-group" style="margin-top:10px;">
+      <label class="f-label">หมายเหตุ</label>
+      <input class="f-input" type="text" id="clr-note" placeholder="เช่น ส่งคืนเงินแล้ว, รอเงินทอน...">
+    </div>
+
+    <div style="background:var(--blue-dim);border:1px solid rgba(29,82,204,.15);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:11px;color:var(--blue);">
+      📱 เมื่อส่งเคลีย — ระบบแจ้ง LINE ผจก.บัญชีทันที<br>
+      ⏰ ถ้าไม่เคลียภายใน 3 วัน — ระบบแจ้งผบห.อัตโนมัติ
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-cancel" onclick="closeModal('modal-clear')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="submitClear()">📤 ส่งเคลียเงิน → ผจก.บัญชี</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

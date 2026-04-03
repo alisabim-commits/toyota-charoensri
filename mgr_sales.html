@@ -1,320 +1,553 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ผู้จัดการขาย — Toyota Charoensri</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f7f7f5;--w:#fff;--br:#e8e6e1;--br2:#d0cdc8;--tx:#1a1a18;--mu:#6b6b68;--red:#cc2222;--rbg:#fef2f2;--rbr:#fca5a5;--amb:#92600a;--abg:#fffbeb;--abr:#fcd34d;--grn:#166534;--gbg:#f0fdf4;--gbr:#86efac;--blu:#1e40af;--bbg:#eff6ff;--bbr:#93c5fd;--gold:#92600a;--gdbg:#fefce8;--gdbr:#fde047;--font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--rl:12px;}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);font-size:14px}
-.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:0 24px;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:50}
-.logo{font-size:13px;font-weight:600;padding-right:20px;border-right:1px solid var(--br);margin-right:20px}.logo span{color:var(--red)}
-.nt{height:44px;display:flex;align-items:center;padding:0 13px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent}
-.nt:hover{color:var(--tx)}.nt.on{color:var(--tx);border-bottom-color:var(--tx)}
-.hr-r{margin-left:auto;font-size:11px;color:var(--mu)}
-.content{max-width:1100px;margin:0 auto;padding:22px 20px}
-.page{display:none}.page.on{display:block}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rl);padding:16px;margin-bottom:12px}
-.ct{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.kpi{background:var(--bg);border-radius:var(--r);padding:12px;text-align:center;border:1px solid var(--br)}
-.kpi.r{border-color:var(--rbr);background:var(--rbg)}.kpi.a{border-color:var(--abr);background:var(--abg)}.kpi.g{border-color:var(--gbr);background:var(--gbg)}
-.kv{font-size:20px;font-weight:600;font-family:var(--mono)}.kl{font-size:10px;color:var(--mu);margin-top:3px}.ks{font-size:11px;margin-top:2px}
-.bd{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block}
-.bd-r{background:var(--rbg);color:var(--red)}.bd-a{background:var(--abg);color:var(--amb)}.bd-g{background:var(--gbg);color:var(--grn)}.bd-b{background:var(--bbg);color:var(--blu)}.bd-hi{background:#f1f0eb;color:var(--mu)}.bd-go{background:var(--gdbg);color:var(--gold)}
-.al{border-radius:var(--r);padding:9px 12px;font-size:12px;display:flex;gap:8px;margin-bottom:8px;border:1px solid}
-.al-r{background:var(--rbg);border-color:var(--rbr);color:var(--red)}.al-a{background:var(--abg);border-color:var(--abr);color:var(--amb)}.al-g{background:var(--gbg);border-color:var(--gbr);color:var(--grn)}.al-b{background:var(--bbg);border-color:var(--bbr);color:var(--blu)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{padding:7px 10px;text-align:left;color:var(--mu);font-weight:500;border-bottom:1px solid var(--br);font-size:11px;background:var(--bg)}
-th.r{text-align:right}td{padding:8px 10px;border-bottom:1px solid var(--br)}td.r{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
-.fg{margin-bottom:10px}.fl{font-size:11px;color:var(--mu);margin-bottom:3px;display:block;font-weight:500}
-.fi{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font)}
-.fi:focus{outline:none;border-color:var(--tx)}.fs{width:100%;background:var(--bg);border:1px solid var(--br2);color:var(--tx);padding:8px 10px;border-radius:var(--r);font-size:13px;font-family:var(--font);cursor:pointer}
-.fr{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}.fr .fg{flex:1;margin-bottom:0}
-.btn{padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid;font-family:var(--font)}
-.btn-p{background:var(--tx);color:#fff;border-color:var(--tx)}.btn-g{background:transparent;color:var(--tx);border-color:var(--br2)}.btn-g:hover{border-color:var(--tx)}.btn-sm{padding:4px 10px;font-size:11px}
-.sec{font-size:19px;font-weight:600;margin-bottom:3px}.sec-s{font-size:12px;color:var(--mu);margin-bottom:18px}
-.pw{background:var(--br);border-radius:3px;height:7px;overflow:hidden;flex:1}.pf{height:100%;border-radius:3px}
-.brow{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;border-bottom:0.5px solid var(--br)}.brow:last-child{border-bottom:none}.bl{min-width:170px;color:var(--mu)}.bv{min-width:70px;text-align:right;font-family:var(--mono);font-size:11px;font-weight:500}
-.brief-block{background:#0a1628;border-radius:var(--rl);padding:16px;color:rgba(255,255,255,.9);margin-bottom:12px}
-.bb-title{font-size:11px;color:#c9a84c;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-.bb-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,.1);font-size:12px}
-.bb-item:last-child{border-bottom:none}
-.bb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f4f6fb;--bg2:#fff;--bg3:#f0f3fa;--bg4:#e8edf8;
+  --border:#dde3f0;--border2:#eaecf5;
+  --text:#18233d;--text2:#546080;--text3:#9aaac0;
+  --red:#dc2244;--rd:rgba(220,34,68,.07);
+  --yel:#c26a00;--yd:rgba(194,106,0,.08);
+  --grn:#0a7c52;--gd:rgba(10,124,82,.07);
+  --blu:#1d52cc;--bd:rgba(29,82,204,.07);
+  --toy:#eb0a1e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;font-size:14px;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,40,.06);}
+.brand{display:flex;align-items:center;gap:10px;}
+.bbar{width:5px;height:26px;background:var(--toy);border-radius:3px;}
+.bname{font-weight:800;font-size:15px;}
+.bsub{font-size:11px;color:var(--text2);}
+.user-badge{display:flex;align-items:center;gap:8px;background:var(--bg3);border-radius:20px;padding:5px 12px 5px 5px;}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blu),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;}
+.clock{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:6px;}
+.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Sarabun',sans-serif;white-space:nowrap;}
+.tab.on{color:var(--toy);border-bottom-color:var(--toy);}
+.main{padding:16px 20px;max-width:1300px;margin:0 auto;}
+
+/* GRID */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:12px;}
+
+/* KPI */
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,40,.04);}
+.kpi.r{border-top-color:var(--toy);}.kpi.g{border-top-color:var(--grn);}.kpi.b{border-top-color:var(--blu);}.kpi.y{border-top-color:var(--yel);}
+.kl{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.kv{font-size:22px;font-weight:800;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.kv.r{color:var(--toy);}.kv.g{color:var(--grn);}.kv.b{color:var(--blu);}.kv.y{color:var(--yel);}
+.ks{font-size:10px;color:var(--text3);margin-top:3px;}
+.pt{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:7px;}
+.pf{height:100%;border-radius:3px;}
+.pf.r{background:var(--toy);}.pf.g{background:var(--grn);}.pf.b{background:var(--blu);}.pf.y{background:var(--yel);}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,40,.04);}
+.ch{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.ct{font-size:13px;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.badge.r{background:var(--rd);color:var(--red);}.badge.g{background:var(--gd);color:var(--grn);}.badge.y{background:var(--yd);color:var(--yel);}.badge.b{background:var(--bd);color:var(--blu);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{text-align:left;padding:8px 14px;font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border2);font-size:12px;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(29,82,204,.02);}
+.n{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.r{color:var(--red);}.g{color:var(--grn);}.y{color:var(--yel);}.b{color:var(--blu);}.m{color:var(--text2);}
+
+/* APPROVAL CARD */
+.appr-card{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,40,.06);transition:all .2s;}
+.appr-card.urgent{border-color:rgba(220,34,68,.35);box-shadow:0 2px 12px rgba(220,34,68,.1);}
+.appr-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.appr-body{padding:14px 16px;}
+.appr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.appr-item{background:var(--bg3);border-radius:8px;padding:8px 10px;}
+.appr-item-label{font-size:9px;color:var(--text3);font-weight:700;text-transform:uppercase;margin-bottom:3px;}
+.appr-item-val{font-size:13px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+
+/* FLOOR INDICATOR */
+.floor-indicator{margin:10px 0;padding:10px 12px;border-radius:8px;border:1px solid;}
+.floor-indicator.ok{background:var(--gd);border-color:rgba(10,124,82,.25);}
+.floor-indicator.warn{background:var(--yd);border-color:rgba(194,106,0,.3);}
+.floor-indicator.over{background:var(--rd);border-color:rgba(220,34,68,.3);}
+.fi-track{height:8px;background:rgba(255,255,255,.6);border-radius:4px;overflow:hidden;margin-top:6px;position:relative;}
+.fi-fill{height:100%;border-radius:4px;}
+.fi-markers{display:flex;justify-content:space-between;font-size:9px;margin-top:3px;}
+
+/* ACTION BUTTONS */
+.btn-approve{background:var(--grn);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;display:inline-flex;align-items:center;gap:5px;}
+.btn-escalate{background:var(--yd);color:var(--yel);border:1px solid rgba(194,106,0,.3);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;display:inline-flex;align-items:center;gap:5px;}
+.btn-reject{background:var(--rd);color:var(--red);border:1px solid rgba(220,34,68,.3);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;display:inline-flex;align-items:center;gap:5px;}
+.btn-primary{background:var(--blu);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-cancel{background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Sarabun',sans-serif;}
+
+/* SA PERFORMANCE */
+.sa-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border2);}
+.sa-row:last-child{border-bottom:none;}
+.sa-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;}
+.sa-info{flex:1;}
+.sa-name{font-size:13px;font-weight:700;}
+.sa-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;}
+.sa-stat{background:var(--bg3);border-radius:6px;padding:5px 8px;text-align:center;}
+.sa-stat-label{font-size:9px;color:var(--text3);}
+.sa-stat-val{font-size:12px;font-weight:700;font-family:'IBM Plex Mono',monospace;margin-top:1px;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,30,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:22px;width:92%;max-width:520px;box-shadow:0 12px 40px rgba(0,0,40,.18);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+.f-label{display:block;font-size:10px;color:var(--text2);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.f-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Sarabun',sans-serif;color:var(--text);outline:none;}
+.f-input:focus{border-color:var(--blu);}
+.f-group{margin-bottom:10px;}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+
+/* SIGNAL */
+.signal{border-radius:10px;padding:10px 14px;display:flex;gap:10px;margin-bottom:8px;border:1px solid;}
+.signal.r{background:var(--rd);border-color:rgba(220,34,68,.25);}
+.signal.y{background:var(--yd);border-color:rgba(194,106,0,.2);}
+.signal.g{background:var(--gd);border-color:rgba(10,124,82,.18);}
+.signal.b{background:var(--bd);border-color:rgba(29,82,204,.18);}
+.st{font-size:12px;font-weight:700;}
+.signal.r .st{color:var(--red);}.signal.y .st{color:var(--yel);}.signal.g .st{color:var(--grn);}.signal.b .st{color:var(--blu);}
+.sd{font-size:11px;color:var(--text2);margin-top:2px;}
+
+@media(max-width:768px){.g4,.g3{grid-template-columns:1fr 1fr;}.g2,.g21{grid-template-columns:1fr;}.appr-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <div class="logo">TOYOTA <span>CHAROENSRI</span></div>
-  <div class="nt on" onclick="gp('brief',this)">☀️ Briefing</div>
-  <div class="nt" onclick="gp('dash',this)">📊 Dashboard</div>
-  <div class="nt" onclick="gp('pipeline',this)">📋 Pipeline</div>
-  <div class="nt" onclick="gp('package',this)">📦 Package</div>
-  <div class="nt" onclick="gp('commission',this)">💵 Commission</div>
-  <div class="nt" onclick="gp('margin',this)">🧮 Margin Calc</div>
-  <div class="hr-r" id="dt"></div>
-</div>
-<div class="content">
 
-<!-- BRIEFING -->
-<div class="page on" id="pg-brief">
-<div class="sec">Morning Briefing</div>
-<div class="sec-s">ทุกวัน 8:00 น. · ผจก.ขายนำ · ดูก่อนออกพบลูกค้า</div>
-<div class="g2">
-  <div>
-    <div class="brief-block">
-      <div class="bb-title">🎯 เป้าวันนี้</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>ปิด COMMUTER ที่ค้างอยู่ — โทรหาลูกค้าก่อน 10:00 เรื่อง F&I ถ้าไม่ทำ = ขาดทุน ฿12,200</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>Follow up ลูกค้า REVO D-CAB Test Drive เมื่อวาน 3 ราย — ถาม objection</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>Push REVO ทุกราย เสนอก่อนเสมอ — MTD 50% เป้า 60%</div></div>
-    </div>
-    <div class="brief-block">
-      <div class="bb-title">🔄 ลูกค้าบริการ → ชวนดูรถใหม่</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--gbr)"></div><div>วันนี้มี 17 คัน เข้าบริการ · SA จะส่งข้อมูลรถที่อายุเกิน 5 ปี หรือวิ่งเกิน 100K km</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>REVO 85,000 km เข้า EM+ — เตรียม brochure REVO ใหม่ + offer ราคา trade-in</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>ลูกค้าจากบริการที่ซื้อรถใหม่ Commission แนะนำ ฿5,000 — แจ้ง SA ด้วย</div></div>
-    </div>
+<div class="topbar">
+  <div class="brand">
+    <div class="bbar"></div>
+    <div><div class="bname">ผู้จัดการฝ่ายขาย</div><div class="bsub">Toyota Charoensri · Dealer 14373</div></div>
   </div>
-  <div>
-    <div class="brief-block">
-      <div class="bb-title">📊 สถานะ MTD — 2 เม.ย.</div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>ขายรถ: <strong>2/22 คัน</strong> (9%) — ต้องขายอีก 20 คันใน 28 วัน</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>Finance: <strong>50%</strong> ห่างเป้า 75% — ทุกดีลต้องเสนอ TLT</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--red)"></div><div>Insurance: <strong>55%</strong> ห่างเป้า 85% — เสนอพร้อมส่งมอบทุกครั้ง</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:var(--abr)"></div><div>P45 ของแถม: <strong>฿32K/คัน</strong> เป้า ≤฿14K — ลดทันที!</div></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="user-badge">
+      <div class="user-avatar">สพ</div>
+      <div style="font-size:12px;font-weight:700;">สมพงษ์ กองศรีเกษ</div>
     </div>
-    <div class="brief-block">
-      <div class="bb-title">🌙 Evening Briefing — 17:30</div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>รายงานยอดขาย + F&I วันนี้ · ของแถมที่ให้ไปเท่าไหร่</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>Pipeline ที่คาดว่าจะปิดพรุ่งนี้/อาทิตย์นี้</div></div>
-      <div class="bb-item"><div class="bb-dot" style="background:#c9a84c"></div><div>ลูกค้าบริการที่สนใจรถใหม่ — ส่งให้ Sales ติดตาม</div></div>
-    </div>
+    <div class="clock" id="clock">--:--:--</div>
   </div>
 </div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(this,'t-approve')">✅ อนุมัติใบจอง <span id="pending-count" style="background:var(--toy);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px;">3</span></button>
+  <button class="tab" onclick="sw(this,'t-team')">👥 ภาพรวมทีม</button>
+  <button class="tab" onclick="sw(this,'t-deals')">📋 ดีลทั้งหมด</button>
+  <button class="tab" onclick="sw(this,'t-campaign')">📢 แคมเปญ TMT</button>
 </div>
 
-<!-- DASHBOARD -->
-<div class="page" id="pg-dash">
-<div class="sec">Dashboard ขาย</div>
-<div class="sec-s">ยอดขายรถ · F&I · Pipeline · Margin</div>
-<div class="al al-r"><span>⚠</span><div>COMMUTER ขายแล้วไม่ทำ F&I → ขาดทุน ฿12,200 · โทรหาลูกค้าทันที!</div></div>
-<div class="g4" style="margin-bottom:14px">
-  <div class="kpi a"><div class="kl">ขายรถ MTD</div><div class="kv">2/22</div><div class="ks" style="color:var(--amb)">9% ของเป้า</div></div>
-  <div class="kpi r"><div class="kl">Finance attach</div><div class="kv" style="color:var(--red)">50%</div><div class="ks" style="color:var(--red)">เป้า 75%</div></div>
-  <div class="kpi r"><div class="kl">REVO Mix</div><div class="kv" style="color:var(--red)">50%</div><div class="ks" style="color:var(--red)">เป้า 60%</div></div>
-  <div class="kpi"><div class="kl">Gross/คัน avg</div><div class="kv" style="color:var(--gold)">฿59K</div><div class="ks" style="color:var(--mu)">รวม F&I</div></div>
-</div>
-<div class="g2">
+<div class="main">
+
+<!-- ===== อนุมัติ ===== -->
+<div id="t-approve">
+
+  <div class="g4" style="margin-bottom:16px;">
+    <div class="kpi r"><div class="kl">⏳ รออนุมัติ</div><div class="kv r">3</div><div class="ks">ใบจองวันนี้</div></div>
+    <div class="kpi y"><div class="kl">⚠️ เกิน Floor ฉัน</div><div class="kv y">1</div><div class="ks">ต้องส่ง ผบห.</div></div>
+    <div class="kpi g"><div class="kl">✅ อนุมัติวันนี้</div><div class="kv g">4</div><div class="ks">ส่งข้อมูลบัญชีแล้ว</div></div>
+    <div class="kpi b"><div class="kl">📦 ยอดขาย เม.ย.</div><div class="kv b">12 คัน</div><div class="ks">เป้า 42 | 29%</div><div class="pt"><div class="pf b" style="width:29%"></div></div></div>
+  </div>
+
+  <!-- APPROVAL CARD 1 — ใน floor -->
+  <div class="appr-card" id="deal-1">
+    <div class="appr-head">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div>
+          <div style="font-size:14px;font-weight:800;">สมชาย กิจเจริญ</div>
+          <div style="font-size:11px;color:var(--text2);">เซล์: สมพงษ์ · ส่งมาเมื่อ 08:42 น.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="badge g">✅ อยู่ใน Floor ของฉัน</span>
+        <span class="badge b">Hilux D-CAB 2.4</span>
+      </div>
+    </div>
+    <div class="appr-body">
+      <div class="appr-grid">
+        <div class="appr-item"><div class="appr-item-label">ราคาขาย</div><div class="appr-item-val b">฿737,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">ส่วนลดขอ</div><div class="appr-item-val g">฿15,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">Package</div><div class="appr-item-val">Package A</div></div>
+        <div class="appr-item"><div class="appr-item-label">Finance</div><div class="appr-item-val">TLT ✅</div></div>
+      </div>
+
+      <div class="floor-indicator ok">
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--grn);font-weight:700;">✅ อยู่ใน Floor ของคุณ (ส่วนลด ฿15K จากสูงสุด ฿34K)</span>
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--grn);">44% ของ Floor</span>
+        </div>
+        <div class="fi-track">
+          <div class="fi-fill" style="width:44%;background:var(--grn);"></div>
+        </div>
+        <div class="fi-markers">
+          <span class="m">฿0</span>
+          <span style="color:var(--grn);">เซล์ ฿17K</span>
+          <span style="color:var(--yel);">คุณ ฿34K</span>
+          <span style="color:var(--red);">ผบห. ฿45K</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn-reject" onclick="handleDeal('deal-1','reject')">❌ ปฏิเสธ</button>
+        <button class="btn-approve" onclick="handleDeal('deal-1','approve')">✅ อนุมัติ — ส่งทุกแผนกอัตโนมัติ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROVAL CARD 2 — เกิน floor ต้องส่งผบห. -->
+  <div class="appr-card urgent" id="deal-2">
+    <div class="appr-head">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div>
+          <div style="font-size:14px;font-weight:800;">วิภาวดี รักดี <span style="font-size:11px;background:var(--rd);color:var(--red);padding:2px 8px;border-radius:10px;margin-left:4px;">เกิน Floor ของคุณ</span></div>
+          <div style="font-size:11px;color:var(--text2);">เซล์: ภุมรี · ส่งมาเมื่อ 09:15 น.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="badge r">⚠️ ต้องส่ง ผบห.</span>
+        <span class="badge b">Fortuner 2.4 Leg.</span>
+      </div>
+    </div>
+    <div class="appr-body">
+      <div class="appr-grid">
+        <div class="appr-item"><div class="appr-item-label">ราคาขาย</div><div class="appr-item-val b">฿1,643,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">ส่วนลดขอ</div><div class="appr-item-val r">฿70,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">Package</div><div class="appr-item-val">Package A</div></div>
+        <div class="appr-item"><div class="appr-item-label">Finance</div><div class="appr-item-val">TLT ✅</div></div>
+      </div>
+
+      <div class="floor-indicator over">
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--red);font-weight:700;">🚨 เกิน Floor ของคุณ (฿70K vs สูงสุด ฿60K) — ต้องส่ง ผบห.อนุมัติ</span>
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--red);">117% ของ Floor</span>
+        </div>
+        <div class="fi-track">
+          <div class="fi-fill" style="width:100%;background:var(--red);"></div>
+        </div>
+        <div class="fi-markers">
+          <span class="m">฿0</span>
+          <span style="color:var(--grn);">เซล์ ฿30K</span>
+          <span style="color:var(--yel);">คุณ ฿60K</span>
+          <span style="color:var(--red);">ผบห. ฿80K | ขอ ฿70K</span>
+        </div>
+      </div>
+
+      <div style="background:var(--yd);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:var(--yel);">
+        💡 แนะนำ: แถม Package B แทน (มูลค่า ฿15K แต่ต้นทุนแค่ ฿9K) แทนที่ลด ฿70K เงินสด
+      </div>
+
+      <div class="f-group">
+        <label class="f-label">หมายเหตุส่ง ผบห.</label>
+        <input class="f-input" id="escalate-note-2" placeholder="เหตุผล เช่น ลูกค้าได้ราคาจากโชว์รูมอื่น ต้องการปิดดีลวันนี้">
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn-reject" onclick="handleDeal('deal-2','reject')">❌ ปฏิเสธ</button>
+        <button class="btn-escalate" onclick="handleDeal('deal-2','escalate')">📤 ส่ง ผบห. อนุมัติ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROVAL CARD 3 — ใน floor -->
+  <div class="appr-card" id="deal-3">
+    <div class="appr-head">
+      <div>
+        <div style="font-size:14px;font-weight:800;">อดิศร ทองมา</div>
+        <div style="font-size:11px;color:var(--text2);">เซล์: ชัยวัฒน์ · ส่งมาเมื่อ 10:30 น.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="badge g">✅ อยู่ใน Floor ของฉัน</span>
+        <span class="badge b">Yaris Cross HEV</span>
+      </div>
+    </div>
+    <div class="appr-body">
+      <div class="appr-grid">
+        <div class="appr-item"><div class="appr-item-label">ราคาขาย</div><div class="appr-item-val b">฿849,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">ส่วนลดขอ</div><div class="appr-item-val g">฿8,000</div></div>
+        <div class="appr-item"><div class="appr-item-label">Package</div><div class="appr-item-val">Package C</div></div>
+        <div class="appr-item"><div class="appr-item-label">Finance</div><div class="appr-item-val r">เงินสด ❌</div></div>
+      </div>
+
+      <div class="floor-indicator ok">
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--grn);font-weight:700;">✅ อยู่ใน Floor ของคุณ (ส่วนลด ฿8K จากสูงสุด ฿21K)</span>
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--grn);">38% ของ Floor</span>
+        </div>
+        <div class="fi-track"><div class="fi-fill" style="width:38%;background:var(--grn);"></div></div>
+        <div class="fi-markers">
+          <span class="m">฿0</span><span style="color:var(--grn);">เซล์ ฿10K</span>
+          <span style="color:var(--yel);">คุณ ฿21K</span><span style="color:var(--red);">ผบห. ฿28K</span>
+        </div>
+      </div>
+
+      <div style="background:var(--yd);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--yel);">
+        ⚠️ ลูกค้าไม่ใช้ Finance — Insurance Attach เป็น 0% กรุณาชวนเซล์ Offer ประกันเพิ่ม
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn-reject" onclick="handleDeal('deal-3','reject')">❌ ปฏิเสธ</button>
+        <button class="btn-approve" onclick="handleDeal('deal-3','approve')">✅ อนุมัติ — ส่งทุกแผนกอัตโนมัติ</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /approve -->
+
+<!-- ===== ภาพรวมทีม ===== -->
+<div id="t-team" style="display:none;">
+
+  <div class="g4">
+    <div class="kpi b"><div class="kl">ยอดรวมทีม เม.ย.</div><div class="kv b">12 คัน</div><div class="ks">เป้า 42 | 29%</div><div class="pt"><div class="pf b" style="width:29%"></div></div></div>
+    <div class="kpi g"><div class="kl">Finance Attach</div><div class="kv g">67%</div><div class="ks">เป้า 75% | ใกล้แล้ว</div><div class="pt"><div class="pf g" style="width:67%"></div></div></div>
+    <div class="kpi y"><div class="kl">Insurance Attach</div><div class="kv y">55%</div><div class="ks">เป้า 85% | ต้องเร่ง</div><div class="pt"><div class="pf y" style="width:55%"></div></div></div>
+    <div class="kpi r"><div class="kl">เสี่ยงยกเลิก</div><div class="kv r">2 ราย</div><div class="ks">จองเกิน 30 วัน</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="ch"><div class="ct">👥 ประสิทธิภาพรายบุคคล</div><span class="badge b">เม.ย. 69</span></div>
+
+      <!-- สมพงษ์ -->
+      <div class="sa-row">
+        <div class="sa-avatar" style="background:#dbeafe;color:var(--blu);">สพ</div>
+        <div class="sa-info">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div class="sa-name">สมพงษ์ กองศรีเกษ</div>
+            <span style="background:#fef3c7;color:#92400e;font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;">🏆 อันดับ 1</span>
+          </div>
+          <div class="sa-stats">
+            <div class="sa-stat"><div class="sa-stat-label">ยอด</div><div class="sa-stat-val" style="color:var(--grn);">5 คัน</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Finance</div><div class="sa-stat-val" style="color:var(--grn);">80%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Insurance</div><div class="sa-stat-val" style="color:var(--yel);">60%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Commission</div><div class="sa-stat-val" style="color:var(--grn);">฿18.5K</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ภุมรี -->
+      <div class="sa-row">
+        <div class="sa-avatar" style="background:#dcfce7;color:var(--grn);">ภม</div>
+        <div class="sa-info">
+          <div class="sa-name">ภุมรี สวัสดี</div>
+          <div class="sa-stats">
+            <div class="sa-stat"><div class="sa-stat-label">ยอด</div><div class="sa-stat-val" style="color:var(--blu);">4 คัน</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Finance</div><div class="sa-stat-val" style="color:var(--grn);">75%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Insurance</div><div class="sa-stat-val" style="color:var(--yel);">50%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Commission</div><div class="sa-stat-val" style="color:var(--blu);">฿14.8K</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ภัทราภรณ์ -->
+      <div class="sa-row">
+        <div class="sa-avatar" style="background:#fef3c7;color:#92400e;">ภท</div>
+        <div class="sa-info">
+          <div class="sa-name">ภัทราภรณ์ ใจดี</div>
+          <div class="sa-stats">
+            <div class="sa-stat"><div class="sa-stat-label">ยอด</div><div class="sa-stat-val" style="color:var(--yel);">2 คัน</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Finance</div><div class="sa-stat-val" style="color:var(--yel);">50%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Insurance</div><div class="sa-stat-val" style="color:var(--red);">50%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Commission</div><div class="sa-stat-val" style="color:var(--yel);">฿7.4K</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ชัยวัฒน์ -->
+      <div class="sa-row">
+        <div class="sa-avatar" style="background:var(--rd);color:var(--red);">ชว</div>
+        <div class="sa-info">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div class="sa-name">ชัยวัฒน์ หมอจันทร์</div>
+            <span style="background:var(--rd);color:var(--red);font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;">⚠️ ต้องติดตาม</span>
+          </div>
+          <div class="sa-stats">
+            <div class="sa-stat"><div class="sa-stat-label">ยอด</div><div class="sa-stat-val" style="color:var(--red);">1 คัน</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Finance</div><div class="sa-stat-val" style="color:var(--red);">0%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Insurance</div><div class="sa-stat-val" style="color:var(--red);">0%</div></div>
+            <div class="sa-stat"><div class="sa-stat-label">Commission</div><div class="sa-stat-val" style="color:var(--red);">฿3.7K</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">🚨 ต้องดูแลด่วน</div></div>
+        <div style="padding:10px 14px;">
+          <div class="signal r">
+            <span style="font-size:14px;">⚠️</span>
+            <div>
+              <div class="st">สมชาย ก. — จอง 35 วัน ยังไม่รับรถ</div>
+              <div class="sd">เซล์: สมพงษ์ | Hilux D-CAB 2.8 | ติดตามด่วน</div>
+            </div>
+          </div>
+          <div class="signal y">
+            <span style="font-size:14px;">⚠️</span>
+            <div>
+              <div class="st">วิภา พ. — จอง 31 วัน ยังไม่รับรถ</div>
+              <div class="sd">เซล์: ภุมรี | Fortuner | โทรติดตามวันนี้</div>
+            </div>
+          </div>
+          <div class="signal y">
+            <span style="font-size:14px;">📉</span>
+            <div>
+              <div class="st">ชัยวัฒน์ — Insurance 0% ต้องสอนเพิ่ม</div>
+              <div class="sd">นัดคุยวันนี้ เรื่อง Offer ประกันกับลูกค้า</div>
+            </div>
+          </div>
+          <div class="signal g">
+            <span style="font-size:14px;">🏆</span>
+            <div>
+              <div class="st">สมพงษ์ — Finance 80% เกินเป้า ชมได้เลย</div>
+              <div class="sd">รักษาไว้ และ Push Insurance ให้ถึง 85%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:0;">
+        <div class="ch"><div class="ct">📊 P28 + P45 เดือนนี้</div><span class="badge r">เกิน Budget</span></div>
+        <table class="tbl">
+          <thead><tr><th>รายการ</th><th>จริง</th><th>เป้า</th><th>สถานะ</th></tr></thead>
+          <tbody>
+            <tr><td>P28 ส่วนลดรวม</td><td class="n r">฿588K</td><td class="n">฿308K</td><td><span class="badge r">เกิน ฿280K</span></td></tr>
+            <tr><td>P45 ของแถมรวม</td><td class="n r">฿662K</td><td class="n">฿409K</td><td><span class="badge r">เกิน ฿253K</span></td></tr>
+          </tbody>
+        </table>
+        <div style="padding:8px 14px;font-size:11px;color:var(--red);background:var(--rd);">
+          🔒 P45: ห้ามอนุมัติของแถมใหม่ — ต้องผ่าน ผบห. ทุกรายการ
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /team -->
+
+<!-- ===== ดีลทั้งหมด ===== -->
+<div id="t-deals" style="display:none;">
   <div class="card">
-    <div class="ct">รายการขาย MTD</div>
-    <table>
-      <tr><th>Sales</th><th>รุ่น</th><th class="r">Margin STD</th><th class="r">P28</th><th class="r">กำไรจริง</th><th>F&I</th><th>Insurance</th></tr>
-      <tr><td>อรุณรักษ์</td><td>REVO D-CAB 2.8</td><td class="r">฿79K</td><td class="r" style="color:var(--amb)">฿20K</td><td class="r"><span class="bd bd-g">฿69K</span></td><td><span class="bd bd-g">✓ ฿10K</span></td><td><span class="bd bd-g">✓ ฿4K</span></td></tr>
-      <tr><td>ภูมิ</td><td>COMMUTER 2.8 A/T</td><td class="r" style="color:var(--red)">฿0</td><td class="r">฿0</td><td class="r"><span class="bd bd-r">-฿12K</span></td><td><span class="bd bd-r">✗ ต้องทำ!</span></td><td><span class="bd bd-r">✗</span></td></tr>
+    <div class="ch">
+      <div class="ct">📋 ดีลทั้งหมด — เม.ย. 69</div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="filterDeals('all')" id="f-all" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);font-size:11px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;">ทั้งหมด</button>
+        <button onclick="filterDeals('pending')" id="f-pending" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);font-size:11px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;">รออนุมัติ</button>
+        <button onclick="filterDeals('done')" id="f-done" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);font-size:11px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;">อนุมัติแล้ว</button>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>ลูกค้า</th><th>รุ่น</th><th>เซล์</th><th>ราคา</th><th>ส่วนลด</th><th>Package</th><th>Finance</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr data-status="done"><td><b>ธีรวัฒน์ แสงผา</b></td><td class="m">D-CAB 2.8</td><td class="m">สมพงษ์</td><td class="n">฿815,000</td><td class="n g">฿32,000</td><td><span class="badge b">Pkg A</span></td><td class="g">TLT ✅</td><td><span class="badge g">✅ ส่งมอบแล้ว</span></td></tr>
+        <tr data-status="done"><td><b>วิไลลักษณ์ สุวรรณ</b></td><td class="m">Yaris Cross</td><td class="m">ภุมรี</td><td class="n">฿849,000</td><td class="n g">฿7,000</td><td><span class="badge b">Pkg C</span></td><td class="g">TLT ✅</td><td><span class="badge g">✅ อนุมัติแล้ว</span></td></tr>
+        <tr data-status="done"><td><b>ประสิทธิ์ มีโชค</b></td><td class="m">D-CAB 2.4</td><td class="m">สมพงษ์</td><td class="n">฿737,000</td><td class="n g">฿15,000</td><td><span class="badge b">Pkg B</span></td><td class="g">TLT ✅</td><td><span class="badge g">✅ อนุมัติแล้ว</span></td></tr>
+        <tr data-status="pending"><td><b>สมชาย กิจเจริญ</b></td><td class="m">D-CAB 2.4</td><td class="m">สมพงษ์</td><td class="n">฿737,000</td><td class="n g">฿15,000</td><td><span class="badge b">Pkg A</span></td><td class="g">TLT ✅</td><td><span class="badge y">⏳ รออนุมัติ</span></td></tr>
+        <tr data-status="pending"><td><b>วิภาวดี รักดี</b></td><td class="m">Fortuner Leg.</td><td class="m">ภุมรี</td><td class="n">฿1,643,000</td><td class="n r">฿70,000</td><td><span class="badge b">Pkg A</span></td><td class="g">TLT ✅</td><td><span class="badge r">🚨 รอ ผบห.</span></td></tr>
+        <tr data-status="pending"><td><b>อดิศร ทองมา</b></td><td class="m">Yaris Cross</td><td class="m">ชัยวัฒน์</td><td class="n">฿849,000</td><td class="n g">฿8,000</td><td><span class="badge b">Pkg C</span></td><td class="r">เงินสด ❌</td><td><span class="badge y">⏳ รออนุมัติ</span></td></tr>
+        <tr data-status="risk"><td><b>สมชาย ก. <span style="font-size:9px;background:var(--rd);color:var(--red);padding:1px 6px;border-radius:10px;">35 วัน</span></b></td><td class="m">D-CAB 2.8</td><td class="m">สมพงษ์</td><td class="n">฿815,000</td><td class="n g">฿20,000</td><td><span class="badge b">Pkg A</span></td><td class="g">TLT ✅</td><td><span class="badge r">⚠️ เสี่ยงยกเลิก</span></td></tr>
+        <tr data-status="risk"><td><b>วิภา พ. <span style="font-size:9px;background:var(--rd);color:var(--red);padding:1px 6px;border-radius:10px;">31 วัน</span></b></td><td class="m">Fortuner</td><td class="m">ภุมรี</td><td class="n">฿1,239,000</td><td class="n g">฿18,000</td><td><span class="badge b">Pkg B</span></td><td class="g">TLT ✅</td><td><span class="badge r">⚠️ เสี่ยงยกเลิก</span></td></tr>
+      </tbody>
     </table>
   </div>
+</div><!-- /deals -->
+
+<!-- ===== แคมเปญ TMT ===== -->
+<div id="t-campaign" style="display:none;">
+  <div style="background:var(--rd);border:1px solid rgba(220,34,68,.3);border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:12px;color:var(--red);font-weight:600;">
+    🔒 ตารางนี้เห็นเฉพาะฝ่ายขายเท่านั้น — ข้อมูลราคาสนับสนุน TMT เป็นความลับ
+  </div>
   <div class="card">
-    <div class="ct">KPI รายคน MTD</div>
-    <table>
-      <tr><th>Sales</th><th class="r">ยอดขาย</th><th class="r">Finance</th><th class="r">Insurance</th><th class="r">Acc./คัน</th><th>สถานะ</th></tr>
-      <tr><td>อรุณรักษ์</td><td class="r">1 คัน</td><td class="r" style="color:var(--grn)">100%</td><td class="r" style="color:var(--grn)">100%</td><td class="r">฿8K</td><td><span class="bd bd-g">ดี</span></td></tr>
-      <tr><td>ภูมิ</td><td class="r">1 คัน</td><td class="r" style="color:var(--red)">0%</td><td class="r" style="color:var(--red)">0%</td><td class="r" style="color:var(--red)">฿0</td><td><span class="bd bd-r">ต้องแก้</span></td></tr>
-      <tr><td>ภูริเนตร</td><td class="r">0 คัน</td><td class="r">-</td><td class="r">-</td><td class="r">-</td><td><span class="bd bd-a">รอ</span></td></tr>
-      <tr><td>ณดาหลัน (Online)</td><td class="r">0 คัน</td><td class="r">-</td><td class="r">-</td><td class="r">-</td><td><span class="bd bd-a">รอ</span></td></tr>
+    <div class="ch"><div class="ct">📢 ส่วนลดและของแถม TMT — ก.ย. 68 (ข้อมูลอ้างอิง)</div><span class="badge b">Confidential</span></div>
+    <table class="tbl">
+      <thead><tr><th>รุ่น</th><th>TMT Support</th><th>Floor เซล์</th><th>Floor ผจก.</th><th>แคมเปญลูกค้า (สูงสุด)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hilux D-CAB 2.4</b></td><td class="n b">฿24,000</td><td class="n g">฿17,000</td><td class="n y">฿34,000</td><td class="n">฿41,000</td></tr>
+        <tr><td><b>Hilux D-CAB 2.8 Premium</b></td><td class="n b">฿50,000</td><td class="n g">฿32,000</td><td class="n y">฿63,000</td><td class="n">฿69,000</td></tr>
+        <tr><td><b>Hilux D-CAB 2.8 Overland</b></td><td class="n b">฿50,000</td><td class="n g">฿32,000</td><td class="n y">฿70,000</td><td class="n">฿93,000</td></tr>
+        <tr><td><b>Yaris Cross HEV Premium</b></td><td class="n b">฿7,000</td><td class="n g">฿10,000</td><td class="n y">฿21,000</td><td class="n">฿17,000</td></tr>
+        <tr><td><b>Ativ 1.2 Smart</b></td><td class="n b">฿15,000</td><td class="n g">฿10,000</td><td class="n y">฿20,000</td><td class="n">฿24,000</td></tr>
+        <tr><td><b>Fortuner 2.4 Leader S</b></td><td class="n b">฿23,000</td><td class="n g">฿20,000</td><td class="n y">฿44,000</td><td class="n">฿58,000</td></tr>
+        <tr><td><b>Fortuner 2.4 Legender</b></td><td class="n b">฿35,000</td><td class="n g">฿30,000</td><td class="n y">฿60,000</td><td class="n">฿85,000</td></tr>
+        <tr><td><b>Corolla Cross HEV Premium</b></td><td class="n b">฿35,000</td><td class="n g">฿27,000</td><td class="n y">฿58,000</td><td class="n">฿45,000</td></tr>
+      </tbody>
     </table>
-  </div>
-</div>
-</div>
-
-<!-- PIPELINE -->
-<div class="page" id="pg-pipeline">
-<div class="sec">Pipeline & A-Card</div>
-<div class="sec-s">ลูกค้าทุกรายต้องอยู่ใน pipeline · ค้างเกิน 7 วันไม่ติดต่อ → แจ้งเตือน</div>
-<div class="g4" style="margin-bottom:14px">
-  <div class="kpi"><div class="kl">Hot Prospect</div><div class="kv" style="color:var(--red)">3</div><div class="ks">น่าจะปิดสัปดาห์นี้</div></div>
-  <div class="kpi"><div class="kl">Warm</div><div class="kv" style="color:var(--amb)">8</div><div class="ks">ใน 30 วัน</div></div>
-  <div class="kpi"><div class="kl">Cold</div><div class="kv">15</div><div class="ks">Follow up</div></div>
-  <div class="kpi"><div class="kl">ค้างเกิน 7 วัน</div><div class="kv" style="color:var(--red)">4</div><div class="ks" style="color:var(--red)">ต้องโทรวันนี้</div></div>
-</div>
-<div class="card">
-  <div class="ct">Pipeline วันนี้</div>
-  <table>
-    <tr><th>ลูกค้า</th><th>รุ่นสนใจ</th><th>Sales</th><th>สถานะ</th><th>ติดต่อล่าสุด</th><th>Action</th></tr>
-    <tr style="background:var(--rbg)"><td style="font-weight:500">นายสมชาย ก.</td><td>REVO D-CAB GRS</td><td>อรุณรักษ์</td><td><span class="bd bd-r">Hot — รอราคา</span></td><td style="color:var(--red)">3 วัน</td><td><button class="btn btn-g btn-sm">โทร</button></td></tr>
-    <tr style="background:var(--rbg)"><td style="font-weight:500">นางมาลี ข.</td><td>FORTUNER 4×4</td><td>ภูมิ</td><td><span class="bd bd-r">Hot — Test Drive</span></td><td style="color:var(--red)">1 วัน</td><td><button class="btn btn-g btn-sm">นัด</button></td></tr>
-    <tr><td>นายวิชัย ค.</td><td>REVO C-CAB</td><td>ภูริเนตร</td><td><span class="bd bd-a">Warm — เปรียบราคา</span></td><td>5 วัน</td><td><button class="btn btn-g btn-sm">ส่ง offer</button></td></tr>
-    <tr style="background:var(--abg)"><td style="font-weight:500;color:var(--amb)">กลุ่มห้างร้าน พ.</td><td>COMMUTER × 3</td><td>ภูมิ</td><td><span class="bd bd-a">Fleet — รอ PO</span></td><td style="color:var(--amb)">7 วัน ⚠</td><td><button class="btn btn-g btn-sm">Follow up</button></td></tr>
-  </table>
-</div>
-</div>
-
-<!-- PACKAGE -->
-<div class="page" id="pg-package">
-<div class="sec">Package Advisor</div>
-<div class="sec-s">เลือกรุ่น → ระบบแนะนำ Package ที่เหมาะ · ต้นทุนต่ำ ลูกค้ารู้สึกคุ้มค่าสูงสุด</div>
-<div class="card">
-  <div class="ct">เลือกรุ่นเพื่อดู Package แนะนำ</div>
-  <div class="fr">
-    <div class="fg"><label class="fl">รุ่นรถ</label>
-      <select class="fs" id="pk_model" onchange="showPkg()">
-        <option value="">-- เลือกรุ่น --</option>
-        <option value="revo_c">REVO C-CAB</option>
-        <option value="revo_d">REVO D-CAB</option>
-        <option value="fortuner">FORTUNER 4×4</option>
-        <option value="commuter">COMMUTER (margin=0)</option>
-        <option value="veloz">VELOZ</option>
-      </select>
+    <div style="padding:10px 16px;font-size:11px;color:var(--text2);background:var(--bg3);">
+      * Floor ผจก. = 60% ของ room รวม | ถ้าต้องการเกินกว่านี้ ต้องขออนุมัติ ผบห. เสมอ
     </div>
   </div>
-  <div id="pkg_res"></div>
-</div>
-<div class="card">
-  <div class="ct">กฎของแถม P45 — ลด ฿3.6ล./ปี ถ้าทำได้</div>
-  <div class="al al-r"><span>🔴</span><div>P45 ปัจจุบัน ~฿32K/คัน เป้า ≤฿14K/คัน · แต่ละคันที่ให้ของแถมเกิน = ลด margin ทันที</div></div>
-  <table>
-    <tr><th>ประเภทของแถม</th><th class="r">ต้นทุนจริง</th><th class="r">ลูกค้าเห็น</th><th>ใน Package</th><th>แนะนำ</th></tr>
-    <tr><td>น้ำยาขจัดเขม่า</td><td class="r">฿200</td><td class="r">฿900</td><td><span class="bd bd-g">Gold Pack ✓</span></td><td><span class="bd bd-g">ใช่ ต้นทุนต่ำ</span></td></tr>
-    <tr><td>พรมยาง Genuine</td><td class="r">฿800</td><td class="r">฿3,500</td><td><span class="bd bd-g">ทุก Pack ✓</span></td><td><span class="bd bd-g">ใช่ perceived สูง</span></td></tr>
-    <tr><td>กันรอยขอบประตู</td><td class="r">฿350</td><td class="r">฿1,500</td><td><span class="bd bd-g">Gold Pack ✓</span></td><td><span class="bd bd-g">ใช่</span></td></tr>
-    <tr><td>ฟิล์มกรองแสง</td><td class="r">฿3,500</td><td class="r">฿8,500</td><td><span class="bd bd-b">Prestige ✓</span></td><td><span class="bd bd-a">ระวัง ต้นทุนสูง</span></td></tr>
-    <tr><td>ประกันภัยฟรี 1 ปี</td><td class="r">฿15,000</td><td class="r">฿15,000</td><td><span class="bd bd-r">ห้ามแถม!</span></td><td><span class="bd bd-r">ขาย Insurance แทน</span></td></tr>
-    <tr><td>ลดเงินดาวน์</td><td class="r">เท่ากับที่ลด</td><td class="r">-</td><td><span class="bd bd-r">ห้าม!</span></td><td><span class="bd bd-r">กินเนื้อตรงๆ</span></td></tr>
-  </table>
-</div>
-</div>
 
-<!-- COMMISSION -->
-<div class="page" id="pg-commission">
-<div class="sec">Commission พนักงานขาย</div>
-<div class="sec-s">คำนวณอัตโนมัติ · ผูกกับ F&I attach rate · ยิ่งทำ F&I มาก commission ยิ่งสูง</div>
-<div class="al al-b"><span>ℹ</span><div>อัตรา commission ขึ้นกับ F&I rate · Finance ≥75% + Insurance ≥85% = tier สูงสุด</div></div>
-<div class="card">
-  <div class="ct">Commission MTD — เม.ย. 69</div>
-  <table>
-    <tr><th>Sales</th><th class="r">ยอดขาย</th><th class="r">F&I Bonus</th><th class="r">Commission รวม</th><th>Tier</th></tr>
-    <tr><td>อรุณรักษ์ พรรณา</td><td class="r">1 คัน</td><td class="r" style="color:var(--grn)">+฿14,000</td><td class="r" style="color:var(--grn)"><strong>฿14,000+</strong></td><td><span class="bd bd-g">Full F&I ✓</span></td></tr>
-    <tr><td>ภูมิ</td><td class="r">1 คัน</td><td class="r" style="color:var(--red)">฿0</td><td class="r" style="color:var(--amb)"><strong>Base only</strong></td><td><span class="bd bd-r">ไม่มี F&I</span></td></tr>
-    <tr><td>ภูริเนตร อภัยโส</td><td class="r">0 คัน</td><td class="r">-</td><td class="r">฿0</td><td><span class="bd bd-hi">-</span></td></tr>
-  </table>
-</div>
-<div class="card">
-  <div class="ct">คำนวณ Commission ดีล</div>
-  <div class="fr">
-    <div class="fg"><label class="fl">รุ่น</label><select class="fs" id="cm_m" onchange="calcCom()"><option value="79000">REVO D-CAB (Margin ฿79K)</option><option value="77000">REVO C-CAB (Margin ฿77K)</option><option value="0">COMMUTER (Margin ฿0)</option><option value="115000">FORTUNER 4×4 (Margin ฿115K)</option></select></div>
-    <div class="fg"><label class="fl">P28 ส่วนลด</label><input class="fi" type="number" id="cm_d" value="0" placeholder="0" oninput="calcCom()"></div>
-    <div class="fg"><label class="fl">ของแถม</label><input class="fi" type="number" id="cm_g" value="0" placeholder="0" oninput="calcCom()"></div>
-  </div>
-  <div style="display:flex;gap:12px;margin-bottom:10px">
-    <label style="font-size:12px;display:flex;align-items:center;gap:6px"><input type="checkbox" id="cm_fi" onchange="calcCom()" checked> Finance TLT</label>
-    <label style="font-size:12px;display:flex;align-items:center;gap:6px"><input type="checkbox" id="cm_ins" onchange="calcCom()" checked> Insurance</label>
-  </div>
-  <div id="com_res"></div>
-</div>
-</div>
-
-<!-- MARGIN CALC -->
-<div class="page" id="pg-margin">
-<div class="sec">Margin Calculator</div>
-<div class="sec-s">เลือกรุ่น ปรับส่วนลด เห็นกำไรทันที · ป้องกันผบห.ลดเกิน Floor</div>
-<div class="g2">
   <div class="card">
-    <div class="fg"><label class="fl">เลือกรุ่น</label>
-      <select class="fs" id="mc_m" onchange="calcMar()">
-        <option value="719000,77000">REVO C-CAB Entry AT (฿719K)</option>
-        <option value="944000,79000">REVO D-CAB 2.8 GR Sport (฿944K)</option>
-        <option value="624000,50000">REVO B-CAB Entry MT (฿624K)</option>
-        <option value="1733000,115000">FORTUNER 4×4 2.4 Legender (฿1.73M)</option>
-        <option value="882000,65000">VELOZ Premium (฿882K)</option>
-        <option value="1369000,0">COMMUTER 2.8 A/T (฿1.37M)</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl">ส่วนลด P28: <span id="mc_dv" style="color:var(--red);font-weight:600">฿0</span></label>
-      <input type="range" id="mc_d" min="0" max="120000" step="5000" value="0" oninput="calcMar()" style="width:100%;accent-color:var(--tx)">
-    </div>
-    <div class="fg"><label class="fl">ของแถม (ต้นทุน): <span id="mc_gv" style="color:var(--red);font-weight:600">฿0</span></label>
-      <input type="range" id="mc_g" min="0" max="50000" step="1000" value="0" oninput="calcMar()" style="width:100%;accent-color:var(--amb)">
+    <div class="ch"><div class="ct">🎯 ALIVE-X Motivation Program เฟส 12 (เม.ย.-มิ.ย. 69)</div><span class="badge b">ขนาด M</span></div>
+    <div style="padding:14px 16px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+        <div style="background:var(--bg3);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:var(--text3);">เกณฑ์ 3%</div><div style="font-size:16px;font-weight:800;color:var(--grn);">฿4,000</div></div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:var(--text3);">เกณฑ์ 5%</div><div style="font-size:16px;font-weight:800;color:var(--grn);">฿6,000</div></div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:10px;color:var(--text3);">เกณฑ์ 10%</div><div style="font-size:16px;font-weight:800;color:var(--grn);">฿8,000</div></div>
+        <div style="background:linear-gradient(135deg,var(--gd),#d1fae5);border-radius:8px;padding:10px;text-align:center;border:1px solid rgba(10,124,82,.2);"><div style="font-size:10px;color:var(--grn);">เกณฑ์ 15%+</div><div style="font-size:16px;font-weight:800;color:var(--grn);">฿10,000</div></div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text2);">
+        📊 ปัจจุบัน: 2.3% | เป้า: 3%+ เพื่อรับ ฿4,000 | คำนวณจากสัดส่วนงานซ่อมที่นำคะแนน ALIVE-X มาใช้เป็นส่วนลด
+      </div>
     </div>
   </div>
-  <div id="mar_res" style="padding:16px;background:var(--w);border:1px solid var(--br);border-radius:var(--rl)"><div style="font-size:12px;color:var(--mu);text-align:center;padding:20px">เลือกรุ่น</div></div>
-</div>
-</div>
+</div><!-- /campaign -->
 
-</div>
+</div><!-- /main -->
+
 <script>
-document.getElementById('dt').textContent=new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
-function gp(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');if(el)el.classList.add('on');}
-const PKGS={
-  revo_c:{n:'REVO C-CAB Gold Pack',cost:14900,seen:38600,profit:63100,items:['น้ำยาขจัดเขม่า ฿200','พรมยาง Genuine ฿800','กันรอยขอบประตู ฿350','Air Care ฿120','ประกันภัย P1 (ขาย ไม่แถม)']},
-  revo_d:{n:'REVO D-CAB Gold Pack',cost:14900,seen:42800,profit:70100,items:['น้ำยาขจัดเขม่า ฿200','พรมยาง Genuine ฿800','กันรอยขอบประตู ฿350','ฟิล์มกรองแสง ฿3,500 (คิดเพิ่ม)','ประกันภัย P1 (ขาย ไม่แถม)']},
-  fortuner:{n:'FORTUNER Prestige Pack',cost:21500,seen:57500,profit:78500,items:['ฟิล์มกรองแสง ฿3,500','พรมยาง Genuine ฿800','กล้อง 360° ฿8,000','ประกันภัย P1 (ขาย ไม่แถม)']},
-  commuter:{n:'COMMUTER Business Pro (F&I บังคับ!)',cost:0,seen:0,profit:-12000,items:['F&I Finance TLT = +฿10,000','Insurance = +฿4,000 commission','ถ้าไม่ทำ = ขาดทุน ฿12,200']},
-  veloz:{n:'VELOZ Gold Pack',cost:14900,seen:38600,profit:52100,items:['น้ำยาขจัดเขม่า ฿200','พรมยาง Genuine ฿800','กันรอยขอบประตู ฿350']}
-};
-function showPkg(){
-  const m=document.getElementById('pk_model').value;
-  if(!m){document.getElementById('pkg_res').innerHTML='';return;}
-  const p=PKGS[m];
-  const isComm=m==='commuter';
-  document.getElementById('pkg_res').innerHTML=`
-  <div style="background:${isComm?'var(--rbg)':'var(--gdbg)'};border:1px solid ${isComm?'var(--rbr)':'var(--gdbr)'};border-radius:var(--r);padding:14px">
-    <div style="font-size:14px;font-weight:600;margin-bottom:8px">${p.n}</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
-      <div style="text-align:center"><div style="font-size:10px;color:var(--mu)">ต้นทุนรวม</div><div style="font-family:var(--mono);font-weight:600;color:var(--red)">฿${p.cost.toLocaleString()}</div></div>
-      <div style="text-align:center"><div style="font-size:10px;color:var(--mu)">ลูกค้าเห็น</div><div style="font-family:var(--mono);font-weight:600">฿${p.seen.toLocaleString()}</div></div>
-      <div style="text-align:center"><div style="font-size:10px;color:var(--mu)">กำไรสุทธิ</div><div style="font-family:var(--mono);font-weight:600;color:${p.profit>0?'var(--grn)':'var(--red)'}">฿${p.profit.toLocaleString()}</div></div>
-    </div>
-    <div style="font-size:11px;color:var(--mu)">รายการใน Package:<br>${p.items.map(i=>'• '+i).join('<br>')}</div>
-  </div>`;
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('th-TH');},1000);
+
+function sw(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  ['t-approve','t-team','t-deals','t-campaign'].forEach(t=>{
+    document.getElementById(t).style.display=t===id?'':'none';
+  });
 }
-function calcCom(){
-  const ms=parseInt(document.getElementById('cm_m').value)||0;
-  const d=parseInt(document.getElementById('cm_d').value)||0;
-  const g=parseInt(document.getElementById('cm_g').value)||0;
-  const fi=document.getElementById('cm_fi').checked;
-  const ins=document.getElementById('cm_ins').checked;
-  const net=ms-d-g;
-  const fi_com=fi?10000:0;
-  const ins_com=ins?4000:0;
-  const total=net+fi_com+ins_com;
-  const col=total<0?'var(--red)':total<ms*0.3?'var(--amb)':'var(--grn)';
-  document.getElementById('com_res').innerHTML=`
-  <div style="background:var(--bg);border-radius:var(--r);padding:12px;border:1px solid var(--br)">
-    <div style="font-size:12px">
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:var(--mu)">Margin STD</span><span style="font-family:var(--mono)">฿${ms.toLocaleString()}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:var(--mu)">P28+ของแถม</span><span style="font-family:var(--mono);color:var(--red)">-฿${(d+g).toLocaleString()}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:var(--mu)">F&I Commission</span><span style="font-family:var(--mono);color:var(--grn)">+฿${(fi_com+ins_com).toLocaleString()}</span></div>
-    </div>
-    <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600;padding-top:8px;margin-top:4px;border-top:1px solid var(--br)">
-      <span>กำไรสุทธิ/คัน</span><span style="font-family:var(--mono);color:${col}">฿${total.toLocaleString()}</span>
-    </div>
-    ${total<0?'<div class="al al-r" style="margin-top:8px"><span>🔴</span><div>ขาดทุน! ผบห.จะไม่อนุมัติ</div></div>':''}
-  </div>`;
+
+function handleDeal(id, action){
+  const card = document.getElementById(id);
+  const msgs = {
+    approve:'✅ อนุมัติแล้ว!\n📱 แจ้ง LINE เซล์ · บัญชี · การเงิน · ทะเบียน อัตโนมัติ\n📦 ตัด Stock ของแถมอัตโนมัติ\n💰 Commission เข้าคิวจ่าย',
+    escalate:'📤 ส่ง ผบห. อนุมัติแล้ว!\n📱 แจ้ง LINE ผบห. พร้อมรายละเอียดและหมายเหตุ\nรอการตอบกลับจาก ผบห.',
+    reject:'❌ ปฏิเสธแล้ว\n📱 แจ้ง LINE เซล์ พร้อมเหตุผล',
+  };
+  const colors = {approve:'var(--grn)',escalate:'var(--yel)',reject:'var(--red)'};
+  const labels = {approve:'✅ อนุมัติแล้ว',escalate:'📤 ส่ง ผบห. แล้ว',reject:'❌ ปฏิเสธแล้ว'};
+  card.style.opacity='.5';
+  card.style.pointerEvents='none';
+  card.querySelector('.appr-body').innerHTML=`
+    <div style="text-align:center;padding:16px;color:${colors[action]};font-size:14px;font-weight:700;">${labels[action]}</div>`;
+  alert(msgs[action]);
+  const count = document.getElementById('pending-count');
+  const n = parseInt(count.textContent)-1;
+  count.textContent = n>0?n:'';
 }
-calcCom();
-function calcMar(){
-  const [price,ms]=document.getElementById('mc_m').value.split(',').map(Number);
-  const d=parseInt(document.getElementById('mc_d').value)||0;
-  const g=parseInt(document.getElementById('mc_g').value)||0;
-  document.getElementById('mc_dv').textContent='฿'+d.toLocaleString('th-TH');
-  document.getElementById('mc_gv').textContent='฿'+g.toLocaleString('th-TH');
-  const fi=ms===0?14000:10000;
-  const net=ms-d-g+fi;
-  const pct=price>0?(net/price*100).toFixed(1):0;
-  const col=net<0?'var(--red)':net<ms*0.3?'var(--amb)':'var(--grn)';
-  const floor=Math.round(ms*0.5);
-  document.getElementById('mar_res').innerHTML=`
-    <div style="font-size:12px;margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">Margin STD</span><span style="font-family:var(--mono)">฿${ms.toLocaleString()}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">P28 Floor (50%)</span><span style="font-family:var(--mono);color:var(--amb)">≤฿${floor.toLocaleString()}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--br)"><span style="color:var(--mu)">P28+ของแถม</span><span style="font-family:var(--mono);color:${d+g>floor?'var(--red)':'var(--grn)'}">฿${(d+g).toLocaleString()} ${d+g>floor?'⚠ เกิน floor!':''}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--mu)">F&I commission</span><span style="font-family:var(--mono);color:var(--grn)">+฿${fi.toLocaleString()}</span></div>
-    </div>
-    <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600;border-top:1px solid var(--br);padding-top:8px"><span>กำไร/คัน</span><span style="font-family:var(--mono);color:${col}">฿${net.toLocaleString()} (${pct}%)</span></div>
-    <div style="margin-top:8px"><span class="bd bd-${net<0?'r':net<ms*0.3?'a':'g'}">${net<0?'ขาดทุน — ไม่อนุมัติ':d+g>floor?'เกิน floor — ต้องผบห.':net<ms*0.3?'ระวัง — กำไรน้อย':'ผ่าน — อนุมัติได้'}</span></div>`;
+
+function filterDeals(type){
+  document.querySelectorAll('.tbl tbody tr').forEach(row=>{
+    const s = row.getAttribute('data-status');
+    row.style.display = (type==='all'||type===s||
+      (type==='pending'&&(s==='pending'||s==='risk'))||
+      (type==='done'&&s==='done'))?'':'none';
+  });
 }
-calcMar();
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+});
 </script>
 </body>
 </html>
